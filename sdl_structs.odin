@@ -4,104 +4,25 @@ SDL_Renderer :: rawptr;
 SDL_Texture :: rawptr;
 SDL_SysWMmsg :: rawptr;
 
+SDL_cond :: struct #ordered {};
+SDL_mutex :: struct #ordered {};
 
-/*
-typedef struct SDL_RWops
+SDL_AudioFormat :: u16;
+
+SDL_AudioCVT :: struct #ordered
 {
-    /**
-     *  Return the size of the file in this rwops, or -1 if unknown
-     */
-    Sint64 (SDLCALL * size) (struct SDL_RWops * context);
-
-    /**
-     *  Seek to \c offset relative to \c whence, one of stdio's whence values:
-     *  RW_SEEK_SET, RW_SEEK_CUR, RW_SEEK_END
-     *
-     *  \return the final offset in the data stream, or -1 on error.
-     */
-    Sint64 (SDLCALL * seek) (struct SDL_RWops * context, Sint64 offset,
-                             int whence);
-
-    /**
-     *  Read up to \c maxnum objects each of size \c size from the data
-     *  stream to the area pointed at by \c ptr.
-     *
-     *  \return the number of objects read, or 0 at error or end of file.
-     */
-    size_t (SDLCALL * read) (struct SDL_RWops * context, void *ptr,
-                             size_t size, size_t maxnum);
-
-    /**
-     *  Write exactly \c num objects each of size \c size from the area
-     *  pointed at by \c ptr to data stream.
-     *
-     *  \return the number of objects written, or 0 at error or end of file.
-     */
-    size_t (SDLCALL * write) (struct SDL_RWops * context, const void *ptr,
-                              size_t size, size_t num);
-
-    /**
-     *  Close and free an allocated SDL_RWops structure.
-     *
-     *  \return 0 if successful or -1 on write error when flushing data.
-     */
-    int (SDLCALL * close) (struct SDL_RWops * context);
-
-    Uint32 type;
-    union
-    {
-#if defined(__ANDROID__)
-        struct
-        {
-            void *fileNameRef;
-            void *inputStreamRef;
-            void *readableByteChannelRef;
-            void *readMethod;
-            void *assetFileDescriptorRef;
-            long position;
-            long size;
-            long offset;
-            int fd;
-        } androidio;
-#elif defined(__WIN32__)
-        struct
-        {
-            SDL_bool append;
-            void *h;
-            struct
-            {
-                void *data;
-                size_t size;
-                size_t left;
-            } buffer;
-        } windowsio;
-#endif
-
-#ifdef HAVE_STDIO_H
-        struct
-        {
-            SDL_bool autoclose;
-            FILE *fp;
-        } stdio;
-#endif
-        struct
-        {
-            Uint8 *base;
-            Uint8 *here;
-            Uint8 *stop;
-        } mem;
-        struct
-        {
-            void *data1;
-            void *data2;
-        } unknown;
-    } hidden;
-
-} SDL_RWops;
-*/
-
-
-
+    needed: i32;                 /**< Set to 1 if conversion possible */
+    src_format: SDL_AudioFormat; /**< Source audio format */
+    dst_format: SDL_AudioFormat; /**< Target audio format */
+    rate_incr: i64;           /**< Rate conversion increment */
+    buf: ^u8;                 /**< Buffer to hold entire audio data */
+    len: i32;                    /**< Length of original audio buffer */
+    len_cvt: i32;                /**< Length of converted audio buffer */
+    len_mult: i32;               /**< buffer must be len*len_mult big */
+    len_ratio: i64;           /**< Given len, final size is len*len_ratio */
+    filters: [10]SDL_AudioFilter;        /**< Filter list */
+    filter_index: i32;           /**< Current audio conversion function */
+}
 
 SDL_Surface :: struct #ordered
 {

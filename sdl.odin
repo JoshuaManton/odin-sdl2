@@ -9,8 +9,17 @@ foreign_system_library (
 SDL_Hint_Callback :: proc(interval: u32, param: rawptr) -> u32 #cc_c;
 SDL_Event_Filter :: proc(userdata: rawptr, param: ^SDL_Event) -> i32 #cc_c;
 SDL_Timer_Callback :: proc(interval: u32, param: rawptr) -> u32 #cc_c;
+SDL_AudioFilter :: proc(cvt: ^SDL_AudioCVT, format: SDL_AudioFormat) #cc_c;
+
+SDL_Bool :: enum i32
+{
+	SDL_False,
+	SDL_True
+}
+
 SDL_Timer_Id :: i32;
 SDL_Spin_Lock :: i32;
+SDL_Audio_Device :: u32;
 
 foreign lib {
 	sdl_add_event_watch 								:: proc(filter: SDL_Event_Filter, userdata: rawptr)																									#link_name "SDL_AddEventWatch" ---;
@@ -18,49 +27,49 @@ foreign lib {
 	sdl_add_timer 										:: proc(interval: u32, callback: SDL_Timer_Callback, param: rawptr) -> SDL_Timer_Id																	#link_name "SDL_AddTimer" ---;
 	sdl_alloc_format 									:: proc(pixel_format: u32) -> SDL_Pixel_Format																										#link_name "SDL_AllocFormat" ---;
 	sdl_alloc_palette 									:: proc(ncolors: i32) -> ^SDL_Palette																												#link_name "SDL_AllocPalette" ---;
-	/*
-	sdl_alloc_rw 										:: proc() ->																																		#link_name "SDL_AllocRW" ---;
-	sdl_atomic_add 										:: proc(a: ^SDL_Atomic_T, v: int) -> int																											#link_name "SDL_AtomicAdd" ---;
-	sdl_atomic_cas 										:: proc(a: ^SDL_Atomic_T, oldval: int, newval: int) -> bool																							#link_name "SDL_AtomicCAS" ---;
-	sdl_atomic_cas_ptr 									:: proc(a: ^rawptr, oldval: rawptr, newval: rawptr) -> bool																							#link_name "SDL_AtomicCASPtr" ---;
-	sdl_atomic_get 										:: proc(a: ^SDL_Atomic_T) -> i32																													#link_name "SDL_AtomicGet" ---;
+	// sdl_alloc_rw 										:: proc() -> 																																		#link_name "SDL_AllocRW" ---;
+	sdl_atomic_add 										:: proc(a: ^SDL_Atomic, v: i32) -> i32																												#link_name "SDL_AtomicAdd" ---;
+	sdl_atomic_cas 										:: proc(a: ^SDL_Atomic, oldval: i32, newval: i32) -> SDL_Bool																							#link_name "SDL_AtomicCAS" ---;
+	sdl_atomic_cas_ptr 									:: proc(a: ^rawptr, oldval: rawptr, newval: rawptr) -> SDL_Bool																							#link_name "SDL_AtomicCASPtr" ---;
+	sdl_atomic_get 										:: proc(a: ^SDL_Atomic) -> i32																														#link_name "SDL_AtomicGet" ---;
 	sdl_atomic_get_ptr 									:: proc(a: ^rawptr) -> rawptr																														#link_name "SDL_AtomicGetPtr" ---;
-	sdl_atomic_lock 									:: proc(lock: ^i32)																																	#link_name "SDL_AtomicLock" ---;
-	sdl_atomic_set 										:: proc(a: ^SDL_Atomic_T, v: i32) -> i32																											#link_name "SDL_AtomicSet" ---;
+	sdl_atomic_lock 									:: proc(lock: ^SDL_Spin_Lock)																																	#link_name "SDL_AtomicLock" ---;
+	sdl_atomic_set 										:: proc(a: ^SDL_Atomic, v: i32) -> i32																												#link_name "SDL_AtomicSet" ---;
 	sdl_atomic_set_ptr 									:: proc(a: ^rawptr, v: rawptr) -> rawptr																											#link_name "SDL_AtomicSetPtr" ---;
-	sdl_atomic_try_lock 								:: proc(lock: ^i32) -> bool																															#link_name "SDL_AtomicTryLock" ---;
-	sdl_atomic_unlock 									:: proc(lock: ^i32)																																	#link_name "SDL_AtomicUnlock" ---;
-	sdl_audio_init 										:: proc() ->																																		#link_name "SDL_AudioInit" ---;
-	sdl_audio_quit 										:: proc() ->																																		#link_name "SDL_AudioQuit" ---;
-	sdl_build_audio_cvt 								:: proc() ->																																		#link_name "SDL_BuildAudioCVT" ---;
-	sdl_calculate_gamma_ramp 							:: proc() ->																																		#link_name "SDL_CalculateGammaRamp" ---;
-	sdl_capture_mouse 									:: proc() ->																																		#link_name "SDL_CaptureMouse" ---;
-	sdl_clear_error 									:: proc() ->																																		#link_name "SDL_ClearError" ---;
-	sdl_clear_hints 									:: proc() ->																																		#link_name "SDL_ClearHints" ---;
-	sdl_clear_queued_audio 								:: proc() ->																																		#link_name "SDL_ClearQueuedAudio" ---;
+	sdl_atomic_try_lock 								:: proc(lock: ^SDL_Spin_Lock) -> SDL_Bool																															#link_name "SDL_AtomicTryLock" ---;
+	sdl_atomic_unlock 									:: proc(lock: ^SDL_Spin_Lock)																																	#link_name "SDL_AtomicUnlock" ---;
+	sdl_audio_init 										:: proc(driver_name: ^u8) -> i32																																	#link_name "SDL_AudioInit" ---;
+	sdl_audio_quit 										:: proc()																																		#link_name "SDL_AudioQuit" ---;
+	sdl_build_audio_cvt 								:: proc(cvt: ^SDL_AudioCVT, src_format: SDL_AudioFormat, src_channels: u8, src_rate: i32, dst_format: SDL_AudioFormat, dst_channels: u8, dst_rate: i32) -> i32																																		#link_name "SDL_BuildAudioCVT" ---;
+	sdl_calculate_gamma_ramp 							:: proc(gamma: f32, ramp: *u16)																																		#link_name "SDL_CalculateGammaRamp" ---;
+	sdl_capture_mouse 									:: proc(enabled: SDL_Bool) -> i32																																		#link_name "SDL_CaptureMouse" ---;
+	sdl_clear_error 									:: proc()																																		#link_name "SDL_ClearError" ---;
+	sdl_clear_hints 									:: proc()																																		#link_name "SDL_ClearHints" ---;
+	sdl_clear_queued_audio 								:: proc(dev: SDL_Audio_Device)																																		#link_name "SDL_ClearQueuedAudio" ---;
 	sdl_close_audio 									:: proc() ->																																		#link_name "SDL_CloseAudio" ---;
-	sdl_close_audio_device 								:: proc() ->																																		#link_name "SDL_CloseAudioDevice" ---;
-	sdl_cond_broadcast 									:: proc() ->																																		#link_name "SDL_CondBroadcast" ---;
-	sdl_cond_signal 									:: proc() ->																																		#link_name "SDL_CondSignal" ---;
-	sdl_cond_wait 										:: proc() ->																																		#link_name "SDL_CondWait" ---;
-	sdl_cond_wait_timeout 								:: proc() ->																																		#link_name "SDL_CondWaitTimeout" ---;
-	sdl_convert_audio 									:: proc() ->																																		#link_name "SDL_ConvertAudio" ---;
-	sdl_convert_pixels 									:: proc() ->																																		#link_name "SDL_ConvertPixels" ---;
-	sdl_convert_surface 								:: proc() ->																																		#link_name "SDL_ConvertSurface" ---;
-	sdl_convert_surface_format 							:: proc() ->																																		#link_name "SDL_ConvertSurfaceFormat" ---;
-	sdl_create_color_cursor 							:: proc() ->																																		#link_name "SDL_CreateColorCursor" ---;
-	sdl_create_cond 									:: proc() ->																																		#link_name "SDL_CreateCond" ---;
-	sdl_create_cursor 									:: proc() ->																																		#link_name "SDL_CreateCursor" ---;
-	sdl_create_mutex 									:: proc() ->																																		#link_name "SDL_CreateMutex" ---;
-	sdl_create_rgb_surface 								:: proc() ->																																		#link_name "SDL_CreateRGBSurface" ---;
-	sdl_create_rgb_surface_from 						:: proc() ->																																		#link_name "SDL_CreateRGBSurfaceFrom" ---;
-	sdl_create_rgb_surface_with_format 					:: proc() ->																																		#link_name "SDL_CreateRGBSurfaceWithFormat" ---;
-	sdl_create_rgb_surface_with_format_from 			:: proc() ->																																		#link_name "SDL_CreateRGBSurfaceWithFormatFrom" ---;
-	sdl_create_renderer 								:: proc() ->																																		#link_name "SDL_CreateRenderer" ---;
-	sdl_create_semaphore 								:: proc() ->																																		#link_name "SDL_CreateSemaphore" ---;
-	sdl_create_shaped_window 							:: proc() ->																																		#link_name "SDL_CreateShapedWindow" ---;
-	sdl_create_software_renderer 						:: proc() ->																																		#link_name "SDL_CreateSoftwareRenderer" ---;
+	sdl_close_audio_device 								:: proc(dev: SDL_Audio_Device)																																		#link_name "SDL_CloseAudioDevice" ---;
+	sdl_cond_broadcast 									:: proc(cond: ^SDL_Cond) -> i32																																		#link_name "SDL_CondBroadcast" ---;
+	sdl_cond_signal 									:: proc(cond: ^SDL_Cond) -> i32																																		#link_name "SDL_CondSignal" ---;
+	sdl_cond_wait 										:: proc(cond: ^SDL_Cond, mutex: ^SDL_Mutex) -> i32																																		#link_name "SDL_CondWait" ---;
+	sdl_cond_wait_timeout 								:: proc(cond: ^SDL_Cond, mutex: ^SDL_Mutex, ms: u32) -> i32																																		#link_name "SDL_CondWaitTimeout" ---;
+	sdl_convert_audio 									:: proc(cvt: ^SDL_AudioCVT) -> i32																																		#link_name "SDL_ConvertAudio" ---;
+	sdl_convert_pixels 									:: proc(width: i32, height: i32, src_format: u32, src: rawptr, src_pitch: i32, dst_format: u32, dst: rawptr, dst_pitch: i32) -> i32																																		#link_name "SDL_ConvertPixels" ---;
+	sdl_convert_surface 								:: proc(src: ^SDL_Surface, fmt: ^SDL_PixelFormat, flags: u32) -> ^SDL_Surface																																		#link_name "SDL_ConvertSurface" ---;
+	sdl_convert_surface_format 							:: proc(src: ^SDL_Surface, pixel_format: u32, flags: u32) -> ^SDL_Surface																																		#link_name "SDL_ConvertSurfaceFormat" ---;
+	sdl_create_color_cursor 							:: proc(surface: ^SDL_Surface, hot_x, hot_y, i32) -> ^SDL_Cursor																																		#link_name "SDL_CreateColorCursor" ---;
+	sdl_create_cond 									:: proc() -> ^SDL_Cond																																		#link_name "SDL_CreateCond" ---;
+	sdl_create_cursor 									:: proc(data: ^u8, mask: ^u8, w, h: i32, hot_x, hot_y: i32) -> ^SDL_Cursor																																		#link_name "SDL_CreateCursor" ---;
+	sdl_create_mutex 									:: proc() -> ^SDL_Mutex																																		#link_name "SDL_CreateMutex" ---;
+	sdl_create_rgb_surface 								:: proc(flags: u32, width, height, depth: i32, Rmask, Gmask, Bmask, Amask: u32) -> ^SDL_Surface																																		#link_name "SDL_CreateRGBSurface" ---;
+	sdl_create_rgb_surface_from 						:: proc(pixels: rawptr, width, height, depth, pitch: i32, Rmask, Gmask, Bmask, Amask: u32) -> ^SDL_Surface																																		#link_name "SDL_CreateRGBSurfaceFrom" ---;
+	sdl_create_rgb_surface_with_format 					:: proc(flags: u32, width, height, depth: i32, format: u32) -> ^SDL_Surface																																		#link_name "SDL_CreateRGBSurfaceWithFormat" ---;
+	sdl_create_rgb_surface_with_format_from 			:: proc(pixels: rawptr, width, height, depth, pitch: i32, format: u32) -> ^SDL_Surface																																		#link_name "SDL_CreateRGBSurfaceWithFormatFrom" ---;
+	sdl_create_renderer 								:: proc(window: ^SDL_Window, index: i32, flags, u32) -> ^SDL_Renderer																																	#link_name "SDL_CreateRenderer" ---;
+	sdl_create_semaphore 								:: proc(initial_value: u32) -> ^SDL_Sem																																		#link_name "SDL_CreateSemaphore" ---;
+	sdl_create_shaped_window 							:: proc(title: ^u8, x, y, w, h: u32, flags: u32) -> ^SDL_Window																																	#link_name "SDL_CreateShapedWindow" ---;
+	sdl_create_software_renderer 						:: proc(surface: ^SDL_Surface) -> ^SDL_renderer																																		#link_name "SDL_CreateSoftwareRenderer" ---;
 	sdl_create_system_cursor 							:: proc() ->																																		#link_name "SDL_CreateSystemCursor" ---;
+	/*
 	sdl_create_texture 									:: proc() ->																																		#link_name "SDL_CreateTexture" ---;
 	sdl_create_texture_from_surface 					:: proc() ->																																		#link_name "SDL_CreateTextureFromSurface" ---;
 	sdl_create_thread 									:: proc() ->																																		#link_name "SDL_CreateThread" ---;
