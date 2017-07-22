@@ -292,16 +292,16 @@ foreign lib {
 	sdl_has_sse42 										:: proc() -> SDL_Bool																																		#link_name "SDL_HasSSE42" ---;
 	sdl_has_screen_keyboard_support 					:: proc() -> SDL_Bool																																		#link_name "SDL_HasScreenKeyboardSupport" ---;
 	sdl_hide_window 									:: proc(window: ^SDL_Window)																																		#link_name "SDL_HideWindow" ---;
+	sdl_init 											:: proc(flags: u32) -> i32																																		#link_name "SDL_Init" ---;
+	sdl_init_sub_system 								:: proc(flags: u32) -> i32																																		#link_name "SDL_InitSubSystem" ---;
+	sdl_intersect_rect 									:: proc(a, b, result: ^SDL_Rect) -> SDL_Bool																																		#link_name "SDL_IntersectRect" ---;
+	sdl_intersect_rect_and_line 						:: proc(rect: ^SDL_Rect, x1, y1, x2, y2: ^i32) -> SDL_Bool																																		#link_name "SDL_IntersectRectAndLine" ---;
+	sdl_is_game_controller 								:: proc(joystick_index: i32) -> SDL_Bool																																		#link_name "SDL_IsGameController" ---;
+	sdl_is_screen_keyboard_shown 						:: proc(window: ^SDL_Window) -> SDL_Bool																																		#link_name "SDL_IsScreenKeyboardShown" ---;
+	sdl_is_screen_saver_enabled 						:: proc() -> SDL_Bool																																		#link_name "SDL_IsScreenSaverEnabled" ---;
+	sdl_is_shaped_window 								:: proc(window: SDL_Window) -> SDL_Bool																																		#link_name "SDL_IsShapedWindow" ---;
+	sdl_is_text_input_active 							:: proc() -> SDL_Bool																																		#link_name "SDL_IsTextInputActive" ---;
 	/*
-	sdl_init 											:: proc() ->																																		#link_name "SDL_Init" ---;
-	sdl_init_sub_system 								:: proc() ->																																		#link_name "SDL_InitSubSystem" ---;
-	sdl_intersect_rect 									:: proc() ->																																		#link_name "SDL_IntersectRect" ---;
-	sdl_intersect_rect_and_line 						:: proc() ->																																		#link_name "SDL_IntersectRectAndLine" ---;
-	sdl_is_game_controller 								:: proc() ->																																		#link_name "SDL_IsGameController" ---;
-	sdl_is_screen_keyboard_shown 						:: proc() ->																																		#link_name "SDL_IsScreenKeyboardShown" ---;
-	sdl_is_screen_saver_enabled 						:: proc() ->																																		#link_name "SDL_IsScreenSaverEnabled" ---;
-	sdl_is_shaped_window 								:: proc() ->																																		#link_name "SDL_IsShapedWindow" ---;
-	sdl_is_text_input_active 							:: proc() ->																																		#link_name "SDL_IsTextInputActive" ---;
 	sdl_joystick_close 									:: proc() ->																																		#link_name "SDL_JoystickClose" ---;
 	sdl_joystick_current_power_level 					:: proc() ->																																		#link_name "SDL_JoystickCurrentPowerLevel" ---;
 	sdl_joystick_event_state 							:: proc() ->																																		#link_name "SDL_JoystickEventState" ---;
