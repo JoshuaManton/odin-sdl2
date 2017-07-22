@@ -351,15 +351,15 @@ foreign lib {
 	// sdl_log_warn 										:: proc() ->																																		#link_name "SDL_LogWarn" ---;
 	sdl_lower_blit 										:: proc(src: ^SDL_Surface, srcrect: ^SDL_Rect, dst: ^SDL_Surface, dstrect: ^SDL_Rect) -> i32																																		#link_name "SDL_LowerBlit" ---;
 	sdl_lower_blit_scaled 								:: proc(src: ^SDL_Surface, srcrect: ^SDL_Rect, dst: ^SDL_Surface, dstrect: ^SDL_Rect) -> i32																																		#link_name "SDL_LowerBlitScaled" ---;
+	sdl_map_rgb 										:: proc(format: SDL_Pixel_Format, r, g, b: u8) -> u32																																		#link_name "SDL_MapRGB" ---;
+	sdl_map_rgba 										:: proc(format: SDL_Pixel_Format, r, g, b, a: u8) -> u32																																		#link_name "SDL_MapRGBA" ---;
+	sdl_masks_to_pixel_format_enum 						:: proc(bpp: i32, r_mask, g_mask, b_mask, a_mask: u32) -> u32																																		#link_name "SDL_MasksToPixelFormatEnum" ---;
+	sdl_maximize_window 								:: proc(window: ^SDL_Window)																																		#link_name "SDL_MaximizeWindow" ---;
+	sdl_minimize_window 								:: proc(window: ^SDL_Window)																																		#link_name "SDL_MinimizeWindow" ---;
+	sdl_mix_audio 										:: proc(dst, src: ^u8, len: u32, volume: i32)																																		#link_name "SDL_MixAudio" ---;
+	sdl_mix_audio_format 								:: proc(dst, src: ^u8, format: SDL_Audio_Format, len: u32, volume: i32)																																		#link_name "SDL_MixAudioFormat" ---;
+	sdl_mouse_is_haptic 								:: proc() -> i32																																		#link_name "SDL_MouseIsHaptic" ---;
 	/*
-	sdl_map_rgb 										:: proc() ->																																		#link_name "SDL_MapRGB" ---;
-	sdl_map_rgba 										:: proc() ->																																		#link_name "SDL_MapRGBA" ---;
-	sdl_masks_to_pixel_format_enum 						:: proc() ->																																		#link_name "SDL_MasksToPixelFormatEnum" ---;
-	sdl_maximize_window 								:: proc() ->																																		#link_name "SDL_MaximizeWindow" ---;
-	sdl_minimize_window 								:: proc() ->																																		#link_name "SDL_MinimizeWindow" ---;
-	sdl_mix_audio 										:: proc() ->																																		#link_name "SDL_MixAudio" ---;
-	sdl_mix_audio_format 								:: proc() ->																																		#link_name "SDL_MixAudioFormat" ---;
-	sdl_mouse_is_haptic 								:: proc() ->																																		#link_name "SDL_MouseIsHaptic" ---;
 	sdl_num_haptics 									:: proc() ->																																		#link_name "SDL_NumHaptics" ---;
 	sdl_num_joysticks 									:: proc() ->																																		#link_name "SDL_NumJoysticks" ---;
 	sdl_open_audio 										:: proc() ->																																		#link_name "SDL_OpenAudio" ---;
