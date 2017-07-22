@@ -500,9 +500,9 @@ foreign lib {
 	sdl_update_yuv_texture 								:: proc(texture: ^SDL_Texture, rect: ^SDL_Rect, y_plane: ^u8, y_pitch: i32, u_plane: ^u8, u_pitch: i32, v_plane: ^u8, v_pitch: i32) -> i32																																		#link_name "SDL_UpdateYUVTexture" ---;
 	sdl_upper_blit 										:: proc(src: ^SDL_Surface, srcrect: ^SDL_Rect, dst: ^SDL_Surface, dstrect: ^SDL_Rect) -> i32																																		#link_name "SDL_UpperBlit" ---;
 	sdl_upper_blit_scaled 								:: proc(src: ^SDL_Surface, srcrect: ^SDL_Rect, dst: ^SDL_Surface, dstrect: ^SDL_Rect) -> i32																																		#link_name "SDL_UpperBlitScaled" ---;
+	sdl_video_init 										:: proc(driver_name: ^u8) -> i32																																		#link_name "SDL_VideoInit" ---;
+	sdl_video_quit 										:: proc()																																		#link_name "SDL_VideoQuit" ---;
 	/*
-	sdl_video_init 										:: proc() ->																																		#link_name "SDL_VideoInit" ---;
-	sdl_video_quit 										:: proc() ->																																		#link_name "SDL_VideoQuit" ---;
 	sdl_wait_event 										:: proc() ->																																		#link_name "SDL_WaitEvent" ---;
 	sdl_wait_event_timeout 								:: proc() ->																																		#link_name "SDL_WaitEventTimeout" ---;
 	sdl_wait_thread 									:: proc() ->																																		#link_name "SDL_WaitThread" ---;
