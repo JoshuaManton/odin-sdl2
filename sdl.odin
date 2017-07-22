@@ -363,14 +363,14 @@ foreign lib {
 	sdl_num_joysticks 									:: proc() -> i32																																		#link_name "SDL_NumJoysticks" ---;
 	sdl_open_audio 										:: proc(desired, obtained: ^SDL_Audio_Spec) -> i32																																		#link_name "SDL_OpenAudio" ---;
 	sdl_open_audio_device 								:: proc(device: ^u8, iscapture: i32, desired, obtained: ^SDL_Audio_Spec, allowed_changed: i32) -> SDL_Audio_Device_Id																																		#link_name "SDL_OpenAudioDevice" ---;
+	sdl_pause_audio 									:: proc(pause_on: i32)																																		#link_name "SDL_PauseAudio" ---;
+	sdl_pause_audio_device 								:: proc(dev: SDL_Audio_Device_Id, pause_on: i32)																																		#link_name "SDL_PauseAudioDevice" ---;
+	sdl_peep_events 									:: proc(events: ^SDL_Event, num_events: i32, action: SDL_Event_Action, min_type, max_type: u32) -> i32																																		#link_name "SDL_PeepEvents" ---;
+	sdl_pixel_format_enum_to_masks 						:: proc(format: u32, bpp: ^i32, r_mask, g_mask, b_mask a_mask: ^u32) -> SDL_Bool																																		#link_name "SDL_PixelFormatEnumToMasks" ---;
+	sdl_poll_event 										:: proc(event: ^SDL_Event) -> i32																																		#link_name "SDL_PollEvent" ---;
+	sdl_pump_events 									:: proc()																																		#link_name "SDL_PumpEvents" ---;
+	sdl_push_event 										:: proc(event: ^SDL_Event) -> i32																																		#link_name "SDL_PushEvent" ---;
 	/*
-	sdl_pause_audio 									:: proc() ->																																		#link_name "SDL_PauseAudio" ---;
-	sdl_pause_audio_device 								:: proc() ->																																		#link_name "SDL_PauseAudioDevice" ---;
-	sdl_peep_events 									:: proc() ->																																		#link_name "SDL_PeepEvents" ---;
-	sdl_pixel_format_enum_to_masks 						:: proc() ->																																		#link_name "SDL_PixelFormatEnumToMasks" ---;
-	sdl_poll_event 										:: proc() ->																																		#link_name "SDL_PollEvent" ---;
-	sdl_pump_events 									:: proc() ->																																		#link_name "SDL_PumpEvents" ---;
-	sdl_push_event 										:: proc() ->																																		#link_name "SDL_PushEvent" ---;
 	sdl_query_texture 									:: proc() ->																																		#link_name "SDL_QueryTexture" ---;
 	sdl_queue_audio 									:: proc() ->																																		#link_name "SDL_QueueAudio" ---;
 	sdl_quit 											:: proc() ->																																		#link_name "SDL_Quit" ---;
