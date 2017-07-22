@@ -361,9 +361,9 @@ foreign lib {
 	sdl_mouse_is_haptic 								:: proc() -> i32																																		#link_name "SDL_MouseIsHaptic" ---;
 	sdl_num_haptics 									:: proc() -> i32																																		#link_name "SDL_NumHaptics" ---;
 	sdl_num_joysticks 									:: proc() -> i32																																		#link_name "SDL_NumJoysticks" ---;
+	sdl_open_audio 										:: proc(desired, obtained: ^SDL_Audio_Spec) -> i32																																		#link_name "SDL_OpenAudio" ---;
+	sdl_open_audio_device 								:: proc(device: ^u8, iscapture: i32, desired, obtained: ^SDL_Audio_Spec, allowed_changed: i32) -> SDL_Audio_Device_Id																																		#link_name "SDL_OpenAudioDevice" ---;
 	/*
-	sdl_open_audio 										:: proc() ->																																		#link_name "SDL_OpenAudio" ---;
-	sdl_open_audio_device 								:: proc() ->																																		#link_name "SDL_OpenAudioDevice" ---;
 	sdl_pause_audio 									:: proc() ->																																		#link_name "SDL_PauseAudio" ---;
 	sdl_pause_audio_device 								:: proc() ->																																		#link_name "SDL_PauseAudioDevice" ---;
 	sdl_peep_events 									:: proc() ->																																		#link_name "SDL_PeepEvents" ---;
