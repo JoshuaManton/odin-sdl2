@@ -481,12 +481,12 @@ foreign lib {
 	sdl_soft_stretch 									:: proc(src: ^SDL_Surface, srcrect: ^SDL_Rect, dst: ^SDL_Surface, dstrect: ^SDL_Rect) -> i32																																		#link_name "SDL_SoftStretch" ---;
 	sdl_start_text_input 								:: proc()																																		#link_name "SDL_StartTextInput" ---;
 	sdl_stop_text_input 								:: proc()																																		#link_name "SDL_StopTextInput" ---;
+	sdl_tls_create 										:: proc() -> SDL_Tls_Id																																		#link_name "SDL_TLSCreate" ---;
+	sdl_tls_get 										:: proc(id: SDL_Tls_Id) -> rawptr																																		#link_name "SDL_TLSGet" ---;
+	sdl_tls_set 										:: proc(id: SDL_Tls_Id, value: rawptr, destructor: proc(data: rawptr)) -> i32																																		#link_name "SDL_TLSSet" ---;
+	sdl_thread_id 										:: proc() -> SDL_Thread_Id																																		#link_name "SDL_ThreadID" ---;
+	sdl_try_lock_mutex 									:: proc(mutex: ^SDL_Mutex) -> i32																																		#link_name "SDL_TryLockMutex" ---;
 	/*
-	sdl_tls_create 										:: proc() ->																																		#link_name "SDL_TLSCreate" ---;
-	sdl_tls_get 										:: proc() ->																																		#link_name "SDL_TLSGet" ---;
-	sdl_tls_set 										:: proc() ->																																		#link_name "SDL_TLSSet" ---;
-	sdl_thread_id 										:: proc() ->																																		#link_name "SDL_ThreadID" ---;
-	sdl_try_lock_mutex 									:: proc() ->																																		#link_name "SDL_TryLockMutex" ---;
 	sdl_union_rect 										:: proc() ->																																		#link_name "SDL_UnionRect" ---;
 	sdl_unload_object 									:: proc() ->																																		#link_name "SDL_UnloadObject" ---;
 	sdl_unlock_audio 									:: proc() ->																																		#link_name "SDL_UnlockAudio" ---;
