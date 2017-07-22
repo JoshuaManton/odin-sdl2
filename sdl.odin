@@ -370,11 +370,11 @@ foreign lib {
 	sdl_poll_event 										:: proc(event: ^SDL_Event) -> i32																																		#link_name "SDL_PollEvent" ---;
 	sdl_pump_events 									:: proc()																																		#link_name "SDL_PumpEvents" ---;
 	sdl_push_event 										:: proc(event: ^SDL_Event) -> i32																																		#link_name "SDL_PushEvent" ---;
+	sdl_query_texture 									:: proc(texture: ^SDL_Texture, format: ^u32, access, w, h: ^i32) -> i32																																		#link_name "SDL_QueryTexture" ---;
+	sdl_queue_audio 									:: proc(dev: SDL_Audio_Device_Id, data: rawptr, len: u32) -> i32																																		#link_name "SDL_QueueAudio" ---;
+	sdl_quit 											:: proc()																																		#link_name "SDL_Quit" ---;
+	sdl_quit_sub_system 								:: proc(flags: u32)																																		#link_name "SDL_QuitSubSystem" ---;
 	/*
-	sdl_query_texture 									:: proc() ->																																		#link_name "SDL_QueryTexture" ---;
-	sdl_queue_audio 									:: proc() ->																																		#link_name "SDL_QueueAudio" ---;
-	sdl_quit 											:: proc() ->																																		#link_name "SDL_Quit" ---;
-	sdl_quit_sub_system 								:: proc() ->																																		#link_name "SDL_QuitSubSystem" ---;
 	sdl_rw_from_const_mem 								:: proc() ->																																		#link_name "SDL_RWFromConstMem" ---;
 	sdl_rw_from_fp 										:: proc() ->																																		#link_name "SDL_RWFromFP" ---;
 	sdl_rw_from_file 									:: proc() ->																																		#link_name "SDL_RWFromFile" ---;
