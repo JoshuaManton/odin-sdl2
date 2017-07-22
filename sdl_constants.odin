@@ -38,7 +38,220 @@ SDL_RENDERER_ACCELERATED :: 0x00000002;
 SDL_RENDERER_PRESENTVSYNC :: 0x00000004;
 SDL_RENDERER_TARGETTEXTURE :: 0x00000008;
 
+SDL_Blend_Mode :: enum i32
+{
+    SDL_BLENDMODE_NONE = 0x00000000,     /**< no blending
+                                              dstRGBA = srcRGBA */
+    SDL_BLENDMODE_BLEND = 0x00000001,    /**< alpha blending
+                                              dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
+                                              dstA = srcA + (dstA * (1-srcA)) */
+    SDL_BLENDMODE_ADD = 0x00000002,      /**< additive blending
+                                              dstRGB = (srcRGB * srcA) + dstRGB
+                                              dstA = dstA */
+    SDL_BLENDMODE_MOD = 0x00000004       /**< color modulate
+                                              dstRGB = srcRGB * dstRGB
+                                              dstA = dstA */
+}
+
+SDL_Error_Code :: enum i32
+{
+    SDL_ENOMEM,
+    SDL_EFREAD,
+    SDL_EFWRITE,
+    SDL_EFSEEK,
+    SDL_UNSUPPORTED,
+    SDL_LASTERROR
+}
+
+SDL_Joystick_Power_Level :: enum i32
+{
+    SDL_JOYSTICK_POWER_UNKNOWN = -1,
+    SDL_JOYSTICK_POWER_EMPTY,
+    SDL_JOYSTICK_POWER_LOW,
+    SDL_JOYSTICK_POWER_MEDIUM,
+    SDL_JOYSTICK_POWER_FULL,
+    SDL_JOYSTICK_POWER_WIRED,
+    SDL_JOYSTICK_POWER_MAX
+}
+
+SDL_Hint_Priority :: enum i32
+{
+    SDL_HINT_DEFAULT,
+    SDL_HINT_NORMAL,
+    SDL_HINT_OVERRIDE
+}
+
+SDL_Thread_Priority :: enum i32
+{
+    SDL_THREAD_PRIORITY_LOW,
+    SDL_THREAD_PRIORITY_NORMAL,
+    SDL_THREAD_PRIORITY_HIGH
+}
+
+SDL_Assert_State :: enum i32
+{
+    SDL_ASSERTION_RETRY,  /**< Retry the assert immediately. */
+    SDL_ASSERTION_BREAK,  /**< Make the debugger trigger a breakpoint. */
+    SDL_ASSERTION_ABORT,  /**< Terminate the program. */
+    SDL_ASSERTION_IGNORE,  /**< Ignore the assert. */
+    SDL_ASSERTION_ALWAYS_IGNORE  /**< Ignore the assert from now on. */
+}
+
+SDL_Event_Action :: enum i32
+{
+    SDL_ADDEVENT,
+    SDL_PEEKEVENT,
+    SDL_GETEVENT
+}
+
+SDL_Hit_Test_Result :: enum i32
+{
+    SDL_HITTEST_NORMAL,  /**< Region is normal. No special properties. */
+    SDL_HITTEST_DRAGGABLE,  /**< Region can drag entire window. */
+    SDL_HITTEST_RESIZE_TOPLEFT,
+    SDL_HITTEST_RESIZE_TOP,
+    SDL_HITTEST_RESIZE_TOPRIGHT,
+    SDL_HITTEST_RESIZE_RIGHT,
+    SDL_HITTEST_RESIZE_BOTTOMRIGHT,
+    SDL_HITTEST_RESIZE_BOTTOM,
+    SDL_HITTEST_RESIZE_BOTTOMLEFT,
+    SDL_HITTEST_RESIZE_LEFT
+}
+
+Window_Shape_Mode :: enum i32
+{
+    /** \brief The default mode, a binarized alpha cutoff of 1. */
+    ShapeModeDefault,
+    /** \brief A binarized alpha cutoff with a given integer value. */
+    ShapeModeBinarizeAlpha,
+    /** \brief A binarized alpha cutoff with a given integer value, but with the opposite comparison. */
+    ShapeModeReverseBinarizeAlpha,
+    /** \brief A color key is applied. */
+    ShapeModeColorKey
+}
+
+SDL_Keymod :: enum i32
+{
+    KMOD_NONE = 0x0000,
+    KMOD_LSHIFT = 0x0001,
+    KMOD_RSHIFT = 0x0002,
+    KMOD_LCTRL = 0x0040,
+    KMOD_RCTRL = 0x0080,
+    KMOD_LALT = 0x0100,
+    KMOD_RALT = 0x0200,
+    KMOD_LGUI = 0x0400,
+    KMOD_RGUI = 0x0800,
+    KMOD_NUM = 0x1000,
+    KMOD_CAPS = 0x2000,
+    KMOD_MODE = 0x4000,
+    KMOD_RESERVED = 0x8000
+}
+
+SDL_Renderer_Flip :: enum i32
+{
+    SDL_FLIP_NONE = 0x00000000,     /**< Do not flip */
+    SDL_FLIP_HORIZONTAL = 0x00000001,    /**< flip horizontally */
+    SDL_FLIP_VERTICAL = 0x00000002     /**< flip vertically */
+}
+
+SDL_GL_Attr :: enum i32
+{
+    SDL_GL_RED_SIZE,
+    SDL_GL_GREEN_SIZE,
+    SDL_GL_BLUE_SIZE,
+    SDL_GL_ALPHA_SIZE,
+    SDL_GL_BUFFER_SIZE,
+    SDL_GL_DOUBLEBUFFER,
+    SDL_GL_DEPTH_SIZE,
+    SDL_GL_STENCIL_SIZE,
+    SDL_GL_ACCUM_RED_SIZE,
+    SDL_GL_ACCUM_GREEN_SIZE,
+    SDL_GL_ACCUM_BLUE_SIZE,
+    SDL_GL_ACCUM_ALPHA_SIZE,
+    SDL_GL_STEREO,
+    SDL_GL_MULTISAMPLEBUFFERS,
+    SDL_GL_MULTISAMPLESAMPLES,
+    SDL_GL_ACCELERATED_VISUAL,
+    SDL_GL_RETAINED_BACKING,
+    SDL_GL_CONTEXT_MAJOR_VERSION,
+    SDL_GL_CONTEXT_MINOR_VERSION,
+    SDL_GL_CONTEXT_EGL,
+    SDL_GL_CONTEXT_FLAGS,
+    SDL_GL_CONTEXT_PROFILE_MASK,
+    SDL_GL_SHARE_WITH_CURRENT_CONTEXT,
+    SDL_GL_FRAMEBUFFER_SRGB_CAPABLE,
+    SDL_GL_CONTEXT_RELEASE_BEHAVIOR
+}
+
+SDL_Message_Box_Color_Type :: enum i32
+{
+    SDL_MESSAGEBOX_COLOR_BACKGROUND,
+    SDL_MESSAGEBOX_COLOR_TEXT,
+    SDL_MESSAGEBOX_COLOR_BUTTON_BORDER,
+    SDL_MESSAGEBOX_COLOR_BUTTON_BACKGROUND,
+    SDL_MESSAGEBOX_COLOR_BUTTON_SELECTED,
+    SDL_MESSAGEBOX_COLOR_MAX
+}
+
+SDL_Audio_Status :: enum i32
+{
+    SDL_AUDIO_STOPPED = 0,
+    SDL_AUDIO_PLAYING,
+    SDL_AUDIO_PAUSED
+}
+
+SDL_Power_State :: enum i32
+{
+    SDL_POWERSTATE_UNKNOWN,      /**< cannot determine power status */
+    SDL_POWERSTATE_ON_BATTERY,   /**< Not plugged in, running on the battery */
+    SDL_POWERSTATE_NO_BATTERY,   /**< Plugged in, no battery available */
+    SDL_POWERSTATE_CHARGING,     /**< Plugged in, charging battery */
+    SDL_POWERSTATE_CHARGED       /**< Plugged in, battery charged */
+}
+
 // Input stuff
+
+
+SDL_Game_Controller_Button :: enum i32
+{
+    SDL_CONTROLLER_BUTTON_INVALID = -1,
+    SDL_CONTROLLER_BUTTON_A,
+    SDL_CONTROLLER_BUTTON_B,
+    SDL_CONTROLLER_BUTTON_X,
+    SDL_CONTROLLER_BUTTON_Y,
+    SDL_CONTROLLER_BUTTON_BACK,
+    SDL_CONTROLLER_BUTTON_GUIDE,
+    SDL_CONTROLLER_BUTTON_START,
+    SDL_CONTROLLER_BUTTON_LEFTSTICK,
+    SDL_CONTROLLER_BUTTON_RIGHTSTICK,
+    SDL_CONTROLLER_BUTTON_LEFTSHOULDER,
+    SDL_CONTROLLER_BUTTON_RIGHTSHOULDER,
+    SDL_CONTROLLER_BUTTON_DPAD_UP,
+    SDL_CONTROLLER_BUTTON_DPAD_DOWN,
+    SDL_CONTROLLER_BUTTON_DPAD_LEFT,
+    SDL_CONTROLLER_BUTTON_DPAD_RIGHT,
+    SDL_CONTROLLER_BUTTON_MAX
+}
+
+SDL_Game_Controller_Axis :: enum i32
+{
+    SDL_CONTROLLER_AXIS_INVALID = -1,
+    SDL_CONTROLLER_AXIS_LEFTX,
+    SDL_CONTROLLER_AXIS_LEFTY,
+    SDL_CONTROLLER_AXIS_RIGHTX,
+    SDL_CONTROLLER_AXIS_RIGHTY,
+    SDL_CONTROLLER_AXIS_TRIGGERLEFT,
+    SDL_CONTROLLER_AXIS_TRIGGERRIGHT,
+    SDL_CONTROLLER_AXIS_MAX
+}
+
+SDL_Game_Controller_Bind_Type :: enum i32
+{
+    SDL_CONTROLLER_BINDTYPE_NONE = 0,
+    SDL_CONTROLLER_BINDTYPE_BUTTON,
+    SDL_CONTROLLER_BINDTYPE_AXIS,
+    SDL_CONTROLLER_BINDTYPE_HAT
+}
 
 SDL_System_Cursor :: enum i32
 {

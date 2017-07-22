@@ -56,7 +56,7 @@ foreign lib {
 	sdl_create_system_cursor 							:: proc(id: SDL_System_Cursor) -> ^SDL_Cursor																																		#link_name "SDL_CreateSystemCursor" ---;
 	sdl_create_texture 									:: proc(renderer: ^SDL_Renderer, format: u32, access: i32, w, h: i32) -> ^SDL_Texture																																		#link_name "SDL_CreateTexture" ---;
 	sdl_create_texture_from_surface 					:: proc(renderer: ^SDL_Renderer, surface: ^SDL_Surface) -> ^SDL_Texture																																		#link_name "SDL_CreateTextureFromSurface" ---;
-	sdl_create_thread 									:: proc(fn: SDL_ThreadFunction, name: ^u8, data: rawptr, pfnBeginThread: pfnSDL_CurrentBeginThread, pfnEndThread: pfnSDL_CurrentEndThread) -> ^SDL_Thread 							#link_name "SDL_CreateThread" ---;
+	sdl_create_thread 									:: proc(fn: SDL_Thread_Function, name: ^u8, data: rawptr, pfnBeginThread: pfnSDL_CurrentBeginThread, pfnEndThread: pfnSDL_CurrentEndThread) -> ^SDL_Thread 							#link_name "SDL_CreateThread" ---;
 	sdl_create_window 									:: proc(title: ^u8, x, y, w, h: i32, flags: u32) -> ^SDL_Window																																		#link_name "SDL_CreateWindow" ---;
 	sdl_create_window_and_renderer 						:: proc(width, height: i32, window_flags: u32, window: ^^SDL_Window, renderer: ^^SDL_Renderer) -> i32																																		#link_name "SDL_CreateWindowAndRenderer" ---;
 	sdl_create_window_from 								:: proc(data: rawptr) -> ^SDL_Window																																		#link_name "SDL_CreateWindowFrom" ---;
@@ -481,7 +481,7 @@ foreign lib {
 	sdl_unregister_app 									:: proc()																																		#link_name "SDL_UnregisterApp" ---;
 	sdl_update_texture 									:: proc(texture: ^SDL_Texture, rect: ^SDL_Rect, pixels: rawptr, pitch: i32)																																		#link_name "SDL_UpdateTexture" ---;
 	sdl_update_window_surface 							:: proc(window: ^SDL_Window) -> i32																																		#link_name "SDL_UpdateWindowSurface" ---;
-	sdl_update_window_surface_rects 					:: proc(window: ^SDL_Window, rects: ^SDL_Rect, int: num_rects) -> i32																																		#link_name "SDL_UpdateWindowSurfaceRects" ---;
+	sdl_update_window_surface_rects 					:: proc(window: ^SDL_Window, rects: ^SDL_Rect, num_rects: i32) -> i32																																		#link_name "SDL_UpdateWindowSurfaceRects" ---;
 	sdl_update_yuv_texture 								:: proc(texture: ^SDL_Texture, rect: ^SDL_Rect, y_plane: ^u8, y_pitch: i32, u_plane: ^u8, u_pitch: i32, v_plane: ^u8, v_pitch: i32) -> i32																																		#link_name "SDL_UpdateYUVTexture" ---;
 	sdl_upper_blit 										:: proc(src: ^SDL_Surface, srcrect: ^SDL_Rect, dst: ^SDL_Surface, dstrect: ^SDL_Rect) -> i32																																		#link_name "SDL_UpperBlit" ---;
 	sdl_upper_blit_scaled 								:: proc(src: ^SDL_Surface, srcrect: ^SDL_Rect, dst: ^SDL_Surface, dstrect: ^SDL_Rect) -> i32																																		#link_name "SDL_UpperBlitScaled" ---;

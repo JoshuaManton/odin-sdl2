@@ -1,28 +1,43 @@
+import . "sdl_constants.odin";
+
 SDL_BlitMap :: rawptr;
 SDL_Window :: rawptr;
 SDL_Renderer :: rawptr;
 SDL_Texture :: rawptr;
 SDL_SysWMmsg :: rawptr;
+SDL_GL_Context :: rawptr;
 
 SDL_Cond :: struct #ordered {};
 SDL_Mutex :: struct #ordered {};
 SDL_Sem :: struct #ordered {};
+SDL_Thread :: struct #ordered {};
 SDL_Haptic :: struct #ordered {};
 SDL_Joystick :: struct #ordered {};
 SDL_Game_Controller :: struct #ordered {};
 SDL_Cursor :: struct #ordered {};
+IDirect3D_Device_9 :: struct #ordered {};
 
 SDL_Joystick_Id :: i32;
 SDL_Timer_Id :: i32;
 SDL_Spin_Lock :: i32;
+SDL_Tls_Id :: u32;
+SDL_Audio_Device_Id :: u32;
 SDL_Audio_Device :: u32;
 SDL_Audio_Format :: u16;
 SDL_Keycode :: i32;
+SDL_Thread_Id :: u64;
+SDL_Touch_Id :: i64;
+SDL_Finger_Id :: i64;
 
 SDL_Hint_Callback :: proc(interval: u32, param: rawptr) -> u32 #cc_c;
 SDL_Event_Filter :: proc(userdata: rawptr, param: ^SDL_Event) -> i32 #cc_c;
 SDL_Timer_Callback :: proc(interval: u32, param: rawptr) -> u32 #cc_c;
+SDL_Audio_Callback :: proc(userdata: rawptr, stream: ^u8, len: i32) #cc_c;
+SDL_Assertion_Handler :: proc(data: ^SDL_Assert_Data, userdata: rawptr) -> SDL_Assert_State #cc_c;
 SDL_Audio_Filter :: proc(cvt: ^SDL_Audio_Cvt, format: SDL_Audio_Format) #cc_c;
+SDL_Thread_Function :: proc(data: rawptr) -> i32 #cc_c;
+SDL_Hit_Test :: proc(window: ^SDL_Window, area: ^SDL_Point, data: rawptr) -> SDL_Hit_Test_Result #cc_c;
+SDL_Windows_Message_Hook :: proc(userdata: rawptr, hwnd: rawptr, message: u32, wparam: u64, lparam: i64) #cc_c;
 
 SDL_Bool :: enum i32
 {
@@ -30,40 +45,118 @@ SDL_Bool :: enum i32
     SDL_True
 }
 
-SDL_Game_Controller_Button :: enum i32
+/*
+typedef struct SDL_GameControllerButtonBind
 {
-    SDL_CONTROLLER_BUTTON_INVALID = -1,
-    SDL_CONTROLLER_BUTTON_A,
-    SDL_CONTROLLER_BUTTON_B,
-    SDL_CONTROLLER_BUTTON_X,
-    SDL_CONTROLLER_BUTTON_Y,
-    SDL_CONTROLLER_BUTTON_BACK,
-    SDL_CONTROLLER_BUTTON_GUIDE,
-    SDL_CONTROLLER_BUTTON_START,
-    SDL_CONTROLLER_BUTTON_LEFTSTICK,
-    SDL_CONTROLLER_BUTTON_RIGHTSTICK,
-    SDL_CONTROLLER_BUTTON_LEFTSHOULDER,
-    SDL_CONTROLLER_BUTTON_RIGHTSHOULDER,
-    SDL_CONTROLLER_BUTTON_DPAD_UP,
-    SDL_CONTROLLER_BUTTON_DPAD_DOWN,
-    SDL_CONTROLLER_BUTTON_DPAD_LEFT,
-    SDL_CONTROLLER_BUTTON_DPAD_RIGHT,
-    SDL_CONTROLLER_BUTTON_MAX
+    SDL_GameControllerBindType bindType;
+    union
+    {
+        int button;
+        int axis;
+        struct {
+            int hat;
+            int hat_mask;
+        } hat;
+    } value;
+
+} SDL_GameControllerButtonBind;
+*/
+
+SDL_Message_Box_Data :: struct #ordered
+{
+    flags: u32;
+    window: ^SDL_Window;
+    title: ^u8;
+    message: ^u8;
+
+    numbuttons: i32;
+    buttons: ^SDL_Message_Box_Button_Data;
+
+    colorScheme: ^SDL_Message_Box_Color_Scheme;
 }
 
-SDL_Game_Controller_Axis :: enum i32
+SDL_Message_Box_Button_Data :: struct #ordered
 {
-    SDL_CONTROLLER_AXIS_INVALID = -1,
-    SDL_CONTROLLER_AXIS_LEFTX,
-    SDL_CONTROLLER_AXIS_LEFTY,
-    SDL_CONTROLLER_AXIS_RIGHTX,
-    SDL_CONTROLLER_AXIS_RIGHTY,
-    SDL_CONTROLLER_AXIS_TRIGGERLEFT,
-    SDL_CONTROLLER_AXIS_TRIGGERRIGHT,
-    SDL_CONTROLLER_AXIS_MAX
+    flags: u32;       /**< ::SDL_MessageBoxButtonFlags */
+    buttonid: i32;       /**< User defined button id (value returned via SDL_ShowMessageBox) */
+    text: ^u8;  /**< The UTF-8 button text */
 }
 
-SDL_Audio_Spec :: struct #ordered 
+SDL_Message_Box_Color_Scheme :: struct #ordered
+{
+    colors: [SDL_Message_Box_Color_Type.SDL_MESSAGEBOX_COLOR_MAX]SDL_Message_Box_Color;
+}
+
+SDL_Message_Box_Color :: struct #ordered
+{
+    r, g, b: u8;
+}
+
+SDL_Assert_Data :: struct #ordered
+{
+    always_ignore: i32;
+    trigger_count: u32;
+    condition: ^u8;
+    filename: ^u8;
+    linenum: i32;
+    function: ^u8;
+    next: ^SDL_Assert_Data;
+}
+
+SDL_Window_Shape_Params :: struct #raw_union
+{
+    /** \brief a cutoff alpha value for binarization of the window shape's alpha channel. */
+    binarizationCutoff: u8;
+    colorKey: SDL_Color;
+}
+
+SDL_Window_Shape_Mode :: struct #ordered
+{
+    mode: Window_Shape_Mode;
+    parameters: SDL_Window_Shape_Params;
+}
+
+SDL_Point :: struct #ordered
+{
+    x: i32;
+    y: i32;
+}
+
+SDL_Renderer_Info :: struct #ordered
+{
+    name: ^u8;           /**< The name of the renderer */
+    flags: u32;               /**< Supported ::SDL_RendererFlags */
+    num_texture_formats: u32; /**< The number of available texture formats */
+    texture_formats: [16]u32; /**< The available texture formats */
+    max_texture_width: i32;      /**< The maximum texture width */
+    max_texture_height: i32;     /**< The maximum texture height */
+}
+
+SDL_Version :: struct #ordered
+{
+    major: u8;        /**< major version */
+    minor: u8;        /**< minor version */
+    patch: u8;        /**< update version */
+}
+
+SDL_Display_Mode :: struct #ordered
+{
+    format: u32;              /**< pixel format */
+    w: i32;                      /**< width, in screen coordinates */
+    h: i32;                      /**< height, in screen coordinates */
+    refresh_rate: i32;           /**< refresh rate (or zero for unspecified) */
+    driverdata: rawptr;           /**< driver-specific data, initialize to 0 */
+}
+
+SDL_Finger :: struct #ordered
+{
+    id: SDL_Finger_Id;
+    x: f32;
+    y: f32;
+    pressure: f32;
+}
+
+SDL_Audio_Spec :: struct #ordered
 {
     freq: i32;                   /**< DSP frequency -- samples per second */
     format: SDL_Audio_Format;     /**< Audio data format */
