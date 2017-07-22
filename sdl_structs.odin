@@ -4,23 +4,95 @@ SDL_Renderer :: rawptr;
 SDL_Texture :: rawptr;
 SDL_SysWMmsg :: rawptr;
 
-SDL_cond :: struct #ordered {};
-SDL_mutex :: struct #ordered {};
+SDL_Cond :: struct #ordered {};
+SDL_Mutex :: struct #ordered {};
+SDL_Sem :: struct #ordered {};
+SDL_Haptic :: struct #ordered {};
+SDL_Joystick :: struct #ordered {};
+SDL_Game_Controller :: struct #ordered {};
+SDL_Cursor :: struct #ordered {};
 
-SDL_AudioFormat :: u16;
+SDL_Joystick_Id :: i32;
+SDL_Timer_Id :: i32;
+SDL_Spin_Lock :: i32;
+SDL_Audio_Device :: u32;
+SDL_Audio_Format :: u16;
+SDL_Keycode :: i32;
 
-SDL_AudioCVT :: struct #ordered
+SDL_Hint_Callback :: proc(interval: u32, param: rawptr) -> u32 #cc_c;
+SDL_Event_Filter :: proc(userdata: rawptr, param: ^SDL_Event) -> i32 #cc_c;
+SDL_Timer_Callback :: proc(interval: u32, param: rawptr) -> u32 #cc_c;
+SDL_Audio_Filter :: proc(cvt: ^SDL_Audio_Cvt, format: SDL_Audio_Format) #cc_c;
+
+SDL_Bool :: enum i32
+{
+    SDL_False,
+    SDL_True
+}
+
+SDL_Game_Controller_Button :: enum i32
+{
+    SDL_CONTROLLER_BUTTON_INVALID = -1,
+    SDL_CONTROLLER_BUTTON_A,
+    SDL_CONTROLLER_BUTTON_B,
+    SDL_CONTROLLER_BUTTON_X,
+    SDL_CONTROLLER_BUTTON_Y,
+    SDL_CONTROLLER_BUTTON_BACK,
+    SDL_CONTROLLER_BUTTON_GUIDE,
+    SDL_CONTROLLER_BUTTON_START,
+    SDL_CONTROLLER_BUTTON_LEFTSTICK,
+    SDL_CONTROLLER_BUTTON_RIGHTSTICK,
+    SDL_CONTROLLER_BUTTON_LEFTSHOULDER,
+    SDL_CONTROLLER_BUTTON_RIGHTSHOULDER,
+    SDL_CONTROLLER_BUTTON_DPAD_UP,
+    SDL_CONTROLLER_BUTTON_DPAD_DOWN,
+    SDL_CONTROLLER_BUTTON_DPAD_LEFT,
+    SDL_CONTROLLER_BUTTON_DPAD_RIGHT,
+    SDL_CONTROLLER_BUTTON_MAX
+}
+
+SDL_Game_Controller_Axis :: enum i32
+{
+    SDL_CONTROLLER_AXIS_INVALID = -1,
+    SDL_CONTROLLER_AXIS_LEFTX,
+    SDL_CONTROLLER_AXIS_LEFTY,
+    SDL_CONTROLLER_AXIS_RIGHTX,
+    SDL_CONTROLLER_AXIS_RIGHTY,
+    SDL_CONTROLLER_AXIS_TRIGGERLEFT,
+    SDL_CONTROLLER_AXIS_TRIGGERRIGHT,
+    SDL_CONTROLLER_AXIS_MAX
+}
+
+SDL_Audio_Spec :: struct #ordered 
+{
+    freq: i32;                   /**< DSP frequency -- samples per second */
+    format: SDL_Audio_Format;     /**< Audio data format */
+    channels: u8;             /**< Number of channels: 1 mono, 2 stereo */
+    silence: u8;              /**< Audio buffer silence value (calculated) */
+    samples: u16;             /**< Audio buffer size in samples (power of 2) */
+    padding: u16;             /**< Necessary for some compile environments */
+    size: u32;                /**< Audio buffer size in bytes (calculated) */
+    callback: SDL_Audio_Callback; /**< Callback that feeds the audio device (NULL to use SDL_QueueAudio()). */
+    userdata: rawptr;             /**< Userdata passed to callback (ignored for NULL callbacks). */
+}
+
+SDL_Joystick_Guid :: struct #ordered
+{
+    data: [16]u8;
+}
+
+SDL_Audio_Cvt :: struct #ordered
 {
     needed: i32;                 /**< Set to 1 if conversion possible */
-    src_format: SDL_AudioFormat; /**< Source audio format */
-    dst_format: SDL_AudioFormat; /**< Target audio format */
+    src_format: SDL_Audio_Format; /**< Source audio format */
+    dst_format: SDL_Audio_Format; /**< Target audio format */
     rate_incr: i64;           /**< Rate conversion increment */
     buf: ^u8;                 /**< Buffer to hold entire audio data */
     len: i32;                    /**< Length of original audio buffer */
     len_cvt: i32;                /**< Length of converted audio buffer */
     len_mult: i32;               /**< buffer must be len*len_mult big */
     len_ratio: i64;           /**< Given len, final size is len*len_ratio */
-    filters: [10]SDL_AudioFilter;        /**< Filter list */
+    filters: [10]SDL_Audio_Filter;        /**< Filter list */
     filter_index: i32;           /**< Current audio conversion function */
 }
 
@@ -28,19 +100,19 @@ SDL_Surface :: struct #ordered
 {
     flags: u32;
     format: ^SDL_Pixel_Format;
-    w, h: int;
-    pitch: int;
+    w, h: i32;
+    pitch: i32;
     pixels: rawptr;
 
     userdata: rawptr;
 
-    locked: int;
+    locked: i32;
     lock_data: rawptr;
 
     clip_rect: SDL_Rect;
     blip_map: ^SDL_BlitMap;
 
-    refcount: int;
+    refcount: i32;
 }
 
 SDL_Color :: struct #ordered
@@ -53,10 +125,10 @@ SDL_Color :: struct #ordered
 
 SDL_Palette :: struct #ordered
 {
-    ncolors: int;
+    ncolors: i32;
     colors: ^SDL_Color;
     version: u32;
-    refcount: int;
+    refcount: i32;
 }
 
 SDL_Pixel_Format :: struct #ordered
@@ -78,7 +150,7 @@ SDL_Pixel_Format :: struct #ordered
     Gshift: u8;
     Bshift: u8;
     Ashift: u8;
-    refcount: int;
+    refcount: i32;
     next: ^SDL_Pixel_Format;
 }
 
@@ -88,7 +160,7 @@ SDL_Rect :: struct #ordered
     w, h: u32;
 }
 
-SDL_Atomic_T :: struct #ordered
+SDL_Atomic :: struct #ordered
 {
     value: i32;
 }
@@ -99,6 +171,166 @@ SDL_Keysym :: struct #ordered
     sym: i32;            /**< SDL virtual key code - see ::SDL_Keycode for details */
     mod: u16;                 /**< current key modifiers */
     unused: u32;
+}
+
+SDL_Haptic_Effect :: struct #raw_union
+{
+    /* Common for all force feedback effects */
+    haptic_type: u16;                    /**< Effect type. */
+    constant: SDL_Haptic_Constant;    /**< Constant effect. */
+    periodic: SDL_Haptic_Periodic;    /**< Periodic effect. */
+    condition: SDL_Haptic_Condition;  /**< Condition effect. */
+    ramp: SDL_Haptic_Ramp;            /**< Ramp effect. */
+    leftright: SDL_Haptic_Left_Right;  /**< Left/Right effect. */
+    custom: SDL_Haptic_Custom;        /**< Custom effect. */
+}
+
+SDL_Haptic_Constant :: struct
+{
+    /* Header */
+    haptic_type: u16;            /**< ::SDL_HAPTIC_CONSTANT */
+    direction: SDL_Haptic_Direction;  /**< Direction of the effect. */
+
+    /* Replay */
+    length: u32;          /**< Duration of the effect. */
+    delay: u16;           /**< Delay before starting the effect. */
+
+    /* Trigger */
+    button: u16;          /**< Button that triggers the effect. */
+    interval: u16;        /**< How soon it can be triggered again after button. */
+
+    /* Constant */
+    level: i16;           /**< Strength of the constant effect. */
+
+    /* Envelope */
+    attack_length: u16;   /**< Duration of the attack. */
+    attack_level: u16;    /**< Level at the start of the attack. */
+    fade_length: u16;     /**< Duration of the fade. */
+    fade_level: u16;      /**< Level at the end of the fade. */
+}
+
+SDL_Haptic_Periodic :: struct
+{
+    /* Header */
+    haptic_type: u16;        /**< ::SDL_HAPTIC_SINE, ::SDL_HAPTIC_LEFTRIGHT,
+                             ::SDL_HAPTIC_TRIANGLE, ::SDL_HAPTIC_SAWTOOTHUP or
+                             ::SDL_HAPTIC_SAWTOOTHDOWN */
+    direction: SDL_Haptic_Direction;  /**< Direction of the effect. */
+
+    /* Replay */
+    length: u32;      /**< Duration of the effect. */
+    delay: u16;       /**< Delay before starting the effect. */
+
+    /* Trigger */
+    button: u16;      /**< Button that triggers the effect. */
+    interval: u16;    /**< How soon it can be triggered again after button. */
+
+    /* Periodic */
+    period: u16;      /**< Period of the wave. */
+    magnitude: i16;   /**< Peak value; if negative, equivalent to 180 degrees extra phase shift. */
+    offset: i16;      /**< Mean value of the wave. */
+    phase: u16;       /**< Positive phase shift given by hundredth of a degree. */
+
+    /* Envelope */
+    attack_length: u16;   /**< Duration of the attack. */
+    attack_level: u16;    /**< Level at the start of the attack. */
+    fade_length: u16; /**< Duration of the fade. */
+    fade_level: u16;  /**< Level at the end of the fade. */
+}
+
+SDL_Haptic_Direction :: struct
+{
+    haptic_type: u8;         /**< The type of encoding. */
+    dir: [3]i32;      /**< The encoded direction. */
+}
+
+SDL_Haptic_Condition :: struct
+{
+    /* Header */
+    haptic_type: u16;            /**< ::SDL_HAPTIC_SPRING, ::SDL_HAPTIC_DAMPER,
+                                 ::SDL_HAPTIC_INERTIA or ::SDL_HAPTIC_FRICTION */
+    direction: SDL_Haptic_Direction;  /**< Direction of the effect - Not used ATM. */
+
+    /* Replay */
+    length: u32;          /**< Duration of the effect. */
+    delay: u16;           /**< Delay before starting the effect. */
+
+    /* Trigger */
+    button: u16;          /**< Button that triggers the effect. */
+    interval: u16;        /**< How soon it can be triggered again after button. */
+
+    /* Condition */
+    right_sat: [3]u16;    /**< Level when joystick is to the positive side; max 0xFFFF. */
+    left_sat: [3]u16;     /**< Level when joystick is to the negative side; max 0xFFFF. */
+    right_coeff: [3]i16;  /**< How fast to increase the force towards the positive side. */
+    left_coeff: [3]i16;   /**< How fast to increase the force towards the negative side. */
+    deadband: [3]u16;     /**< Size of the dead zone; max 0xFFFF: whole axis-range when 0-centered. */
+    center: [3]i16;       /**< Position of the dead zone. */
+}
+
+SDL_Haptic_Ramp :: struct
+{
+    /* Header */
+    haptic_type: u16;            /**< ::SDL_HAPTIC_RAMP */
+    direction: SDL_Haptic_Direction;  /**< Direction of the effect. */
+
+    /* Replay */
+    length: u32;          /**< Duration of the effect. */
+    delay: u16;           /**< Delay before starting the effect. */
+
+    /* Trigger */
+    button: u16;          /**< Button that triggers the effect. */
+    interval: u16;        /**< How soon it can be triggered again after button. */
+
+    /* Ramp */
+    start: i16;           /**< Beginning strength level. */
+    end: i16;             /**< Ending strength level. */
+
+    /* Envelope */
+    attack_length: u16;   /**< Duration of the attack. */
+    attack_level: u16;    /**< Level at the start of the attack. */
+    fade_length: u16;     /**< Duration of the fade. */
+    fade_level: u16;      /**< Level at the end of the fade. */
+}
+
+SDL_Haptic_Left_Right :: struct
+{
+    /* Header */
+    haptic_type: u16;            /**< ::SDL_HAPTIC_LEFTRIGHT */
+
+    /* Replay */
+    length: u32;          /**< Duration of the effect. */
+
+    /* Rumble */
+    large_magnitude: u16; /**< Control of the large controller motor. */
+    small_magnitude: u16; /**< Control of the small controller motor. */
+}
+
+SDL_Haptic_Custom :: struct
+{
+    /* Header */
+    haptic_type: u16;            /**< ::SDL_HAPTIC_CUSTOM */
+    direction: SDL_Haptic_Direction;  /**< Direction of the effect. */
+
+    /* Replay */
+    length: u32;          /**< Duration of the effect. */
+    delay: u16;           /**< Delay before starting the effect. */
+
+    /* Trigger */
+    button: u16;          /**< Button that triggers the effect. */
+    interval: u16;        /**< How soon it can be triggered again after button. */
+
+    /* Custom */
+    channels: u8;         /**< Axes to use, minimum of one. */
+    period: u16;          /**< Sample periods. */
+    samples: u16;         /**< Amount of samples. */
+    data: ^u16;           /**< Should contain channels*samples items. */
+
+    /* Envelope */
+    attack_length: u16;   /**< Duration of the attack. */
+    attack_level: u16;    /**< Level at the start of the attack. */
+    fade_length: u16;     /**< Duration of the fade. */
+    fade_level: u16;      /**< Level at the end of the fade. */
 }
 
 SDL_Event :: struct #raw_union

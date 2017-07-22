@@ -6,21 +6,6 @@ foreign_system_library (
 	lib "SDL2.lib";
 )
 
-SDL_Hint_Callback :: proc(interval: u32, param: rawptr) -> u32 #cc_c;
-SDL_Event_Filter :: proc(userdata: rawptr, param: ^SDL_Event) -> i32 #cc_c;
-SDL_Timer_Callback :: proc(interval: u32, param: rawptr) -> u32 #cc_c;
-SDL_AudioFilter :: proc(cvt: ^SDL_AudioCVT, format: SDL_AudioFormat) #cc_c;
-
-SDL_Bool :: enum i32
-{
-	SDL_False,
-	SDL_True
-}
-
-SDL_Timer_Id :: i32;
-SDL_Spin_Lock :: i32;
-SDL_Audio_Device :: u32;
-
 foreign lib {
 	sdl_add_event_watch 								:: proc(filter: SDL_Event_Filter, userdata: rawptr)																									#link_name "SDL_AddEventWatch" ---;
 	sdl_add_hint_callback  								:: proc(name: ^u8, callback: SDL_Hint_Callback, userdata: rawptr)  																					#link_name "SDL_AddHintCallback" ---;
@@ -40,19 +25,19 @@ foreign lib {
 	sdl_atomic_unlock 									:: proc(lock: ^SDL_Spin_Lock)																																	#link_name "SDL_AtomicUnlock" ---;
 	sdl_audio_init 										:: proc(driver_name: ^u8) -> i32																																	#link_name "SDL_AudioInit" ---;
 	sdl_audio_quit 										:: proc()																																		#link_name "SDL_AudioQuit" ---;
-	sdl_build_audio_cvt 								:: proc(cvt: ^SDL_AudioCVT, src_format: SDL_AudioFormat, src_channels: u8, src_rate: i32, dst_format: SDL_AudioFormat, dst_channels: u8, dst_rate: i32) -> i32																																		#link_name "SDL_BuildAudioCVT" ---;
+	sdl_build_audio_cvt 								:: proc(cvt: ^SDL_Audio_Cvt, src_format: SDL_Audio_Format, src_channels: u8, src_rate: i32, dst_format: SDL_Audio_Format, dst_channels: u8, dst_rate: i32) -> i32																																		#link_name "SDL_BuildAudioCVT" ---;
 	sdl_calculate_gamma_ramp 							:: proc(gamma: f32, ramp: ^u16)																																		#link_name "SDL_CalculateGammaRamp" ---;
 	sdl_capture_mouse 									:: proc(enabled: SDL_Bool) -> i32																																		#link_name "SDL_CaptureMouse" ---;
 	sdl_clear_error 									:: proc()																																		#link_name "SDL_ClearError" ---;
 	sdl_clear_hints 									:: proc()																																		#link_name "SDL_ClearHints" ---;
 	sdl_clear_queued_audio 								:: proc(dev: SDL_Audio_Device)																																		#link_name "SDL_ClearQueuedAudio" ---;
-	sdl_close_audio 									:: proc() ->																																		#link_name "SDL_CloseAudio" ---;
+	sdl_close_audio 									:: proc()																																		#link_name "SDL_CloseAudio" ---;
 	sdl_close_audio_device 								:: proc(dev: SDL_Audio_Device)																																		#link_name "SDL_CloseAudioDevice" ---;
 	sdl_cond_broadcast 									:: proc(cond: ^SDL_Cond) -> i32																																		#link_name "SDL_CondBroadcast" ---;
 	sdl_cond_signal 									:: proc(cond: ^SDL_Cond) -> i32																																		#link_name "SDL_CondSignal" ---;
 	sdl_cond_wait 										:: proc(cond: ^SDL_Cond, mutex: ^SDL_Mutex) -> i32																																		#link_name "SDL_CondWait" ---;
 	sdl_cond_wait_timeout 								:: proc(cond: ^SDL_Cond, mutex: ^SDL_Mutex, ms: u32) -> i32																																		#link_name "SDL_CondWaitTimeout" ---;
-	sdl_convert_audio 									:: proc(cvt: ^SDL_AudioCVT) -> i32																																		#link_name "SDL_ConvertAudio" ---;
+	sdl_convert_audio 									:: proc(cvt: ^SDL_Audio_Cvt) -> i32																																		#link_name "SDL_ConvertAudio" ---;
 	sdl_convert_pixels 									:: proc(width: i32, height: i32, src_format: u32, src: rawptr, src_pitch: i32, dst_format: u32, dst: rawptr, dst_pitch: i32) -> i32																																		#link_name "SDL_ConvertPixels" ---;
 	sdl_convert_surface 								:: proc(src: ^SDL_Surface, fmt: ^SDL_Pixel_Format, flags: u32) -> ^SDL_Surface																																		#link_name "SDL_ConvertSurface" ---;
 	sdl_convert_surface_format 							:: proc(src: ^SDL_Surface, pixel_format: u32, flags: u32) -> ^SDL_Surface																																		#link_name "SDL_ConvertSurfaceFormat" ---;
@@ -68,7 +53,7 @@ foreign lib {
 	sdl_create_semaphore 								:: proc(initial_value: u32) -> ^SDL_Sem																																		#link_name "SDL_CreateSemaphore" ---;
 	sdl_create_shaped_window 							:: proc(title: ^u8, x, y, w, h: u32, flags: u32) -> ^SDL_Window																																	#link_name "SDL_CreateShapedWindow" ---;
 	sdl_create_software_renderer 						:: proc(surface: ^SDL_Surface) -> ^SDL_Renderer																																		#link_name "SDL_CreateSoftwareRenderer" ---;
-	sdl_create_system_cursor 							:: proc(id: SDL_SystemCursor) -> ^SDL_Cursor																																		#link_name "SDL_CreateSystemCursor" ---;
+	sdl_create_system_cursor 							:: proc(id: SDL_System_Cursor) -> ^SDL_Cursor																																		#link_name "SDL_CreateSystemCursor" ---;
 	sdl_create_texture 									:: proc(renderer: ^SDL_Renderer, format: u32, access: i32, w, h: i32) -> ^SDL_Texture																																		#link_name "SDL_CreateTexture" ---;
 	sdl_create_texture_from_surface 					:: proc(renderer: ^SDL_Renderer, surface: ^SDL_Surface) -> ^SDL_Texture																																		#link_name "SDL_CreateTextureFromSurface" ---;
 	sdl_create_thread 									:: proc(fn: SDL_ThreadFunction, name: ^u8, data: rawptr, pfnBeginThread: pfnSDL_CurrentBeginThread, pfnEndThread: pfnSDL_CurrentEndThread) -> ^SDL_Thread 							#link_name "SDL_CreateThread" ---;
@@ -378,7 +363,7 @@ foreign lib {
 	// sdl_rw_from_fp 										:: proc() ->																																		#link_name "SDL_RWFromFP" ---;
 	// sdl_rw_from_file 									:: proc() ->																																		#link_name "SDL_RWFromFile" ---;
 	// sdl_rw_from_mem 									:: proc() ->																																		#link_name "SDL_RWFromMem" ---;
-	sdl_raise_window 									:: proc(window: ^SDL_Window) ->																																		#link_name "SDL_RaiseWindow" ---;
+	sdl_raise_window 									:: proc(window: ^SDL_Window)																																		#link_name "SDL_RaiseWindow" ---;
 	// sdl_read_be16 										:: proc() ->																																		#link_name "SDL_ReadBE16" ---;
 	// sdl_read_be32 										:: proc() ->																																		#link_name "SDL_ReadBE32" ---;
 	// sdl_read_be64 										:: proc() ->																																		#link_name "SDL_ReadBE64" ---;
@@ -465,7 +450,7 @@ foreign lib {
 	sdl_set_window_icon 								:: proc(window: ^SDL_Window, icon: ^SDL_Surface)																																		#link_name "SDL_SetWindowIcon" ---;
 	sdl_set_window_input_focus 							:: proc(window: ^SDL_Window) -> i32																																		#link_name "SDL_SetWindowInputFocus" ---;
 	sdl_set_window_maximum_size 						:: proc(window: ^SDL_Window, w, h: i32)																																		#link_name "SDL_SetWindowMaximumSize" ---;
-	sdl_set_window_minimum_size 						:: proc(window: ^SDL_Window, w, h: i32) ->																																		#link_name "SDL_SetWindowMinimumSize" ---;
+	sdl_set_window_minimum_size 						:: proc(window: ^SDL_Window, w, h: i32)																																		#link_name "SDL_SetWindowMinimumSize" ---;
 	sdl_set_window_modal_for 							:: proc(window: ^SDL_Window, parent_window: ^SDL_Window) -> i32																																		#link_name "SDL_SetWindowModalFor" ---;
 	sdl_set_window_opacity 								:: proc(window: ^SDL_Window, opacity: f32) -> i32																																		#link_name "SDL_SetWindowOpacity" ---;
 	sdl_set_window_position 							:: proc(window: ^SDL_Window, x, y: i32)																																		#link_name "SDL_SetWindowPosition" ---;
