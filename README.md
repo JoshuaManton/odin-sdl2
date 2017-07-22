@@ -1,2 +1,2 @@
 # odin-sdl2
-Odin bindings for SDL2
+Odin bindings to SDL 2.0.5
