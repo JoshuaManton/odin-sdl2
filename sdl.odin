@@ -359,9 +359,9 @@ foreign lib {
 	sdl_mix_audio 										:: proc(dst, src: ^u8, len: u32, volume: i32)																																		#link_name "SDL_MixAudio" ---;
 	sdl_mix_audio_format 								:: proc(dst, src: ^u8, format: SDL_Audio_Format, len: u32, volume: i32)																																		#link_name "SDL_MixAudioFormat" ---;
 	sdl_mouse_is_haptic 								:: proc() -> i32																																		#link_name "SDL_MouseIsHaptic" ---;
+	sdl_num_haptics 									:: proc() -> i32																																		#link_name "SDL_NumHaptics" ---;
+	sdl_num_joysticks 									:: proc() -> i32																																		#link_name "SDL_NumJoysticks" ---;
 	/*
-	sdl_num_haptics 									:: proc() ->																																		#link_name "SDL_NumHaptics" ---;
-	sdl_num_joysticks 									:: proc() ->																																		#link_name "SDL_NumJoysticks" ---;
 	sdl_open_audio 										:: proc() ->																																		#link_name "SDL_OpenAudio" ---;
 	sdl_open_audio_device 								:: proc() ->																																		#link_name "SDL_OpenAudioDevice" ---;
 	sdl_pause_audio 									:: proc() ->																																		#link_name "SDL_PauseAudio" ---;
