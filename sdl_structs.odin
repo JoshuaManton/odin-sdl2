@@ -38,29 +38,7 @@ SDL_Audio_Filter :: proc(cvt: ^SDL_Audio_Cvt, format: SDL_Audio_Format) #cc_c;
 SDL_Thread_Function :: proc(data: rawptr) -> i32 #cc_c;
 SDL_Hit_Test :: proc(window: ^SDL_Window, area: ^SDL_Point, data: rawptr) -> SDL_Hit_Test_Result #cc_c;
 SDL_Windows_Message_Hook :: proc(userdata: rawptr, hwnd: rawptr, message: u32, wparam: u64, lparam: i64) #cc_c;
-
-SDL_Bool :: enum i32
-{
-    SDL_False,
-    SDL_True
-}
-
-/*
-typedef struct SDL_GameControllerButtonBind
-{
-    SDL_GameControllerBindType bindType;
-    union
-    {
-        int button;
-        int axis;
-        struct {
-            int hat;
-            int hat_mask;
-        } hat;
-    } value;
-
-} SDL_GameControllerButtonBind;
-*/
+SDL_Log_Output_Function :: proc(userdata: rawptr, category: i32, priority: SDL_Log_Priority, message: ^u8) #cc_c;
 
 SDL_Message_Box_Data :: struct #ordered
 {

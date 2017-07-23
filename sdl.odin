@@ -12,7 +12,10 @@ foreign lib {
 	sdl_add_timer 										:: proc(interval: u32, callback: SDL_Timer_Callback, param: rawptr) -> SDL_Timer_Id																	#link_name "SDL_AddTimer" ---;
 	sdl_alloc_format 									:: proc(pixel_format: u32) -> SDL_Pixel_Format																										#link_name "SDL_AllocFormat" ---;
 	sdl_alloc_palette 									:: proc(ncolors: i32) -> ^SDL_Palette																												#link_name "SDL_AllocPalette" ---;
+
+	// @SDL_Rw_Ops
 	// sdl_alloc_rw 										:: proc() -> 																																		#link_name "SDL_AllocRW" ---;
+
 	sdl_atomic_add 										:: proc(a: ^SDL_Atomic, v: i32) -> i32																												#link_name "SDL_AtomicAdd" ---;
 	sdl_atomic_cas 										:: proc(a: ^SDL_Atomic, oldval: i32, newval: i32) -> SDL_Bool																							#link_name "SDL_AtomicCAS" ---;
 	sdl_atomic_cas_ptr 									:: proc(a: ^rawptr, oldval: rawptr, newval: rawptr) -> SDL_Bool																							#link_name "SDL_AtomicCASPtr" ---;
@@ -56,12 +59,15 @@ foreign lib {
 	sdl_create_system_cursor 							:: proc(id: SDL_System_Cursor) -> ^SDL_Cursor																																		#link_name "SDL_CreateSystemCursor" ---;
 	sdl_create_texture 									:: proc(renderer: ^SDL_Renderer, format: u32, access: i32, w, h: i32) -> ^SDL_Texture																																		#link_name "SDL_CreateTexture" ---;
 	sdl_create_texture_from_surface 					:: proc(renderer: ^SDL_Renderer, surface: ^SDL_Surface) -> ^SDL_Texture																																		#link_name "SDL_CreateTextureFromSurface" ---;
-	sdl_create_thread 									:: proc(fn: SDL_Thread_Function, name: ^u8, data: rawptr, pfnBeginThread: pfnSDL_CurrentBeginThread, pfnEndThread: pfnSDL_CurrentEndThread) -> ^SDL_Thread 							#link_name "SDL_CreateThread" ---;
+	sdl_create_thread 									:: proc(fn: SDL_Thread_Function, name: ^u8, data: rawptr) -> ^SDL_Thread 										#link_name "SDL_CreateThread" ---;
 	sdl_create_window 									:: proc(title: ^u8, x, y, w, h: i32, flags: u32) -> ^SDL_Window																																		#link_name "SDL_CreateWindow" ---;
 	sdl_create_window_and_renderer 						:: proc(width, height: i32, window_flags: u32, window: ^^SDL_Window, renderer: ^^SDL_Renderer) -> i32																																		#link_name "SDL_CreateWindowAndRenderer" ---;
 	sdl_create_window_from 								:: proc(data: rawptr) -> ^SDL_Window																																		#link_name "SDL_CreateWindowFrom" ---;
 	sdl_dxgi_get_output_info 							:: proc(display_index: i32, adapter_index: ^i32, output_index: ^i32) -> SDL_Bool																																		#link_name "SDL_DXGIGetOutputInfo" ---;
+
+	// This one is missing from my source of SDL2
 	// sdl_dynapi_entry 									:: proc() ->																																		#link_name "SDL_DYNAPI_entry" ---;
+
 	sdl_del_event_watch 								:: proc(filter: SDL_Event_Filter, userdata: rawptr)																																		#link_name "SDL_DelEventWatch" ---;
 	sdl_del_hint_callback 								:: proc(name: ^u8, callback: SDL_Hint_Callback, userdata: rawptr)																																		#link_name "SDL_DelHintCallback" ---;
 	sdl_delay 											:: proc(ms: u32)																																		#link_name "SDL_Delay" ---;
@@ -87,7 +93,10 @@ foreign lib {
 	sdl_free_cursor 									:: proc(cursor: ^SDL_Cursor)																																		#link_name "SDL_FreeCursor" ---;
 	sdl_free_format 									:: proc(format: ^SDL_Pixel_Format)																																		#link_name "SDL_FreeFormat" ---;
 	sdl_free_palette 									:: proc(palette: ^SDL_Palette)																																		#link_name "SDL_FreePalette" ---;
+
+	// @SDL_Rw_Ops
 	// sdl_free_rw 										:: proc() ->																																		#link_name "SDL_FreeRW" ---;
+
 	sdl_free_surface 									:: proc(surface: ^SDL_Surface)																																		#link_name "SDL_FreeSurface" ---;
 	sdl_free_wav 										:: proc(audio_buf: ^u8)																																		#link_name "SDL_FreeWAV" ---;
 	sdl_gl_bind_texture 								:: proc(texture: ^SDL_Texture, texw, texh: ^f32) -> i32																																		#link_name "SDL_GL_BindTexture" ---;
@@ -109,15 +118,21 @@ foreign lib {
 	sdl_gl_unbind_texture 								:: proc(texture: ^SDL_Texture) -> i32																																		#link_name "SDL_GL_UnbindTexture" ---;
 	sdl_gl_unload_library 								:: proc()																																		#link_name "SDL_GL_UnloadLibrary" ---;
 	sdl_game_controller_add_mapping 					:: proc(mapping_string: ^u8) -> i32																																		#link_name "SDL_GameControllerAddMapping" ---;
+
+	// @SDL_Rw_Ops
 	// sdl_game_controller_add_mappings_from_rw 			:: proc() ->																																		#link_name "SDL_GameControllerAddMappingsFromRW" ---;
+
 	sdl_game_controller_close 							:: proc(game_controller: ^SDL_Game_Controller)																																		#link_name "SDL_GameControllerClose" ---;
 	sdl_game_controller_event_state 					:: proc(state: i32) -> i32																																		#link_name "SDL_GameControllerEventState" ---;
 	sdl_game_controller_from_instance_id 				:: proc(joy_id: SDL_Joystick_Id) ->	^SDL_Game_Controller																																	#link_name "SDL_GameControllerFromInstanceID" ---;
 	sdl_game_controller_get_attached 					:: proc(game_controller: ^SDL_Game_Controller) -> SDL_Bool																																		#link_name "SDL_GameControllerGetAttached" ---;
 	sdl_game_controller_get_axis 						:: proc(game_controller: ^SDL_Game_Controller, axis: SDL_Game_Controller_Axis) -> i16																																		#link_name "SDL_GameControllerGetAxis" ---;
 	sdl_game_controller_get_axis_from_string 			:: proc(pch_string: ^u8) -> ^u8																																		#link_name "SDL_GameControllerGetAxisFromString" ---;
-	sdl_game_controller_get_bind_for_axis 				:: proc(game_controller: ^SDL_Game_Controller, axis: SDL_Game_Controller_Axis) -> SDL_Game_Controller_Button_Bind																																		#link_name "SDL_GameControllerGetBindForAxis" ---;
-	sdl_game_controller_get_bind_for_button 			:: proc(game_controller: ^SDL_Game_Controller, button: SDL_Game_Controller_Button) -> SDL_Game_Controller_Button_Bind																																		#link_name "SDL_GameControllerGetBindForButton" ---;
+
+	// @SDL_Game_Controller_Button_Bind
+	// sdl_game_controller_get_bind_for_axis 				:: proc(game_controller: ^SDL_Game_Controller, axis: SDL_Game_Controller_Axis) -> SDL_Game_Controller_Button_Bind																																		#link_name "SDL_GameControllerGetBindForAxis" ---;
+	// sdl_game_controller_get_bind_for_button 			:: proc(game_controller: ^SDL_Game_Controller, button: SDL_Game_Controller_Button) -> SDL_Game_Controller_Button_Bind																																		#link_name "SDL_GameControllerGetBindForButton" ---;
+
 	sdl_game_controller_get_button 						:: proc(game_controller: ^SDL_Game_Controller, button: SDL_Game_Controller_Button) -> u8																																		#link_name "SDL_GameControllerGetButton" ---;
 	sdl_game_controller_get_button_from_string 			:: proc(pch_string: ^u8) -> SDL_Game_Controller_Button																																		#link_name "SDL_GameControllerGetButtonFromString" ---;
 	sdl_game_controller_get_joystick 					:: proc(game_controller: ^SDL_Game_Controller) -> ^SDL_Joystick																																		#link_name "SDL_GameControllerGetJoystick" ---;
@@ -232,7 +247,10 @@ foreign lib {
 	sdl_get_window_size 								:: proc(window: ^SDL_Window, w, h: ^i32)																																		#link_name "SDL_GetWindowSize" ---;
 	sdl_get_window_surface 								:: proc(window: ^SDL_Window) -> ^SDL_Surface																																		#link_name "SDL_GetWindowSurface" ---;
 	sdl_get_window_title 								:: proc(window: ^SDL_Window) -> ^u8																																		#link_name "SDL_GetWindowTitle" ---;
-	sdl_get_window_wm_info 								:: proc(window: ^SDL_Window, info: ^SDL_Sys_Wm_Info) -> SDL_Bool																																		#link_name "SDL_GetWindowWMInfo" ---;
+
+	// @SDL_Sys_Wm_Info
+	// sdl_get_window_wm_info 								:: proc(window: ^SDL_Window, info: ^SDL_Sys_Wm_Info) -> SDL_Bool																																		#link_name "SDL_GetWindowWMInfo" ---;
+
 	sdl_haptic_close 									:: proc(haptic: ^SDL_Haptic)																																		#link_name "SDL_HapticClose" ---;
 	sdl_haptic_destroy_effect 							:: proc(haptic: ^SDL_Haptic, effect: i32)																																		#link_name "SDL_HapticDestroyEffect" ---;
 	sdl_haptic_effect_supported 						:: proc(haptic: ^SDL_Haptic, effect: ^SDL_Haptic_Effect) -> i32																																		#link_name "SDL_HapticEffectSupported" ---;
@@ -309,31 +327,40 @@ foreign lib {
 	sdl_joystick_num_hats 								:: proc(joystick: ^SDL_Joystick) -> i32 																																	#link_name "SDL_JoystickNumHats" ---;
 	sdl_joystick_open 									:: proc(device_index: i32) -> ^SDL_Joystick																																		#link_name "SDL_JoystickOpen" ---;
 	sdl_joystick_update 								:: proc()																																		#link_name "SDL_JoystickUpdate" ---;
+
+	// @SDL_Rw_Ops
 	// sdl_load_bmp_rw 									:: proc() ->																																		#link_name "SDL_LoadBMP_RW" ---;
 	// sdl_load_dollar_templates 							:: proc() ->																																		#link_name "SDL_LoadDollarTemplates" ---;
+
 	sdl_load_function 									:: proc(handle: rawptr, name: ^u8) -> rawptr																																		#link_name "SDL_LoadFunction" ---;
 	sdl_load_object 									:: proc(sofile: ^u8) -> ^u8																																		#link_name "SDL_LoadObject" ---;
+
+	// @SDL_Rw_Ops
 	// sdl_load_wav_rw 									:: proc() ->																																		#link_name "SDL_LoadWAV_RW" ---;
+
 	sdl_lock_audio 										:: proc()																																		#link_name "SDL_LockAudio" ---;
 	sdl_lock_audio_device 								:: proc(dev: SDL_Audio_Device_Id)																																		#link_name "SDL_LockAudioDevice" ---;
 	sdl_lock_mutex 										:: proc(mutex: ^SDL_Mutex) -> i32																																		#link_name "SDL_LockMutex" ---;
 	sdl_lock_surface 									:: proc(surface: ^SDL_Surface) -> i32																																		#link_name "SDL_LockSurface" ---;
 	sdl_lock_texture 									:: proc(texture: ^SDL_Texture, rect: ^SDL_Rect, pixels: ^rawptr, pitch: ^i32) -> i32																																		#link_name "SDL_LockTexture" ---;
-	// sdl_log 											:: proc() ->																																		#link_name "SDL_Log" ---;
-	// sdl_log_critical 									:: proc() ->																																		#link_name "SDL_LogCritical" ---;
-	// sdl_log_debug 										:: proc() ->																																		#link_name "SDL_LogDebug" ---;
-	// sdl_log_error 										:: proc() ->																																		#link_name "SDL_LogError" ---;
-	// sdl_log_get_output_function 						:: proc() ->																																		#link_name "SDL_LogGetOutputFunction" ---;
-	// sdl_log_get_priority 								:: proc() ->																																		#link_name "SDL_LogGetPriority" ---;
-	// sdl_log_info 										:: proc() ->																																		#link_name "SDL_LogInfo" ---;
-	// sdl_log_message 									:: proc() ->																																		#link_name "SDL_LogMessage" ---;
-	// sdl_log_message_v 									:: proc() ->																																		#link_name "SDL_LogMessageV" ---;
-	// sdl_log_reset_priorities 							:: proc() ->																																		#link_name "SDL_LogResetPriorities" ---;
-	// sdl_log_set_all_priority 							:: proc() ->																																		#link_name "SDL_LogSetAllPriority" ---;
-	// sdl_log_set_output_function 						:: proc() ->																																		#link_name "SDL_LogSetOutputFunction" ---;
-	// sdl_log_set_priority 								:: proc() ->																																		#link_name "SDL_LogSetPriority" ---;
-	// sdl_log_verbose 									:: proc() ->																																		#link_name "SDL_LogVerbose" ---;
-	// sdl_log_warn 										:: proc() ->																																		#link_name "SDL_LogWarn" ---;
+
+	// These might be wrong?
+	sdl_log 											:: proc(fmt: ...^u8)																																		#link_name "SDL_Log" ---;
+	sdl_log_critical 									:: proc(category: i32, fmt: ...^u8)																																		#link_name "SDL_LogCritical" ---;
+	sdl_log_debug 										:: proc(category: i32, fmt: ...^u8)																																		#link_name "SDL_LogDebug" ---;
+	sdl_log_error 										:: proc(category: i32, fmt: ...^u8)																																		#link_name "SDL_LogError" ---;
+	sdl_log_get_output_function 						:: proc(callback: ^SDL_Log_Output_Function, userdata: ^rawptr)																																		#link_name "SDL_LogGetOutputFunction" ---;
+	sdl_log_get_priority 								:: proc(category: i32) -> SDL_Log_Priority																																		#link_name "SDL_LogGetPriority" ---;
+	sdl_log_info 										:: proc(category: i32, fmt: ...^u8)																																		#link_name "SDL_LogInfo" ---;
+	sdl_log_message 									:: proc(category: i32, priority: SDL_Log_Priority, fmt: ...^u8)																																		#link_name "SDL_LogMessage" ---;
+	sdl_log_message_v 									:: proc(category: i32, priority: SDL_Log_Priority, fmt: ^u8, va_list: ^u8)																																		#link_name "SDL_LogMessageV" ---;
+	sdl_log_reset_priorities 							:: proc()																																		#link_name "SDL_LogResetPriorities" ---;
+	sdl_log_set_all_priority 							:: proc(priority: SDL_Log_Priority)																																		#link_name "SDL_LogSetAllPriority" ---;
+	sdl_log_set_output_function 						:: proc(callback: SDL_Log_Output_Function, userdata: rawptr)																																		#link_name "SDL_LogSetOutputFunction" ---;
+	sdl_log_set_priority 								:: proc(category: i32, priority: SDL_Log_Priority)																																		#link_name "SDL_LogSetPriority" ---;
+	sdl_log_verbose 									:: proc(category: i32, fmt: ...^u8)																																		#link_name "SDL_LogVerbose" ---;
+	sdl_log_warn 										:: proc(category: i32, fmt: ...^u8)																																		#link_name "SDL_LogWarn" ---;
+
 	sdl_lower_blit 										:: proc(src: ^SDL_Surface, srcrect: ^SDL_Rect, dst: ^SDL_Surface, dstrect: ^SDL_Rect) -> i32																																		#link_name "SDL_LowerBlit" ---;
 	sdl_lower_blit_scaled 								:: proc(src: ^SDL_Surface, srcrect: ^SDL_Rect, dst: ^SDL_Surface, dstrect: ^SDL_Rect) -> i32																																		#link_name "SDL_LowerBlitScaled" ---;
 	sdl_map_rgb 										:: proc(format: SDL_Pixel_Format, r, g, b: u8) -> u32																																		#link_name "SDL_MapRGB" ---;
@@ -359,11 +386,16 @@ foreign lib {
 	sdl_queue_audio 									:: proc(dev: SDL_Audio_Device_Id, data: rawptr, len: u32) -> i32																																		#link_name "SDL_QueueAudio" ---;
 	sdl_quit 											:: proc()																																		#link_name "SDL_Quit" ---;
 	sdl_quit_sub_system 								:: proc(flags: u32)																																		#link_name "SDL_QuitSubSystem" ---;
+
+	// @SDL_Rw_Ops
 	// sdl_rw_from_const_mem 								:: proc() ->																																		#link_name "SDL_RWFromConstMem" ---;
 	// sdl_rw_from_fp 										:: proc() ->																																		#link_name "SDL_RWFromFP" ---;
 	// sdl_rw_from_file 									:: proc() ->																																		#link_name "SDL_RWFromFile" ---;
 	// sdl_rw_from_mem 									:: proc() ->																																		#link_name "SDL_RWFromMem" ---;
+
 	sdl_raise_window 									:: proc(window: ^SDL_Window)																																		#link_name "SDL_RaiseWindow" ---;
+
+	// @SDL_Rw_Ops
 	// sdl_read_be16 										:: proc() ->																																		#link_name "SDL_ReadBE16" ---;
 	// sdl_read_be32 										:: proc() ->																																		#link_name "SDL_ReadBE32" ---;
 	// sdl_read_be64 										:: proc() ->																																		#link_name "SDL_ReadBE64" ---;
@@ -371,6 +403,7 @@ foreign lib {
 	// sdl_read_le32 										:: proc() ->																																		#link_name "SDL_ReadLE32" ---;
 	// sdl_read_le64 										:: proc() ->																																		#link_name "SDL_ReadLE64" ---;
 	// sdl_read_u8 										:: proc() ->																																		#link_name "SDL_ReadU8" ---;
+
 	sdl_record_gesture 									:: proc(touch_id: SDL_Touch_Id) -> i32																																		#link_name "SDL_RecordGesture" ---;
 	sdl_register_app 									:: proc(name: ^u8, style: u32, h_inst: rawptr) -> i32																																		#link_name "SDL_RegisterApp" ---;
 	sdl_register_events 								:: proc(num_events: i32) -> u32																																		#link_name "SDL_RegisterEvents" ---;
@@ -401,12 +434,18 @@ foreign lib {
 	sdl_render_set_scale 								:: proc(renderer: ^SDL_Renderer, scale_x, scale_y: f32) -> i32																																		#link_name "SDL_RenderSetScale" ---;
 	sdl_render_set_viewport 							:: proc(renderer: ^SDL_Renderer, rect: ^SDL_Rect)																																		#link_name "SDL_RenderSetViewport" ---;
 	sdl_render_target_supported 						:: proc(renderer: ^SDL_Renderer) -> SDL_Bool																																		#link_name "SDL_RenderTargetSupported" ---;
-	// sdl_report_assertion 								:: proc() ->																																		#link_name "SDL_ReportAssertion" ---;
+
+	// @Macros
+	//sdl_report_assertion 								:: proc() ->																																		#link_name "SDL_ReportAssertion" ---;
+
 	sdl_reset_assertion_report 							:: proc()																																		#link_name "SDL_ResetAssertionReport" ---;
 	sdl_restore_window 									:: proc(window: ^SDL_Window)																																		#link_name "SDL_RestoreWindow" ---;
+
+	// @SDL_Rw_Ops
 	// sdl_save_all_dollar_templates 						:: proc() ->																																		#link_name "SDL_SaveAllDollarTemplates" ---;
 	// sdl_save_bmp_rw 									:: proc() ->																																		#link_name "SDL_SaveBMP_RW" ---;
 	// sdl_save_dollar_template 							:: proc() ->																																		#link_name "SDL_SaveDollarTemplate" ---;
+
 	sdl_sem_post 										:: proc(sem: SDL_Sem) -> i32																																		#link_name "SDL_SemPost" ---;
 	sdl_sem_try_wait 									:: proc(sem: SDL_Sem) -> i32																																		#link_name "SDL_SemTryWait" ---;
 	sdl_sem_value 										:: proc(sem: SDL_Sem) -> u32																																		#link_name "SDL_SemValue" ---;
@@ -417,7 +456,7 @@ foreign lib {
 	sdl_set_clipboard_text 								:: proc(text: ^u8) -> i32																																		#link_name "SDL_SetClipboardText" ---;
 	sdl_set_color_key 									:: proc(surface: ^SDL_Surface, flag: i32, key: u32) -> i32																																		#link_name "SDL_SetColorKey" ---;
 	sdl_set_cursor 										:: proc(cursor: ^SDL_Cursor)																																		#link_name "SDL_SetCursor" ---;
-	// sdl_set_error 										:: proc() ->																																		#link_name "SDL_SetError" ---;
+	sdl_set_error 										:: proc(fmt: ...^u8) -> i32																																	#link_name "SDL_SetError" ---;
 	sdl_set_event_filter 								:: proc(filter: SDL_Event_Filter, userdata: rawptr)																																		#link_name "SDL_SetEventFilter" ---;
 	sdl_set_hint 										:: proc(name, value: ^u8) -> SDL_Bool																																		#link_name "SDL_SetHint" ---;
 	sdl_set_hint_with_priority 							:: proc(name, value: ^u8, priority: SDL_Hint_Priority) -> SDL_Bool																																		#link_name "SDL_SetHintWithPriority" ---;
@@ -493,6 +532,8 @@ foreign lib {
 	sdl_warp_mouse_global 								:: proc(x, y: i32) -> i32																																		#link_name "SDL_WarpMouseGlobal" ---;
 	sdl_warp_mouse_in_window 							:: proc(window: ^SDL_Window, x, y: i32)																																		#link_name "SDL_WarpMouseInWindow" ---;
 	sdl_was_init 										:: proc(flags: u32) -> u32																																		#link_name "SDL_WasInit" ---;
+
+	// @SDL_Rw_Ops
 	// sdl_write_be16 										:: proc() ->																																		#link_name "SDL_WriteBE16" ---;
 	// sdl_write_be32 										:: proc() ->																																		#link_name "SDL_WriteBE32" ---;
 	// sdl_write_be64 										:: proc() ->																																		#link_name "SDL_WriteBE64" ---;
@@ -500,7 +541,8 @@ foreign lib {
 	// sdl_write_le32 										:: proc() ->																																		#link_name "SDL_WriteLE32" ---;
 	// sdl_write_le64 										:: proc() ->																																		#link_name "SDL_WriteLE64" ---;
 	// sdl_write_u8 										:: proc() ->																																		#link_name "SDL_WriteU8" ---;
-	/*
+
+	/* Probably don't need these at all?
 	sdl_abs 											:: proc() ->																																		#link_name "SDL_abs" ---;
 	sdl_acos 											:: proc() ->																																		#link_name "SDL_acos" ---;
 	sdl_asin 											:: proc() ->																																		#link_name "SDL_asin" ---;
@@ -576,9 +618,4 @@ foreign lib {
 	sdl_wcslcpy 										:: proc() ->																																		#link_name "SDL_wcslcpy" ---;
 	sdl_wcslen 											:: proc() ->																																		#link_name "SDL_wcslen" ---;
 	*/
-}
-
-main :: proc()
-{
-	
 }

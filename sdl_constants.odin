@@ -118,6 +118,12 @@ SDL_Hit_Test_Result :: enum i32
     SDL_HITTEST_RESIZE_LEFT
 }
 
+SDL_Bool :: enum i32
+{
+    SDL_False,
+    SDL_True
+}
+
 Window_Shape_Mode :: enum i32
 {
     /** \brief The default mode, a binarized alpha cutoff of 1. */
@@ -208,6 +214,18 @@ SDL_Power_State :: enum i32
     SDL_POWERSTATE_CHARGING,     /**< Plugged in, charging battery */
     SDL_POWERSTATE_CHARGED       /**< Plugged in, battery charged */
 }
+
+SDL_Log_Priority :: enum i32
+{
+    SDL_LOG_PRIORITY_VERBOSE = 1,
+    SDL_LOG_PRIORITY_DEBUG,
+    SDL_LOG_PRIORITY_INFO,
+    SDL_LOG_PRIORITY_WARN,
+    SDL_LOG_PRIORITY_ERROR,
+    SDL_LOG_PRIORITY_CRITICAL,
+    SDL_NUM_LOG_PRIORITIES
+}
+
 
 // Input stuff
 
