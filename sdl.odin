@@ -620,17 +620,10 @@ RENDERER_PRESENTVSYNC :: 0x00000004;
 RENDERER_TARGETTEXTURE :: 0x00000008;
 
 BlendMode :: enum i32 {
-    NONE = 0x00000000,     /**< no blending
-                                              dstRGBA = srcRGBA */
-    BLEND = 0x00000001,    /**< alpha blending
-                                              dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
-                                              dstA = srcA + (dstA * (1-srcA)) */
-    ADD = 0x00000002,      /**< additive blending
-                                              dstRGB = (srcRGB * srcA) + dstRGB
-                                              dstA = dstA */
-    MOD = 0x00000004       /**< color modulate
-                                              dstRGB = srcRGB * dstRGB
-                                              dstA = dstA */
+    NONE = 0x00000000,
+    BLEND = 0x00000001,
+    ADD = 0x00000002,
+    MOD = 0x00000004
 }
 
 ErrorCode :: enum i32 {
@@ -665,11 +658,11 @@ ThreadPriority :: enum i32 {
 }
 
 AssertState :: enum i32 {
-    RETRY,  /**< Retry the assert immediately. */
-    BREAK,  /**< Make the debugger trigger a breakpoint. */
-    ABORT,  /**< Terminate the program. */
-    IGNORE,  /**< Ignore the assert. */
-    ALWAYS_IGNORE  /**< Ignore the assert from now on. */
+    RETRY,
+    BREAK,
+    ABORT,
+    IGNORE,
+    ALWAYS_IGNORE
 }
 
 EventAction :: enum i32 {
@@ -679,8 +672,8 @@ EventAction :: enum i32 {
 }
 
 HitTestResult :: enum i32 {
-    NORMAL,  /**< Region is normal. No special properties. */
-    DRAGGABLE,  /**< Region can drag entire window. */
+    NORMAL,
+    DRAGGABLE,
     RESIZE_TOPLEFT,
     RESIZE_TOP,
     RESIZE_TOPRIGHT,
@@ -697,13 +690,9 @@ Bool :: enum i32 {
 }
 
 WindowShapeModes :: enum i32 {
-    /** \brief The default mode, a binarized alpha cutoff of 1. */
     DEFAULT,
-    /** \brief A binarized alpha cutoff with a given integer value. */
     BINARIZE_ALPHA,
-    /** \brief A binarized alpha cutoff with a given integer value, but with the opposite comparison. */
     REVERSE_BINARIZE_ALPHA,
-    /** \brief A color key is applied. */
     COLOR_KEY
 }
 
@@ -724,9 +713,9 @@ Keymod :: enum i32 {
 }
 
 RendererFlip :: enum i32 {
-    NONE = 0x00000000,     /**< Do not flip */
-    HORIZONTAL = 0x00000001,    /**< flip horizontally */
-    VERTICAL = 0x00000002     /**< flip vertically */
+    NONE = 0x00000000,
+    HORIZONTAL = 0x00000001,
+    VERTICAL = 0x00000002
 }
 
 GLAttr :: enum i32 {
@@ -773,11 +762,11 @@ AudioStatus :: enum i32 {
 }
 
 PowerState :: enum i32 {
-    UNKNOWN,      /**< cannot determine power status */
-    ON_BATTERY,   /**< Not plugged in, running on the battery */
-    NO_BATTERY,   /**< Plugged in, no battery available */
-    CHARGING,     /**< Plugged in, charging battery */
-    CHARGED       /**< Plugged in, battery charged */
+    UNKNOWN,
+    ON_BATTERY,
+    NO_BATTERY,
+    CHARGING,
+    CHARGED
 }
 
 LogPriority :: enum i32 {
@@ -833,31 +822,24 @@ GameControllerBindType :: enum i32 {
 }
 
 SystemCursor :: enum i32 {
-    ARROW,     /**< Arrow */
-    IBEAM,     /**< I-beam */
-    WAIT,      /**< Wait */
-    CROSSHAIR, /**< Crosshair */
-    WAITARROW, /**< Small wait cursor (or Wait if not available) */
-    SIZENWSE,  /**< Double arrow pointing northwest and southeast */
-    SIZENESW,  /**< Double arrow pointing northeast and southwest */
-    SIZEWE,    /**< Double arrow pointing west and east */
-    SIZENS,    /**< Double arrow pointing north and south */
-    SIZEALL,   /**< Four pointed arrow pointing north, south, east, and west */
-    NO,        /**< Slashed circle or crossbones */
-    HAND,      /**< Hand */
+    ARROW,
+    IBEAM,
+    WAIT,
+    CROSSHAIR,
+    WAITARROW,
+    SIZENWSE,
+    SIZENESW,
+    SIZEWE,
+    SIZENS,
+    SIZEALL,
+    NO,
+    HAND,
     NUM_SYSTEM_CURSORS
 }
 
 
 Scancode :: enum i32 {
     UNKNOWN = 0,
-
-    /**
-     *  \name Usage page 0x07
-     *
-     *  These values are from usage page 0x07 (USB keyboard page).
-     */
-    /* @{ */
 
     A = 4,
     B = 5,
@@ -907,51 +889,11 @@ Scancode :: enum i32 {
     EQUALS = 46,
     LEFTBRACKET = 47,
     RIGHTBRACKET = 48,
-    BACKSLASH = 49, /**< Located at the lower left of the return
-                                  *   key on ISO keyboards and at the right end
-                                  *   of the QWERTY row on ANSI keyboards.
-                                  *   Produces REVERSE SOLIDUS (backslash) and
-                                  *   VERTICAL LINE in a US layout, REVERSE
-                                  *   SOLIDUS and VERTICAL LINE in a UK Mac
-                                  *   layout, NUMBER SIGN and TILDE in a UK
-                                  *   Windows layout, DOLLAR SIGN and POUND SIGN
-                                  *   in a Swiss German layout, NUMBER SIGN and
-                                  *   APOSTROPHE in a German layout, GRAVE
-                                  *   ACCENT and POUND SIGN in a French Mac
-                                  *   layout, and ASTERISK and MICRO SIGN in a
-                                  *   French Windows layout.
-                                  */
-    NONUSHASH = 50, /**< ISO USB keyboards actually use this code
-                                  *   instead of 49 for the same key, but all
-                                  *   OSes I've seen treat the two codes
-                                  *   identically. So, as an implementor, unless
-                                  *   your keyboard generates both of those
-                                  *   codes and your OS treats them differently,
-                                  *   you should generate BACKSLASH
-                                  *   instead of this code. As a user, you
-                                  *   should not rely on this code because SDL
-                                  *   will never generate it with most (all?)
-                                  *   keyboards.
-                                  */
+    BACKSLASH = 49,
+    NONUSHASH = 50,
     SEMICOLON = 51,
     APOSTROPHE = 52,
-    GRAVE = 53, /**< Located in the top left corner (on both ANSI
-                              *   and ISO keyboards). Produces GRAVE ACCENT and
-                              *   TILDE in a US Windows layout and in US and UK
-                              *   Mac layouts on ANSI keyboards, GRAVE ACCENT
-                              *   and NOT SIGN in a UK Windows layout, SECTION
-                              *   SIGN and PLUS-MINUS SIGN in US and UK Mac
-                              *   layouts on ISO keyboards, SECTION SIGN and
-                              *   DEGREE SIGN in a Swiss German layout (Mac:
-                              *   only on ISO keyboards), CIRCUMFLEX ACCENT and
-                              *   DEGREE SIGN in a German layout (Mac: only on
-                              *   ISO keyboards), SUPERSCRIPT TWO and TILDE in a
-                              *   French Windows layout, COMMERCIAL AT and
-                              *   NUMBER SIGN in a French Mac layout on ISO
-                              *   keyboards, and LESS-THAN SIGN and GREATER-THAN
-                              *   SIGN in a Swiss German, German, or French Mac
-                              *   layout on ANSI keyboards.
-                              */
+    GRAVE = 53,
     COMMA = 54,
     PERIOD = 55,
     SLASH = 56,
@@ -974,8 +916,7 @@ Scancode :: enum i32 {
     PRINTSCREEN = 70,
     SCROLLLOCK = 71,
     PAUSE = 72,
-    INSERT = 73, /**< insert on PC, help on some Mac keyboards (but
-                                   does send code 73, not 117) */
+    INSERT = 73,
     HOME = 74,
     PAGEUP = 75,
     DELETE = 76,
@@ -986,8 +927,7 @@ Scancode :: enum i32 {
     DOWN = 81,
     UP = 82,
 
-    NUMLOCKCLEAR = 83, /**< num lock on PC, clear on Mac keyboards
-                                     */
+    NUMLOCKCLEAR = 83,
     KP_DIVIDE = 84,
     KP_MULTIPLY = 85,
     KP_MINUS = 86,
@@ -1005,20 +945,9 @@ Scancode :: enum i32 {
     KP_0 = 98,
     KP_PERIOD = 99,
 
-    NONUSBACKSLASH = 100, /**< This is the additional key that ISO
-                                        *   keyboards have over ANSI ones,
-                                        *   located between left shift and Y.
-                                        *   Produces GRAVE ACCENT and TILDE in a
-                                        *   US or UK Mac layout, REVERSE SOLIDUS
-                                        *   (backslash) and VERTICAL LINE in a
-                                        *   US or UK Windows layout, and
-                                        *   LESS-THAN SIGN and GREATER-THAN SIGN
-                                        *   in a Swiss German, German, or French
-                                        *   layout. */
-    APPLICATION = 101, /**< windows contextual menu, compose */
-    POWER = 102, /**< The USB document says this is a status flag,
-                               *   not a physical key - but some Mac keyboards
-                               *   do have a power key. */
+    NONUSBACKSLASH = 100,
+    APPLICATION = 101,
+    POWER = 102,
     KP_EQUALS = 103,
     F13 = 104,
     F14 = 105,
@@ -1037,7 +966,7 @@ Scancode :: enum i32 {
     MENU = 118,
     SELECT = 119,
     STOP = 120,
-    AGAIN = 121,   /**< redo */
+    AGAIN = 121,
     UNDO = 122,
     CUT = 123,
     COPY = 124,
@@ -1053,27 +982,26 @@ Scancode :: enum i32 {
     KP_COMMA = 133,
     KP_EQUALSAS400 = 134,
 
-    INTERNATIONAL1 = 135, /**< used on Asian keyboards, see
-                                            footnotes in USB doc */
+    INTERNATIONAL1 = 135,
     INTERNATIONAL2 = 136,
-    INTERNATIONAL3 = 137, /**< Yen */
+    INTERNATIONAL3 = 137,
     INTERNATIONAL4 = 138,
     INTERNATIONAL5 = 139,
     INTERNATIONAL6 = 140,
     INTERNATIONAL7 = 141,
     INTERNATIONAL8 = 142,
     INTERNATIONAL9 = 143,
-    LANG1 = 144, /**< Hangul/English toggle */
-    LANG2 = 145, /**< Hanja conversion */
-    LANG3 = 146, /**< Katakana */
-    LANG4 = 147, /**< Hiragana */
-    LANG5 = 148, /**< Zenkaku/Hankaku */
-    LANG6 = 149, /**< reserved */
-    LANG7 = 150, /**< reserved */
-    LANG8 = 151, /**< reserved */
-    LANG9 = 152, /**< reserved */
+    LANG1 = 144,
+    LANG2 = 145,
+    LANG3 = 146,
+    LANG4 = 147,
+    LANG5 = 148,
+    LANG6 = 149,
+    LANG7 = 150,
+    LANG8 = 151,
+    LANG9 = 152,
 
-    ALTERASE = 153, /**< Erase-Eaze */
+    ALTERASE = 153,
     SYSREQ = 154,
     CANCEL = 155,
     CLEAR = 156,
@@ -1135,26 +1063,14 @@ Scancode :: enum i32 {
 
     LCTRL = 224,
     LSHIFT = 225,
-    LALT = 226, /**< alt, option */
-    LGUI = 227, /**< windows, command (apple), meta */
+    LALT = 226,
+    LGUI = 227,
     RCTRL = 228,
     RSHIFT = 229,
-    RALT = 230, /**< alt gr, option */
-    RGUI = 231, /**< windows, command (apple), meta */
+    RALT = 230,
+    RGUI = 231,
 
-    MODE = 257,    /**< I'm not sure if this is really not covered
-                                 *   by any of the above, but since there's a
-                                 *   special KMOD_MODE for it I'm adding it here
-                                 */
-
-    /* @} *//* Usage page 0x07 */
-
-    /**
-     *  \name Usage page 0x0C
-     *
-     *  These values are mapped from usage page 0x0C (USB consumer page).
-     */
-    /* @{ */
+    MODE = 257,
 
     AUDIONEXT = 258,
     AUDIOPREV = 259,
@@ -1174,19 +1090,9 @@ Scancode :: enum i32 {
     AC_REFRESH = 273,
     AC_BOOKMARKS = 274,
 
-    /* @} *//* Usage page 0x0C */
-
-    /**
-     *  \name Walther keys
-     *
-     *  These are values that Christian Walther added (for mac keyboard?).
-     */
-    /* @{ */
-
     BRIGHTNESSDOWN = 275,
     BRIGHTNESSUP = 276,
-    DISPLAYSWITCH = 277, /**< display mirroring/dual display
-                                           switch, video mode switch */
+    DISPLAYSWITCH = 277,
     KBDILLUMTOGGLE = 278,
     KBDILLUMDOWN = 279,
     KBDILLUMUP = 280,
@@ -1196,12 +1102,7 @@ Scancode :: enum i32 {
     APP1 = 283,
     APP2 = 284,
 
-    /* @} *//* Walther keys */
-
-    /* Add any other keys here. */
-
-    NUM_SCANCODES = 512 /**< not a key, just marks the number of scancodes
-                                 for array bounds */
+    NUM_SCANCODES = 512
 }
 
 
@@ -1244,9 +1145,7 @@ SDLK_EQUALS :: '=';
 SDLK_GREATER :: '>';
 SDLK_QUESTION :: '?';
 SDLK_AT :: '@';
-/*
-   Skip uppercase letters
- */
+
 SDLK_LEFTBRACKET :: '[';
 SDLK_BACKSLASH :: '\\';
 SDLK_RIGHTBRACKET :: ']';
@@ -1472,108 +1371,69 @@ HAT_LEFTDOWN :: HAT_LEFT | HAT_DOWN;
 
 
 
-FIRST_EVENT :: 0;     /**< Unused (do not remove) */
+FIRST_EVENT :: 0;
 
-/* Application events */
-QUIT :: 0x100; /**< User-requested quit */
+QUIT :: 0x100;
 
-/* These application events have special meaning on iOS, see README-ios.md for details */
-APP_TERMINATING :: 257;        /**< The application is being terminated by the OS
-                                 Called on iOS in applicationWillTerminate()
-                                 Called on Android in onDestroy()
-                            */
-APP_LOW_MEMORY :: 258;          /**< The application is low on memory, free memory if possible.
-                                 Called on iOS in applicationDidReceiveMemoryWarning()
-                                 Called on Android in onLowMemory()
-                            */
-APP_WILL_ENTER_BACKGROUND :: 259; /**< The application is about to enter the background
-                                 Called on iOS in applicationWillResignActive()
-                                 Called on Android in onPause()
-                            */
-APP_DID_ENTER_BACKGROUND :: 260; /**< The application did enter the background and may not get CPU for some time
-                                 Called on iOS in applicationDidEnterBackground()
-                                 Called on Android in onPause()
-                            */
-APP_WILL_ENTER_FOREGROUND :: 261; /**< The application is about to enter the foreground
-                                 Called on iOS in applicationWillEnterForeground()
-                                 Called on Android in onResume()
-                            */
-APP_DID_ENTER_FOREGROUND :: 262; /**< The application is now interactive
-                                 Called on iOS in applicationDidBecomeActive()
-                                 Called on Android in onResume()
-                            */
+APP_TERMINATING :: 257;
+APP_LOW_MEMORY :: 258;
+APP_WILL_ENTER_BACKGROUND :: 259;
+APP_DID_ENTER_BACKGROUND :: 260;
+APP_WILL_ENTER_FOREGROUND :: 261;
+APP_DID_ENTER_FOREGROUND :: 262;
 
-/* Window events */
-WINDOW_EVENT :: 0x200; /**< Window state change */
-SYS_WM_EVENT :: 513;             /**< System specific event */
+WINDOW_EVENT :: 0x200;
+SYS_WM_EVENT :: 513;
 
-/* Keyboard events */
-KEY_DOWN :: 0x300; /**< Key pressed */
-KEY_UP :: 769;                  /**< Key released */
-TEXT_EDITING :: 770;            /**< Keyboard text editing (composition) */
-TEXT_INPUT :: 771;              /**< Keyboard text input */
-KEY_MAP_CHANGED :: 772;          /**< Keymap changed due to a system event such as an
-                                 input language or keyboard layout change.
-                            */
+KEY_DOWN :: 0x300;
+KEY_UP :: 769;
+TEXT_EDITING :: 770;
+TEXT_INPUT :: 771;
+KEY_MAP_CHANGED :: 772;
 
-/* Mouse events */
-MOUSE_MOTION :: 0x400; /**< Mouse moved */
-MOUSE_BUTTON_DOWN :: 1025;        /**< Mouse button pressed */
-MOUSE_BUTTON_UP :: 1026;         /**< Mouse button released */
-MOUSE_WHEEL :: 1027;             /**< Mouse wheel motion */
+MOUSE_MOTION :: 0x400;
+MOUSE_BUTTON_DOWN :: 1025;
+MOUSE_BUTTON_UP :: 1026;
+MOUSE_WHEEL :: 1027;
 
-/* Joystick events */
-JOY_AXIS_MOTION :: 0x600; /**< Joystick axis motion */
-JOY_BALL_MOTION :: 1537;          /**< Joystick trackball motion */
-JOY_HAT_MOTION :: 1538;           /**< Joystick hat position change */
-JOY_BUTTON_DOWN :: 1539;          /**< Joystick button pressed */
-JOY_BUTTON_UP :: 1540;            /**< Joystick button released */
-JOY_DEVICE_ADDED :: 1541;         /**< A new joystick has been inserted into the system */
-JOY_DEVICE_REMOVED :: 1542;       /**< An opened joystick has been removed */
+JOY_AXIS_MOTION :: 0x600;
+JOY_BALL_MOTION :: 1537;
+JOY_HAT_MOTION :: 1538;
+JOY_BUTTON_DOWN :: 1539;
+JOY_BUTTON_UP :: 1540;
+JOY_DEVICE_ADDED :: 1541;
+JOY_DEVICE_REMOVED :: 1542;
 
-/* Game controller events */
-CONTROLLER_AXIS_MOTION :: 0x650; /**< Game controller axis motion */
-CONTROLLER_BUTTON_DOWN :: 1617;          /**< Game controller button pressed */
-CONTROLLER_BUTTON_UP :: 1618;            /**< Game controller button released */
-CONTROLLER_DEVICE_ADDED :: 1619;         /**< A new Game controller has been inserted into the system */
-CONTROLLER_DEVICE_REMOVED :: 1620;       /**< An opened Game controller has been removed */
-CONTROLLER_DEVICE_REMAPPED :: 1621;      /**< The controller mapping was updated */
+CONTROLLER_AXIS_MOTION :: 0x650;
+CONTROLLER_BUTTON_DOWN :: 1617;
+CONTROLLER_BUTTON_UP :: 1618;
+CONTROLLER_DEVICE_ADDED :: 1619;
+CONTROLLER_DEVICE_REMOVED :: 1620;
+CONTROLLER_DEVICE_REMAPPED :: 1621;
 
-/* Touch events */
 FINGER_DOWN :: 0x700;
 FINGER_UP :: 1793;
 FINGER_MOTION :: 1794;
 
-/* Gesture events */
 DOLLAR_GESTURE :: 0x800;
 DOLLAR_RECORD :: 2049;
 MULTIGESTURE :: 2050;
 
-/* Clipboard events */
-CLIPBOARD_UPDATE :: 0x900; /**< The clipboard changed */
+CLIPBOARD_UPDATE :: 0x900;
 
-/* Drag and drop events */
-DROP_FILE :: 0x1000; /**< The system requests a file open */
-DROP_TEXT :: 4097;                 /**< text/plain drag-and-drop event */
-DROP_BEGIN :: 4098;                /**< A new set of drops is beginning (NULL filename) */
-DROP_COMPLETE :: 4099;             /**< Current set of drops is now complete (NULL filename) */
+DROP_FILE :: 0x1000;
+DROP_TEXT :: 4097;
+DROP_BEGIN :: 4098;
+DROP_COMPLETE :: 4099;
 
-/* Audio hotplug events */
-AUDIO_DEVICE_ADDED :: 0x1100; /**< A new audio device is available */
-AUDIO_DEVICE_REMOVED :: 4353;        /**< An audio device has been removed. */
+AUDIO_DEVICE_ADDED :: 0x1100;
+AUDIO_DEVICE_REMOVED :: 4353;
 
-/* Render events */
-RENDER_TARGETS_RESET :: 0x2000; /**< The render targets have been reset and their contents need to be updated */
-RENDER_DEVICE_RESET :: 8193; /**< The device has been reset and all textures need to be recreated */
+RENDER_TARGETS_RESET :: 0x2000;
+RENDER_DEVICE_RESET :: 8193;
 
-/** Events ::USER_EVENT through ::LAST_EVENT are for your use,
- *  and should be allocated with RegisterEvents()
- */
 USER_EVENT :: 0x8000;
 
-/**
- *  This last event is only for bounding internal arrays
- */
 LAST_EVENT :: 0xFFFF;
 
 GLContext :: rawptr;
@@ -1648,9 +1508,9 @@ MessageBoxData :: struct #ordered {
 }
 
 MessageBoxButtonData :: struct #ordered {
-    flags: u32;       /**< ::MessageBoxButtonFlags */
-    button_id: i32;       /**< User defined button id (value returned via ShowMessageBox) */
-    text: ^u8;  /**< The UTF-8 button text */
+    flags: u32;
+    button_id: i32;
+    text: ^u8;
 }
 
 MessageBoxColorScheme :: struct #ordered {
@@ -1672,7 +1532,6 @@ AssertData :: struct #ordered {
 }
 
 WindowShapeParams :: struct #raw_union {
-    /** \brief a cutoff alpha value for binarization of the window shape's alpha channel. */
     binarizationCutoff: u8;
     colorKey: Color;
 }
@@ -1688,26 +1547,26 @@ Point :: struct #ordered {
 }
 
 RendererInfo :: struct #ordered {
-    name: ^u8;           /**< The name of the renderer */
-    flags: u32;               /**< Supported ::RendererFlags */
-    num_texture_formats: u32; /**< The number of available texture formats */
-    texture_formats: [16]u32; /**< The available texture formats */
-    max_texture_width: i32;      /**< The maximum texture width */
-    max_texture_height: i32;     /**< The maximum texture height */
+    name: ^u8;
+    flags: u32;
+    num_texture_formats: u32;
+    texture_formats: [16]u32;
+    max_texture_width: i32;
+    max_texture_height: i32;
 }
 
 Version :: struct #ordered {
-    major: u8;        /**< major version */
-    minor: u8;        /**< minor version */
-    patch: u8;        /**< update version */
+    major: u8;
+    minor: u8;
+    patch: u8;
 }
 
 DisplayMode :: struct #ordered {
-    format: u32;              /**< pixel format */
-    w: i32;                      /**< width, in screen coordinates */
-    h: i32;                      /**< height, in screen coordinates */
-    refresh_rate: i32;           /**< refresh rate (or zero for unspecified) */
-    driverdata: rawptr;           /**< driver-specific data, initialize to 0 */
+    format: u32;
+    w: i32;
+    h: i32;
+    refresh_rate: i32;
+    driverdata: rawptr;
 }
 
 Finger :: struct #ordered {
@@ -1718,15 +1577,15 @@ Finger :: struct #ordered {
 }
 
 AudioSpec :: struct #ordered {
-    freq: i32;                   /**< DSP frequency -- samples per second */
-    format: AudioFormat;     /**< Audio data format */
-    channels: u8;             /**< Number of channels: 1 mono, 2 stereo */
-    silence: u8;              /**< Audio buffer silence value (calculated) */
-    samples: u16;             /**< Audio buffer size in samples (power of 2) */
-    padding: u16;             /**< Necessary for some compile environments */
-    size: u32;                /**< Audio buffer size in bytes (calculated) */
-    callback: AudioCallback; /**< Callback that feeds the audio device (NULL to use QueueAudio()). */
-    userdata: rawptr;             /**< Userdata passed to callback (ignored for NULL callbacks). */
+    freq: i32;
+    format: AudioFormat;
+    channels: u8;
+    silence: u8;
+    samples: u16;
+    padding: u16;
+    size: u32;
+    callback: AudioCallback;
+    userdata: rawptr;
 }
 
 JoystickGuid :: struct #ordered {
@@ -1734,17 +1593,17 @@ JoystickGuid :: struct #ordered {
 }
 
 AudioCvt :: struct #ordered {
-    needed: i32;                 /**< Set to 1 if conversion possible */
-    src_format: AudioFormat; /**< Source audio format */
-    dst_format: AudioFormat; /**< Target audio format */
-    rate_incr: i64;           /**< Rate conversion increment */
-    buf: ^u8;                 /**< Buffer to hold entire audio data */
-    len: i32;                    /**< Length of original audio buffer */
-    len_cvt: i32;                /**< Length of converted audio buffer */
-    len_mult: i32;               /**< buffer must be len*len_mult big */
-    len_ratio: i64;           /**< Given len, final size is len*len_ratio */
-    filters: [10]AudioFilter;        /**< Filter list */
-    filter_index: i32;           /**< Current audio conversion function */
+    needed: i32;
+    src_format: AudioFormat;
+    dst_format: AudioFormat;
+    rate_incr: i64;
+    buf: ^u8;
+    len: i32;
+    len_cvt: i32;
+    len_mult: i32;
+    len_ratio: i64;
+    filters: [10]AudioFilter;
+    filter_index: i32;
 }
 
 Surface :: struct #ordered {
@@ -1811,456 +1670,350 @@ Atomic :: struct #ordered {
 }
 
 Keysym :: struct #ordered {
-    scancode: u32;      /**< SDL physical key code - see ::Scancode for details */
-    sym: i32;            /**< SDL virtual key code - see ::Keycode for details */
-    mod: u16;                 /**< current key modifiers */
+    scancode: u32;
+    sym: i32;
+    mod: u16;
     unused: u32;
 }
 
 HapticEffect :: struct #raw_union {
-    /* Common for all force feedback effects */
-    haptic_type: u16;                    /**< Effect type. */
-    constant: HapticConstant;    /**< Constant effect. */
-    periodic: HapticPeriodic;    /**< Periodic effect. */
-    condition: HapticCondition;  /**< Condition effect. */
-    ramp: HapticRamp;            /**< Ramp effect. */
-    leftright: HapticLeftRight;  /**< Left/Right effect. */
-    custom: HapticCustom;        /**< Custom effect. */
+    haptic_type: u16;
+    constant: HapticConstant;
+    periodic: HapticPeriodic;
+    condition: HapticCondition;
+    ramp: HapticRamp;
+    leftright: HapticLeftRight;
+    custom: HapticCustom;
 }
 
 HapticConstant :: struct {
-    /* Header */
-    haptic_type: u16;            /**< ::HAPTIC_CONSTANT */
-    direction: HapticDirection;  /**< Direction of the effect. */
+    haptic_type: u16;
+    direction: HapticDirection;
 
-    /* Replay */
-    length: u32;          /**< Duration of the effect. */
-    delay: u16;           /**< Delay before starting the effect. */
+    length: u32;
+    delay: u16;
 
-    /* Trigger */
-    button: u16;          /**< Button that triggers the effect. */
-    interval: u16;        /**< How soon it can be triggered again after button. */
+    button: u16;
+    interval: u16;
 
-    /* Constant */
-    level: i16;           /**< Strength of the constant effect. */
+    level: i16;
 
-    /* Envelope */
-    attack_length: u16;   /**< Duration of the attack. */
-    attack_level: u16;    /**< Level at the start of the attack. */
-    fade_length: u16;     /**< Duration of the fade. */
-    fade_level: u16;      /**< Level at the end of the fade. */
+    attack_length: u16;
+    attack_level: u16;
+    fade_length: u16;
+    fade_level: u16;
 }
 
 HapticPeriodic :: struct {
-    /* Header */
-    haptic_type: u16;        /**< ::HAPTIC_SINE, ::HAPTIC_LEFTRIGHT,
-                             ::HAPTIC_TRIANGLE, ::HAPTIC_SAWTOOTHUP or
-                             ::HAPTIC_SAWTOOTHDOWN */
-    direction: HapticDirection;  /**< Direction of the effect. */
+    haptic_type: u16;
+    direction: HapticDirection;
 
-    /* Replay */
-    length: u32;      /**< Duration of the effect. */
-    delay: u16;       /**< Delay before starting the effect. */
+    length: u32;
+    delay: u16;
 
-    /* Trigger */
-    button: u16;      /**< Button that triggers the effect. */
-    interval: u16;    /**< How soon it can be triggered again after button. */
+    button: u16;
+    interval: u16;
 
-    /* Periodic */
-    period: u16;      /**< Period of the wave. */
-    magnitude: i16;   /**< Peak value; if negative, equivalent to 180 degrees extra phase shift. */
-    offset: i16;      /**< Mean value of the wave. */
-    phase: u16;       /**< Positive phase shift given by hundredth of a degree. */
+    period: u16;
+    magnitude: i16;
+    offset: i16;
+    phase: u16;
 
-    /* Envelope */
-    attack_length: u16;   /**< Duration of the attack. */
-    attack_level: u16;    /**< Level at the start of the attack. */
-    fade_length: u16; /**< Duration of the fade. */
-    fade_level: u16;  /**< Level at the end of the fade. */
+    attack_length: u16;
+    attack_level: u16;
+    fade_length: u16;
+    fade_level: u16;
 }
 
 HapticDirection :: struct {
-    haptic_type: u8;         /**< The type of encoding. */
-    dir: [3]i32;      /**< The encoded direction. */
+    haptic_type: u8;
+    dir: [3]i32;
 }
 
 HapticCondition :: struct {
-    /* Header */
-    haptic_type: u16;            /**< ::HAPTIC_SPRING, ::HAPTIC_DAMPER,
-                                 ::HAPTIC_INERTIA or ::HAPTIC_FRICTION */
-    direction: HapticDirection;  /**< Direction of the effect - Not used ATM. */
+    haptic_type: u16;
+    direction: HapticDirection;
 
-    /* Replay */
-    length: u32;          /**< Duration of the effect. */
-    delay: u16;           /**< Delay before starting the effect. */
+    length: u32;
+    delay: u16;
 
-    /* Trigger */
-    button: u16;          /**< Button that triggers the effect. */
-    interval: u16;        /**< How soon it can be triggered again after button. */
+    button: u16;
+    interval: u16;
 
-    /* Condition */
-    right_sat: [3]u16;    /**< Level when joystick is to the positive side; max 0xFFFF. */
-    left_sat: [3]u16;     /**< Level when joystick is to the negative side; max 0xFFFF. */
-    right_coeff: [3]i16;  /**< How fast to increase the force towards the positive side. */
-    left_coeff: [3]i16;   /**< How fast to increase the force towards the negative side. */
-    deadband: [3]u16;     /**< Size of the dead zone; max 0xFFFF: whole axis-range when 0-centered. */
-    center: [3]i16;       /**< Position of the dead zone. */
+    right_sat: [3]u16;
+    left_sat: [3]u16;
+    right_coeff: [3]i16;
+    left_coeff: [3]i16;
+    deadband: [3]u16;
+    center: [3]i16;
 }
 
 HapticRamp :: struct {
-    /* Header */
-    haptic_type: u16;            /**< ::HAPTIC_RAMP */
-    direction: HapticDirection;  /**< Direction of the effect. */
+    haptic_type: u16;
+    direction: HapticDirection;
 
-    /* Replay */
-    length: u32;          /**< Duration of the effect. */
-    delay: u16;           /**< Delay before starting the effect. */
+    length: u32;
+    delay: u16;
 
-    /* Trigger */
-    button: u16;          /**< Button that triggers the effect. */
-    interval: u16;        /**< How soon it can be triggered again after button. */
+    button: u16;
+    interval: u16;
 
-    /* Ramp */
-    start: i16;           /**< Beginning strength level. */
-    end: i16;             /**< Ending strength level. */
+    start: i16;
+    end: i16;
 
-    /* Envelope */
-    attack_length: u16;   /**< Duration of the attack. */
-    attack_level: u16;    /**< Level at the start of the attack. */
-    fade_length: u16;     /**< Duration of the fade. */
-    fade_level: u16;      /**< Level at the end of the fade. */
+    attack_length: u16;
+    attack_level: u16;
+    fade_length: u16;
+    fade_level: u16;
 }
 
 HapticLeftRight :: struct {
-    /* Header */
-    haptic_type: u16;            /**< ::HAPTIC_LEFTRIGHT */
+    haptic_type: u16;
 
-    /* Replay */
-    length: u32;          /**< Duration of the effect. */
+    length: u32;
 
-    /* Rumble */
-    large_magnitude: u16; /**< Control of the large controller motor. */
-    small_magnitude: u16; /**< Control of the small controller motor. */
+    large_magnitude: u16;
+    small_magnitude: u16;
 }
 
 HapticCustom :: struct {
-    /* Header */
-    haptic_type: u16;            /**< ::HAPTIC_CUSTOM */
-    direction: HapticDirection;  /**< Direction of the effect. */
+    haptic_type: u16;
+    direction: HapticDirection;
 
-    /* Replay */
-    length: u32;          /**< Duration of the effect. */
-    delay: u16;           /**< Delay before starting the effect. */
+    length: u32;
+    delay: u16;
 
-    /* Trigger */
-    button: u16;          /**< Button that triggers the effect. */
-    interval: u16;        /**< How soon it can be triggered again after button. */
+    button: u16;
+    interval: u16;
 
-    /* Custom */
-    channels: u8;         /**< Axes to use, minimum of one. */
-    period: u16;          /**< Sample periods. */
-    samples: u16;         /**< Amount of samples. */
-    data: ^u16;           /**< Should contain channels*samples items. */
+    channels: u8;
+    period: u16;
+    samples: u16;
+    data: ^u16;
 
-    /* Envelope */
-    attack_length: u16;   /**< Duration of the attack. */
-    attack_level: u16;    /**< Level at the start of the attack. */
-    fade_length: u16;     /**< Duration of the fade. */
-    fade_level: u16;      /**< Level at the end of the fade. */
+    attack_length: u16;
+    attack_level: u16;
+    fade_length: u16;
+    fade_level: u16;
 }
 
 Event :: struct #raw_union {
-    event_type: u32;                    /**< Event type, shared with all events */
-    common: CommonEvent;         /**< Common event data */
-    window: WindowEvent;         /**< Window event data */
-    key: KeyboardEvent;          /**< Keyboard event data */
-    edit: TextEditingEvent;      /**< Text editing event data */
-    text: TextInputEvent;        /**< Text input event data */
-    motion: MouseMotionEvent;    /**< Mouse motion event data */
-    button: MouseButtonEvent;    /**< Mouse button event data */
-    wheel: MouseWheelEvent;      /**< Mouse wheel event data */
-    jaxis: JoyAxisEvent;         /**< Joystick axis event data */
-    jball: JoyBall_Event;         /**< Joystick ball event data */
-    jhat: JoyHat_Event;           /**< Joystick hat event data */
-    jbutton: JoyButtonEvent;     /**< Joystick button event data */
-    jdevice: JoyDeviceEvent;     /**< Joystick device change event data */
-    caxis: ControllerAxisEvent;      /**< Game Controller axis event data */
-    cbutton: ControllerButtonEvent;  /**< Game Controller button event data */
-    cdevice: ControllerDeviceEvent;  /**< Game Controller device event data */
-    adevice: AudioDeviceEvent;   /**< Audio device event data */
-    quit: QuitEvent;             /**< Quit request event data */
-    user: UserEvent;             /**< Custom event data */
-    syswm: SysWmEvent;           /**< System dependent window event data */
-    tfinger: TouchFingerEvent;   /**< Touch finger event data */
-    mgesture: MultiGestureEvent; /**< Gesture event data */
-    dgesture: DollarGestureEvent; /**< Gesture event data */
-    drop: DropEvent;             /**< Drag and drop event data */
+    event_type: u32;
+    common: CommonEvent;
+    window: WindowEvent;
+    key: KeyboardEvent;
+    edit: TextEditingEvent;
+    text: TextInputEvent;
+    motion: MouseMotionEvent;
+    button: MouseButtonEvent;
+    wheel: MouseWheelEvent;
+    jaxis: JoyAxisEvent;
+    jball: JoyBall_Event;
+    jhat: JoyHat_Event;
+    jbutton: JoyButtonEvent;
+    jdevice: JoyDeviceEvent;
+    caxis: ControllerAxisEvent;
+    cbutton: ControllerButtonEvent;
+    cdevice: ControllerDeviceEvent;
+    adevice: AudioDeviceEvent;
+    quit: QuitEvent;
+    user: UserEvent;
+    syswm: SysWmEvent;
+    tfinger: TouchFingerEvent;
+    mgesture: MultiGestureEvent;
+    dgesture: DollarGestureEvent;
+    drop: DropEvent;
 
-    /* This is necessary for ABI compatibility between Visual C++ and GCC
-       Visual C++ will respect the push pack pragma and use 52 bytes for
-       this structure, and GCC will use the alignment of the largest datatype
-       within the union, which is 8 bytes.
-
-       So... we'll add padding to force the size to be 56 bytes for both.
-    */
     padding: [56]u8;
 }
 
 
-/**
- *  \brief Fields shared by every event
- */
 CommonEvent :: struct #ordered {
     event_type: u32;
     timestamp: u32;
 }
 
-/**
- *  \brief Window state change event data (event.window.*)
- */
 WindowEvent :: struct #ordered {
-    event_type: u32;        /**< ::WINDOW_EVENT */
+    event_type: u32;
     timestamp: u32;
-    window_id: u32;    /**< The associated window */
-    event: u8;        /**< ::WindowEventID */
+    window_id: u32;
+    event: u8;
     padding1: u8;
     padding2: u8;
     padding3: u8;
-    data1: i32;       /**< event dependent data */
-    data2: i32;       /**< event dependent data */
+    data1: i32;
+    data2: i32;
 }
 
-/**
- *  \brief Keyboard button event structure (event.key.*)
- */
 KeyboardEvent :: struct #ordered {
-    event_type: u32;        /**< ::KEY_DOWN or ::KEY_UP */
+    event_type: u32;
     timestamp: u32;
-    window_id: u32;    /**< The window with keyboard focus, if any */
-    state: u8;        /**< ::PRESSED or ::RELEASED */
-    repeat: u8;       /**< Non-zero if this is a key repeat */
+    window_id: u32;
+    state: u8;
+    repeat: u8;
     padding2: u8;
     padding3: u8;
-    keysym: Keysym;  /**< The key that was pressed or released */
+    keysym: Keysym;
 }
 
 TEXT_EDITING_EVENT_TEXT_SIZE :: 32;
-/**
- *  \brief Keyboard text editing event structure (event.edit.*)
- */
 TextEditingEvent :: struct #ordered {
-    event_type: u32;                                /**< ::TEXT_EDITING */
+    event_type: u32;
     timestamp: u32;
-    window_id: u32;                            /**< The window with keyboard focus, if any */
-    text: [TEXT_EDITING_EVENT_TEXT_SIZE]u8;  /**< The editing text */
-    start: i32;                               /**< The start cursor of selected editing text */
-    length: i32;                              /**< The length of selected editing text */
+    window_id: u32;
+    text: [TEXT_EDITING_EVENT_TEXT_SIZE]u8;
+    start: i32;
+    length: i32;
 }
 
 
 TEXT_INPUT_EVENT_TEXT_SIZE :: 32;
-/**
- *  \brief Keyboard text input event structure (event.text.*)
- */
 TextInputEvent :: struct #ordered {
-    event_type: u32;                              /**< ::TEXT_INPUT */
+    event_type: u32;
     timestamp: u32;
-    window_id: u32;                          /**< The window with keyboard focus, if any */
-    text: [TEXT_INPUT_EVENT_TEXT_SIZE]u8;  /**< The input text */
+    window_id: u32;
+    text: [TEXT_INPUT_EVENT_TEXT_SIZE]u8;
 }
 
-/**
- *  \brief Mouse motion event structure (event.motion.*)
- */
 MouseMotionEvent :: struct #ordered {
-    event_type: u32;        /**< ::MOUSE_MOTION */
+    event_type: u32;
     timestamp: u32;
-    window_id: u32;    /**< The window with mouse focus, if any */
-    which: u32;       /**< The mouse instance id, or TOUCH_MOUSEID */
-    state: u32;       /**< The current button state */
-    x: i32;           /**< X coordinate, relative to window */
-    y: i32;           /**< Y coordinate, relative to window */
-    xrel: i32;        /**< The relative motion in the X direction */
-    yrel: i32;        /**< The relative motion in the Y direction */
+    window_id: u32;
+    which: u32;
+    state: u32;
+    x: i32;
+    y: i32;
+    xrel: i32;
+    yrel: i32;
 }
 
-/**
- *  \brief Mouse button event structure (event.button.*)
- */
 MouseButtonEvent :: struct #ordered {
-    event_type: u32;        /**< ::MOUSE_BUTTON_DOWN or ::MOUSE_BUTTON_UP */
+    event_type: u32;
     timestamp: u32;
-    window_id: u32;    /**< The window with mouse focus, if any */
-    which: u32;       /**< The mouse instance id, or TOUCH_MOUSEID */
-    button: u8;       /**< The mouse button index */
-    state: u8;        /**< ::PRESSED or ::RELEASED */
-    clicks: u8;       /**< 1 for single-click, 2 for double-click, etc. */
+    window_id: u32;
+    which: u32;
+    button: u8;
+    state: u8;
+    clicks: u8;
     padding1: u8;
-    x: i32;           /**< X coordinate, relative to window */
-    y: i32;           /**< Y coordinate, relative to window */
+    x: i32;
+    y: i32;
 }
 
-/**
- *  \brief Mouse wheel event structure (event.wheel.*)
- */
 MouseWheelEvent :: struct #ordered {
-    event_type: u32;        /**< ::MOUSE_WHEEL */
+    event_type: u32;
     timestamp: u32;
-    window_id: u32;    /**< The window with mouse focus, if any */
-    which: u32;       /**< The mouse instance id, or TOUCH_MOUSEID */
-    x: i32;           /**< The amount scrolled horizontally, positive to the right and negative to the left */
-    y: i32;           /**< The amount scrolled vertically, positive away from the user and negative toward the user */
-    direction: u32;   /**< Set to one of the MOUSE_WHEEL_* defines. When FLIPPED the values in X and Y will be opposite. Multiply by -1 to change them back */
+    window_id: u32;
+    which: u32;
+    x: i32;
+    y: i32;
+    direction: u32;
 }
 
-/**
- *  \brief Joystick axis motion event structure (event.jaxis.*)
- */
 JoyAxisEvent :: struct #ordered {
-    event_type: u32;        /**< ::JOY_AXIS_MOTION */
+    event_type: u32;
     timestamp: u32;
-    which: i32; /**< The joystick instance id */
-    axis: u8;         /**< The joystick axis index */
+    which: i32;
+    axis: u8;
     padding1: u8;
     padding2: u8;
     padding3: u8;
-    value: i16;       /**< The axis value (range: -32768 to 32767) */
+    value: i16;
     padding4: u16;
 }
 
-/**
- *  \brief Joystick trackball motion event structure (event.jball.*)
- */
 JoyBall_Event :: struct #ordered {
-    event_type: u32;        /**< ::JOY_BALL_MOTION */
+    event_type: u32;
     timestamp: u32;
-    which: i32; /**< The joystick instance id */
-    ball: u8;         /**< The joystick trackball index */
+    which: i32;
+    ball: u8;
     padding1: u8;
     padding2: u8;
     padding3: u8;
-    xrel: i16;        /**< The relative motion in the X direction */
-    yrel: i16;        /**< The relative motion in the Y direction */
+    xrel: i16;
+    yrel: i16;
 }
 
-/**
- *  \brief Joystick hat position change event structure (event.jhat.*)
- */
 JoyHat_Event :: struct #ordered {
-    event_type: u32;        /**< ::JOY_HAT_MOTION */
+    event_type: u32;
     timestamp: u32;
-    which: i32; /**< The joystick instance id */
-    hat: u8;          /**< The joystick hat index */
-    value: u8;        /**< The hat position value.
-                         *   \sa ::HAT_LEFT_UP ::HAT_UP ::HAT_RIGHT_UP
-                         *   \sa ::HAT_LEFT ::HAT_CENTERED ::HAT_RIGHT
-                         *   \sa ::HAT_LEFT_DOWN ::HAT_DOWN ::HAT_RIGHT_DOWN
-                         *
-                         *   Note that zero means the POV is centered.
-                         */
+    which: i32;
+    hat: u8;
+    value: u8;
     padding1: u8;
     padding2: u8;
 }
 
-/**
- *  \brief Joystick button event structure (event.jbutton.*)
- */
 JoyButtonEvent :: struct #ordered {
-    event_type: u32;        /**< ::JOY_BUTTON_DOWN or ::JOY_BUTTON_UP */
+    event_type: u32;
     timestamp: u32;
-    which: i32; /**< The joystick instance id */
-    button: u8;       /**< The joystick button index */
-    state: u8;        /**< ::PRESSED or ::RELEASED */
+    which: i32;
+    button: u8;
+    state: u8;
     padding1: u8;
     padding2: u8;
 }
 
-/**
- *  \brief Joystick device event structure (event.jdevice.*)
- */
 JoyDeviceEvent :: struct #ordered {
-    event_type: u32;        /**< ::JOY_DEVICE_ADDED or ::JOY_DEVICE_REMOVED */
+    event_type: u32;
     timestamp: u32;
-    which: i32;       /**< The joystick device index for the ADDED event, instance id for the REMOVED event */
+    which: i32;
 }
 
-
-/**
- *  \brief Game controller axis motion event structure (event.caxis.*)
- */
 ControllerAxisEvent :: struct #ordered {
-    event_type: u32;        /**< ::CONTROLLER_AXIS_MOTION */
+    event_type: u32;
     timestamp: u32;
-    which: i32; /**< The joystick instance id */
-    axis: u8;         /**< The controller axis (GameControllerAxis) */
+    which: i32;
+    axis: u8;
     padding1: u8;
     padding2: u8;
     padding3: u8;
-    value: i16;       /**< The axis value (range: -32768 to 32767) */
+    value: i16;
     padding4: u16;
 }
 
-
-/**
- *  \brief Game controller button event structure (event.cbutton.*)
- */
 ControllerButtonEvent :: struct #ordered {
-    event_type: u32;        /**< ::CONTROLLER_BUTTON_DOWN or ::CONTROLLER_BUTTON_UP */
+    event_type: u32;
     timestamp: u32;
-    which: i32; /**< The joystick instance id */
-    button: u8;       /**< The controller button (GameControllerButton) */
-    state: u8;        /**< ::PRESSED or ::RELEASED */
+    which: i32;
+    button: u8;
+    state: u8;
     padding1: u8;
     padding2: u8;
 }
 
-
-/**
- *  \brief Controller device event structure (event.cdevice.*)
- */
 ControllerDeviceEvent :: struct #ordered {
-    event_type: u32;        /**< ::CONTROLLER_DEVICE_ADDED, ::CONTROLLER_DEVICE_REMOVED, or ::CONTROLLER_DEVICE_REMAPPED */
+    event_type: u32;
     timestamp: u32;
-    which: i32;       /**< The joystick device index for the ADDED event, instance id for the REMOVED or REMAPPED event */
+    which: i32;
 }
 
-/**
- *  \brief Audio device event structure (event.adevice.*)
- */
 AudioDeviceEvent :: struct #ordered {
-    event_type: u32;        /**< ::AUDIO_DEVICE_ADDED, or ::AUDIO_DEVICE_REMOVED */
+    event_type: u32;
     timestamp: u32;
-    which: u32;       /**< The audio device index for the ADDED event (valid until next GetNumAudioDevices() call), AudioDeviceID for the REMOVED event */
-    iscapture: u8;    /**< zero if an output device, non-zero if a capture device. */
+    which: u32;
+    iscapture: u8;
     padding1: u8;
     padding2: u8;
     padding3: u8;
 }
 
-
-/**
- *  \brief Touch finger event structure (event.tfinger.*)
- */
 TouchFingerEvent :: struct #ordered {
-    event_type: u32;        /**< ::FINGER_MOTION or ::FINGER_DOWN or ::FINGER_UP */
+    event_type: u32;
     timestamp: u32;
-    touchId: i64; /**< The touch device id */
+    touchId: i64;
     fingerId: i64;
-    x: f32;            /**< Normalized in the range 0...1 */
-    y: f32;            /**< Normalized in the range 0...1 */
-    dx: f32;           /**< Normalized in the range -1...1 */
-    dy: f32;           /**< Normalized in the range -1...1 */
-    pressure: f32;     /**< Normalized in the range 0...1 */
+    x: f32;
+    y: f32;
+    dx: f32;
+    dy: f32;
+    pressure: f32;
 }
 
-
-/**
- *  \brief Multiple Finger Gesture Event (event.mgesture.*)
- */
 MultiGestureEvent :: struct #ordered {
-    event_type: u32;        /**< ::MULTIGESTURE */
+    event_type: u32;
     timestamp: u32;
-    touchId: i64; /**< The touch device id */
+    touchId: i64;
     dTheta: f32;
     dDist: f32;
     x: f32;
@@ -2269,71 +2022,45 @@ MultiGestureEvent :: struct #ordered {
     padding: u16;
 }
 
-
-/**
- * \brief Dollar Gesture Event (event.dgesture.*)
- */
 DollarGestureEvent :: struct #ordered {
-    event_type: u32;        /**< ::DOLLAR_GESTURE or ::DOLLAR_RECORD */
+    event_type: u32;
     timestamp: u32;
-    touchId: i64; /**< The touch device id */
+    touchId: i64;
     gestureId: i64;
     numFingers: u32;
     error: f32;
-    x: f32;            /**< Normalized center of gesture */
-    y: f32;            /**< Normalized center of gesture */
+    x: f32;
+    y: f32;
 }
 
-
-/**
- *  \brief An event used to request a file open by the system (event.drop.*)
- *         This event is enabled by default, you can disable it with EventState().
- *  \note If this event is enabled, you must free the filename in the event.
- */
 DropEvent :: struct #ordered {
-    event_type: u32;        /**< ::DROP_BEGIN or ::DROP_FILE or ::DROP_TEXT or ::DROP_COMPLETE */
+    event_type: u32;
     timestamp: u32;
-    file: ^u8;         /**< The file name, which should be freed with free(), is NULL on begin/complete */
-    window_id: u32;    /**< The window that was dropped on, if any */
+    file: ^u8;
+    window_id: u32;
 }
 
-
-/**
- *  \brief The "quit requested" event
- */
 QuitEvent :: struct #ordered {
-    event_type: u32;        /**< ::QUIT */
+    event_type: u32;
     timestamp: u32;
 }
 
-/**
- *  \brief OS Specific event
- */
 OSEvent :: struct #ordered {
-    event_type: u32;        /**< ::QUIT */
+    event_type: u32;
     timestamp: u32;
 }
 
-/**
- *  \brief A user-defined event type (event.user.*)
- */
 UserEvent :: struct #ordered {
-    event_type: u32;        /**< ::USER_EVENT through ::LAST_EVENT-1 */
+    event_type: u32;
     timestamp: u32;
-    window_id: u32;    /**< The associated window if any */
-    code: i32;        /**< User defined event code */
-    data1: ^rawptr;        /**< User defined data pointer */
-    data2: ^rawptr;        /**< User defined data pointer */
+    window_id: u32;
+    code: i32;
+    data1: ^rawptr;
+    data2: ^rawptr;
 }
 
-/**
- *  \brief A video driver dependent system event (event.syswm.*)
- *         This event is disabled by default, you can enable it with EventState()
- *
- *  \note If you want to use this event, you should include syswm.h.
- */
 SysWmEvent :: struct #ordered {
-    event_type: u32;        /**< ::SYS_Wm_EVENT */
+    event_type: u32;
     timestamp: u32;
-    msg: ^SysWmMsg;  /**< driver dependent data, defined in syswm.h */
+    msg: ^SysWmMsg;
 }
