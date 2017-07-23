@@ -32,18 +32,15 @@ foreign lib {
 	// save_dollar_template 						:: proc() ->																																										#link_name "SDL_SaveDollarTemplate" ---;
 	// alloc_rw 									:: proc() -> 																																										#link_name "SDL_AllocRW" ---;
 
-	// Need to port SDL_SysWMinfo, which also looks like a nightmare
-	// get_window_wm_info 							:: proc(window: ^Window, info: ^Sys_Wm_Info) -> Bool																																#link_name "SDL_GetWindowWMInfo" ---;
-
-	// Need to port SDL_Game_Controller_Button_Bind
-	// game_controller_get_bind_for_axis 			:: proc(game_controller: ^Game_Controller, axis: Game_Controller_Axis) -> Game_Controller_Button_Bind																				#link_name "SDL_GameControllerGetBindForAxis" ---;
-	// game_controller_get_bind_for_button 			:: proc(game_controller: ^Game_Controller, button: Game_Controller_Button) -> Game_Controller_Button_Bind																			#link_name "SDL_GameControllerGetBindForButton" ---;
-
-	// This one is missing from my source of SDL2
+	// This one is missing from my source of SDL2 ???
 	// dynapi_entry 								:: proc() ->																																										#link_name "SDL_DYNAPI_entry" ---;
 
 	// The source for this one says you should never call it directly, but rather use the macros provided. Need to port those over still
 	//report_assertion 								:: proc() ->																																										#link_name "SDL_ReportAssertion" ---;
+
+	game_controller_get_bind_for_axis 				:: proc(game_controller: ^Game_Controller, axis: Game_Controller_Axis) -> Game_Controller_Button_Bind																				#link_name "SDL_GameControllerGetBindForAxis" ---;
+	game_controller_get_bind_for_button 			:: proc(game_controller: ^Game_Controller, button: Game_Controller_Button) -> Game_Controller_Button_Bind																			#link_name "SDL_GameControllerGetBindForButton" ---;
+	get_window_wm_info 								:: proc(window: ^Window, info: ^Sys_Wm_Info) -> Bool																																#link_name "SDL_GetWindowWMInfo" ---;
 
 	add_event_watch 								:: proc(filter: Event_Filter, userdata: rawptr)																																		#link_name "SDL_AddEventWatch" ---;
 	add_hint_callback  								:: proc(name: ^u8, callback: Hint_Callback, userdata: rawptr)  																														#link_name "SDL_AddHintCallback" ---;
@@ -1527,8 +1524,8 @@ APP_DIDENTERFOREGROUND :: 262; /**< The application is now interactive
                             */
 
 /* Window events */
-WINDOWEVENT :: 0x200; /**< Window state change */
-SYSWMEVENT :: 513;             /**< System specific event */
+WINDOW_EVENT :: 0x200; /**< Window state change */
+SYS_WM_EVENT :: 513;             /**< System specific event */
 
 /* Keyboard events */
 KEYDOWN :: 0x300; /**< Key pressed */
@@ -1589,22 +1586,43 @@ AUDIODEVICEREMOVED :: 4353;        /**< An audio device has been removed. */
 RENDER_TARGETS_RESET :: 0x2000; /**< The render targets have been reset and their contents need to be updated */
 RENDER_DEVICE_RESET :: 8193; /**< The device has been reset and all textures need to be recreated */
 
-/** Events ::USEREVENT through ::LASTEVENT are for your use,
+/** Events ::USER_EVENT through ::LASTEVENT are for your use,
  *  and should be allocated with RegisterEvents()
  */
-USEREVENT :: 0x8000;
+USER_EVENT :: 0x8000;
 
 /**
  *  This last event is only for bounding internal arrays
  */
 LASTEVENT :: 0xFFFF;
 
-BlitMap :: rawptr;
-Window :: rawptr;
-Renderer :: rawptr;
-Texture :: rawptr;
-SysWMmsg :: rawptr;
-GL_Context :: rawptr;
+BlitMap :: struct #ordered {};
+Window :: struct #ordered {};
+Renderer :: struct #ordered {};
+Texture :: struct #ordered {};
+GL_Context :: struct #ordered {};
+Sys_Wm_Info :: struct #ordered {}; // TODO: need to port the struct properly
+Sys_Wm_Msg :: struct #ordered {}; // TODO: need to port the struct properly
+
+
+
+// I think this is right?
+_Bind_Hat :: struct #ordered
+{
+	hat: i32;
+    hat_mask: i32;
+}
+_Bind_Value :: struct #raw_union
+{
+	button: i32;
+    axis: i32;
+    hat: _Bind_Hat;
+}
+Game_Controller_Button_Bind :: struct #ordered
+{
+    bind_type: Game_Controller_Bind_Type;
+    bind_value: _Bind_Value;
+}
 
 Cond :: struct #ordered {};
 Mutex :: struct #ordered {};
@@ -2006,30 +2024,30 @@ Haptic_Custom :: struct
 Event :: struct #raw_union
 {
     event_type: u32;                    /**< Event type, shared with all events */
-    common: CommonEvent;         /**< Common event data */
-    window: WindowEvent;         /**< Window event data */
-    key: KeyboardEvent;          /**< Keyboard event data */
-    edit: TextEditingEvent;      /**< Text editing event data */
-    text: TextInputEvent;        /**< Text input event data */
-    motion: MouseMotionEvent;    /**< Mouse motion event data */
-    button: MouseButtonEvent;    /**< Mouse button event data */
-    wheel: MouseWheelEvent;      /**< Mouse wheel event data */
-    jaxis: JoyAxisEvent;         /**< Joystick axis event data */
-    jball: JoyBallEvent;         /**< Joystick ball event data */
-    jhat: JoyHatEvent;           /**< Joystick hat event data */
-    jbutton: JoyButtonEvent;     /**< Joystick button event data */
-    jdevice: JoyDeviceEvent;     /**< Joystick device change event data */
-    caxis: ControllerAxisEvent;      /**< Game Controller axis event data */
-    cbutton: ControllerButtonEvent;  /**< Game Controller button event data */
-    cdevice: ControllerDeviceEvent;  /**< Game Controller device event data */
-    adevice: AudioDeviceEvent;   /**< Audio device event data */
-    quit: QuitEvent;             /**< Quit request event data */
-    user: UserEvent;             /**< Custom event data */
-    syswm: SysWMEvent;           /**< System dependent window event data */
-    tfinger: TouchFingerEvent;   /**< Touch finger event data */
-    mgesture: MultiGestureEvent; /**< Gesture event data */
-    dgesture: DollarGestureEvent; /**< Gesture event data */
-    drop: DropEvent;             /**< Drag and drop event data */
+    common: Common_Event;         /**< Common event data */
+    window: Window_Event;         /**< Window event data */
+    key: Keyboard_Event;          /**< Keyboard event data */
+    edit: Text_Editing_Event;      /**< Text editing event data */
+    text: Text_Input_Event;        /**< Text input event data */
+    motion: Mouse_Motion_Event;    /**< Mouse motion event data */
+    button: Mouse_Button_Event;    /**< Mouse button event data */
+    wheel: Mouse_Wheel_Event;      /**< Mouse wheel event data */
+    jaxis: Joy_Axis_Event;         /**< Joystick axis event data */
+    jball: Joy_Ball_Event;         /**< Joystick ball event data */
+    jhat: Joy_Hat_Event;           /**< Joystick hat event data */
+    jbutton: Joy_Button_Event;     /**< Joystick button event data */
+    jdevice: Joy_Device_Event;     /**< Joystick device change event data */
+    caxis: Controller_Axis_Event;      /**< Game Controller axis event data */
+    cbutton: Controller_Button_Event;  /**< Game Controller button event data */
+    cdevice: Controller_Device_Event;  /**< Game Controller device event data */
+    adevice: Audio_Device_Event;   /**< Audio device event data */
+    quit: Quit_Event;             /**< Quit request event data */
+    user: User_Event;             /**< Custom event data */
+    syswm: Sys_Wm_Event;           /**< System dependent window event data */
+    tfinger: Touch_Finger_Event;   /**< Touch finger event data */
+    mgesture: Multi_Gesture_Event; /**< Gesture event data */
+    dgesture: Dollar_Gesture_Event; /**< Gesture event data */
+    drop: Drop_Event;             /**< Drag and drop event data */
 
     /* This is necessary for ABI compatibility between Visual C++ and GCC
        Visual C++ will respect the push pack pragma and use 52 bytes for
@@ -2045,7 +2063,7 @@ Event :: struct #raw_union
 /**
  *  \brief Fields shared by every event
  */
-CommonEvent :: struct #ordered
+Common_Event :: struct #ordered
 {
     event_type: u32;
     timestamp: u32;
@@ -2054,12 +2072,12 @@ CommonEvent :: struct #ordered
 /**
  *  \brief Window state change event data (event.window.*)
  */
-WindowEvent :: struct #ordered
+Window_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::WINDOWEVENT */
+    event_type: u32;        /**< ::WINDOW_EVENT */
     timestamp: u32;
     windowID: u32;    /**< The associated window */
-    event: u8;        /**< ::WindowEventID */
+    event: u8;        /**< ::Window_EventID */
     padding1: u8;
     padding2: u8;
     padding3: u8;
@@ -2070,7 +2088,7 @@ WindowEvent :: struct #ordered
 /**
  *  \brief Keyboard button event structure (event.key.*)
  */
-KeyboardEvent :: struct #ordered
+Keyboard_Event :: struct #ordered
 {
     event_type: u32;        /**< ::KEYDOWN or ::KEYUP */
     timestamp: u32;
@@ -2082,37 +2100,37 @@ KeyboardEvent :: struct #ordered
     keysym: Keysym;  /**< The key that was pressed or released */
 }
 
-TEXTEDITINGEVENT_TEXT_SIZE :: 32;
+TEXT_EDITING_EVENT_TEXT_SIZE :: 32;
 /**
  *  \brief Keyboard text editing event structure (event.edit.*)
  */
-TextEditingEvent :: struct #ordered
+Text_Editing_Event :: struct #ordered
 {
     event_type: u32;                                /**< ::TEXTEDITING */
     timestamp: u32;
     windowID: u32;                            /**< The window with keyboard focus, if any */
-    text: [TEXTEDITINGEVENT_TEXT_SIZE]u8;  /**< The editing text */
+    text: [TEXT_EDITING_EVENT_TEXT_SIZE]u8;  /**< The editing text */
     start: i32;                               /**< The start cursor of selected editing text */
     length: i32;                              /**< The length of selected editing text */
 }
 
 
-TEXTINPUTEVENT_TEXT_SIZE :: 32;
+TEXT_INPUT_EVENT_TEXT_SIZE :: 32;
 /**
  *  \brief Keyboard text input event structure (event.text.*)
  */
-TextInputEvent :: struct #ordered
+Text_Input_Event :: struct #ordered
 {
     event_type: u32;                              /**< ::TEXTINPUT */
     timestamp: u32;
     windowID: u32;                          /**< The window with keyboard focus, if any */
-    text: [TEXTINPUTEVENT_TEXT_SIZE]u8;  /**< The input text */
+    text: [TEXT_INPUT_EVENT_TEXT_SIZE]u8;  /**< The input text */
 }
 
 /**
  *  \brief Mouse motion event structure (event.motion.*)
  */
-MouseMotionEvent :: struct #ordered
+Mouse_Motion_Event :: struct #ordered
 {
     event_type: u32;        /**< ::MOUSEMOTION */
     timestamp: u32;
@@ -2128,7 +2146,7 @@ MouseMotionEvent :: struct #ordered
 /**
  *  \brief Mouse button event structure (event.button.*)
  */
-MouseButtonEvent :: struct #ordered
+Mouse_Button_Event :: struct #ordered
 {
     event_type: u32;        /**< ::MOUSEBUTTONDOWN or ::MOUSEBUTTONUP */
     timestamp: u32;
@@ -2145,7 +2163,7 @@ MouseButtonEvent :: struct #ordered
 /**
  *  \brief Mouse wheel event structure (event.wheel.*)
  */
-MouseWheelEvent :: struct #ordered
+Mouse_Wheel_Event :: struct #ordered
 {
     event_type: u32;        /**< ::MOUSEWHEEL */
     timestamp: u32;
@@ -2159,7 +2177,7 @@ MouseWheelEvent :: struct #ordered
 /**
  *  \brief Joystick axis motion event structure (event.jaxis.*)
  */
-JoyAxisEvent :: struct #ordered
+Joy_Axis_Event :: struct #ordered
 {
     event_type: u32;        /**< ::JOYAXISMOTION */
     timestamp: u32;
@@ -2175,7 +2193,7 @@ JoyAxisEvent :: struct #ordered
 /**
  *  \brief Joystick trackball motion event structure (event.jball.*)
  */
-JoyBallEvent :: struct #ordered
+Joy_Ball_Event :: struct #ordered
 {
     event_type: u32;        /**< ::JOYBALLMOTION */
     timestamp: u32;
@@ -2191,7 +2209,7 @@ JoyBallEvent :: struct #ordered
 /**
  *  \brief Joystick hat position change event structure (event.jhat.*)
  */
-JoyHatEvent :: struct #ordered
+Joy_Hat_Event :: struct #ordered
 {
     event_type: u32;        /**< ::JOYHATMOTION */
     timestamp: u32;
@@ -2211,7 +2229,7 @@ JoyHatEvent :: struct #ordered
 /**
  *  \brief Joystick button event structure (event.jbutton.*)
  */
-JoyButtonEvent :: struct #ordered
+Joy_Button_Event :: struct #ordered
 {
     event_type: u32;        /**< ::JOYBUTTONDOWN or ::JOYBUTTONUP */
     timestamp: u32;
@@ -2225,7 +2243,7 @@ JoyButtonEvent :: struct #ordered
 /**
  *  \brief Joystick device event structure (event.jdevice.*)
  */
-JoyDeviceEvent :: struct #ordered
+Joy_Device_Event :: struct #ordered
 {
     event_type: u32;        /**< ::JOYDEVICEADDED or ::JOYDEVICEREMOVED */
     timestamp: u32;
@@ -2236,7 +2254,7 @@ JoyDeviceEvent :: struct #ordered
 /**
  *  \brief Game controller axis motion event structure (event.caxis.*)
  */
-ControllerAxisEvent :: struct #ordered
+Controller_Axis_Event :: struct #ordered
 {
     event_type: u32;        /**< ::CONTROLLERAXISMOTION */
     timestamp: u32;
@@ -2253,7 +2271,7 @@ ControllerAxisEvent :: struct #ordered
 /**
  *  \brief Game controller button event structure (event.cbutton.*)
  */
-ControllerButtonEvent :: struct #ordered
+Controller_Button_Event :: struct #ordered
 {
     event_type: u32;        /**< ::CONTROLLERBUTTONDOWN or ::CONTROLLERBUTTONUP */
     timestamp: u32;
@@ -2268,7 +2286,7 @@ ControllerButtonEvent :: struct #ordered
 /**
  *  \brief Controller device event structure (event.cdevice.*)
  */
-ControllerDeviceEvent :: struct #ordered
+Controller_Device_Event :: struct #ordered
 {
     event_type: u32;        /**< ::CONTROLLERDEVICEADDED, ::CONTROLLERDEVICEREMOVED, or ::CONTROLLERDEVICEREMAPPED */
     timestamp: u32;
@@ -2278,7 +2296,7 @@ ControllerDeviceEvent :: struct #ordered
 /**
  *  \brief Audio device event structure (event.adevice.*)
  */
-AudioDeviceEvent :: struct #ordered
+Audio_Device_Event :: struct #ordered
 {
     event_type: u32;        /**< ::AUDIODEVICEADDED, or ::AUDIODEVICEREMOVED */
     timestamp: u32;
@@ -2293,7 +2311,7 @@ AudioDeviceEvent :: struct #ordered
 /**
  *  \brief Touch finger event structure (event.tfinger.*)
  */
-TouchFingerEvent :: struct #ordered
+Touch_Finger_Event :: struct #ordered
 {
     event_type: u32;        /**< ::FINGERMOTION or ::FINGERDOWN or ::FINGERUP */
     timestamp: u32;
@@ -2310,7 +2328,7 @@ TouchFingerEvent :: struct #ordered
 /**
  *  \brief Multiple Finger Gesture Event (event.mgesture.*)
  */
-MultiGestureEvent :: struct #ordered
+Multi_Gesture_Event :: struct #ordered
 {
     event_type: u32;        /**< ::MULTIGESTURE */
     timestamp: u32;
@@ -2327,7 +2345,7 @@ MultiGestureEvent :: struct #ordered
 /**
  * \brief Dollar Gesture Event (event.dgesture.*)
  */
-DollarGestureEvent :: struct #ordered
+Dollar_Gesture_Event :: struct #ordered
 {
     event_type: u32;        /**< ::DOLLARGESTURE or ::DOLLARRECORD */
     timestamp: u32;
@@ -2345,7 +2363,7 @@ DollarGestureEvent :: struct #ordered
  *         This event is enabled by default, you can disable it with EventState().
  *  \note If this event is enabled, you must free the filename in the event.
  */
-DropEvent :: struct #ordered
+Drop_Event :: struct #ordered
 {
     event_type: u32;        /**< ::DROPBEGIN or ::DROPFILE or ::DROPTEXT or ::DROPCOMPLETE */
     timestamp: u32;
@@ -2357,7 +2375,7 @@ DropEvent :: struct #ordered
 /**
  *  \brief The "quit requested" event
  */
-QuitEvent :: struct #ordered
+Quit_Event :: struct #ordered
 {
     event_type: u32;        /**< ::QUIT */
     timestamp: u32;
@@ -2366,7 +2384,7 @@ QuitEvent :: struct #ordered
 /**
  *  \brief OS Specific event
  */
-OSEvent :: struct #ordered
+Os_Event :: struct #ordered
 {
     event_type: u32;        /**< ::QUIT */
     timestamp: u32;
@@ -2375,9 +2393,9 @@ OSEvent :: struct #ordered
 /**
  *  \brief A user-defined event type (event.user.*)
  */
-UserEvent :: struct #ordered
+User_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::USEREVENT through ::LASTEVENT-1 */
+    event_type: u32;        /**< ::USER_EVENT through ::LASTEVENT-1 */
     timestamp: u32;
     windowID: u32;    /**< The associated window if any */
     code: i32;        /**< User defined event code */
@@ -2391,11 +2409,11 @@ UserEvent :: struct #ordered
  *
  *  \note If you want to use this event, you should include syswm.h.
  */
-SysWMEvent :: struct #ordered
+Sys_Wm_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::SYSWMEVENT */
+    event_type: u32;        /**< ::SYS_Wm_EVENT */
     timestamp: u32;
-    msg: ^SysWMmsg;  /**< driver dependent data, defined in syswm.h */
+    msg: ^Sys_Wm_Msg;  /**< driver dependent data, defined in syswm.h */
 }
 
 main :: proc()
