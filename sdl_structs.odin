@@ -1,4 +1,4 @@
-import . "sdl_constants.odin";
+import_load "sdl_constants.odin";
 
 SDL_BlitMap :: rawptr;
 SDL_Window :: rawptr;

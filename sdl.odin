@@ -1,6 +1,5 @@
-import . "sdl_structs.odin";
-import . "sdl_constants.odin";
-import "strings.odin";
+import_load "sdl_structs.odin";
+import_load "sdl_constants.odin";
 
 foreign_system_library (
 	lib "SDL2.lib";
