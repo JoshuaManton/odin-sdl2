@@ -1488,11 +1488,19 @@ Scancode :: enum i32
 }
 
 
+HAT_CENTERED :: 0x00;
+HAT_UP :: 0x01;
+HAT_RIGHT :: 0x02;
+HAT_DOWN :: 0x04;
+HAT_LEFT :: 0x08;
+HAT_RIGHTUP :: HAT_RIGHT | HAT_UP;
+HAT_RIGHTDOWN :: HAT_RIGHT | HAT_DOWN;
+HAT_LEFTUP :: HAT_LEFT | HAT_UP;
+HAT_LEFTDOWN :: HAT_LEFT | HAT_DOWN;
 
 
 
-
-FIRSTEVENT :: 0;     /**< Unused (do not remove) */
+FIRST_EVENT :: 0;     /**< Unused (do not remove) */
 
 /* Application events */
 QUIT :: 0x100; /**< User-requested quit */
@@ -1502,23 +1510,23 @@ APP_TERMINATING :: 257;        /**< The application is being terminated by the O
                                  Called on iOS in applicationWillTerminate()
                                  Called on Android in onDestroy()
                             */
-APP_LOWMEMORY :: 258;          /**< The application is low on memory, free memory if possible.
+APP_LOW_MEMORY :: 258;          /**< The application is low on memory, free memory if possible.
                                  Called on iOS in applicationDidReceiveMemoryWarning()
                                  Called on Android in onLowMemory()
                             */
-APP_WILLENTERBACKGROUND :: 259; /**< The application is about to enter the background
+APP_WILL_ENTER_BACKGROUND :: 259; /**< The application is about to enter the background
                                  Called on iOS in applicationWillResignActive()
                                  Called on Android in onPause()
                             */
-APP_DIDENTERBACKGROUND :: 260; /**< The application did enter the background and may not get CPU for some time
+APP_DID_ENTER_BACKGROUND :: 260; /**< The application did enter the background and may not get CPU for some time
                                  Called on iOS in applicationDidEnterBackground()
                                  Called on Android in onPause()
                             */
-APP_WILLENTERFOREGROUND :: 261; /**< The application is about to enter the foreground
+APP_WILL_ENTER_FOREGROUND :: 261; /**< The application is about to enter the foreground
                                  Called on iOS in applicationWillEnterForeground()
                                  Called on Android in onResume()
                             */
-APP_DIDENTERFOREGROUND :: 262; /**< The application is now interactive
+APP_DID_ENTER_FOREGROUND :: 262; /**< The application is now interactive
                                  Called on iOS in applicationDidBecomeActive()
                                  Called on Android in onResume()
                             */
@@ -1528,65 +1536,65 @@ WINDOW_EVENT :: 0x200; /**< Window state change */
 SYS_WM_EVENT :: 513;             /**< System specific event */
 
 /* Keyboard events */
-KEYDOWN :: 0x300; /**< Key pressed */
-KEYUP :: 769;                  /**< Key released */
-TEXTEDITING :: 770;            /**< Keyboard text editing (composition) */
-TEXTINPUT :: 771;              /**< Keyboard text input */
-KEYMAPCHANGED :: 772;          /**< Keymap changed due to a system event such as an
+KEY_DOWN :: 0x300; /**< Key pressed */
+KEY_UP :: 769;                  /**< Key released */
+TEXT_EDITING :: 770;            /**< Keyboard text editing (composition) */
+TEXT_INPUT :: 771;              /**< Keyboard text input */
+KEY_MAP_CHANGED :: 772;          /**< Keymap changed due to a system event such as an
                                  input language or keyboard layout change.
                             */
 
 /* Mouse events */
-MOUSEMOTION :: 0x400; /**< Mouse moved */
-MOUSEBUTTONDOWN :: 1025;        /**< Mouse button pressed */
-MOUSEBUTTONUP :: 1026;         /**< Mouse button released */
-MOUSEWHEEL :: 1027;             /**< Mouse wheel motion */
+MOUSE_MOTION :: 0x400; /**< Mouse moved */
+MOUSE_BUTTON_DOWN :: 1025;        /**< Mouse button pressed */
+MOUSE_BUTTON_UP :: 1026;         /**< Mouse button released */
+MOUSE_WHEEL :: 1027;             /**< Mouse wheel motion */
 
 /* Joystick events */
-JOYAXISMOTION :: 0x600; /**< Joystick axis motion */
-JOYBALLMOTION :: 1537;          /**< Joystick trackball motion */
-JOYHATMOTION :: 1538;           /**< Joystick hat position change */
-JOYBUTTONDOWN :: 1539;          /**< Joystick button pressed */
-JOYBUTTONUP :: 1540;            /**< Joystick button released */
-JOYDEVICEADDED :: 1541;         /**< A new joystick has been inserted into the system */
-JOYDEVICEREMOVED :: 1542;       /**< An opened joystick has been removed */
+JOY_AXIS_MOTION :: 0x600; /**< Joystick axis motion */
+JOY_BALL_MOTION :: 1537;          /**< Joystick trackball motion */
+JOY_HAT_MOTION :: 1538;           /**< Joystick hat position change */
+JOY_BUTTON_DOWN :: 1539;          /**< Joystick button pressed */
+JOY_BUTTON_UP :: 1540;            /**< Joystick button released */
+JOY_DEVICE_ADDED :: 1541;         /**< A new joystick has been inserted into the system */
+JOY_DEVICE_REMOVED :: 1542;       /**< An opened joystick has been removed */
 
 /* Game controller events */
-CONTROLLERAXISMOTION :: 0x650; /**< Game controller axis motion */
-CONTROLLERBUTTONDOWN :: 1617;          /**< Game controller button pressed */
-CONTROLLERBUTTONUP :: 1618;            /**< Game controller button released */
-CONTROLLERDEVICEADDED :: 1619;         /**< A new Game controller has been inserted into the system */
-CONTROLLERDEVICEREMOVED :: 1620;       /**< An opened Game controller has been removed */
-CONTROLLERDEVICEREMAPPED :: 1621;      /**< The controller mapping was updated */
+CONTROLLER_AXIS_MOTION :: 0x650; /**< Game controller axis motion */
+CONTROLLER_BUTTON_DOWN :: 1617;          /**< Game controller button pressed */
+CONTROLLER_BUTTON_UP :: 1618;            /**< Game controller button released */
+CONTROLLER_DEVICE_ADDED :: 1619;         /**< A new Game controller has been inserted into the system */
+CONTROLLER_DEVICE_REMOVED :: 1620;       /**< An opened Game controller has been removed */
+CONTROLLER_DEVICE_REMAPPED :: 1621;      /**< The controller mapping was updated */
 
 /* Touch events */
-FINGERDOWN :: 0x700;
-FINGERUP :: 1793;
-FINGERMOTION :: 1794;
+FINGER_DOWN :: 0x700;
+FINGER_UP :: 1793;
+FINGER_MOTION :: 1794;
 
 /* Gesture events */
-DOLLARGESTURE :: 0x800;
-DOLLARRECORD :: 2049;
+DOLLAR_GESTURE :: 0x800;
+DOLLAR_RECORD :: 2049;
 MULTIGESTURE :: 2050;
 
 /* Clipboard events */
-CLIPBOARDUPDATE :: 0x900; /**< The clipboard changed */
+CLIPBOARD_UPDATE :: 0x900; /**< The clipboard changed */
 
 /* Drag and drop events */
-DROPFILE :: 0x1000; /**< The system requests a file open */
-DROPTEXT :: 4097;                 /**< text/plain drag-and-drop event */
-DROPBEGIN :: 4098;                /**< A new set of drops is beginning (NULL filename) */
-DROPCOMPLETE :: 4099;             /**< Current set of drops is now complete (NULL filename) */
+DROP_FILE :: 0x1000; /**< The system requests a file open */
+DROP_TEXT :: 4097;                 /**< text/plain drag-and-drop event */
+DROP_BEGIN :: 4098;                /**< A new set of drops is beginning (NULL filename) */
+DROP_COMPLETE :: 4099;             /**< Current set of drops is now complete (NULL filename) */
 
 /* Audio hotplug events */
-AUDIODEVICEADDED :: 0x1100; /**< A new audio device is available */
-AUDIODEVICEREMOVED :: 4353;        /**< An audio device has been removed. */
+AUDIO_DEVICE_ADDED :: 0x1100; /**< A new audio device is available */
+AUDIO_DEVICE_REMOVED :: 4353;        /**< An audio device has been removed. */
 
 /* Render events */
 RENDER_TARGETS_RESET :: 0x2000; /**< The render targets have been reset and their contents need to be updated */
 RENDER_DEVICE_RESET :: 8193; /**< The device has been reset and all textures need to be recreated */
 
-/** Events ::USER_EVENT through ::LASTEVENT are for your use,
+/** Events ::USER_EVENT through ::LAST_EVENT are for your use,
  *  and should be allocated with RegisterEvents()
  */
 USER_EVENT :: 0x8000;
@@ -1594,7 +1602,7 @@ USER_EVENT :: 0x8000;
 /**
  *  This last event is only for bounding internal arrays
  */
-LASTEVENT :: 0xFFFF;
+LAST_EVENT :: 0xFFFF;
 
 BlitMap :: struct #ordered {};
 Window :: struct #ordered {};
@@ -1623,6 +1631,24 @@ Game_Controller_Button_Bind :: struct #ordered
     bind_type: Game_Controller_Bind_Type;
     bind_value: _Bind_Value;
 }
+// ^ That comes from this:
+/*
+typedef struct SDL_GameControllerButtonBind
+{
+    SDL_GameControllerBindType bindType;
+    union
+    {
+        int button;
+        int axis;
+        struct {
+            int hat;
+            int hat_mask;
+        } hat;
+    } value;
+
+} SDL_GameControllerButtonBind;
+*/
+
 
 Cond :: struct #ordered {};
 Mutex :: struct #ordered {};
@@ -2090,7 +2116,7 @@ Window_Event :: struct #ordered
  */
 Keyboard_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::KEYDOWN or ::KEYUP */
+    event_type: u32;        /**< ::KEY_DOWN or ::KEY_UP */
     timestamp: u32;
     windowID: u32;    /**< The window with keyboard focus, if any */
     state: u8;        /**< ::PRESSED or ::RELEASED */
@@ -2106,7 +2132,7 @@ TEXT_EDITING_EVENT_TEXT_SIZE :: 32;
  */
 Text_Editing_Event :: struct #ordered
 {
-    event_type: u32;                                /**< ::TEXTEDITING */
+    event_type: u32;                                /**< ::TEXT_EDITING */
     timestamp: u32;
     windowID: u32;                            /**< The window with keyboard focus, if any */
     text: [TEXT_EDITING_EVENT_TEXT_SIZE]u8;  /**< The editing text */
@@ -2121,7 +2147,7 @@ TEXT_INPUT_EVENT_TEXT_SIZE :: 32;
  */
 Text_Input_Event :: struct #ordered
 {
-    event_type: u32;                              /**< ::TEXTINPUT */
+    event_type: u32;                              /**< ::TEXT_INPUT */
     timestamp: u32;
     windowID: u32;                          /**< The window with keyboard focus, if any */
     text: [TEXT_INPUT_EVENT_TEXT_SIZE]u8;  /**< The input text */
@@ -2132,7 +2158,7 @@ Text_Input_Event :: struct #ordered
  */
 Mouse_Motion_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::MOUSEMOTION */
+    event_type: u32;        /**< ::MOUSE_MOTION */
     timestamp: u32;
     windowID: u32;    /**< The window with mouse focus, if any */
     which: u32;       /**< The mouse instance id, or TOUCH_MOUSEID */
@@ -2148,7 +2174,7 @@ Mouse_Motion_Event :: struct #ordered
  */
 Mouse_Button_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::MOUSEBUTTONDOWN or ::MOUSEBUTTONUP */
+    event_type: u32;        /**< ::MOUSE_BUTTON_DOWN or ::MOUSE_BUTTON_UP */
     timestamp: u32;
     windowID: u32;    /**< The window with mouse focus, if any */
     which: u32;       /**< The mouse instance id, or TOUCH_MOUSEID */
@@ -2165,13 +2191,13 @@ Mouse_Button_Event :: struct #ordered
  */
 Mouse_Wheel_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::MOUSEWHEEL */
+    event_type: u32;        /**< ::MOUSE_WHEEL */
     timestamp: u32;
     windowID: u32;    /**< The window with mouse focus, if any */
     which: u32;       /**< The mouse instance id, or TOUCH_MOUSEID */
     x: i32;           /**< The amount scrolled horizontally, positive to the right and negative to the left */
     y: i32;           /**< The amount scrolled vertically, positive away from the user and negative toward the user */
-    direction: u32;   /**< Set to one of the MOUSEWHEEL_* defines. When FLIPPED the values in X and Y will be opposite. Multiply by -1 to change them back */
+    direction: u32;   /**< Set to one of the MOUSE_WHEEL_* defines. When FLIPPED the values in X and Y will be opposite. Multiply by -1 to change them back */
 }
 
 /**
@@ -2179,7 +2205,7 @@ Mouse_Wheel_Event :: struct #ordered
  */
 Joy_Axis_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::JOYAXISMOTION */
+    event_type: u32;        /**< ::JOY_AXIS_MOTION */
     timestamp: u32;
     which: i32; /**< The joystick instance id */
     axis: u8;         /**< The joystick axis index */
@@ -2195,7 +2221,7 @@ Joy_Axis_Event :: struct #ordered
  */
 Joy_Ball_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::JOYBALLMOTION */
+    event_type: u32;        /**< ::JOY_BALL_MOTION */
     timestamp: u32;
     which: i32; /**< The joystick instance id */
     ball: u8;         /**< The joystick trackball index */
@@ -2211,14 +2237,14 @@ Joy_Ball_Event :: struct #ordered
  */
 Joy_Hat_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::JOYHATMOTION */
+    event_type: u32;        /**< ::JOY_HAT_MOTION */
     timestamp: u32;
     which: i32; /**< The joystick instance id */
     hat: u8;          /**< The joystick hat index */
     value: u8;        /**< The hat position value.
-                         *   \sa ::HAT_LEFTUP ::HAT_UP ::HAT_RIGHTUP
+                         *   \sa ::HAT_LEFT_UP ::HAT_UP ::HAT_RIGHT_UP
                          *   \sa ::HAT_LEFT ::HAT_CENTERED ::HAT_RIGHT
-                         *   \sa ::HAT_LEFTDOWN ::HAT_DOWN ::HAT_RIGHTDOWN
+                         *   \sa ::HAT_LEFT_DOWN ::HAT_DOWN ::HAT_RIGHT_DOWN
                          *
                          *   Note that zero means the POV is centered.
                          */
@@ -2231,7 +2257,7 @@ Joy_Hat_Event :: struct #ordered
  */
 Joy_Button_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::JOYBUTTONDOWN or ::JOYBUTTONUP */
+    event_type: u32;        /**< ::JOY_BUTTON_DOWN or ::JOY_BUTTON_UP */
     timestamp: u32;
     which: i32; /**< The joystick instance id */
     button: u8;       /**< The joystick button index */
@@ -2245,7 +2271,7 @@ Joy_Button_Event :: struct #ordered
  */
 Joy_Device_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::JOYDEVICEADDED or ::JOYDEVICEREMOVED */
+    event_type: u32;        /**< ::JOY_DEVICE_ADDED or ::JOY_DEVICE_REMOVED */
     timestamp: u32;
     which: i32;       /**< The joystick device index for the ADDED event, instance id for the REMOVED event */
 }
@@ -2256,7 +2282,7 @@ Joy_Device_Event :: struct #ordered
  */
 Controller_Axis_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::CONTROLLERAXISMOTION */
+    event_type: u32;        /**< ::CONTROLLER_AXIS_MOTION */
     timestamp: u32;
     which: i32; /**< The joystick instance id */
     axis: u8;         /**< The controller axis (GameControllerAxis) */
@@ -2273,7 +2299,7 @@ Controller_Axis_Event :: struct #ordered
  */
 Controller_Button_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::CONTROLLERBUTTONDOWN or ::CONTROLLERBUTTONUP */
+    event_type: u32;        /**< ::CONTROLLER_BUTTON_DOWN or ::CONTROLLER_BUTTON_UP */
     timestamp: u32;
     which: i32; /**< The joystick instance id */
     button: u8;       /**< The controller button (GameControllerButton) */
@@ -2288,7 +2314,7 @@ Controller_Button_Event :: struct #ordered
  */
 Controller_Device_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::CONTROLLERDEVICEADDED, ::CONTROLLERDEVICEREMOVED, or ::CONTROLLERDEVICEREMAPPED */
+    event_type: u32;        /**< ::CONTROLLER_DEVICE_ADDED, ::CONTROLLER_DEVICE_REMOVED, or ::CONTROLLER_DEVICE_REMAPPED */
     timestamp: u32;
     which: i32;       /**< The joystick device index for the ADDED event, instance id for the REMOVED or REMAPPED event */
 }
@@ -2298,7 +2324,7 @@ Controller_Device_Event :: struct #ordered
  */
 Audio_Device_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::AUDIODEVICEADDED, or ::AUDIODEVICEREMOVED */
+    event_type: u32;        /**< ::AUDIO_DEVICE_ADDED, or ::AUDIO_DEVICE_REMOVED */
     timestamp: u32;
     which: u32;       /**< The audio device index for the ADDED event (valid until next GetNumAudioDevices() call), AudioDeviceID for the REMOVED event */
     iscapture: u8;    /**< zero if an output device, non-zero if a capture device. */
@@ -2313,7 +2339,7 @@ Audio_Device_Event :: struct #ordered
  */
 Touch_Finger_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::FINGERMOTION or ::FINGERDOWN or ::FINGERUP */
+    event_type: u32;        /**< ::FINGER_MOTION or ::FINGER_DOWN or ::FINGER_UP */
     timestamp: u32;
     touchId: i64; /**< The touch device id */
     fingerId: i64;
@@ -2347,7 +2373,7 @@ Multi_Gesture_Event :: struct #ordered
  */
 Dollar_Gesture_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::DOLLARGESTURE or ::DOLLARRECORD */
+    event_type: u32;        /**< ::DOLLAR_GESTURE or ::DOLLAR_RECORD */
     timestamp: u32;
     touchId: i64; /**< The touch device id */
     gestureId: i64;
@@ -2365,7 +2391,7 @@ Dollar_Gesture_Event :: struct #ordered
  */
 Drop_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::DROPBEGIN or ::DROPFILE or ::DROPTEXT or ::DROPCOMPLETE */
+    event_type: u32;        /**< ::DROP_BEGIN or ::DROP_FILE or ::DROP_TEXT or ::DROP_COMPLETE */
     timestamp: u32;
     file: ^u8;         /**< The file name, which should be freed with free(), is NULL on begin/complete */
     windowID: u32;    /**< The window that was dropped on, if any */
@@ -2395,7 +2421,7 @@ Os_Event :: struct #ordered
  */
 User_Event :: struct #ordered
 {
-    event_type: u32;        /**< ::USER_EVENT through ::LASTEVENT-1 */
+    event_type: u32;        /**< ::USER_EVENT through ::LAST_EVENT-1 */
     timestamp: u32;
     windowID: u32;    /**< The associated window if any */
     code: i32;        /**< User defined event code */
