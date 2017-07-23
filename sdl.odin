@@ -41,7 +41,7 @@ foreign lib {
 	add_event_watch 								:: proc(filter: EventFilter, userdata: rawptr)																																		#link_name "SDL_AddEventWatch" ---;
 	add_hint_callback  								:: proc(name: ^u8, callback: HintCallback, userdata: rawptr)  																														#link_name "SDL_AddHintCallback" ---;
 	add_timer 										:: proc(interval: u32, callback: TimerCallback, param: rawptr) -> TimerId																											#link_name "SDL_AddTimer" ---;
-	alloc_format 									:: proc(pixel_format: u32) -> PixelFormat																																			#link_name "SDL_AllocFormat" ---;
+	alloc_format 									:: proc(pixel_format: u32) -> ^PixelFormat																																			#link_name "SDL_AllocFormat" ---;
 	alloc_palette 									:: proc(ncolors: i32) -> ^Palette																																					#link_name "SDL_AllocPalette" ---;
 	atomic_add 										:: proc(a: ^Atomic, v: i32) -> i32																																					#link_name "SDL_AtomicAdd" ---;
 	atomic_cas 										:: proc(a: ^Atomic, oldval: i32, newval: i32) -> Bool																																#link_name "SDL_AtomicCAS" ---;
