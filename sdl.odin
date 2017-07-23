@@ -3,10 +3,7 @@ foreign_system_library (
 )
 
 foreign lib {
-	// This one is missing from my source of SDL2
-	// dynapi_entry 								:: proc() ->																																										#link_name "SDL_DYNAPI_entry" ---;
-
-	// @Rw_Ops
+	// Need to port SDL_RWops over to Odin, and that looks like a nightmare
 	// write_be16 									:: proc() ->																																										#link_name "SDL_WriteBE16" ---;
 	// write_be32 									:: proc() ->																																										#link_name "SDL_WriteBE32" ---;
 	// write_be64 									:: proc() ->																																										#link_name "SDL_WriteBE64" ---;
@@ -35,12 +32,15 @@ foreign lib {
 	// save_dollar_template 						:: proc() ->																																										#link_name "SDL_SaveDollarTemplate" ---;
 	// alloc_rw 									:: proc() -> 																																										#link_name "SDL_AllocRW" ---;
 
-	// @Game_Controller_Button_Bind
+	// Need to port SDL_SysWMinfo, which also looks like a nightmare
+	// get_window_wm_info 							:: proc(window: ^Window, info: ^Sys_Wm_Info) -> Bool																																#link_name "SDL_GetWindowWMInfo" ---;
+
+	// Need to port SDL_Game_Controller_Button_Bind
 	// game_controller_get_bind_for_axis 			:: proc(game_controller: ^Game_Controller, axis: Game_Controller_Axis) -> Game_Controller_Button_Bind																				#link_name "SDL_GameControllerGetBindForAxis" ---;
 	// game_controller_get_bind_for_button 			:: proc(game_controller: ^Game_Controller, button: Game_Controller_Button) -> Game_Controller_Button_Bind																			#link_name "SDL_GameControllerGetBindForButton" ---;
 
-	// @Sys_Wm_Info
-	// get_window_wm_info 							:: proc(window: ^Window, info: ^Sys_Wm_Info) -> Bool																																#link_name "SDL_GetWindowWMInfo" ---;
+	// This one is missing from my source of SDL2
+	// dynapi_entry 								:: proc() ->																																										#link_name "SDL_DYNAPI_entry" ---;
 
 	// The source for this one says you should never call it directly, but rather use the macros provided. Need to port those over still
 	//report_assertion 								:: proc() ->																																										#link_name "SDL_ReportAssertion" ---;
