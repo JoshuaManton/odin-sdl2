@@ -2441,8 +2441,3 @@ Sys_Wm_Event :: struct #ordered
     timestamp: u32;
     msg: ^Sys_Wm_Msg;  /**< driver dependent data, defined in syswm.h */
 }
-
-main :: proc()
-{
-
-}
