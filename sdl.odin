@@ -320,8 +320,6 @@ foreign lib {
 	lock_mutex 										:: proc(mutex: ^Mutex) -> i32																																						#link_name "SDL_LockMutex" ---;
 	lock_surface 									:: proc(surface: ^Surface) -> i32																																					#link_name "SDL_LockSurface" ---;
 	lock_texture 									:: proc(texture: ^Texture, rect: ^Rect, pixels: ^rawptr, pitch: ^i32) -> i32																										#link_name "SDL_LockTexture" ---;
-
-	// These might be wrong?
 	log 											:: proc(fmt: ...^u8)																																								#link_name "SDL_Log" ---;
 	log_critical 									:: proc(category: i32, fmt: ...^u8)																																					#link_name "SDL_LogCritical" ---;
 	log_debug 										:: proc(category: i32, fmt: ...^u8)																																					#link_name "SDL_LogDebug" ---;
@@ -337,7 +335,6 @@ foreign lib {
 	log_set_priority 								:: proc(category: i32, priority: LogPriority)																																		#link_name "SDL_LogSetPriority" ---;
 	log_verbose 									:: proc(category: i32, fmt: ...^u8)																																					#link_name "SDL_LogVerbose" ---;
 	log_warn 										:: proc(category: i32, fmt: ...^u8)																																					#link_name "SDL_LogWarn" ---;
-
 	lower_blit 										:: proc(src: ^Surface, srcrect: ^Rect, dst: ^Surface, dstrect: ^Rect) -> i32																										#link_name "SDL_LowerBlit" ---;
 	lower_blit_scaled 								:: proc(src: ^Surface, srcrect: ^Rect, dst: ^Surface, dstrect: ^Rect) -> i32																										#link_name "SDL_LowerBlitScaled" ---;
 	map_rgb 										:: proc(format: PixelFormat, r, g, b: u8) -> u32																																	#link_name "SDL_MapRGB" ---;
