@@ -1603,11 +1603,12 @@ USER_EVENT :: 0x8000;
  */
 LAST_EVENT :: 0xFFFF;
 
+GL_Context :: rawptr;
+
 BlitMap :: struct #ordered {};
 Window :: struct #ordered {};
 Renderer :: struct #ordered {};
 Texture :: struct #ordered {};
-GL_Context :: struct #ordered {};
 Cond :: struct #ordered {};
 Mutex :: struct #ordered {};
 Sem :: struct #ordered {};
@@ -1618,10 +1619,9 @@ Game_Controller :: struct #ordered {};
 Cursor :: struct #ordered {};
 IDirect3D_Device_9 :: struct #ordered {};
 
-Sys_Wm_Info :: struct #ordered {}; // TODO: need to port the struct properly
-Sys_Wm_Msg :: struct #ordered {}; // TODO: need to port the struct properly
-
-
+// Unsure of these
+Sys_Wm_Info :: struct #ordered {};
+Sys_Wm_Msg :: struct #ordered {};
 
 Joystick_Id :: i32;
 Timer_Id :: i32;
