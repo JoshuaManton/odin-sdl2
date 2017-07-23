@@ -3,34 +3,34 @@ foreign_system_library (
 )
 
 foreign lib {
-	// Need to port SDL_RWops over to Odin, and that looks like a nightmare
-	// write_be16 									:: proc() ->																																										#link_name "SDL_WriteBE16" ---;
-	// write_be32 									:: proc() ->																																										#link_name "SDL_WriteBE32" ---;
-	// write_be64 									:: proc() ->																																										#link_name "SDL_WriteBE64" ---;
-	// write_le16 									:: proc() ->																																										#link_name "SDL_WriteLE16" ---;
-	// write_le32 									:: proc() ->																																										#link_name "SDL_WriteLE32" ---;
-	// write_le64 									:: proc() ->																																										#link_name "SDL_WriteLE64" ---;
-	// write_u8 									:: proc() ->																																										#link_name "SDL_WriteU8" ---;
-	// free_rw 										:: proc() ->																																										#link_name "SDL_FreeRW" ---;
-	// game_controller_add_mappings_from_rw 		:: proc() ->																																										#link_name "SDL_GameControllerAddMappingsFromRW" ---;
-	// load_bmp_rw 									:: proc() ->																																										#link_name "SDL_LoadBMP_RW" ---;
-	// load_dollar_templates 						:: proc() ->																																										#link_name "SDL_LoadDollarTemplates" ---;
-	// load_wav_rw 									:: proc() ->																																										#link_name "SDL_LoadWAV_RW" ---;
-	// rw_from_const_mem 							:: proc() ->																																										#link_name "SDL_RWFromConstMem" ---;
-	// rw_from_fp 									:: proc() ->																																										#link_name "SDL_RWFromFP" ---;
-	// rw_from_file 								:: proc() ->																																										#link_name "SDL_RWFromFile" ---;
-	// rw_from_mem 									:: proc() ->																																										#link_name "SDL_RWFromMem" ---;
-	// read_be16 									:: proc() ->																																										#link_name "SDL_ReadBE16" ---;
-	// read_be32 									:: proc() ->																																										#link_name "SDL_ReadBE32" ---;
-	// read_be64 									:: proc() ->																																										#link_name "SDL_ReadBE64" ---;
-	// read_le16 									:: proc() ->																																										#link_name "SDL_ReadLE16" ---;
-	// read_le32 									:: proc() ->																																										#link_name "SDL_ReadLE32" ---;
-	// read_le64 									:: proc() ->																																										#link_name "SDL_ReadLE64" ---;
-	// read_u8 										:: proc() ->																																										#link_name "SDL_ReadU8" ---;
-	// save_all_dollar_templates 					:: proc() ->																																										#link_name "SDL_SaveAllDollarTemplates" ---;
-	// save_bmp_rw 									:: proc() ->																																										#link_name "SDL_SaveBMP_RW" ---;
-	// save_dollar_template 						:: proc() ->																																										#link_name "SDL_SaveDollarTemplate" ---;
-	// alloc_rw 									:: proc() -> 																																										#link_name "SDL_AllocRW" ---;
+	write_be16 										:: proc(dst: ^RwOps, value: u16) -> u64																																										#link_name "SDL_WriteBE16" ---;
+	write_be32 										:: proc(dst: ^RwOps, value: u32) -> u64																																										#link_name "SDL_WriteBE32" ---;
+	write_be64 										:: proc(dst: ^RwOps, value: u64) -> u64																																										#link_name "SDL_WriteBE64" ---;
+	write_le16 										:: proc(dst: ^RwOps, value: u16) -> u64																																										#link_name "SDL_WriteLE16" ---;
+	write_le32 										:: proc(dst: ^RwOps, value: u32) -> u64																																										#link_name "SDL_WriteLE32" ---;
+	write_le64 										:: proc(dst: ^RwOps, value: u64) -> u64																																										#link_name "SDL_WriteLE64" ---;
+	write_u8 										:: proc(dst: ^RwOps, value: u8) -> u64																																										#link_name "SDL_WriteU8" ---;
+	read_be16 										:: proc(src: ^RwOps) -> u16																																										#link_name "SDL_ReadBE16" ---;
+	read_be32 										:: proc(src: ^RwOps) -> u32																																										#link_name "SDL_ReadBE32" ---;
+	read_be64 										:: proc(src: ^RwOps) -> u64																																										#link_name "SDL_ReadBE64" ---;
+	read_le16 										:: proc(src: ^RwOps) -> u16																																										#link_name "SDL_ReadLE16" ---;
+	read_le32 										:: proc(src: ^RwOps) -> u32																																										#link_name "SDL_ReadLE32" ---;
+	read_le64 										:: proc(src: ^RwOps) -> u64																																										#link_name "SDL_ReadLE64" ---;
+	read_u8 										:: proc(src: ^RwOps) -> u8																																							#link_name "SDL_ReadU8" ---;
+
+	free_rw 										:: proc(area: ^RwOps)																																										#link_name "SDL_FreeRW" ---;
+	game_controller_add_mappings_from_rw 			:: proc(area: ^RwOps, freerw: i32) -> i32																																										#link_name "SDL_GameControllerAddMappingsFromRW" ---;
+	load_bmp_rw 									:: proc(src: ^RwOps, freerw: i32) -> ^Surface																																										#link_name "SDL_LoadBMP_RW" ---;
+	load_dollar_templates 							:: proc(touch_id: TouchId, src: ^RwOps) -> i32																																										#link_name "SDL_LoadDollarTemplates" ---;
+	load_wav_rw 									:: proc(src: ^RwOps, freesrc: i32, spec: ^AudioSpec, audio_buf: ^^u8, audio_len: ^u32) -> ^AudioSpec																																										#link_name "SDL_LoadWAV_RW" ---;
+	rw_from_const_mem 								:: proc(mem: rawptr, size: i32) -> ^RwOps																																										#link_name "SDL_RWFromConstMem" ---;
+	rw_from_fp 										:: proc(fp: rawptr, auto_close: Bool) -> ^RwOps																																										#link_name "SDL_RWFromFP" ---;
+	rw_from_file 									:: proc(file: ^u8, mode: ^u8) -> ^RwOps																																										#link_name "SDL_RWFromFile" ---;
+	rw_from_mem 									:: proc(mem: rawptr, size:i32) -> ^RwOps																																										#link_name "SDL_RWFromMem" ---;
+	save_all_dollar_templates 						:: proc(dst: ^RwOps) -> i32																																										#link_name "SDL_SaveAllDollarTemplates" ---;
+	save_bmp_rw 									:: proc(surface: ^Surface, dst: ^RwOps, free_dst: i32) -> i32																																										#link_name "SDL_SaveBMP_RW" ---;
+	save_dollar_template 							:: proc(gesture_id: GestureId, dst: ^RwOps) -> i32																																										#link_name "SDL_SaveDollarTemplate" ---;
+	alloc_rw 										:: proc() -> ^RwOps 																																										#link_name "SDL_AllocRW" ---;
 
 	// This one is missing from my source of SDL2 ???
 	// dynapi_entry 								:: proc() ->																																										#link_name "SDL_DYNAPI_entry" ---;
@@ -1596,6 +1596,7 @@ Joystick :: struct #ordered {};
 GameController :: struct #ordered {};
 Cursor :: struct #ordered {};
 IDirect3DDevice9 :: struct #ordered {};
+RwOps :: struct #ordered {};
 
 // Unsure of these
 SysWmInfo :: struct #ordered {};
@@ -1611,6 +1612,7 @@ AudioFormat :: u16;
 Keycode :: i32;
 ThreadId :: u64;
 TouchId :: i64;
+GestureId :: i64;
 FingerId :: i64;
 
 HintCallback :: proc(interval: u32, param: rawptr) -> u32 #cc_c;

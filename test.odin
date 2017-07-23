@@ -1,4 +1,5 @@
 import . "sdl.odin";
+import . "fmt.odin";
 
 // !!!!!!!!!!
 // All of these tests should pass except the ones I've commented out because
@@ -7,6 +8,36 @@ import . "sdl.odin";
 
 main :: proc()
 {
+	test_write_be16 := write_be16;
+	test_write_be32 := write_be32;
+	test_write_be64 := write_be64;
+	test_write_le16 := write_le16;
+	test_write_le32 := write_le32;
+	test_write_le64 := write_le64;
+	test_write_u8 := write_u8;
+
+	test_read_be16 := read_be16;
+	test_read_be32 := read_be32;
+	test_read_be64 := read_be64;
+	test_read_le16 := read_le16;
+	test_read_le32 := read_le32;
+	test_read_le64 := read_le64;
+	test_read_u8 := read_u8;
+
+	test_free_rw := free_rw;
+	test_game_controller_add_mappings_from_rw := game_controller_add_mappings_from_rw;
+	test_load_bmp_rw := load_bmp_rw;
+	test_load_dollar_templates := load_dollar_templates;
+	test_load_wav_rw := load_wav_rw;
+	test_rw_from_const_mem := rw_from_const_mem;
+	test_rw_from_fp := rw_from_fp;
+	test_rw_from_file := rw_from_file;
+	test_rw_from_mem := rw_from_mem;
+	test_save_all_dollar_templates := save_all_dollar_templates;
+	test_save_bmp_rw := save_bmp_rw;
+	test_save_dollar_template := save_dollar_template;
+	test_alloc_rw := alloc_rw;
+
 	test_add_event_watch := add_event_watch;
 	test_add_hint_callback := add_hint_callback;
 	test_add_timer := add_timer;
