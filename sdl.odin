@@ -624,8 +624,7 @@ RENDERER_ACCELERATED :: 0x00000002;
 RENDERER_PRESENTVSYNC :: 0x00000004;
 RENDERER_TARGETTEXTURE :: 0x00000008;
 
-BlendMode :: enum i32
-{
+BlendMode :: enum i32 {
     NONE = 0x00000000,     /**< no blending
                                               dstRGBA = srcRGBA */
     BLEND = 0x00000001,    /**< alpha blending
@@ -639,8 +638,7 @@ BlendMode :: enum i32
                                               dstA = dstA */
 }
 
-ErrorCode :: enum i32
-{
+ErrorCode :: enum i32 {
     ENOMEM,
     EFREAD,
     EFWRITE,
@@ -649,8 +647,7 @@ ErrorCode :: enum i32
     LASTERROR
 }
 
-JoystickPowerLevel :: enum i32
-{
+JoystickPowerLevel :: enum i32 {
     UNKNOWN = -1,
     EMPTY,
     LOW,
@@ -660,22 +657,19 @@ JoystickPowerLevel :: enum i32
     MAX
 }
 
-HintPriority :: enum i32
-{
+HintPriority :: enum i32 {
     DEFAULT,
     NORMAL,
     OVERRIDE
 }
 
-ThreadPriority :: enum i32
-{
+ThreadPriority :: enum i32 {
     LOW,
     NORMAL,
     HIGH
 }
 
-AssertState :: enum i32
-{
+AssertState :: enum i32 {
     RETRY,  /**< Retry the assert immediately. */
     BREAK,  /**< Make the debugger trigger a breakpoint. */
     ABORT,  /**< Terminate the program. */
@@ -683,15 +677,13 @@ AssertState :: enum i32
     ALWAYS_IGNORE  /**< Ignore the assert from now on. */
 }
 
-EventAction :: enum i32
-{
+EventAction :: enum i32 {
     ADDEVENT,
     PEEKEVENT,
     GETEVENT
 }
 
-HitTestResult :: enum i32
-{
+HitTestResult :: enum i32 {
     NORMAL,  /**< Region is normal. No special properties. */
     DRAGGABLE,  /**< Region can drag entire window. */
     RESIZE_TOPLEFT,
@@ -704,14 +696,12 @@ HitTestResult :: enum i32
     RESIZE_LEFT
 }
 
-Bool :: enum i32
-{
+Bool :: enum i32 {
     False,
     True
 }
 
-WindowShapeModes :: enum i32
-{
+WindowShapeModes :: enum i32 {
     /** \brief The default mode, a binarized alpha cutoff of 1. */
     DEFAULT,
     /** \brief A binarized alpha cutoff with a given integer value. */
@@ -722,8 +712,7 @@ WindowShapeModes :: enum i32
     COLOR_KEY
 }
 
-Keymod :: enum i32
-{
+Keymod :: enum i32 {
     NONE = 0x0000,
     LSHIFT = 0x0001,
     RSHIFT = 0x0002,
@@ -739,15 +728,13 @@ Keymod :: enum i32
     RESERVED = 0x8000
 }
 
-RendererFlip :: enum i32
-{
+RendererFlip :: enum i32 {
     NONE = 0x00000000,     /**< Do not flip */
     HORIZONTAL = 0x00000001,    /**< flip horizontally */
     VERTICAL = 0x00000002     /**< flip vertically */
 }
 
-GLAttr :: enum i32
-{
+GLAttr :: enum i32 {
     RED_SIZE,
     GREEN_SIZE,
     BLUE_SIZE,
@@ -775,8 +762,7 @@ GLAttr :: enum i32
     CONTEXT_RELEASE_BEHAVIOR
 }
 
-MessageBoxColorType :: enum i32
-{
+MessageBoxColorType :: enum i32 {
     BACKGROUND,
     TEXT,
     BUTTON_BORDER,
@@ -785,15 +771,13 @@ MessageBoxColorType :: enum i32
     MAX
 }
 
-AudioStatus :: enum i32
-{
+AudioStatus :: enum i32 {
     STOPPED = 0,
     PLAYING,
     PAUSED
 }
 
-PowerState :: enum i32
-{
+PowerState :: enum i32 {
     UNKNOWN,      /**< cannot determine power status */
     ON_BATTERY,   /**< Not plugged in, running on the battery */
     NO_BATTERY,   /**< Plugged in, no battery available */
@@ -801,8 +785,7 @@ PowerState :: enum i32
     CHARGED       /**< Plugged in, battery charged */
 }
 
-LogPriority :: enum i32
-{
+LogPriority :: enum i32 {
     VERBOSE = 1,
     DEBUG,
     INFO,
@@ -816,8 +799,7 @@ LogPriority :: enum i32
 // Input stuff
 
 
-GameControllerButton :: enum i32
-{
+GameControllerButton :: enum i32 {
     INVALID = -1,
     A,
     B,
@@ -837,8 +819,7 @@ GameControllerButton :: enum i32
     MAX
 }
 
-GameControllerAxis :: enum i32
-{
+GameControllerAxis :: enum i32 {
     INVALID = -1,
     LEFTX,
     LEFTY,
@@ -849,16 +830,14 @@ GameControllerAxis :: enum i32
     MAX
 }
 
-GameControllerBindType :: enum i32
-{
+GameControllerBindType :: enum i32 {
     NONE = 0,
     BUTTON,
     AXIS,
     HAT
 }
 
-SystemCursor :: enum i32
-{
+SystemCursor :: enum i32 {
     ARROW,     /**< Arrow */
     IBEAM,     /**< I-beam */
     WAIT,      /**< Wait */
@@ -875,8 +854,7 @@ SystemCursor :: enum i32
 }
 
 
-Scancode :: enum i32
-{
+Scancode :: enum i32 {
     UNKNOWN = 0,
 
     /**
@@ -1647,8 +1625,7 @@ WindowsMessageHook :: proc(userdata: rawptr, hwnd: rawptr, message: u32, wparam:
 LogOutputFunction :: proc(userdata: rawptr, category: i32, priority: LogPriority, message: ^u8) #cc_c;
 
 // Thanks gingerBill for this one!
-GameControllerButtonBind :: struct #ordered
-{
+GameControllerButtonBind :: struct #ordered {
     bind_type: GameControllerBindType;
     value: struct #raw_union
     {
@@ -1661,8 +1638,7 @@ GameControllerButtonBind :: struct #ordered
     };
 };
 
-MessageBoxData :: struct #ordered
-{
+MessageBoxData :: struct #ordered {
     flags: u32;
     window: ^Window;
     title: ^u8;
@@ -1674,25 +1650,21 @@ MessageBoxData :: struct #ordered
     color_scheme: ^MessageBoxColorScheme;
 }
 
-MessageBoxButtonData :: struct #ordered
-{
+MessageBoxButtonData :: struct #ordered {
     flags: u32;       /**< ::MessageBoxButtonFlags */
     button_id: i32;       /**< User defined button id (value returned via ShowMessageBox) */
     text: ^u8;  /**< The UTF-8 button text */
 }
 
-MessageBoxColorScheme :: struct #ordered
-{
+MessageBoxColorScheme :: struct #ordered {
     colors: [MessageBoxColorType.MAX]MessageBoxColor;
 }
 
-MessageBoxColor :: struct #ordered
-{
+MessageBoxColor :: struct #ordered {
     r, g, b: u8;
 }
 
-AssertData :: struct #ordered
-{
+AssertData :: struct #ordered {
     always_ignore: i32;
     trigger_count: u32;
     condition: ^u8;
@@ -1702,27 +1674,23 @@ AssertData :: struct #ordered
     next: ^AssertData;
 }
 
-WindowShapeParams :: struct #raw_union
-{
+WindowShapeParams :: struct #raw_union {
     /** \brief a cutoff alpha value for binarization of the window shape's alpha channel. */
     binarizationCutoff: u8;
     colorKey: Color;
 }
 
-WindowShapeMode :: struct #ordered
-{
+WindowShapeMode :: struct #ordered {
     mode: WindowShapeModes;
     parameters: WindowShapeParams;
 }
 
-Point :: struct #ordered
-{
+Point :: struct #ordered {
     x: i32;
     y: i32;
 }
 
-RendererInfo :: struct #ordered
-{
+RendererInfo :: struct #ordered {
     name: ^u8;           /**< The name of the renderer */
     flags: u32;               /**< Supported ::RendererFlags */
     num_texture_formats: u32; /**< The number of available texture formats */
@@ -1731,15 +1699,13 @@ RendererInfo :: struct #ordered
     max_texture_height: i32;     /**< The maximum texture height */
 }
 
-Version :: struct #ordered
-{
+Version :: struct #ordered {
     major: u8;        /**< major version */
     minor: u8;        /**< minor version */
     patch: u8;        /**< update version */
 }
 
-DisplayMode :: struct #ordered
-{
+DisplayMode :: struct #ordered {
     format: u32;              /**< pixel format */
     w: i32;                      /**< width, in screen coordinates */
     h: i32;                      /**< height, in screen coordinates */
@@ -1747,16 +1713,14 @@ DisplayMode :: struct #ordered
     driverdata: rawptr;           /**< driver-specific data, initialize to 0 */
 }
 
-Finger :: struct #ordered
-{
+Finger :: struct #ordered {
     id: FingerId;
     x: f32;
     y: f32;
     pressure: f32;
 }
 
-AudioSpec :: struct #ordered
-{
+AudioSpec :: struct #ordered {
     freq: i32;                   /**< DSP frequency -- samples per second */
     format: AudioFormat;     /**< Audio data format */
     channels: u8;             /**< Number of channels: 1 mono, 2 stereo */
@@ -1768,13 +1732,11 @@ AudioSpec :: struct #ordered
     userdata: rawptr;             /**< Userdata passed to callback (ignored for NULL callbacks). */
 }
 
-JoystickGuid :: struct #ordered
-{
+JoystickGuid :: struct #ordered {
     data: [16]u8;
 }
 
-AudioCvt :: struct #ordered
-{
+AudioCvt :: struct #ordered {
     needed: i32;                 /**< Set to 1 if conversion possible */
     src_format: AudioFormat; /**< Source audio format */
     dst_format: AudioFormat; /**< Target audio format */
@@ -1788,8 +1750,7 @@ AudioCvt :: struct #ordered
     filter_index: i32;           /**< Current audio conversion function */
 }
 
-Surface :: struct #ordered
-{
+Surface :: struct #ordered {
     flags: u32;
     format: ^PixelFormat;
     w, h: i32;
@@ -1807,24 +1768,21 @@ Surface :: struct #ordered
     refcount: i32;
 }
 
-Color :: struct #ordered
-{
+Color :: struct #ordered {
     r: u8;
     g: u8;
     b: u8;
     a: u8;
 }
 
-Palette :: struct #ordered
-{
+Palette :: struct #ordered {
     ncolors: i32;
     colors: ^Color;
     version: u32;
     refcount: i32;
 }
 
-PixelFormat :: struct #ordered
-{
+PixelFormat :: struct #ordered {
     format: u32;
     palette: ^Palette;
     bits_per_pixel: u8;
@@ -1846,27 +1804,23 @@ PixelFormat :: struct #ordered
     next: ^PixelFormat;
 }
 
-Rect :: struct #ordered
-{
+Rect :: struct #ordered {
     x, y: u32;
     w, h: u32;
 }
 
-Atomic :: struct #ordered
-{
+Atomic :: struct #ordered {
     value: i32;
 }
 
-Keysym :: struct #ordered
-{
+Keysym :: struct #ordered {
     scancode: u32;      /**< SDL physical key code - see ::Scancode for details */
     sym: i32;            /**< SDL virtual key code - see ::Keycode for details */
     mod: u16;                 /**< current key modifiers */
     unused: u32;
 }
 
-HapticEffect :: struct #raw_union
-{
+HapticEffect :: struct #raw_union {
     /* Common for all force feedback effects */
     haptic_type: u16;                    /**< Effect type. */
     constant: HapticConstant;    /**< Constant effect. */
@@ -1877,8 +1831,7 @@ HapticEffect :: struct #raw_union
     custom: HapticCustom;        /**< Custom effect. */
 }
 
-HapticConstant :: struct
-{
+HapticConstant :: struct {
     /* Header */
     haptic_type: u16;            /**< ::HAPTIC_CONSTANT */
     direction: HapticDirection;  /**< Direction of the effect. */
@@ -1901,8 +1854,7 @@ HapticConstant :: struct
     fade_level: u16;      /**< Level at the end of the fade. */
 }
 
-HapticPeriodic :: struct
-{
+HapticPeriodic :: struct {
     /* Header */
     haptic_type: u16;        /**< ::HAPTIC_SINE, ::HAPTIC_LEFTRIGHT,
                              ::HAPTIC_TRIANGLE, ::HAPTIC_SAWTOOTHUP or
@@ -1930,14 +1882,12 @@ HapticPeriodic :: struct
     fade_level: u16;  /**< Level at the end of the fade. */
 }
 
-HapticDirection :: struct
-{
+HapticDirection :: struct {
     haptic_type: u8;         /**< The type of encoding. */
     dir: [3]i32;      /**< The encoded direction. */
 }
 
-HapticCondition :: struct
-{
+HapticCondition :: struct {
     /* Header */
     haptic_type: u16;            /**< ::HAPTIC_SPRING, ::HAPTIC_DAMPER,
                                  ::HAPTIC_INERTIA or ::HAPTIC_FRICTION */
@@ -1960,8 +1910,7 @@ HapticCondition :: struct
     center: [3]i16;       /**< Position of the dead zone. */
 }
 
-HapticRamp :: struct
-{
+HapticRamp :: struct {
     /* Header */
     haptic_type: u16;            /**< ::HAPTIC_RAMP */
     direction: HapticDirection;  /**< Direction of the effect. */
@@ -1985,8 +1934,7 @@ HapticRamp :: struct
     fade_level: u16;      /**< Level at the end of the fade. */
 }
 
-HapticLeftRight :: struct
-{
+HapticLeftRight :: struct {
     /* Header */
     haptic_type: u16;            /**< ::HAPTIC_LEFTRIGHT */
 
@@ -1998,8 +1946,7 @@ HapticLeftRight :: struct
     small_magnitude: u16; /**< Control of the small controller motor. */
 }
 
-HapticCustom :: struct
-{
+HapticCustom :: struct {
     /* Header */
     haptic_type: u16;            /**< ::HAPTIC_CUSTOM */
     direction: HapticDirection;  /**< Direction of the effect. */
@@ -2025,8 +1972,7 @@ HapticCustom :: struct
     fade_level: u16;      /**< Level at the end of the fade. */
 }
 
-Event :: struct #raw_union
-{
+Event :: struct #raw_union {
     event_type: u32;                    /**< Event type, shared with all events */
     common: CommonEvent;         /**< Common event data */
     window: WindowEvent;         /**< Window event data */
@@ -2067,8 +2013,7 @@ Event :: struct #raw_union
 /**
  *  \brief Fields shared by every event
  */
-CommonEvent :: struct #ordered
-{
+CommonEvent :: struct #ordered {
     event_type: u32;
     timestamp: u32;
 }
@@ -2076,8 +2021,7 @@ CommonEvent :: struct #ordered
 /**
  *  \brief Window state change event data (event.window.*)
  */
-WindowEvent :: struct #ordered
-{
+WindowEvent :: struct #ordered {
     event_type: u32;        /**< ::WINDOW_EVENT */
     timestamp: u32;
     window_id: u32;    /**< The associated window */
@@ -2092,8 +2036,7 @@ WindowEvent :: struct #ordered
 /**
  *  \brief Keyboard button event structure (event.key.*)
  */
-KeyboardEvent :: struct #ordered
-{
+KeyboardEvent :: struct #ordered {
     event_type: u32;        /**< ::KEY_DOWN or ::KEY_UP */
     timestamp: u32;
     window_id: u32;    /**< The window with keyboard focus, if any */
@@ -2108,8 +2051,7 @@ TEXT_EDITING_EVENT_TEXT_SIZE :: 32;
 /**
  *  \brief Keyboard text editing event structure (event.edit.*)
  */
-TextEditingEvent :: struct #ordered
-{
+TextEditingEvent :: struct #ordered {
     event_type: u32;                                /**< ::TEXT_EDITING */
     timestamp: u32;
     window_id: u32;                            /**< The window with keyboard focus, if any */
@@ -2123,8 +2065,7 @@ TEXT_INPUT_EVENT_TEXT_SIZE :: 32;
 /**
  *  \brief Keyboard text input event structure (event.text.*)
  */
-TextInputEvent :: struct #ordered
-{
+TextInputEvent :: struct #ordered {
     event_type: u32;                              /**< ::TEXT_INPUT */
     timestamp: u32;
     window_id: u32;                          /**< The window with keyboard focus, if any */
@@ -2134,8 +2075,7 @@ TextInputEvent :: struct #ordered
 /**
  *  \brief Mouse motion event structure (event.motion.*)
  */
-MouseMotionEvent :: struct #ordered
-{
+MouseMotionEvent :: struct #ordered {
     event_type: u32;        /**< ::MOUSE_MOTION */
     timestamp: u32;
     window_id: u32;    /**< The window with mouse focus, if any */
@@ -2150,8 +2090,7 @@ MouseMotionEvent :: struct #ordered
 /**
  *  \brief Mouse button event structure (event.button.*)
  */
-MouseButtonEvent :: struct #ordered
-{
+MouseButtonEvent :: struct #ordered {
     event_type: u32;        /**< ::MOUSE_BUTTON_DOWN or ::MOUSE_BUTTON_UP */
     timestamp: u32;
     window_id: u32;    /**< The window with mouse focus, if any */
@@ -2167,8 +2106,7 @@ MouseButtonEvent :: struct #ordered
 /**
  *  \brief Mouse wheel event structure (event.wheel.*)
  */
-MouseWheelEvent :: struct #ordered
-{
+MouseWheelEvent :: struct #ordered {
     event_type: u32;        /**< ::MOUSE_WHEEL */
     timestamp: u32;
     window_id: u32;    /**< The window with mouse focus, if any */
@@ -2181,8 +2119,7 @@ MouseWheelEvent :: struct #ordered
 /**
  *  \brief Joystick axis motion event structure (event.jaxis.*)
  */
-JoyAxisEvent :: struct #ordered
-{
+JoyAxisEvent :: struct #ordered {
     event_type: u32;        /**< ::JOY_AXIS_MOTION */
     timestamp: u32;
     which: i32; /**< The joystick instance id */
@@ -2197,8 +2134,7 @@ JoyAxisEvent :: struct #ordered
 /**
  *  \brief Joystick trackball motion event structure (event.jball.*)
  */
-JoyBall_Event :: struct #ordered
-{
+JoyBall_Event :: struct #ordered {
     event_type: u32;        /**< ::JOY_BALL_MOTION */
     timestamp: u32;
     which: i32; /**< The joystick instance id */
@@ -2213,8 +2149,7 @@ JoyBall_Event :: struct #ordered
 /**
  *  \brief Joystick hat position change event structure (event.jhat.*)
  */
-JoyHat_Event :: struct #ordered
-{
+JoyHat_Event :: struct #ordered {
     event_type: u32;        /**< ::JOY_HAT_MOTION */
     timestamp: u32;
     which: i32; /**< The joystick instance id */
@@ -2233,8 +2168,7 @@ JoyHat_Event :: struct #ordered
 /**
  *  \brief Joystick button event structure (event.jbutton.*)
  */
-JoyButtonEvent :: struct #ordered
-{
+JoyButtonEvent :: struct #ordered {
     event_type: u32;        /**< ::JOY_BUTTON_DOWN or ::JOY_BUTTON_UP */
     timestamp: u32;
     which: i32; /**< The joystick instance id */
@@ -2247,8 +2181,7 @@ JoyButtonEvent :: struct #ordered
 /**
  *  \brief Joystick device event structure (event.jdevice.*)
  */
-JoyDeviceEvent :: struct #ordered
-{
+JoyDeviceEvent :: struct #ordered {
     event_type: u32;        /**< ::JOY_DEVICE_ADDED or ::JOY_DEVICE_REMOVED */
     timestamp: u32;
     which: i32;       /**< The joystick device index for the ADDED event, instance id for the REMOVED event */
@@ -2258,8 +2191,7 @@ JoyDeviceEvent :: struct #ordered
 /**
  *  \brief Game controller axis motion event structure (event.caxis.*)
  */
-ControllerAxisEvent :: struct #ordered
-{
+ControllerAxisEvent :: struct #ordered {
     event_type: u32;        /**< ::CONTROLLER_AXIS_MOTION */
     timestamp: u32;
     which: i32; /**< The joystick instance id */
@@ -2275,8 +2207,7 @@ ControllerAxisEvent :: struct #ordered
 /**
  *  \brief Game controller button event structure (event.cbutton.*)
  */
-ControllerButtonEvent :: struct #ordered
-{
+ControllerButtonEvent :: struct #ordered {
     event_type: u32;        /**< ::CONTROLLER_BUTTON_DOWN or ::CONTROLLER_BUTTON_UP */
     timestamp: u32;
     which: i32; /**< The joystick instance id */
@@ -2290,8 +2221,7 @@ ControllerButtonEvent :: struct #ordered
 /**
  *  \brief Controller device event structure (event.cdevice.*)
  */
-ControllerDeviceEvent :: struct #ordered
-{
+ControllerDeviceEvent :: struct #ordered {
     event_type: u32;        /**< ::CONTROLLER_DEVICE_ADDED, ::CONTROLLER_DEVICE_REMOVED, or ::CONTROLLER_DEVICE_REMAPPED */
     timestamp: u32;
     which: i32;       /**< The joystick device index for the ADDED event, instance id for the REMOVED or REMAPPED event */
@@ -2300,8 +2230,7 @@ ControllerDeviceEvent :: struct #ordered
 /**
  *  \brief Audio device event structure (event.adevice.*)
  */
-AudioDeviceEvent :: struct #ordered
-{
+AudioDeviceEvent :: struct #ordered {
     event_type: u32;        /**< ::AUDIO_DEVICE_ADDED, or ::AUDIO_DEVICE_REMOVED */
     timestamp: u32;
     which: u32;       /**< The audio device index for the ADDED event (valid until next GetNumAudioDevices() call), AudioDeviceID for the REMOVED event */
@@ -2315,8 +2244,7 @@ AudioDeviceEvent :: struct #ordered
 /**
  *  \brief Touch finger event structure (event.tfinger.*)
  */
-TouchFingerEvent :: struct #ordered
-{
+TouchFingerEvent :: struct #ordered {
     event_type: u32;        /**< ::FINGER_MOTION or ::FINGER_DOWN or ::FINGER_UP */
     timestamp: u32;
     touchId: i64; /**< The touch device id */
@@ -2332,8 +2260,7 @@ TouchFingerEvent :: struct #ordered
 /**
  *  \brief Multiple Finger Gesture Event (event.mgesture.*)
  */
-MultiGestureEvent :: struct #ordered
-{
+MultiGestureEvent :: struct #ordered {
     event_type: u32;        /**< ::MULTIGESTURE */
     timestamp: u32;
     touchId: i64; /**< The touch device id */
@@ -2349,8 +2276,7 @@ MultiGestureEvent :: struct #ordered
 /**
  * \brief Dollar Gesture Event (event.dgesture.*)
  */
-DollarGestureEvent :: struct #ordered
-{
+DollarGestureEvent :: struct #ordered {
     event_type: u32;        /**< ::DOLLAR_GESTURE or ::DOLLAR_RECORD */
     timestamp: u32;
     touchId: i64; /**< The touch device id */
@@ -2367,8 +2293,7 @@ DollarGestureEvent :: struct #ordered
  *         This event is enabled by default, you can disable it with EventState().
  *  \note If this event is enabled, you must free the filename in the event.
  */
-DropEvent :: struct #ordered
-{
+DropEvent :: struct #ordered {
     event_type: u32;        /**< ::DROP_BEGIN or ::DROP_FILE or ::DROP_TEXT or ::DROP_COMPLETE */
     timestamp: u32;
     file: ^u8;         /**< The file name, which should be freed with free(), is NULL on begin/complete */
@@ -2379,8 +2304,7 @@ DropEvent :: struct #ordered
 /**
  *  \brief The "quit requested" event
  */
-QuitEvent :: struct #ordered
-{
+QuitEvent :: struct #ordered {
     event_type: u32;        /**< ::QUIT */
     timestamp: u32;
 }
@@ -2388,8 +2312,7 @@ QuitEvent :: struct #ordered
 /**
  *  \brief OS Specific event
  */
-OSEvent :: struct #ordered
-{
+OSEvent :: struct #ordered {
     event_type: u32;        /**< ::QUIT */
     timestamp: u32;
 }
@@ -2397,8 +2320,7 @@ OSEvent :: struct #ordered
 /**
  *  \brief A user-defined event type (event.user.*)
  */
-UserEvent :: struct #ordered
-{
+UserEvent :: struct #ordered {
     event_type: u32;        /**< ::USER_EVENT through ::LAST_EVENT-1 */
     timestamp: u32;
     window_id: u32;    /**< The associated window if any */
@@ -2413,8 +2335,7 @@ UserEvent :: struct #ordered
  *
  *  \note If you want to use this event, you should include syswm.h.
  */
-SysWmEvent :: struct #ordered
-{
+SysWmEvent :: struct #ordered {
     event_type: u32;        /**< ::SYS_Wm_EVENT */
     timestamp: u32;
     msg: ^SysWmMsg;  /**< driver dependent data, defined in syswm.h */

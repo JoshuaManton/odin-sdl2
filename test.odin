@@ -112,8 +112,8 @@ main :: proc()
 	test_game_controller_get_attached := game_controller_get_attached;
 	test_game_controller_get_axis := game_controller_get_axis;
 	test_game_controller_get_axis_from_string := game_controller_get_axis_from_string;
-	test_game_controller_get_bind_for_axis := game_controller_get_bind_for_axis;
-	test_game_controller_get_bind_for_button := game_controller_get_bind_for_button;
+	// test_game_controller_get_bind_for_axis := game_controller_get_bind_for_axis;
+	// test_game_controller_get_bind_for_button := game_controller_get_bind_for_button;
 	test_game_controller_get_button := game_controller_get_button;
 	test_game_controller_get_button_from_string := game_controller_get_button_from_string;
 	test_game_controller_get_joystick := game_controller_get_joystick;
@@ -290,9 +290,9 @@ main :: proc()
 	test_joystick_get_axis := joystick_get_axis;
 	test_joystick_get_ball := joystick_get_ball;
 	test_joystick_get_button := joystick_get_button;
-	test_joystick_get_device_guid := joystick_get_device_guid;
-	test_joystick_get_guid := joystick_get_guid;
-	test_joystick_get_guid_from_string := joystick_get_guid_from_string;
+	//test_joystick_get_device_guid := joystick_get_device_guid;
+	//test_joystick_get_guid := joystick_get_guid;
+	//test_joystick_get_guid_from_string := joystick_get_guid_from_string;
 	test_joystick_get_guid_string := joystick_get_guid_string;
 	test_joystick_get_hat := joystick_get_hat;
 	test_joystick_instance_id := joystick_instance_id;
