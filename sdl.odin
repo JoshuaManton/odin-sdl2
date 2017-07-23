@@ -1,6 +1,3 @@
-import_load "sdl_structs.odin";
-import_load "sdl_constants.odin";
-
 foreign_system_library (
 	lib "SDL2.lib";
 )
@@ -617,4 +614,1819 @@ foreign lib {
 	sdl_wcslcpy 										:: proc() ->																																		#link_name "SDL_wcslcpy" ---;
 	sdl_wcslen 											:: proc() ->																																		#link_name "SDL_wcslen" ---;
 	*/
+}
+
+SDL_INIT_TIMER :: 0x00000001;
+SDL_INIT_AUDIO :: 0x00000010;
+SDL_INIT_VIDEO :: 0x00000020;
+SDL_INIT_JOYSTICK :: 0x00000200;
+SDL_INIT_HAPTIC :: 0x00001000;
+SDL_INIT_GAMECONTROLLER :: 0x00002000;
+SDL_INIT_EVENTS :: 0x00004000;
+SDL_INIT_NOPARACHUTE :: 0x00100000;
+SDL_INIT_EVERYTHING :: SDL_INIT_TIMER | SDL_INIT_AUDIO | SDL_INIT_VIDEO | SDL_INIT_EVENTS | SDL_INIT_JOYSTICK | SDL_INIT_HAPTIC | SDL_INIT_GAMECONTROLLER;
+
+SDL_WINDOW_FULLSCREEN :: 0x00000001;
+SDL_WINDOW_OPENGL :: 0x00000002;
+SDL_WINDOW_SHOWN :: 0x00000004;
+SDL_WINDOW_HIDDEN :: 0x00000008;
+SDL_WINDOW_BORDERLESS :: 0x00000010;
+SDL_WINDOW_RESIZABLE :: 0x00000020;
+SDL_WINDOW_MINIMIZED :: 0x00000040;
+SDL_WINDOW_MAXIMIZED :: 0x00000080;
+SDL_WINDOW_INPUT_GRABBED :: 0x00000100;
+SDL_WINDOW_INPUT_FOCUS :: 0x00000200;
+SDL_WINDOW_MOUSE_FOCUS :: 0x00000400;
+SDL_WINDOW_FULLSCREEN_DESKTOP :: SDL_WINDOW_FULLSCREEN | 0x00001000;
+SDL_WINDOW_FOREIGN :: 0x00000800;
+SDL_WINDOW_ALLOW_HIGHDPI :: 0x00002000;
+SDL_WINDOW_MOUSE_CAPTURE :: 0x00004000;
+SDL_WINDOW_ALWAYS_ON_TOP :: 0x00008000;
+SDL_WINDOW_SKIP_TASKBAR :: 0x00010000;
+SDL_WINDOW_UTILITY :: 0x00020000;
+SDL_WINDOW_TOOLTIP :: 0x00040000;
+SDL_WINDOW_POPUP_MENU :: 0x00080000;
+SDL_WINDOW_VULKAN :: 0x00100000;
+
+SDL_WINDOWPOS_UNDEFINED :: 0x1FFF0000;
+SDL_WINDOWPOS_CENTERED :: 0x2FFF0000;
+
+SDL_RENDERER_SOFTWARE :: 0x00000001;
+SDL_RENDERER_ACCELERATED :: 0x00000002;
+SDL_RENDERER_PRESENTVSYNC :: 0x00000004;
+SDL_RENDERER_TARGETTEXTURE :: 0x00000008;
+
+SDL_Blend_Mode :: enum i32
+{
+    SDL_BLENDMODE_NONE = 0x00000000,     /**< no blending
+                                              dstRGBA = srcRGBA */
+    SDL_BLENDMODE_BLEND = 0x00000001,    /**< alpha blending
+                                              dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
+                                              dstA = srcA + (dstA * (1-srcA)) */
+    SDL_BLENDMODE_ADD = 0x00000002,      /**< additive blending
+                                              dstRGB = (srcRGB * srcA) + dstRGB
+                                              dstA = dstA */
+    SDL_BLENDMODE_MOD = 0x00000004       /**< color modulate
+                                              dstRGB = srcRGB * dstRGB
+                                              dstA = dstA */
+}
+
+SDL_Error_Code :: enum i32
+{
+    SDL_ENOMEM,
+    SDL_EFREAD,
+    SDL_EFWRITE,
+    SDL_EFSEEK,
+    SDL_UNSUPPORTED,
+    SDL_LASTERROR
+}
+
+SDL_Joystick_Power_Level :: enum i32
+{
+    SDL_JOYSTICK_POWER_UNKNOWN = -1,
+    SDL_JOYSTICK_POWER_EMPTY,
+    SDL_JOYSTICK_POWER_LOW,
+    SDL_JOYSTICK_POWER_MEDIUM,
+    SDL_JOYSTICK_POWER_FULL,
+    SDL_JOYSTICK_POWER_WIRED,
+    SDL_JOYSTICK_POWER_MAX
+}
+
+SDL_Hint_Priority :: enum i32
+{
+    SDL_HINT_DEFAULT,
+    SDL_HINT_NORMAL,
+    SDL_HINT_OVERRIDE
+}
+
+SDL_Thread_Priority :: enum i32
+{
+    SDL_THREAD_PRIORITY_LOW,
+    SDL_THREAD_PRIORITY_NORMAL,
+    SDL_THREAD_PRIORITY_HIGH
+}
+
+SDL_Assert_State :: enum i32
+{
+    SDL_ASSERTION_RETRY,  /**< Retry the assert immediately. */
+    SDL_ASSERTION_BREAK,  /**< Make the debugger trigger a breakpoint. */
+    SDL_ASSERTION_ABORT,  /**< Terminate the program. */
+    SDL_ASSERTION_IGNORE,  /**< Ignore the assert. */
+    SDL_ASSERTION_ALWAYS_IGNORE  /**< Ignore the assert from now on. */
+}
+
+SDL_Event_Action :: enum i32
+{
+    SDL_ADDEVENT,
+    SDL_PEEKEVENT,
+    SDL_GETEVENT
+}
+
+SDL_Hit_Test_Result :: enum i32
+{
+    SDL_HITTEST_NORMAL,  /**< Region is normal. No special properties. */
+    SDL_HITTEST_DRAGGABLE,  /**< Region can drag entire window. */
+    SDL_HITTEST_RESIZE_TOPLEFT,
+    SDL_HITTEST_RESIZE_TOP,
+    SDL_HITTEST_RESIZE_TOPRIGHT,
+    SDL_HITTEST_RESIZE_RIGHT,
+    SDL_HITTEST_RESIZE_BOTTOMRIGHT,
+    SDL_HITTEST_RESIZE_BOTTOM,
+    SDL_HITTEST_RESIZE_BOTTOMLEFT,
+    SDL_HITTEST_RESIZE_LEFT
+}
+
+SDL_Bool :: enum i32
+{
+    SDL_False,
+    SDL_True
+}
+
+Window_Shape_Mode :: enum i32
+{
+    /** \brief The default mode, a binarized alpha cutoff of 1. */
+    ShapeModeDefault,
+    /** \brief A binarized alpha cutoff with a given integer value. */
+    ShapeModeBinarizeAlpha,
+    /** \brief A binarized alpha cutoff with a given integer value, but with the opposite comparison. */
+    ShapeModeReverseBinarizeAlpha,
+    /** \brief A color key is applied. */
+    ShapeModeColorKey
+}
+
+SDL_Keymod :: enum i32
+{
+    KMOD_NONE = 0x0000,
+    KMOD_LSHIFT = 0x0001,
+    KMOD_RSHIFT = 0x0002,
+    KMOD_LCTRL = 0x0040,
+    KMOD_RCTRL = 0x0080,
+    KMOD_LALT = 0x0100,
+    KMOD_RALT = 0x0200,
+    KMOD_LGUI = 0x0400,
+    KMOD_RGUI = 0x0800,
+    KMOD_NUM = 0x1000,
+    KMOD_CAPS = 0x2000,
+    KMOD_MODE = 0x4000,
+    KMOD_RESERVED = 0x8000
+}
+
+SDL_Renderer_Flip :: enum i32
+{
+    SDL_FLIP_NONE = 0x00000000,     /**< Do not flip */
+    SDL_FLIP_HORIZONTAL = 0x00000001,    /**< flip horizontally */
+    SDL_FLIP_VERTICAL = 0x00000002     /**< flip vertically */
+}
+
+SDL_GL_Attr :: enum i32
+{
+    SDL_GL_RED_SIZE,
+    SDL_GL_GREEN_SIZE,
+    SDL_GL_BLUE_SIZE,
+    SDL_GL_ALPHA_SIZE,
+    SDL_GL_BUFFER_SIZE,
+    SDL_GL_DOUBLEBUFFER,
+    SDL_GL_DEPTH_SIZE,
+    SDL_GL_STENCIL_SIZE,
+    SDL_GL_ACCUM_RED_SIZE,
+    SDL_GL_ACCUM_GREEN_SIZE,
+    SDL_GL_ACCUM_BLUE_SIZE,
+    SDL_GL_ACCUM_ALPHA_SIZE,
+    SDL_GL_STEREO,
+    SDL_GL_MULTISAMPLEBUFFERS,
+    SDL_GL_MULTISAMPLESAMPLES,
+    SDL_GL_ACCELERATED_VISUAL,
+    SDL_GL_RETAINED_BACKING,
+    SDL_GL_CONTEXT_MAJOR_VERSION,
+    SDL_GL_CONTEXT_MINOR_VERSION,
+    SDL_GL_CONTEXT_EGL,
+    SDL_GL_CONTEXT_FLAGS,
+    SDL_GL_CONTEXT_PROFILE_MASK,
+    SDL_GL_SHARE_WITH_CURRENT_CONTEXT,
+    SDL_GL_FRAMEBUFFER_SRGB_CAPABLE,
+    SDL_GL_CONTEXT_RELEASE_BEHAVIOR
+}
+
+SDL_Message_Box_Color_Type :: enum i32
+{
+    SDL_MESSAGEBOX_COLOR_BACKGROUND,
+    SDL_MESSAGEBOX_COLOR_TEXT,
+    SDL_MESSAGEBOX_COLOR_BUTTON_BORDER,
+    SDL_MESSAGEBOX_COLOR_BUTTON_BACKGROUND,
+    SDL_MESSAGEBOX_COLOR_BUTTON_SELECTED,
+    SDL_MESSAGEBOX_COLOR_MAX
+}
+
+SDL_Audio_Status :: enum i32
+{
+    SDL_AUDIO_STOPPED = 0,
+    SDL_AUDIO_PLAYING,
+    SDL_AUDIO_PAUSED
+}
+
+SDL_Power_State :: enum i32
+{
+    SDL_POWERSTATE_UNKNOWN,      /**< cannot determine power status */
+    SDL_POWERSTATE_ON_BATTERY,   /**< Not plugged in, running on the battery */
+    SDL_POWERSTATE_NO_BATTERY,   /**< Plugged in, no battery available */
+    SDL_POWERSTATE_CHARGING,     /**< Plugged in, charging battery */
+    SDL_POWERSTATE_CHARGED       /**< Plugged in, battery charged */
+}
+
+SDL_Log_Priority :: enum i32
+{
+    SDL_LOG_PRIORITY_VERBOSE = 1,
+    SDL_LOG_PRIORITY_DEBUG,
+    SDL_LOG_PRIORITY_INFO,
+    SDL_LOG_PRIORITY_WARN,
+    SDL_LOG_PRIORITY_ERROR,
+    SDL_LOG_PRIORITY_CRITICAL,
+    SDL_NUM_LOG_PRIORITIES
+}
+
+
+// Input stuff
+
+
+SDL_Game_Controller_Button :: enum i32
+{
+    SDL_CONTROLLER_BUTTON_INVALID = -1,
+    SDL_CONTROLLER_BUTTON_A,
+    SDL_CONTROLLER_BUTTON_B,
+    SDL_CONTROLLER_BUTTON_X,
+    SDL_CONTROLLER_BUTTON_Y,
+    SDL_CONTROLLER_BUTTON_BACK,
+    SDL_CONTROLLER_BUTTON_GUIDE,
+    SDL_CONTROLLER_BUTTON_START,
+    SDL_CONTROLLER_BUTTON_LEFTSTICK,
+    SDL_CONTROLLER_BUTTON_RIGHTSTICK,
+    SDL_CONTROLLER_BUTTON_LEFTSHOULDER,
+    SDL_CONTROLLER_BUTTON_RIGHTSHOULDER,
+    SDL_CONTROLLER_BUTTON_DPAD_UP,
+    SDL_CONTROLLER_BUTTON_DPAD_DOWN,
+    SDL_CONTROLLER_BUTTON_DPAD_LEFT,
+    SDL_CONTROLLER_BUTTON_DPAD_RIGHT,
+    SDL_CONTROLLER_BUTTON_MAX
+}
+
+SDL_Game_Controller_Axis :: enum i32
+{
+    SDL_CONTROLLER_AXIS_INVALID = -1,
+    SDL_CONTROLLER_AXIS_LEFTX,
+    SDL_CONTROLLER_AXIS_LEFTY,
+    SDL_CONTROLLER_AXIS_RIGHTX,
+    SDL_CONTROLLER_AXIS_RIGHTY,
+    SDL_CONTROLLER_AXIS_TRIGGERLEFT,
+    SDL_CONTROLLER_AXIS_TRIGGERRIGHT,
+    SDL_CONTROLLER_AXIS_MAX
+}
+
+SDL_Game_Controller_Bind_Type :: enum i32
+{
+    SDL_CONTROLLER_BINDTYPE_NONE = 0,
+    SDL_CONTROLLER_BINDTYPE_BUTTON,
+    SDL_CONTROLLER_BINDTYPE_AXIS,
+    SDL_CONTROLLER_BINDTYPE_HAT
+}
+
+SDL_System_Cursor :: enum i32
+{
+    SDL_SYSTEM_CURSOR_ARROW,     /**< Arrow */
+    SDL_SYSTEM_CURSOR_IBEAM,     /**< I-beam */
+    SDL_SYSTEM_CURSOR_WAIT,      /**< Wait */
+    SDL_SYSTEM_CURSOR_CROSSHAIR, /**< Crosshair */
+    SDL_SYSTEM_CURSOR_WAITARROW, /**< Small wait cursor (or Wait if not available) */
+    SDL_SYSTEM_CURSOR_SIZENWSE,  /**< Double arrow pointing northwest and southeast */
+    SDL_SYSTEM_CURSOR_SIZENESW,  /**< Double arrow pointing northeast and southwest */
+    SDL_SYSTEM_CURSOR_SIZEWE,    /**< Double arrow pointing west and east */
+    SDL_SYSTEM_CURSOR_SIZENS,    /**< Double arrow pointing north and south */
+    SDL_SYSTEM_CURSOR_SIZEALL,   /**< Four pointed arrow pointing north, south, east, and west */
+    SDL_SYSTEM_CURSOR_NO,        /**< Slashed circle or crossbones */
+    SDL_SYSTEM_CURSOR_HAND,      /**< Hand */
+    SDL_NUM_SYSTEM_CURSORS
+}
+
+
+SDLK_UNKNOWN :: 0;
+
+SDLK_RETURN :: '\r';
+SDLK_ESCAPE :: '\033';
+SDLK_BACKSPACE :: '\b';
+SDLK_TAB :: '\t';
+SDLK_SPACE :: ' ';
+SDLK_EXCLAIM :: '!';
+SDLK_QUOTEDBL :: '"';
+SDLK_HASH :: '#';
+SDLK_PERCENT :: '%';
+SDLK_DOLLAR :: '$';
+SDLK_AMPERSAND :: '&';
+SDLK_QUOTE :: '\'';
+SDLK_LEFTPAREN :: '(';
+SDLK_RIGHTPAREN :: ')';
+SDLK_ASTERISK :: '*';
+SDLK_PLUS :: '+';
+SDLK_COMMA :: ',';
+SDLK_MINUS :: '-';
+SDLK_PERIOD :: '.';
+SDLK_SLASH :: '/';
+SDLK_0 :: '0';
+SDLK_1 :: '1';
+SDLK_2 :: '2';
+SDLK_3 :: '3';
+SDLK_4 :: '4';
+SDLK_5 :: '5';
+SDLK_6 :: '6';
+SDLK_7 :: '7';
+SDLK_8 :: '8';
+SDLK_9 :: '9';
+SDLK_COLON :: ':';
+SDLK_SEMICOLON :: ';';
+SDLK_LESS :: '<';
+SDLK_EQUALS :: '=';
+SDLK_GREATER :: '>';
+SDLK_QUESTION :: '?';
+SDLK_AT :: '@';
+/*
+   Skip uppercase letters
+ */
+SDLK_LEFTBRACKET :: '[';
+SDLK_BACKSLASH :: '\\';
+SDLK_RIGHTBRACKET :: ']';
+SDLK_CARET :: '^';
+SDLK_UNDERSCORE :: '_';
+SDLK_BACKQUOTE :: '`';
+SDLK_a :: 'a';
+SDLK_b :: 'b';
+SDLK_c :: 'c';
+SDLK_d :: 'd';
+SDLK_e :: 'e';
+SDLK_f :: 'f';
+SDLK_g :: 'g';
+SDLK_h :: 'h';
+SDLK_i :: 'i';
+SDLK_j :: 'j';
+SDLK_k :: 'k';
+SDLK_l :: 'l';
+SDLK_m :: 'm';
+SDLK_n :: 'n';
+SDLK_o :: 'o';
+SDLK_p :: 'p';
+SDLK_q :: 'q';
+SDLK_r :: 'r';
+SDLK_s :: 's';
+SDLK_t :: 't';
+SDLK_u :: 'u';
+SDLK_v :: 'v';
+SDLK_w :: 'w';
+SDLK_x :: 'x';
+SDLK_y :: 'y';
+SDLK_z :: 'z';
+
+SDLK_CAPSLOCK :: SDL_Scancode.SDL_SCANCODE_CAPSLOCK | SDLK_SCANCODE_MASK;
+
+SDLK_F1 :: SDL_Scancode.SDL_SCANCODE_F1 | SDLK_SCANCODE_MASK;
+SDLK_F2 :: SDL_Scancode.SDL_SCANCODE_F2 | SDLK_SCANCODE_MASK;
+SDLK_F3 :: SDL_Scancode.SDL_SCANCODE_F3 | SDLK_SCANCODE_MASK;
+SDLK_F4 :: SDL_Scancode.SDL_SCANCODE_F4 | SDLK_SCANCODE_MASK;
+SDLK_F5 :: SDL_Scancode.SDL_SCANCODE_F5 | SDLK_SCANCODE_MASK;
+SDLK_F6 :: SDL_Scancode.SDL_SCANCODE_F6 | SDLK_SCANCODE_MASK;
+SDLK_F7 :: SDL_Scancode.SDL_SCANCODE_F7 | SDLK_SCANCODE_MASK;
+SDLK_F8 :: SDL_Scancode.SDL_SCANCODE_F8 | SDLK_SCANCODE_MASK;
+SDLK_F9 :: SDL_Scancode.SDL_SCANCODE_F9 | SDLK_SCANCODE_MASK;
+SDLK_F10 :: SDL_Scancode.SDL_SCANCODE_F10 | SDLK_SCANCODE_MASK;
+SDLK_F11 :: SDL_Scancode.SDL_SCANCODE_F11 | SDLK_SCANCODE_MASK;
+SDLK_F12 :: SDL_Scancode.SDL_SCANCODE_F12 | SDLK_SCANCODE_MASK;
+
+SDLK_PRINTSCREEN :: SDL_Scancode.SDL_SCANCODE_PRINTSCREEN | SDLK_SCANCODE_MASK;
+SDLK_SCROLLLOCK :: SDL_Scancode.SDL_SCANCODE_SCROLLLOCK | SDLK_SCANCODE_MASK;
+SDLK_PAUSE :: SDL_Scancode.SDL_SCANCODE_PAUSE | SDLK_SCANCODE_MASK;
+SDLK_INSERT :: SDL_Scancode.SDL_SCANCODE_INSERT | SDLK_SCANCODE_MASK;
+SDLK_HOME :: SDL_Scancode.SDL_SCANCODE_HOME | SDLK_SCANCODE_MASK;
+SDLK_PAGEUP :: SDL_Scancode.SDL_SCANCODE_PAGEUP | SDLK_SCANCODE_MASK;
+SDLK_DELETE :: '\177';
+SDLK_END :: SDL_Scancode.SDL_SCANCODE_END | SDLK_SCANCODE_MASK;
+SDLK_PAGEDOWN :: SDL_Scancode.SDL_SCANCODE_PAGEDOWN | SDLK_SCANCODE_MASK;
+SDLK_RIGHT :: SDL_Scancode.SDL_SCANCODE_RIGHT | SDLK_SCANCODE_MASK;
+SDLK_LEFT :: SDL_Scancode.SDL_SCANCODE_LEFT | SDLK_SCANCODE_MASK;
+SDLK_DOWN :: SDL_Scancode.SDL_SCANCODE_DOWN | SDLK_SCANCODE_MASK;
+SDLK_UP :: SDL_Scancode.SDL_SCANCODE_UP | SDLK_SCANCODE_MASK;
+
+SDLK_NUMLOCKCLEAR :: SDL_Scancode.SDL_SCANCODE_NUMLOCKCLEAR | SDLK_SCANCODE_MASK;
+SDLK_KP_DIVIDE :: SDL_Scancode.SDL_SCANCODE_KP_DIVIDE | SDLK_SCANCODE_MASK;
+SDLK_KP_MULTIPLY :: SDL_Scancode.SDL_SCANCODE_KP_MULTIPLY | SDLK_SCANCODE_MASK;
+SDLK_KP_MINUS :: SDL_Scancode.SDL_SCANCODE_KP_MINUS | SDLK_SCANCODE_MASK;
+SDLK_KP_PLUS :: SDL_Scancode.SDL_SCANCODE_KP_PLUS | SDLK_SCANCODE_MASK;
+SDLK_KP_ENTER :: SDL_Scancode.SDL_SCANCODE_KP_ENTER | SDLK_SCANCODE_MASK;
+SDLK_KP_1 :: SDL_Scancode.SDL_SCANCODE_KP_1 | SDLK_SCANCODE_MASK;
+SDLK_KP_2 :: SDL_Scancode.SDL_SCANCODE_KP_2 | SDLK_SCANCODE_MASK;
+SDLK_KP_3 :: SDL_Scancode.SDL_SCANCODE_KP_3 | SDLK_SCANCODE_MASK;
+SDLK_KP_4 :: SDL_Scancode.SDL_SCANCODE_KP_4 | SDLK_SCANCODE_MASK;
+SDLK_KP_5 :: SDL_Scancode.SDL_SCANCODE_KP_5 | SDLK_SCANCODE_MASK;
+SDLK_KP_6 :: SDL_Scancode.SDL_SCANCODE_KP_6 | SDLK_SCANCODE_MASK;
+SDLK_KP_7 :: SDL_Scancode.SDL_SCANCODE_KP_7 | SDLK_SCANCODE_MASK;
+SDLK_KP_8 :: SDL_Scancode.SDL_SCANCODE_KP_8 | SDLK_SCANCODE_MASK;
+SDLK_KP_9 :: SDL_Scancode.SDL_SCANCODE_KP_9 | SDLK_SCANCODE_MASK;
+SDLK_KP_0 :: SDL_Scancode.SDL_SCANCODE_KP_0 | SDLK_SCANCODE_MASK;
+SDLK_KP_PERIOD :: SDL_Scancode.SDL_SCANCODE_KP_PERIOD | SDLK_SCANCODE_MASK;
+
+SDLK_APPLICATION :: SDL_Scancode.SDL_SCANCODE_APPLICATION | SDLK_SCANCODE_MASK;
+SDLK_POWER :: SDL_Scancode.SDL_SCANCODE_POWER | SDLK_SCANCODE_MASK;
+SDLK_KP_EQUALS :: SDL_Scancode.SDL_SCANCODE_KP_EQUALS | SDLK_SCANCODE_MASK;
+SDLK_F13 :: SDL_Scancode.SDL_SCANCODE_F13 | SDLK_SCANCODE_MASK;
+SDLK_F14 :: SDL_Scancode.SDL_SCANCODE_F14 | SDLK_SCANCODE_MASK;
+SDLK_F15 :: SDL_Scancode.SDL_SCANCODE_F15 | SDLK_SCANCODE_MASK;
+SDLK_F16 :: SDL_Scancode.SDL_SCANCODE_F16 | SDLK_SCANCODE_MASK;
+SDLK_F17 :: SDL_Scancode.SDL_SCANCODE_F17 | SDLK_SCANCODE_MASK;
+SDLK_F18 :: SDL_Scancode.SDL_SCANCODE_F18 | SDLK_SCANCODE_MASK;
+SDLK_F19 :: SDL_Scancode.SDL_SCANCODE_F19 | SDLK_SCANCODE_MASK;
+SDLK_F20 :: SDL_Scancode.SDL_SCANCODE_F20 | SDLK_SCANCODE_MASK;
+SDLK_F21 :: SDL_Scancode.SDL_SCANCODE_F21 | SDLK_SCANCODE_MASK;
+SDLK_F22 :: SDL_Scancode.SDL_SCANCODE_F22 | SDLK_SCANCODE_MASK;
+SDLK_F23 :: SDL_Scancode.SDL_SCANCODE_F23 | SDLK_SCANCODE_MASK;
+SDLK_F24 :: SDL_Scancode.SDL_SCANCODE_F24 | SDLK_SCANCODE_MASK;
+SDLK_EXECUTE :: SDL_Scancode.SDL_SCANCODE_EXECUTE | SDLK_SCANCODE_MASK;
+SDLK_HELP :: SDL_Scancode.SDL_SCANCODE_HELP | SDLK_SCANCODE_MASK;
+SDLK_MENU :: SDL_Scancode.SDL_SCANCODE_MENU | SDLK_SCANCODE_MASK;
+SDLK_SELECT :: SDL_Scancode.SDL_SCANCODE_SELECT | SDLK_SCANCODE_MASK;
+SDLK_STOP :: SDL_Scancode.SDL_SCANCODE_STOP | SDLK_SCANCODE_MASK;
+SDLK_AGAIN :: SDL_Scancode.SDL_SCANCODE_AGAIN | SDLK_SCANCODE_MASK;
+SDLK_UNDO :: SDL_Scancode.SDL_SCANCODE_UNDO | SDLK_SCANCODE_MASK;
+SDLK_CUT :: SDL_Scancode.SDL_SCANCODE_CUT | SDLK_SCANCODE_MASK;
+SDLK_COPY :: SDL_Scancode.SDL_SCANCODE_COPY | SDLK_SCANCODE_MASK;
+SDLK_PASTE :: SDL_Scancode.SDL_SCANCODE_PASTE | SDLK_SCANCODE_MASK;
+SDLK_FIND :: SDL_Scancode.SDL_SCANCODE_FIND | SDLK_SCANCODE_MASK;
+SDLK_MUTE :: SDL_Scancode.SDL_SCANCODE_MUTE | SDLK_SCANCODE_MASK;
+SDLK_VOLUMEUP :: SDL_Scancode.SDL_SCANCODE_VOLUMEUP | SDLK_SCANCODE_MASK;
+SDLK_VOLUMEDOWN :: SDL_Scancode.SDL_SCANCODE_VOLUMEDOWN | SDLK_SCANCODE_MASK;
+SDLK_KP_COMMA :: SDL_Scancode.SDL_SCANCODE_KP_COMMA | SDLK_SCANCODE_MASK;
+SDLK_KP_EQUALSAS400 :: SDL_Scancode.SDL_SCANCODE_KP_EQUALSAS400 | SDLK_SCANCODE_MASK;
+
+SDLK_ALTERASE :: SDL_Scancode.SDL_SCANCODE_ALTERASE | SDLK_SCANCODE_MASK;
+SDLK_SYSREQ :: SDL_Scancode.SDL_SCANCODE_SYSREQ | SDLK_SCANCODE_MASK;
+SDLK_CANCEL :: SDL_Scancode.SDL_SCANCODE_CANCEL | SDLK_SCANCODE_MASK;
+SDLK_CLEAR :: SDL_Scancode.SDL_SCANCODE_CLEAR | SDLK_SCANCODE_MASK;
+SDLK_PRIOR :: SDL_Scancode.SDL_SCANCODE_PRIOR | SDLK_SCANCODE_MASK;
+SDLK_RETURN2 :: SDL_Scancode.SDL_SCANCODE_RETURN2 | SDLK_SCANCODE_MASK;
+SDLK_SEPARATOR :: SDL_Scancode.SDL_SCANCODE_SEPARATOR | SDLK_SCANCODE_MASK;
+SDLK_OUT :: SDL_Scancode.SDL_SCANCODE_OUT | SDLK_SCANCODE_MASK;
+SDLK_OPER :: SDL_Scancode.SDL_SCANCODE_OPER | SDLK_SCANCODE_MASK;
+SDLK_CLEARAGAIN :: SDL_Scancode.SDL_SCANCODE_CLEARAGAIN | SDLK_SCANCODE_MASK;
+SDLK_CRSEL :: SDL_Scancode.SDL_SCANCODE_CRSEL | SDLK_SCANCODE_MASK;
+SDLK_EXSEL :: SDL_Scancode.SDL_SCANCODE_EXSEL | SDLK_SCANCODE_MASK;
+
+SDLK_KP_00 :: SDL_Scancode.SDL_SCANCODE_KP_00 | SDLK_SCANCODE_MASK;
+SDLK_KP_000 :: SDL_Scancode.SDL_SCANCODE_KP_000 | SDLK_SCANCODE_MASK;
+SDLK_THOUSANDSSEPARATOR :: SDL_Scancode.SDL_SCANCODE_THOUSANDSSEPARATOR | SDLK_SCANCODE_MASK;
+SDLK_DECIMALSEPARATOR :: SDL_Scancode.SDL_SCANCODE_DECIMALSEPARATOR | SDLK_SCANCODE_MASK;
+SDLK_CURRENCYUNIT :: SDL_Scancode.SDL_SCANCODE_CURRENCYUNIT | SDLK_SCANCODE_MASK;
+SDLK_CURRENCYSUBUNIT :: SDL_Scancode.SDL_SCANCODE_CURRENCYSUBUNIT | SDLK_SCANCODE_MASK;
+SDLK_KP_LEFTPAREN :: SDL_Scancode.SDL_SCANCODE_KP_LEFTPAREN | SDLK_SCANCODE_MASK;
+SDLK_KP_RIGHTPAREN :: SDL_Scancode.SDL_SCANCODE_KP_RIGHTPAREN | SDLK_SCANCODE_MASK;
+SDLK_KP_LEFTBRACE :: SDL_Scancode.SDL_SCANCODE_KP_LEFTBRACE | SDLK_SCANCODE_MASK;
+SDLK_KP_RIGHTBRACE :: SDL_Scancode.SDL_SCANCODE_KP_RIGHTBRACE | SDLK_SCANCODE_MASK;
+SDLK_KP_TAB :: SDL_Scancode.SDL_SCANCODE_KP_TAB | SDLK_SCANCODE_MASK;
+SDLK_KP_BACKSPACE :: SDL_Scancode.SDL_SCANCODE_KP_BACKSPACE | SDLK_SCANCODE_MASK;
+SDLK_KP_A :: SDL_Scancode.SDL_SCANCODE_KP_A | SDLK_SCANCODE_MASK;
+SDLK_KP_B :: SDL_Scancode.SDL_SCANCODE_KP_B | SDLK_SCANCODE_MASK;
+SDLK_KP_C :: SDL_Scancode.SDL_SCANCODE_KP_C | SDLK_SCANCODE_MASK;
+SDLK_KP_D :: SDL_Scancode.SDL_SCANCODE_KP_D | SDLK_SCANCODE_MASK;
+SDLK_KP_E :: SDL_Scancode.SDL_SCANCODE_KP_E | SDLK_SCANCODE_MASK;
+SDLK_KP_F :: SDL_Scancode.SDL_SCANCODE_KP_F | SDLK_SCANCODE_MASK;
+SDLK_KP_XOR :: SDL_Scancode.SDL_SCANCODE_KP_XOR | SDLK_SCANCODE_MASK;
+SDLK_KP_POWER :: SDL_Scancode.SDL_SCANCODE_KP_POWER | SDLK_SCANCODE_MASK;
+SDLK_KP_PERCENT :: SDL_Scancode.SDL_SCANCODE_KP_PERCENT | SDLK_SCANCODE_MASK;
+SDLK_KP_LESS :: SDL_Scancode.SDL_SCANCODE_KP_LESS | SDLK_SCANCODE_MASK;
+SDLK_KP_GREATER :: SDL_Scancode.SDL_SCANCODE_KP_GREATER | SDLK_SCANCODE_MASK;
+SDLK_KP_AMPERSAND :: SDL_Scancode.SDL_SCANCODE_KP_AMPERSAND | SDLK_SCANCODE_MASK;
+SDLK_KP_DBLAMPERSAND :: SDL_Scancode.SDL_SCANCODE_KP_DBLAMPERSAND | SDLK_SCANCODE_MASK;
+SDLK_KP_VERTICALBAR :: SDL_Scancode.SDL_SCANCODE_KP_VERTICALBAR | SDLK_SCANCODE_MASK;
+SDLK_KP_DBLVERTICALBAR :: SDL_Scancode.SDL_SCANCODE_KP_DBLVERTICALBAR | SDLK_SCANCODE_MASK;
+SDLK_KP_COLON :: SDL_Scancode.SDL_SCANCODE_KP_COLON | SDLK_SCANCODE_MASK;
+SDLK_KP_HASH :: SDL_Scancode.SDL_SCANCODE_KP_HASH | SDLK_SCANCODE_MASK;
+SDLK_KP_SPACE :: SDL_Scancode.SDL_SCANCODE_KP_SPACE | SDLK_SCANCODE_MASK;
+SDLK_KP_AT :: SDL_Scancode.SDL_SCANCODE_KP_AT | SDLK_SCANCODE_MASK;
+SDLK_KP_EXCLAM :: SDL_Scancode.SDL_SCANCODE_KP_EXCLAM | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMSTORE :: SDL_Scancode.SDL_SCANCODE_KP_MEMSTORE | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMRECALL :: SDL_Scancode.SDL_SCANCODE_KP_MEMRECALL | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMCLEAR :: SDL_Scancode.SDL_SCANCODE_KP_MEMCLEAR | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMADD :: SDL_Scancode.SDL_SCANCODE_KP_MEMADD | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMSUBTRACT :: SDL_Scancode.SDL_SCANCODE_KP_MEMSUBTRACT | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMMULTIPLY :: SDL_Scancode.SDL_SCANCODE_KP_MEMMULTIPLY | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMDIVIDE :: SDL_Scancode.SDL_SCANCODE_KP_MEMDIVIDE | SDLK_SCANCODE_MASK;
+SDLK_KP_PLUSMINUS :: SDL_Scancode.SDL_SCANCODE_KP_PLUSMINUS | SDLK_SCANCODE_MASK;
+SDLK_KP_CLEAR :: SDL_Scancode.SDL_SCANCODE_KP_CLEAR | SDLK_SCANCODE_MASK;
+SDLK_KP_CLEARENTRY :: SDL_Scancode.SDL_SCANCODE_KP_CLEARENTRY | SDLK_SCANCODE_MASK;
+SDLK_KP_BINARY :: SDL_Scancode.SDL_SCANCODE_KP_BINARY | SDLK_SCANCODE_MASK;
+SDLK_KP_OCTAL :: SDL_Scancode.SDL_SCANCODE_KP_OCTAL | SDLK_SCANCODE_MASK;
+SDLK_KP_DECIMAL :: SDL_Scancode.SDL_SCANCODE_KP_DECIMAL | SDLK_SCANCODE_MASK;
+SDLK_KP_HEXADECIMAL :: SDL_Scancode.SDL_SCANCODE_KP_HEXADECIMAL | SDLK_SCANCODE_MASK;
+
+SDLK_LCTRL :: SDL_Scancode.SDL_SCANCODE_LCTRL | SDLK_SCANCODE_MASK;
+SDLK_LSHIFT :: SDL_Scancode.SDL_SCANCODE_LSHIFT | SDLK_SCANCODE_MASK;
+SDLK_LALT :: SDL_Scancode.SDL_SCANCODE_LALT | SDLK_SCANCODE_MASK;
+SDLK_LGUI :: SDL_Scancode.SDL_SCANCODE_LGUI | SDLK_SCANCODE_MASK;
+SDLK_RCTRL :: SDL_Scancode.SDL_SCANCODE_RCTRL | SDLK_SCANCODE_MASK;
+SDLK_RSHIFT :: SDL_Scancode.SDL_SCANCODE_RSHIFT | SDLK_SCANCODE_MASK;
+SDLK_RALT :: SDL_Scancode.SDL_SCANCODE_RALT | SDLK_SCANCODE_MASK;
+SDLK_RGUI :: SDL_Scancode.SDL_SCANCODE_RGUI | SDLK_SCANCODE_MASK;
+
+SDLK_MODE :: SDL_Scancode.SDL_SCANCODE_MODE | SDLK_SCANCODE_MASK;
+
+SDLK_AUDIONEXT :: SDL_Scancode.SDL_SCANCODE_AUDIONEXT | SDLK_SCANCODE_MASK;
+SDLK_AUDIOPREV :: SDL_Scancode.SDL_SCANCODE_AUDIOPREV | SDLK_SCANCODE_MASK;
+SDLK_AUDIOSTOP :: SDL_Scancode.SDL_SCANCODE_AUDIOSTOP | SDLK_SCANCODE_MASK;
+SDLK_AUDIOPLAY :: SDL_Scancode.SDL_SCANCODE_AUDIOPLAY | SDLK_SCANCODE_MASK;
+SDLK_AUDIOMUTE :: SDL_Scancode.SDL_SCANCODE_AUDIOMUTE | SDLK_SCANCODE_MASK;
+SDLK_MEDIASELECT :: SDL_Scancode.SDL_SCANCODE_MEDIASELECT | SDLK_SCANCODE_MASK;
+SDLK_WWW :: SDL_Scancode.SDL_SCANCODE_WWW | SDLK_SCANCODE_MASK;
+SDLK_MAIL :: SDL_Scancode.SDL_SCANCODE_MAIL | SDLK_SCANCODE_MASK;
+SDLK_CALCULATOR :: SDL_Scancode.SDL_SCANCODE_CALCULATOR | SDLK_SCANCODE_MASK;
+SDLK_COMPUTER :: SDL_Scancode.SDL_SCANCODE_COMPUTER | SDLK_SCANCODE_MASK;
+SDLK_AC_SEARCH :: SDL_Scancode.SDL_SCANCODE_AC_SEARCH | SDLK_SCANCODE_MASK;
+SDLK_AC_HOME :: SDL_Scancode.SDL_SCANCODE_AC_HOME | SDLK_SCANCODE_MASK;
+SDLK_AC_BACK :: SDL_Scancode.SDL_SCANCODE_AC_BACK | SDLK_SCANCODE_MASK;
+SDLK_AC_FORWARD :: SDL_Scancode.SDL_SCANCODE_AC_FORWARD | SDLK_SCANCODE_MASK;
+SDLK_AC_STOP :: SDL_Scancode.SDL_SCANCODE_AC_STOP | SDLK_SCANCODE_MASK;
+SDLK_AC_REFRESH :: SDL_Scancode.SDL_SCANCODE_AC_REFRESH | SDLK_SCANCODE_MASK;
+SDLK_AC_BOOKMARKS :: SDL_Scancode.SDL_SCANCODE_AC_BOOKMARKS | SDLK_SCANCODE_MASK;
+
+SDLK_BRIGHTNESSDOWN :: SDL_Scancode.SDL_SCANCODE_BRIGHTNESSDOWN | SDLK_SCANCODE_MASK;
+SDLK_BRIGHTNESSUP :: SDL_Scancode.SDL_SCANCODE_BRIGHTNESSUP | SDLK_SCANCODE_MASK;
+SDLK_DISPLAYSWITCH :: SDL_Scancode.SDL_SCANCODE_DISPLAYSWITCH | SDLK_SCANCODE_MASK;
+SDLK_KBDILLUMTOGGLE :: SDL_Scancode.SDL_SCANCODE_KBDILLUMTOGGLE | SDLK_SCANCODE_MASK;
+SDLK_KBDILLUMDOWN :: SDL_Scancode.SDL_SCANCODE_KBDILLUMDOWN | SDLK_SCANCODE_MASK;
+SDLK_KBDILLUMUP :: SDL_Scancode.SDL_SCANCODE_KBDILLUMUP | SDLK_SCANCODE_MASK;
+SDLK_EJECT :: SDL_Scancode.SDL_SCANCODE_EJECT | SDLK_SCANCODE_MASK;
+SDLK_SLEEP :: SDL_Scancode.SDL_SCANCODE_SLEEP | SDLK_SCANCODE_MASK;
+
+SDLK_SCANCODE_MASK :: 1<<30;
+
+
+SDL_Scancode :: enum i32
+{
+    SDL_SCANCODE_UNKNOWN = 0,
+
+    /**
+     *  \name Usage page 0x07
+     *
+     *  These values are from usage page 0x07 (USB keyboard page).
+     */
+    /* @{ */
+
+    SDL_SCANCODE_A = 4,
+    SDL_SCANCODE_B = 5,
+    SDL_SCANCODE_C = 6,
+    SDL_SCANCODE_D = 7,
+    SDL_SCANCODE_E = 8,
+    SDL_SCANCODE_F = 9,
+    SDL_SCANCODE_G = 10,
+    SDL_SCANCODE_H = 11,
+    SDL_SCANCODE_I = 12,
+    SDL_SCANCODE_J = 13,
+    SDL_SCANCODE_K = 14,
+    SDL_SCANCODE_L = 15,
+    SDL_SCANCODE_M = 16,
+    SDL_SCANCODE_N = 17,
+    SDL_SCANCODE_O = 18,
+    SDL_SCANCODE_P = 19,
+    SDL_SCANCODE_Q = 20,
+    SDL_SCANCODE_R = 21,
+    SDL_SCANCODE_S = 22,
+    SDL_SCANCODE_T = 23,
+    SDL_SCANCODE_U = 24,
+    SDL_SCANCODE_V = 25,
+    SDL_SCANCODE_W = 26,
+    SDL_SCANCODE_X = 27,
+    SDL_SCANCODE_Y = 28,
+    SDL_SCANCODE_Z = 29,
+
+    SDL_SCANCODE_1 = 30,
+    SDL_SCANCODE_2 = 31,
+    SDL_SCANCODE_3 = 32,
+    SDL_SCANCODE_4 = 33,
+    SDL_SCANCODE_5 = 34,
+    SDL_SCANCODE_6 = 35,
+    SDL_SCANCODE_7 = 36,
+    SDL_SCANCODE_8 = 37,
+    SDL_SCANCODE_9 = 38,
+    SDL_SCANCODE_0 = 39,
+
+    SDL_SCANCODE_RETURN = 40,
+    SDL_SCANCODE_ESCAPE = 41,
+    SDL_SCANCODE_BACKSPACE = 42,
+    SDL_SCANCODE_TAB = 43,
+    SDL_SCANCODE_SPACE = 44,
+
+    SDL_SCANCODE_MINUS = 45,
+    SDL_SCANCODE_EQUALS = 46,
+    SDL_SCANCODE_LEFTBRACKET = 47,
+    SDL_SCANCODE_RIGHTBRACKET = 48,
+    SDL_SCANCODE_BACKSLASH = 49, /**< Located at the lower left of the return
+                                  *   key on ISO keyboards and at the right end
+                                  *   of the QWERTY row on ANSI keyboards.
+                                  *   Produces REVERSE SOLIDUS (backslash) and
+                                  *   VERTICAL LINE in a US layout, REVERSE
+                                  *   SOLIDUS and VERTICAL LINE in a UK Mac
+                                  *   layout, NUMBER SIGN and TILDE in a UK
+                                  *   Windows layout, DOLLAR SIGN and POUND SIGN
+                                  *   in a Swiss German layout, NUMBER SIGN and
+                                  *   APOSTROPHE in a German layout, GRAVE
+                                  *   ACCENT and POUND SIGN in a French Mac
+                                  *   layout, and ASTERISK and MICRO SIGN in a
+                                  *   French Windows layout.
+                                  */
+    SDL_SCANCODE_NONUSHASH = 50, /**< ISO USB keyboards actually use this code
+                                  *   instead of 49 for the same key, but all
+                                  *   OSes I've seen treat the two codes
+                                  *   identically. So, as an implementor, unless
+                                  *   your keyboard generates both of those
+                                  *   codes and your OS treats them differently,
+                                  *   you should generate SDL_SCANCODE_BACKSLASH
+                                  *   instead of this code. As a user, you
+                                  *   should not rely on this code because SDL
+                                  *   will never generate it with most (all?)
+                                  *   keyboards.
+                                  */
+    SDL_SCANCODE_SEMICOLON = 51,
+    SDL_SCANCODE_APOSTROPHE = 52,
+    SDL_SCANCODE_GRAVE = 53, /**< Located in the top left corner (on both ANSI
+                              *   and ISO keyboards). Produces GRAVE ACCENT and
+                              *   TILDE in a US Windows layout and in US and UK
+                              *   Mac layouts on ANSI keyboards, GRAVE ACCENT
+                              *   and NOT SIGN in a UK Windows layout, SECTION
+                              *   SIGN and PLUS-MINUS SIGN in US and UK Mac
+                              *   layouts on ISO keyboards, SECTION SIGN and
+                              *   DEGREE SIGN in a Swiss German layout (Mac:
+                              *   only on ISO keyboards), CIRCUMFLEX ACCENT and
+                              *   DEGREE SIGN in a German layout (Mac: only on
+                              *   ISO keyboards), SUPERSCRIPT TWO and TILDE in a
+                              *   French Windows layout, COMMERCIAL AT and
+                              *   NUMBER SIGN in a French Mac layout on ISO
+                              *   keyboards, and LESS-THAN SIGN and GREATER-THAN
+                              *   SIGN in a Swiss German, German, or French Mac
+                              *   layout on ANSI keyboards.
+                              */
+    SDL_SCANCODE_COMMA = 54,
+    SDL_SCANCODE_PERIOD = 55,
+    SDL_SCANCODE_SLASH = 56,
+
+    SDL_SCANCODE_CAPSLOCK = 57,
+
+    SDL_SCANCODE_F1 = 58,
+    SDL_SCANCODE_F2 = 59,
+    SDL_SCANCODE_F3 = 60,
+    SDL_SCANCODE_F4 = 61,
+    SDL_SCANCODE_F5 = 62,
+    SDL_SCANCODE_F6 = 63,
+    SDL_SCANCODE_F7 = 64,
+    SDL_SCANCODE_F8 = 65,
+    SDL_SCANCODE_F9 = 66,
+    SDL_SCANCODE_F10 = 67,
+    SDL_SCANCODE_F11 = 68,
+    SDL_SCANCODE_F12 = 69,
+
+    SDL_SCANCODE_PRINTSCREEN = 70,
+    SDL_SCANCODE_SCROLLLOCK = 71,
+    SDL_SCANCODE_PAUSE = 72,
+    SDL_SCANCODE_INSERT = 73, /**< insert on PC, help on some Mac keyboards (but
+                                   does send code 73, not 117) */
+    SDL_SCANCODE_HOME = 74,
+    SDL_SCANCODE_PAGEUP = 75,
+    SDL_SCANCODE_DELETE = 76,
+    SDL_SCANCODE_END = 77,
+    SDL_SCANCODE_PAGEDOWN = 78,
+    SDL_SCANCODE_RIGHT = 79,
+    SDL_SCANCODE_LEFT = 80,
+    SDL_SCANCODE_DOWN = 81,
+    SDL_SCANCODE_UP = 82,
+
+    SDL_SCANCODE_NUMLOCKCLEAR = 83, /**< num lock on PC, clear on Mac keyboards
+                                     */
+    SDL_SCANCODE_KP_DIVIDE = 84,
+    SDL_SCANCODE_KP_MULTIPLY = 85,
+    SDL_SCANCODE_KP_MINUS = 86,
+    SDL_SCANCODE_KP_PLUS = 87,
+    SDL_SCANCODE_KP_ENTER = 88,
+    SDL_SCANCODE_KP_1 = 89,
+    SDL_SCANCODE_KP_2 = 90,
+    SDL_SCANCODE_KP_3 = 91,
+    SDL_SCANCODE_KP_4 = 92,
+    SDL_SCANCODE_KP_5 = 93,
+    SDL_SCANCODE_KP_6 = 94,
+    SDL_SCANCODE_KP_7 = 95,
+    SDL_SCANCODE_KP_8 = 96,
+    SDL_SCANCODE_KP_9 = 97,
+    SDL_SCANCODE_KP_0 = 98,
+    SDL_SCANCODE_KP_PERIOD = 99,
+
+    SDL_SCANCODE_NONUSBACKSLASH = 100, /**< This is the additional key that ISO
+                                        *   keyboards have over ANSI ones,
+                                        *   located between left shift and Y.
+                                        *   Produces GRAVE ACCENT and TILDE in a
+                                        *   US or UK Mac layout, REVERSE SOLIDUS
+                                        *   (backslash) and VERTICAL LINE in a
+                                        *   US or UK Windows layout, and
+                                        *   LESS-THAN SIGN and GREATER-THAN SIGN
+                                        *   in a Swiss German, German, or French
+                                        *   layout. */
+    SDL_SCANCODE_APPLICATION = 101, /**< windows contextual menu, compose */
+    SDL_SCANCODE_POWER = 102, /**< The USB document says this is a status flag,
+                               *   not a physical key - but some Mac keyboards
+                               *   do have a power key. */
+    SDL_SCANCODE_KP_EQUALS = 103,
+    SDL_SCANCODE_F13 = 104,
+    SDL_SCANCODE_F14 = 105,
+    SDL_SCANCODE_F15 = 106,
+    SDL_SCANCODE_F16 = 107,
+    SDL_SCANCODE_F17 = 108,
+    SDL_SCANCODE_F18 = 109,
+    SDL_SCANCODE_F19 = 110,
+    SDL_SCANCODE_F20 = 111,
+    SDL_SCANCODE_F21 = 112,
+    SDL_SCANCODE_F22 = 113,
+    SDL_SCANCODE_F23 = 114,
+    SDL_SCANCODE_F24 = 115,
+    SDL_SCANCODE_EXECUTE = 116,
+    SDL_SCANCODE_HELP = 117,
+    SDL_SCANCODE_MENU = 118,
+    SDL_SCANCODE_SELECT = 119,
+    SDL_SCANCODE_STOP = 120,
+    SDL_SCANCODE_AGAIN = 121,   /**< redo */
+    SDL_SCANCODE_UNDO = 122,
+    SDL_SCANCODE_CUT = 123,
+    SDL_SCANCODE_COPY = 124,
+    SDL_SCANCODE_PASTE = 125,
+    SDL_SCANCODE_FIND = 126,
+    SDL_SCANCODE_MUTE = 127,
+    SDL_SCANCODE_VOLUMEUP = 128,
+    SDL_SCANCODE_VOLUMEDOWN = 129,
+/* not sure whether there's a reason to enable these */
+/*     SDL_SCANCODE_LOCKINGCAPSLOCK = 130,  */
+/*     SDL_SCANCODE_LOCKINGNUMLOCK = 131, */
+/*     SDL_SCANCODE_LOCKINGSCROLLLOCK = 132, */
+    SDL_SCANCODE_KP_COMMA = 133,
+    SDL_SCANCODE_KP_EQUALSAS400 = 134,
+
+    SDL_SCANCODE_INTERNATIONAL1 = 135, /**< used on Asian keyboards, see
+                                            footnotes in USB doc */
+    SDL_SCANCODE_INTERNATIONAL2 = 136,
+    SDL_SCANCODE_INTERNATIONAL3 = 137, /**< Yen */
+    SDL_SCANCODE_INTERNATIONAL4 = 138,
+    SDL_SCANCODE_INTERNATIONAL5 = 139,
+    SDL_SCANCODE_INTERNATIONAL6 = 140,
+    SDL_SCANCODE_INTERNATIONAL7 = 141,
+    SDL_SCANCODE_INTERNATIONAL8 = 142,
+    SDL_SCANCODE_INTERNATIONAL9 = 143,
+    SDL_SCANCODE_LANG1 = 144, /**< Hangul/English toggle */
+    SDL_SCANCODE_LANG2 = 145, /**< Hanja conversion */
+    SDL_SCANCODE_LANG3 = 146, /**< Katakana */
+    SDL_SCANCODE_LANG4 = 147, /**< Hiragana */
+    SDL_SCANCODE_LANG5 = 148, /**< Zenkaku/Hankaku */
+    SDL_SCANCODE_LANG6 = 149, /**< reserved */
+    SDL_SCANCODE_LANG7 = 150, /**< reserved */
+    SDL_SCANCODE_LANG8 = 151, /**< reserved */
+    SDL_SCANCODE_LANG9 = 152, /**< reserved */
+
+    SDL_SCANCODE_ALTERASE = 153, /**< Erase-Eaze */
+    SDL_SCANCODE_SYSREQ = 154,
+    SDL_SCANCODE_CANCEL = 155,
+    SDL_SCANCODE_CLEAR = 156,
+    SDL_SCANCODE_PRIOR = 157,
+    SDL_SCANCODE_RETURN2 = 158,
+    SDL_SCANCODE_SEPARATOR = 159,
+    SDL_SCANCODE_OUT = 160,
+    SDL_SCANCODE_OPER = 161,
+    SDL_SCANCODE_CLEARAGAIN = 162,
+    SDL_SCANCODE_CRSEL = 163,
+    SDL_SCANCODE_EXSEL = 164,
+
+    SDL_SCANCODE_KP_00 = 176,
+    SDL_SCANCODE_KP_000 = 177,
+    SDL_SCANCODE_THOUSANDSSEPARATOR = 178,
+    SDL_SCANCODE_DECIMALSEPARATOR = 179,
+    SDL_SCANCODE_CURRENCYUNIT = 180,
+    SDL_SCANCODE_CURRENCYSUBUNIT = 181,
+    SDL_SCANCODE_KP_LEFTPAREN = 182,
+    SDL_SCANCODE_KP_RIGHTPAREN = 183,
+    SDL_SCANCODE_KP_LEFTBRACE = 184,
+    SDL_SCANCODE_KP_RIGHTBRACE = 185,
+    SDL_SCANCODE_KP_TAB = 186,
+    SDL_SCANCODE_KP_BACKSPACE = 187,
+    SDL_SCANCODE_KP_A = 188,
+    SDL_SCANCODE_KP_B = 189,
+    SDL_SCANCODE_KP_C = 190,
+    SDL_SCANCODE_KP_D = 191,
+    SDL_SCANCODE_KP_E = 192,
+    SDL_SCANCODE_KP_F = 193,
+    SDL_SCANCODE_KP_XOR = 194,
+    SDL_SCANCODE_KP_POWER = 195,
+    SDL_SCANCODE_KP_PERCENT = 196,
+    SDL_SCANCODE_KP_LESS = 197,
+    SDL_SCANCODE_KP_GREATER = 198,
+    SDL_SCANCODE_KP_AMPERSAND = 199,
+    SDL_SCANCODE_KP_DBLAMPERSAND = 200,
+    SDL_SCANCODE_KP_VERTICALBAR = 201,
+    SDL_SCANCODE_KP_DBLVERTICALBAR = 202,
+    SDL_SCANCODE_KP_COLON = 203,
+    SDL_SCANCODE_KP_HASH = 204,
+    SDL_SCANCODE_KP_SPACE = 205,
+    SDL_SCANCODE_KP_AT = 206,
+    SDL_SCANCODE_KP_EXCLAM = 207,
+    SDL_SCANCODE_KP_MEMSTORE = 208,
+    SDL_SCANCODE_KP_MEMRECALL = 209,
+    SDL_SCANCODE_KP_MEMCLEAR = 210,
+    SDL_SCANCODE_KP_MEMADD = 211,
+    SDL_SCANCODE_KP_MEMSUBTRACT = 212,
+    SDL_SCANCODE_KP_MEMMULTIPLY = 213,
+    SDL_SCANCODE_KP_MEMDIVIDE = 214,
+    SDL_SCANCODE_KP_PLUSMINUS = 215,
+    SDL_SCANCODE_KP_CLEAR = 216,
+    SDL_SCANCODE_KP_CLEARENTRY = 217,
+    SDL_SCANCODE_KP_BINARY = 218,
+    SDL_SCANCODE_KP_OCTAL = 219,
+    SDL_SCANCODE_KP_DECIMAL = 220,
+    SDL_SCANCODE_KP_HEXADECIMAL = 221,
+
+    SDL_SCANCODE_LCTRL = 224,
+    SDL_SCANCODE_LSHIFT = 225,
+    SDL_SCANCODE_LALT = 226, /**< alt, option */
+    SDL_SCANCODE_LGUI = 227, /**< windows, command (apple), meta */
+    SDL_SCANCODE_RCTRL = 228,
+    SDL_SCANCODE_RSHIFT = 229,
+    SDL_SCANCODE_RALT = 230, /**< alt gr, option */
+    SDL_SCANCODE_RGUI = 231, /**< windows, command (apple), meta */
+
+    SDL_SCANCODE_MODE = 257,    /**< I'm not sure if this is really not covered
+                                 *   by any of the above, but since there's a
+                                 *   special KMOD_MODE for it I'm adding it here
+                                 */
+
+    /* @} *//* Usage page 0x07 */
+
+    /**
+     *  \name Usage page 0x0C
+     *
+     *  These values are mapped from usage page 0x0C (USB consumer page).
+     */
+    /* @{ */
+
+    SDL_SCANCODE_AUDIONEXT = 258,
+    SDL_SCANCODE_AUDIOPREV = 259,
+    SDL_SCANCODE_AUDIOSTOP = 260,
+    SDL_SCANCODE_AUDIOPLAY = 261,
+    SDL_SCANCODE_AUDIOMUTE = 262,
+    SDL_SCANCODE_MEDIASELECT = 263,
+    SDL_SCANCODE_WWW = 264,
+    SDL_SCANCODE_MAIL = 265,
+    SDL_SCANCODE_CALCULATOR = 266,
+    SDL_SCANCODE_COMPUTER = 267,
+    SDL_SCANCODE_AC_SEARCH = 268,
+    SDL_SCANCODE_AC_HOME = 269,
+    SDL_SCANCODE_AC_BACK = 270,
+    SDL_SCANCODE_AC_FORWARD = 271,
+    SDL_SCANCODE_AC_STOP = 272,
+    SDL_SCANCODE_AC_REFRESH = 273,
+    SDL_SCANCODE_AC_BOOKMARKS = 274,
+
+    /* @} *//* Usage page 0x0C */
+
+    /**
+     *  \name Walther keys
+     *
+     *  These are values that Christian Walther added (for mac keyboard?).
+     */
+    /* @{ */
+
+    SDL_SCANCODE_BRIGHTNESSDOWN = 275,
+    SDL_SCANCODE_BRIGHTNESSUP = 276,
+    SDL_SCANCODE_DISPLAYSWITCH = 277, /**< display mirroring/dual display
+                                           switch, video mode switch */
+    SDL_SCANCODE_KBDILLUMTOGGLE = 278,
+    SDL_SCANCODE_KBDILLUMDOWN = 279,
+    SDL_SCANCODE_KBDILLUMUP = 280,
+    SDL_SCANCODE_EJECT = 281,
+    SDL_SCANCODE_SLEEP = 282,
+
+    SDL_SCANCODE_APP1 = 283,
+    SDL_SCANCODE_APP2 = 284,
+
+    /* @} *//* Walther keys */
+
+    /* Add any other keys here. */
+
+    SDL_NUM_SCANCODES = 512 /**< not a key, just marks the number of scancodes
+                                 for array bounds */
+}
+
+
+
+
+
+
+SDL_FIRSTEVENT :: 0;     /**< Unused (do not remove) */
+
+/* Application events */
+SDL_QUIT :: 0x100; /**< User-requested quit */
+
+/* These application events have special meaning on iOS, see README-ios.md for details */
+SDL_APP_TERMINATING :: 257;        /**< The application is being terminated by the OS
+                                 Called on iOS in applicationWillTerminate()
+                                 Called on Android in onDestroy()
+                            */
+SDL_APP_LOWMEMORY :: 258;          /**< The application is low on memory, free memory if possible.
+                                 Called on iOS in applicationDidReceiveMemoryWarning()
+                                 Called on Android in onLowMemory()
+                            */
+SDL_APP_WILLENTERBACKGROUND :: 259; /**< The application is about to enter the background
+                                 Called on iOS in applicationWillResignActive()
+                                 Called on Android in onPause()
+                            */
+SDL_APP_DIDENTERBACKGROUND :: 260; /**< The application did enter the background and may not get CPU for some time
+                                 Called on iOS in applicationDidEnterBackground()
+                                 Called on Android in onPause()
+                            */
+SDL_APP_WILLENTERFOREGROUND :: 261; /**< The application is about to enter the foreground
+                                 Called on iOS in applicationWillEnterForeground()
+                                 Called on Android in onResume()
+                            */
+SDL_APP_DIDENTERFOREGROUND :: 262; /**< The application is now interactive
+                                 Called on iOS in applicationDidBecomeActive()
+                                 Called on Android in onResume()
+                            */
+
+/* Window events */
+SDL_WINDOWEVENT :: 0x200; /**< Window state change */
+SDL_SYSWMEVENT :: 513;             /**< System specific event */
+
+/* Keyboard events */
+SDL_KEYDOWN :: 0x300; /**< Key pressed */
+SDL_KEYUP :: 769;                  /**< Key released */
+SDL_TEXTEDITING :: 770;            /**< Keyboard text editing (composition) */
+SDL_TEXTINPUT :: 771;              /**< Keyboard text input */
+SDL_KEYMAPCHANGED :: 772;          /**< Keymap changed due to a system event such as an
+                                 input language or keyboard layout change.
+                            */
+
+/* Mouse events */
+SDL_MOUSEMOTION :: 0x400; /**< Mouse moved */
+SDL_MOUSEBUTTONDOWN :: 1025;        /**< Mouse button pressed */
+SDL_MOUSEBUTTONUP :: 1026;         /**< Mouse button released */
+SDL_MOUSEWHEEL :: 1027;             /**< Mouse wheel motion */
+
+/* Joystick events */
+SDL_JOYAXISMOTION :: 0x600; /**< Joystick axis motion */
+SDL_JOYBALLMOTION :: 1537;          /**< Joystick trackball motion */
+SDL_JOYHATMOTION :: 1538;           /**< Joystick hat position change */
+SDL_JOYBUTTONDOWN :: 1539;          /**< Joystick button pressed */
+SDL_JOYBUTTONUP :: 1540;            /**< Joystick button released */
+SDL_JOYDEVICEADDED :: 1541;         /**< A new joystick has been inserted into the system */
+SDL_JOYDEVICEREMOVED :: 1542;       /**< An opened joystick has been removed */
+
+/* Game controller events */
+SDL_CONTROLLERAXISMOTION :: 0x650; /**< Game controller axis motion */
+SDL_CONTROLLERBUTTONDOWN :: 1617;          /**< Game controller button pressed */
+SDL_CONTROLLERBUTTONUP :: 1618;            /**< Game controller button released */
+SDL_CONTROLLERDEVICEADDED :: 1619;         /**< A new Game controller has been inserted into the system */
+SDL_CONTROLLERDEVICEREMOVED :: 1620;       /**< An opened Game controller has been removed */
+SDL_CONTROLLERDEVICEREMAPPED :: 1621;      /**< The controller mapping was updated */
+
+/* Touch events */
+SDL_FINGERDOWN :: 0x700;
+SDL_FINGERUP :: 1793;
+SDL_FINGERMOTION :: 1794;
+
+/* Gesture events */
+SDL_DOLLARGESTURE :: 0x800;
+SDL_DOLLARRECORD :: 2049;
+SDL_MULTIGESTURE :: 2050;
+
+/* Clipboard events */
+SDL_CLIPBOARDUPDATE :: 0x900; /**< The clipboard changed */
+
+/* Drag and drop events */
+SDL_DROPFILE :: 0x1000; /**< The system requests a file open */
+SDL_DROPTEXT :: 4097;                 /**< text/plain drag-and-drop event */
+SDL_DROPBEGIN :: 4098;                /**< A new set of drops is beginning (NULL filename) */
+SDL_DROPCOMPLETE :: 4099;             /**< Current set of drops is now complete (NULL filename) */
+
+/* Audio hotplug events */
+SDL_AUDIODEVICEADDED :: 0x1100; /**< A new audio device is available */
+SDL_AUDIODEVICEREMOVED :: 4353;        /**< An audio device has been removed. */
+
+/* Render events */
+SDL_RENDER_TARGETS_RESET :: 0x2000; /**< The render targets have been reset and their contents need to be updated */
+SDL_RENDER_DEVICE_RESET :: 8193; /**< The device has been reset and all textures need to be recreated */
+
+/** Events ::SDL_USEREVENT through ::SDL_LASTEVENT are for your use,
+ *  and should be allocated with SDL_RegisterEvents()
+ */
+SDL_USEREVENT :: 0x8000;
+
+/**
+ *  This last event is only for bounding internal arrays
+ */
+SDL_LASTEVENT :: 0xFFFF;
+
+SDL_BlitMap :: rawptr;
+SDL_Window :: rawptr;
+SDL_Renderer :: rawptr;
+SDL_Texture :: rawptr;
+SDL_SysWMmsg :: rawptr;
+SDL_GL_Context :: rawptr;
+
+SDL_Cond :: struct #ordered {};
+SDL_Mutex :: struct #ordered {};
+SDL_Sem :: struct #ordered {};
+SDL_Thread :: struct #ordered {};
+SDL_Haptic :: struct #ordered {};
+SDL_Joystick :: struct #ordered {};
+SDL_Game_Controller :: struct #ordered {};
+SDL_Cursor :: struct #ordered {};
+IDirect3D_Device_9 :: struct #ordered {};
+
+SDL_Joystick_Id :: i32;
+SDL_Timer_Id :: i32;
+SDL_Spin_Lock :: i32;
+SDL_Tls_Id :: u32;
+SDL_Audio_Device_Id :: u32;
+SDL_Audio_Device :: u32;
+SDL_Audio_Format :: u16;
+SDL_Keycode :: i32;
+SDL_Thread_Id :: u64;
+SDL_Touch_Id :: i64;
+SDL_Finger_Id :: i64;
+
+SDL_Hint_Callback :: proc(interval: u32, param: rawptr) -> u32 #cc_c;
+SDL_Event_Filter :: proc(userdata: rawptr, param: ^SDL_Event) -> i32 #cc_c;
+SDL_Timer_Callback :: proc(interval: u32, param: rawptr) -> u32 #cc_c;
+SDL_Audio_Callback :: proc(userdata: rawptr, stream: ^u8, len: i32) #cc_c;
+SDL_Assertion_Handler :: proc(data: ^SDL_Assert_Data, userdata: rawptr) -> SDL_Assert_State #cc_c;
+SDL_Audio_Filter :: proc(cvt: ^SDL_Audio_Cvt, format: SDL_Audio_Format) #cc_c;
+SDL_Thread_Function :: proc(data: rawptr) -> i32 #cc_c;
+SDL_Hit_Test :: proc(window: ^SDL_Window, area: ^SDL_Point, data: rawptr) -> SDL_Hit_Test_Result #cc_c;
+SDL_Windows_Message_Hook :: proc(userdata: rawptr, hwnd: rawptr, message: u32, wparam: u64, lparam: i64) #cc_c;
+SDL_Log_Output_Function :: proc(userdata: rawptr, category: i32, priority: SDL_Log_Priority, message: ^u8) #cc_c;
+
+SDL_Message_Box_Data :: struct #ordered
+{
+    flags: u32;
+    window: ^SDL_Window;
+    title: ^u8;
+    message: ^u8;
+
+    numbuttons: i32;
+    buttons: ^SDL_Message_Box_Button_Data;
+
+    colorScheme: ^SDL_Message_Box_Color_Scheme;
+}
+
+SDL_Message_Box_Button_Data :: struct #ordered
+{
+    flags: u32;       /**< ::SDL_MessageBoxButtonFlags */
+    buttonid: i32;       /**< User defined button id (value returned via SDL_ShowMessageBox) */
+    text: ^u8;  /**< The UTF-8 button text */
+}
+
+SDL_Message_Box_Color_Scheme :: struct #ordered
+{
+    colors: [SDL_Message_Box_Color_Type.SDL_MESSAGEBOX_COLOR_MAX]SDL_Message_Box_Color;
+}
+
+SDL_Message_Box_Color :: struct #ordered
+{
+    r, g, b: u8;
+}
+
+SDL_Assert_Data :: struct #ordered
+{
+    always_ignore: i32;
+    trigger_count: u32;
+    condition: ^u8;
+    filename: ^u8;
+    linenum: i32;
+    function: ^u8;
+    next: ^SDL_Assert_Data;
+}
+
+SDL_Window_Shape_Params :: struct #raw_union
+{
+    /** \brief a cutoff alpha value for binarization of the window shape's alpha channel. */
+    binarizationCutoff: u8;
+    colorKey: SDL_Color;
+}
+
+SDL_Window_Shape_Mode :: struct #ordered
+{
+    mode: Window_Shape_Mode;
+    parameters: SDL_Window_Shape_Params;
+}
+
+SDL_Point :: struct #ordered
+{
+    x: i32;
+    y: i32;
+}
+
+SDL_Renderer_Info :: struct #ordered
+{
+    name: ^u8;           /**< The name of the renderer */
+    flags: u32;               /**< Supported ::SDL_RendererFlags */
+    num_texture_formats: u32; /**< The number of available texture formats */
+    texture_formats: [16]u32; /**< The available texture formats */
+    max_texture_width: i32;      /**< The maximum texture width */
+    max_texture_height: i32;     /**< The maximum texture height */
+}
+
+SDL_Version :: struct #ordered
+{
+    major: u8;        /**< major version */
+    minor: u8;        /**< minor version */
+    patch: u8;        /**< update version */
+}
+
+SDL_Display_Mode :: struct #ordered
+{
+    format: u32;              /**< pixel format */
+    w: i32;                      /**< width, in screen coordinates */
+    h: i32;                      /**< height, in screen coordinates */
+    refresh_rate: i32;           /**< refresh rate (or zero for unspecified) */
+    driverdata: rawptr;           /**< driver-specific data, initialize to 0 */
+}
+
+SDL_Finger :: struct #ordered
+{
+    id: SDL_Finger_Id;
+    x: f32;
+    y: f32;
+    pressure: f32;
+}
+
+SDL_Audio_Spec :: struct #ordered
+{
+    freq: i32;                   /**< DSP frequency -- samples per second */
+    format: SDL_Audio_Format;     /**< Audio data format */
+    channels: u8;             /**< Number of channels: 1 mono, 2 stereo */
+    silence: u8;              /**< Audio buffer silence value (calculated) */
+    samples: u16;             /**< Audio buffer size in samples (power of 2) */
+    padding: u16;             /**< Necessary for some compile environments */
+    size: u32;                /**< Audio buffer size in bytes (calculated) */
+    callback: SDL_Audio_Callback; /**< Callback that feeds the audio device (NULL to use SDL_QueueAudio()). */
+    userdata: rawptr;             /**< Userdata passed to callback (ignored for NULL callbacks). */
+}
+
+SDL_Joystick_Guid :: struct #ordered
+{
+    data: [16]u8;
+}
+
+SDL_Audio_Cvt :: struct #ordered
+{
+    needed: i32;                 /**< Set to 1 if conversion possible */
+    src_format: SDL_Audio_Format; /**< Source audio format */
+    dst_format: SDL_Audio_Format; /**< Target audio format */
+    rate_incr: i64;           /**< Rate conversion increment */
+    buf: ^u8;                 /**< Buffer to hold entire audio data */
+    len: i32;                    /**< Length of original audio buffer */
+    len_cvt: i32;                /**< Length of converted audio buffer */
+    len_mult: i32;               /**< buffer must be len*len_mult big */
+    len_ratio: i64;           /**< Given len, final size is len*len_ratio */
+    filters: [10]SDL_Audio_Filter;        /**< Filter list */
+    filter_index: i32;           /**< Current audio conversion function */
+}
+
+SDL_Surface :: struct #ordered
+{
+    flags: u32;
+    format: ^SDL_Pixel_Format;
+    w, h: i32;
+    pitch: i32;
+    pixels: rawptr;
+
+    userdata: rawptr;
+
+    locked: i32;
+    lock_data: rawptr;
+
+    clip_rect: SDL_Rect;
+    blip_map: ^SDL_BlitMap;
+
+    refcount: i32;
+}
+
+SDL_Color :: struct #ordered
+{
+    r: u8;
+    g: u8;
+    b: u8;
+    a: u8;
+}
+
+SDL_Palette :: struct #ordered
+{
+    ncolors: i32;
+    colors: ^SDL_Color;
+    version: u32;
+    refcount: i32;
+}
+
+SDL_Pixel_Format :: struct #ordered
+{
+    format: u32;
+    palette: ^SDL_Palette;
+    BitsPerPixel: u8;
+    BytesPerPixel: u8;
+    padding: [2]u8;
+    Rmask: u32;
+    Gmask: u32;
+    Bmask: u32;
+    Amask: u32;
+    Rloss: u8;
+    Gloss: u8;
+    Bloss: u8;
+    Aloss: u8;
+    Rshift: u8;
+    Gshift: u8;
+    Bshift: u8;
+    Ashift: u8;
+    refcount: i32;
+    next: ^SDL_Pixel_Format;
+}
+
+SDL_Rect :: struct #ordered
+{
+    x, y: u32;
+    w, h: u32;
+}
+
+SDL_Atomic :: struct #ordered
+{
+    value: i32;
+}
+
+SDL_Keysym :: struct #ordered
+{
+    scancode: u32;      /**< SDL physical key code - see ::SDL_Scancode for details */
+    sym: i32;            /**< SDL virtual key code - see ::SDL_Keycode for details */
+    mod: u16;                 /**< current key modifiers */
+    unused: u32;
+}
+
+SDL_Haptic_Effect :: struct #raw_union
+{
+    /* Common for all force feedback effects */
+    haptic_type: u16;                    /**< Effect type. */
+    constant: SDL_Haptic_Constant;    /**< Constant effect. */
+    periodic: SDL_Haptic_Periodic;    /**< Periodic effect. */
+    condition: SDL_Haptic_Condition;  /**< Condition effect. */
+    ramp: SDL_Haptic_Ramp;            /**< Ramp effect. */
+    leftright: SDL_Haptic_Left_Right;  /**< Left/Right effect. */
+    custom: SDL_Haptic_Custom;        /**< Custom effect. */
+}
+
+SDL_Haptic_Constant :: struct
+{
+    /* Header */
+    haptic_type: u16;            /**< ::SDL_HAPTIC_CONSTANT */
+    direction: SDL_Haptic_Direction;  /**< Direction of the effect. */
+
+    /* Replay */
+    length: u32;          /**< Duration of the effect. */
+    delay: u16;           /**< Delay before starting the effect. */
+
+    /* Trigger */
+    button: u16;          /**< Button that triggers the effect. */
+    interval: u16;        /**< How soon it can be triggered again after button. */
+
+    /* Constant */
+    level: i16;           /**< Strength of the constant effect. */
+
+    /* Envelope */
+    attack_length: u16;   /**< Duration of the attack. */
+    attack_level: u16;    /**< Level at the start of the attack. */
+    fade_length: u16;     /**< Duration of the fade. */
+    fade_level: u16;      /**< Level at the end of the fade. */
+}
+
+SDL_Haptic_Periodic :: struct
+{
+    /* Header */
+    haptic_type: u16;        /**< ::SDL_HAPTIC_SINE, ::SDL_HAPTIC_LEFTRIGHT,
+                             ::SDL_HAPTIC_TRIANGLE, ::SDL_HAPTIC_SAWTOOTHUP or
+                             ::SDL_HAPTIC_SAWTOOTHDOWN */
+    direction: SDL_Haptic_Direction;  /**< Direction of the effect. */
+
+    /* Replay */
+    length: u32;      /**< Duration of the effect. */
+    delay: u16;       /**< Delay before starting the effect. */
+
+    /* Trigger */
+    button: u16;      /**< Button that triggers the effect. */
+    interval: u16;    /**< How soon it can be triggered again after button. */
+
+    /* Periodic */
+    period: u16;      /**< Period of the wave. */
+    magnitude: i16;   /**< Peak value; if negative, equivalent to 180 degrees extra phase shift. */
+    offset: i16;      /**< Mean value of the wave. */
+    phase: u16;       /**< Positive phase shift given by hundredth of a degree. */
+
+    /* Envelope */
+    attack_length: u16;   /**< Duration of the attack. */
+    attack_level: u16;    /**< Level at the start of the attack. */
+    fade_length: u16; /**< Duration of the fade. */
+    fade_level: u16;  /**< Level at the end of the fade. */
+}
+
+SDL_Haptic_Direction :: struct
+{
+    haptic_type: u8;         /**< The type of encoding. */
+    dir: [3]i32;      /**< The encoded direction. */
+}
+
+SDL_Haptic_Condition :: struct
+{
+    /* Header */
+    haptic_type: u16;            /**< ::SDL_HAPTIC_SPRING, ::SDL_HAPTIC_DAMPER,
+                                 ::SDL_HAPTIC_INERTIA or ::SDL_HAPTIC_FRICTION */
+    direction: SDL_Haptic_Direction;  /**< Direction of the effect - Not used ATM. */
+
+    /* Replay */
+    length: u32;          /**< Duration of the effect. */
+    delay: u16;           /**< Delay before starting the effect. */
+
+    /* Trigger */
+    button: u16;          /**< Button that triggers the effect. */
+    interval: u16;        /**< How soon it can be triggered again after button. */
+
+    /* Condition */
+    right_sat: [3]u16;    /**< Level when joystick is to the positive side; max 0xFFFF. */
+    left_sat: [3]u16;     /**< Level when joystick is to the negative side; max 0xFFFF. */
+    right_coeff: [3]i16;  /**< How fast to increase the force towards the positive side. */
+    left_coeff: [3]i16;   /**< How fast to increase the force towards the negative side. */
+    deadband: [3]u16;     /**< Size of the dead zone; max 0xFFFF: whole axis-range when 0-centered. */
+    center: [3]i16;       /**< Position of the dead zone. */
+}
+
+SDL_Haptic_Ramp :: struct
+{
+    /* Header */
+    haptic_type: u16;            /**< ::SDL_HAPTIC_RAMP */
+    direction: SDL_Haptic_Direction;  /**< Direction of the effect. */
+
+    /* Replay */
+    length: u32;          /**< Duration of the effect. */
+    delay: u16;           /**< Delay before starting the effect. */
+
+    /* Trigger */
+    button: u16;          /**< Button that triggers the effect. */
+    interval: u16;        /**< How soon it can be triggered again after button. */
+
+    /* Ramp */
+    start: i16;           /**< Beginning strength level. */
+    end: i16;             /**< Ending strength level. */
+
+    /* Envelope */
+    attack_length: u16;   /**< Duration of the attack. */
+    attack_level: u16;    /**< Level at the start of the attack. */
+    fade_length: u16;     /**< Duration of the fade. */
+    fade_level: u16;      /**< Level at the end of the fade. */
+}
+
+SDL_Haptic_Left_Right :: struct
+{
+    /* Header */
+    haptic_type: u16;            /**< ::SDL_HAPTIC_LEFTRIGHT */
+
+    /* Replay */
+    length: u32;          /**< Duration of the effect. */
+
+    /* Rumble */
+    large_magnitude: u16; /**< Control of the large controller motor. */
+    small_magnitude: u16; /**< Control of the small controller motor. */
+}
+
+SDL_Haptic_Custom :: struct
+{
+    /* Header */
+    haptic_type: u16;            /**< ::SDL_HAPTIC_CUSTOM */
+    direction: SDL_Haptic_Direction;  /**< Direction of the effect. */
+
+    /* Replay */
+    length: u32;          /**< Duration of the effect. */
+    delay: u16;           /**< Delay before starting the effect. */
+
+    /* Trigger */
+    button: u16;          /**< Button that triggers the effect. */
+    interval: u16;        /**< How soon it can be triggered again after button. */
+
+    /* Custom */
+    channels: u8;         /**< Axes to use, minimum of one. */
+    period: u16;          /**< Sample periods. */
+    samples: u16;         /**< Amount of samples. */
+    data: ^u16;           /**< Should contain channels*samples items. */
+
+    /* Envelope */
+    attack_length: u16;   /**< Duration of the attack. */
+    attack_level: u16;    /**< Level at the start of the attack. */
+    fade_length: u16;     /**< Duration of the fade. */
+    fade_level: u16;      /**< Level at the end of the fade. */
+}
+
+SDL_Event :: struct #raw_union
+{
+    event_type: u32;                    /**< Event type, shared with all events */
+    common: SDL_CommonEvent;         /**< Common event data */
+    window: SDL_WindowEvent;         /**< Window event data */
+    key: SDL_KeyboardEvent;          /**< Keyboard event data */
+    edit: SDL_TextEditingEvent;      /**< Text editing event data */
+    text: SDL_TextInputEvent;        /**< Text input event data */
+    motion: SDL_MouseMotionEvent;    /**< Mouse motion event data */
+    button: SDL_MouseButtonEvent;    /**< Mouse button event data */
+    wheel: SDL_MouseWheelEvent;      /**< Mouse wheel event data */
+    jaxis: SDL_JoyAxisEvent;         /**< Joystick axis event data */
+    jball: SDL_JoyBallEvent;         /**< Joystick ball event data */
+    jhat: SDL_JoyHatEvent;           /**< Joystick hat event data */
+    jbutton: SDL_JoyButtonEvent;     /**< Joystick button event data */
+    jdevice: SDL_JoyDeviceEvent;     /**< Joystick device change event data */
+    caxis: SDL_ControllerAxisEvent;      /**< Game Controller axis event data */
+    cbutton: SDL_ControllerButtonEvent;  /**< Game Controller button event data */
+    cdevice: SDL_ControllerDeviceEvent;  /**< Game Controller device event data */
+    adevice: SDL_AudioDeviceEvent;   /**< Audio device event data */
+    quit: SDL_QuitEvent;             /**< Quit request event data */
+    user: SDL_UserEvent;             /**< Custom event data */
+    syswm: SDL_SysWMEvent;           /**< System dependent window event data */
+    tfinger: SDL_TouchFingerEvent;   /**< Touch finger event data */
+    mgesture: SDL_MultiGestureEvent; /**< Gesture event data */
+    dgesture: SDL_DollarGestureEvent; /**< Gesture event data */
+    drop: SDL_DropEvent;             /**< Drag and drop event data */
+
+    /* This is necessary for ABI compatibility between Visual C++ and GCC
+       Visual C++ will respect the push pack pragma and use 52 bytes for
+       this structure, and GCC will use the alignment of the largest datatype
+       within the union, which is 8 bytes.
+
+       So... we'll add padding to force the size to be 56 bytes for both.
+    */
+    padding: [56]u8;
+}
+
+
+/**
+ *  \brief Fields shared by every event
+ */
+SDL_CommonEvent :: struct #ordered
+{
+    event_type: u32;
+    timestamp: u32;
+}
+
+/**
+ *  \brief Window state change event data (event.window.*)
+ */
+SDL_WindowEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_WINDOWEVENT */
+    timestamp: u32;
+    windowID: u32;    /**< The associated window */
+    event: u8;        /**< ::SDL_WindowEventID */
+    padding1: u8;
+    padding2: u8;
+    padding3: u8;
+    data1: i32;       /**< event dependent data */
+    data2: i32;       /**< event dependent data */
+}
+
+/**
+ *  \brief Keyboard button event structure (event.key.*)
+ */
+SDL_KeyboardEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_KEYDOWN or ::SDL_KEYUP */
+    timestamp: u32;
+    windowID: u32;    /**< The window with keyboard focus, if any */
+    state: u8;        /**< ::SDL_PRESSED or ::SDL_RELEASED */
+    repeat: u8;       /**< Non-zero if this is a key repeat */
+    padding2: u8;
+    padding3: u8;
+    keysym: SDL_Keysym;  /**< The key that was pressed or released */
+}
+
+SDL_TEXTEDITINGEVENT_TEXT_SIZE :: 32;
+/**
+ *  \brief Keyboard text editing event structure (event.edit.*)
+ */
+SDL_TextEditingEvent :: struct #ordered
+{
+    event_type: u32;                                /**< ::SDL_TEXTEDITING */
+    timestamp: u32;
+    windowID: u32;                            /**< The window with keyboard focus, if any */
+    text: [SDL_TEXTEDITINGEVENT_TEXT_SIZE]u8;  /**< The editing text */
+    start: i32;                               /**< The start cursor of selected editing text */
+    length: i32;                              /**< The length of selected editing text */
+}
+
+
+SDL_TEXTINPUTEVENT_TEXT_SIZE :: 32;
+/**
+ *  \brief Keyboard text input event structure (event.text.*)
+ */
+SDL_TextInputEvent :: struct #ordered
+{
+    event_type: u32;                              /**< ::SDL_TEXTINPUT */
+    timestamp: u32;
+    windowID: u32;                          /**< The window with keyboard focus, if any */
+    text: [SDL_TEXTINPUTEVENT_TEXT_SIZE]u8;  /**< The input text */
+}
+
+/**
+ *  \brief Mouse motion event structure (event.motion.*)
+ */
+SDL_MouseMotionEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_MOUSEMOTION */
+    timestamp: u32;
+    windowID: u32;    /**< The window with mouse focus, if any */
+    which: u32;       /**< The mouse instance id, or SDL_TOUCH_MOUSEID */
+    state: u32;       /**< The current button state */
+    x: i32;           /**< X coordinate, relative to window */
+    y: i32;           /**< Y coordinate, relative to window */
+    xrel: i32;        /**< The relative motion in the X direction */
+    yrel: i32;        /**< The relative motion in the Y direction */
+}
+
+/**
+ *  \brief Mouse button event structure (event.button.*)
+ */
+SDL_MouseButtonEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_MOUSEBUTTONDOWN or ::SDL_MOUSEBUTTONUP */
+    timestamp: u32;
+    windowID: u32;    /**< The window with mouse focus, if any */
+    which: u32;       /**< The mouse instance id, or SDL_TOUCH_MOUSEID */
+    button: u8;       /**< The mouse button index */
+    state: u8;        /**< ::SDL_PRESSED or ::SDL_RELEASED */
+    clicks: u8;       /**< 1 for single-click, 2 for double-click, etc. */
+    padding1: u8;
+    x: i32;           /**< X coordinate, relative to window */
+    y: i32;           /**< Y coordinate, relative to window */
+}
+
+/**
+ *  \brief Mouse wheel event structure (event.wheel.*)
+ */
+SDL_MouseWheelEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_MOUSEWHEEL */
+    timestamp: u32;
+    windowID: u32;    /**< The window with mouse focus, if any */
+    which: u32;       /**< The mouse instance id, or SDL_TOUCH_MOUSEID */
+    x: i32;           /**< The amount scrolled horizontally, positive to the right and negative to the left */
+    y: i32;           /**< The amount scrolled vertically, positive away from the user and negative toward the user */
+    direction: u32;   /**< Set to one of the SDL_MOUSEWHEEL_* defines. When FLIPPED the values in X and Y will be opposite. Multiply by -1 to change them back */
+}
+
+/**
+ *  \brief Joystick axis motion event structure (event.jaxis.*)
+ */
+SDL_JoyAxisEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_JOYAXISMOTION */
+    timestamp: u32;
+    which: i32; /**< The joystick instance id */
+    axis: u8;         /**< The joystick axis index */
+    padding1: u8;
+    padding2: u8;
+    padding3: u8;
+    value: i16;       /**< The axis value (range: -32768 to 32767) */
+    padding4: u16;
+}
+
+/**
+ *  \brief Joystick trackball motion event structure (event.jball.*)
+ */
+SDL_JoyBallEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_JOYBALLMOTION */
+    timestamp: u32;
+    which: i32; /**< The joystick instance id */
+    ball: u8;         /**< The joystick trackball index */
+    padding1: u8;
+    padding2: u8;
+    padding3: u8;
+    xrel: i16;        /**< The relative motion in the X direction */
+    yrel: i16;        /**< The relative motion in the Y direction */
+}
+
+/**
+ *  \brief Joystick hat position change event structure (event.jhat.*)
+ */
+SDL_JoyHatEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_JOYHATMOTION */
+    timestamp: u32;
+    which: i32; /**< The joystick instance id */
+    hat: u8;          /**< The joystick hat index */
+    value: u8;        /**< The hat position value.
+                         *   \sa ::SDL_HAT_LEFTUP ::SDL_HAT_UP ::SDL_HAT_RIGHTUP
+                         *   \sa ::SDL_HAT_LEFT ::SDL_HAT_CENTERED ::SDL_HAT_RIGHT
+                         *   \sa ::SDL_HAT_LEFTDOWN ::SDL_HAT_DOWN ::SDL_HAT_RIGHTDOWN
+                         *
+                         *   Note that zero means the POV is centered.
+                         */
+    padding1: u8;
+    padding2: u8;
+}
+
+/**
+ *  \brief Joystick button event structure (event.jbutton.*)
+ */
+SDL_JoyButtonEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_JOYBUTTONDOWN or ::SDL_JOYBUTTONUP */
+    timestamp: u32;
+    which: i32; /**< The joystick instance id */
+    button: u8;       /**< The joystick button index */
+    state: u8;        /**< ::SDL_PRESSED or ::SDL_RELEASED */
+    padding1: u8;
+    padding2: u8;
+}
+
+/**
+ *  \brief Joystick device event structure (event.jdevice.*)
+ */
+SDL_JoyDeviceEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_JOYDEVICEADDED or ::SDL_JOYDEVICEREMOVED */
+    timestamp: u32;
+    which: i32;       /**< The joystick device index for the ADDED event, instance id for the REMOVED event */
+}
+
+
+/**
+ *  \brief Game controller axis motion event structure (event.caxis.*)
+ */
+SDL_ControllerAxisEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_CONTROLLERAXISMOTION */
+    timestamp: u32;
+    which: i32; /**< The joystick instance id */
+    axis: u8;         /**< The controller axis (SDL_GameControllerAxis) */
+    padding1: u8;
+    padding2: u8;
+    padding3: u8;
+    value: i16;       /**< The axis value (range: -32768 to 32767) */
+    padding4: u16;
+}
+
+
+/**
+ *  \brief Game controller button event structure (event.cbutton.*)
+ */
+SDL_ControllerButtonEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_CONTROLLERBUTTONDOWN or ::SDL_CONTROLLERBUTTONUP */
+    timestamp: u32;
+    which: i32; /**< The joystick instance id */
+    button: u8;       /**< The controller button (SDL_GameControllerButton) */
+    state: u8;        /**< ::SDL_PRESSED or ::SDL_RELEASED */
+    padding1: u8;
+    padding2: u8;
+}
+
+
+/**
+ *  \brief Controller device event structure (event.cdevice.*)
+ */
+SDL_ControllerDeviceEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_CONTROLLERDEVICEADDED, ::SDL_CONTROLLERDEVICEREMOVED, or ::SDL_CONTROLLERDEVICEREMAPPED */
+    timestamp: u32;
+    which: i32;       /**< The joystick device index for the ADDED event, instance id for the REMOVED or REMAPPED event */
+}
+
+/**
+ *  \brief Audio device event structure (event.adevice.*)
+ */
+SDL_AudioDeviceEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_AUDIODEVICEADDED, or ::SDL_AUDIODEVICEREMOVED */
+    timestamp: u32;
+    which: u32;       /**< The audio device index for the ADDED event (valid until next SDL_GetNumAudioDevices() call), SDL_AudioDeviceID for the REMOVED event */
+    iscapture: u8;    /**< zero if an output device, non-zero if a capture device. */
+    padding1: u8;
+    padding2: u8;
+    padding3: u8;
+}
+
+
+/**
+ *  \brief Touch finger event structure (event.tfinger.*)
+ */
+SDL_TouchFingerEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_FINGERMOTION or ::SDL_FINGERDOWN or ::SDL_FINGERUP */
+    timestamp: u32;
+    touchId: i64; /**< The touch device id */
+    fingerId: i64;
+    x: f32;            /**< Normalized in the range 0...1 */
+    y: f32;            /**< Normalized in the range 0...1 */
+    dx: f32;           /**< Normalized in the range -1...1 */
+    dy: f32;           /**< Normalized in the range -1...1 */
+    pressure: f32;     /**< Normalized in the range 0...1 */
+}
+
+
+/**
+ *  \brief Multiple Finger Gesture Event (event.mgesture.*)
+ */
+SDL_MultiGestureEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_MULTIGESTURE */
+    timestamp: u32;
+    touchId: i64; /**< The touch device id */
+    dTheta: f32;
+    dDist: f32;
+    x: f32;
+    y: f32;
+    numFingers: u16;
+    padding: u16;
+}
+
+
+/**
+ * \brief Dollar Gesture Event (event.dgesture.*)
+ */
+SDL_DollarGestureEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_DOLLARGESTURE or ::SDL_DOLLARRECORD */
+    timestamp: u32;
+    touchId: i64; /**< The touch device id */
+    gestureId: i64;
+    numFingers: u32;
+    error: f32;
+    x: f32;            /**< Normalized center of gesture */
+    y: f32;            /**< Normalized center of gesture */
+}
+
+
+/**
+ *  \brief An event used to request a file open by the system (event.drop.*)
+ *         This event is enabled by default, you can disable it with SDL_EventState().
+ *  \note If this event is enabled, you must free the filename in the event.
+ */
+SDL_DropEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_DROPBEGIN or ::SDL_DROPFILE or ::SDL_DROPTEXT or ::SDL_DROPCOMPLETE */
+    timestamp: u32;
+    file: ^u8;         /**< The file name, which should be freed with SDL_free(), is NULL on begin/complete */
+    windowID: u32;    /**< The window that was dropped on, if any */
+}
+
+
+/**
+ *  \brief The "quit requested" event
+ */
+SDL_QuitEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_QUIT */
+    timestamp: u32;
+}
+
+/**
+ *  \brief OS Specific event
+ */
+SDL_OSEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_QUIT */
+    timestamp: u32;
+}
+
+/**
+ *  \brief A user-defined event type (event.user.*)
+ */
+SDL_UserEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_USEREVENT through ::SDL_LASTEVENT-1 */
+    timestamp: u32;
+    windowID: u32;    /**< The associated window if any */
+    code: i32;        /**< User defined event code */
+    data1: ^rawptr;        /**< User defined data pointer */
+    data2: ^rawptr;        /**< User defined data pointer */
+}
+
+/**
+ *  \brief A video driver dependent system event (event.syswm.*)
+ *         This event is disabled by default, you can enable it with SDL_EventState()
+ *
+ *  \note If you want to use this event, you should include SDL_syswm.h.
+ */
+SDL_SysWMEvent :: struct #ordered
+{
+    event_type: u32;        /**< ::SDL_SYSWMEVENT */
+    timestamp: u32;
+    msg: ^SDL_SysWMmsg;  /**< driver dependent data, defined in SDL_syswm.h */
+}
+
+main :: proc()
+{
+
 }
