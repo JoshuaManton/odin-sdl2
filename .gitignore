@@ -3,3 +3,4 @@
 *.bc
 *.obj
 *.exports
+main.odin

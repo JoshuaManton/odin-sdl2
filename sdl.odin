@@ -38,10 +38,6 @@ foreign lib {
 	// The source for this one says you should never call it directly, but rather use the macros provided. Need to port those over still
 	//report_assertion 								:: proc() ->																																										#link_name "SDL_ReportAssertion" ---;
 
-	game_controller_get_bind_for_axis 				:: proc(game_controller: ^Game_Controller, axis: Game_Controller_Axis) -> Game_Controller_Button_Bind																				#link_name "SDL_GameControllerGetBindForAxis" ---;
-	game_controller_get_bind_for_button 			:: proc(game_controller: ^Game_Controller, button: Game_Controller_Button) -> Game_Controller_Button_Bind																			#link_name "SDL_GameControllerGetBindForButton" ---;
-	get_window_wm_info 								:: proc(window: ^Window, info: ^Sys_Wm_Info) -> Bool																																#link_name "SDL_GetWindowWMInfo" ---;
-
 	add_event_watch 								:: proc(filter: Event_Filter, userdata: rawptr)																																		#link_name "SDL_AddEventWatch" ---;
 	add_hint_callback  								:: proc(name: ^u8, callback: Hint_Callback, userdata: rawptr)  																														#link_name "SDL_AddHintCallback" ---;
 	add_timer 										:: proc(interval: u32, callback: Timer_Callback, param: rawptr) -> Timer_Id																											#link_name "SDL_AddTimer" ---;
@@ -147,6 +143,8 @@ foreign lib {
 	game_controller_get_attached 					:: proc(game_controller: ^Game_Controller) -> Bool																																	#link_name "SDL_GameControllerGetAttached" ---;
 	game_controller_get_axis 						:: proc(game_controller: ^Game_Controller, axis: Game_Controller_Axis) -> i16																										#link_name "SDL_GameControllerGetAxis" ---;
 	game_controller_get_axis_from_string 			:: proc(pch_string: ^u8) -> ^u8																																						#link_name "SDL_GameControllerGetAxisFromString" ---;
+	game_controller_get_bind_for_axis 				:: proc(game_controller: ^Game_Controller, axis: Game_Controller_Axis) -> Game_Controller_Button_Bind																				#link_name "SDL_GameControllerGetBindForAxis" ---;
+	game_controller_get_bind_for_button 			:: proc(game_controller: ^Game_Controller, button: Game_Controller_Button) -> Game_Controller_Button_Bind																			#link_name "SDL_GameControllerGetBindForButton" ---;
 	game_controller_get_button 						:: proc(game_controller: ^Game_Controller, button: Game_Controller_Button) -> u8																									#link_name "SDL_GameControllerGetButton" ---;
 	game_controller_get_button_from_string 			:: proc(pch_string: ^u8) -> Game_Controller_Button																																	#link_name "SDL_GameControllerGetButtonFromString" ---;
 	game_controller_get_joystick 					:: proc(game_controller: ^Game_Controller) -> ^Joystick																																#link_name "SDL_GameControllerGetJoystick" ---;
@@ -261,6 +259,7 @@ foreign lib {
 	get_window_size 								:: proc(window: ^Window, w, h: ^i32)																																				#link_name "SDL_GetWindowSize" ---;
 	get_window_surface 								:: proc(window: ^Window) -> ^Surface																																				#link_name "SDL_GetWindowSurface" ---;
 	get_window_title 								:: proc(window: ^Window) -> ^u8																																						#link_name "SDL_GetWindowTitle" ---;
+	get_window_wm_info 								:: proc(window: ^Window, info: ^Sys_Wm_Info) -> Bool																																#link_name "SDL_GetWindowWMInfo" ---;
 	haptic_close 									:: proc(haptic: ^Haptic)																																							#link_name "SDL_HapticClose" ---;
 	haptic_destroy_effect 							:: proc(haptic: ^Haptic, effect: i32)																																				#link_name "SDL_HapticDestroyEffect" ---;
 	haptic_effect_supported 						:: proc(haptic: ^Haptic, effect: ^Haptic_Effect) -> i32																																#link_name "SDL_HapticEffectSupported" ---;
@@ -1609,47 +1608,6 @@ Window :: struct #ordered {};
 Renderer :: struct #ordered {};
 Texture :: struct #ordered {};
 GL_Context :: struct #ordered {};
-Sys_Wm_Info :: struct #ordered {}; // TODO: need to port the struct properly
-Sys_Wm_Msg :: struct #ordered {}; // TODO: need to port the struct properly
-
-
-
-// I think this is right?
-_Bind_Hat :: struct #ordered
-{
-	hat: i32;
-    hat_mask: i32;
-}
-_Bind_Value :: struct #raw_union
-{
-	button: i32;
-    axis: i32;
-    hat: _Bind_Hat;
-}
-Game_Controller_Button_Bind :: struct #ordered
-{
-    bind_type: Game_Controller_Bind_Type;
-    bind_value: _Bind_Value;
-}
-// ^ That comes from this:
-/*
-typedef struct SDL_GameControllerButtonBind
-{
-    SDL_GameControllerBindType bindType;
-    union
-    {
-        int button;
-        int axis;
-        struct {
-            int hat;
-            int hat_mask;
-        } hat;
-    } value;
-
-} SDL_GameControllerButtonBind;
-*/
-
-
 Cond :: struct #ordered {};
 Mutex :: struct #ordered {};
 Sem :: struct #ordered {};
@@ -1659,6 +1617,11 @@ Joystick :: struct #ordered {};
 Game_Controller :: struct #ordered {};
 Cursor :: struct #ordered {};
 IDirect3D_Device_9 :: struct #ordered {};
+
+Sys_Wm_Info :: struct #ordered {}; // TODO: need to port the struct properly
+Sys_Wm_Msg :: struct #ordered {}; // TODO: need to port the struct properly
+
+
 
 Joystick_Id :: i32;
 Timer_Id :: i32;
@@ -1682,6 +1645,21 @@ Thread_Function :: proc(data: rawptr) -> i32 #cc_c;
 Hit_Test :: proc(window: ^Window, area: ^Point, data: rawptr) -> Hit_Test_Result #cc_c;
 Windows_Message_Hook :: proc(userdata: rawptr, hwnd: rawptr, message: u32, wparam: u64, lparam: i64) #cc_c;
 Log_Output_Function :: proc(userdata: rawptr, category: i32, priority: Log_Priority, message: ^u8) #cc_c;
+
+// Thanks gingerBill for this one!
+Game_Controller_Button_Bind :: struct #ordered
+{
+    bind_type: Game_Controller_Bind_Type;
+    value: struct #raw_union
+    {
+        button: i32;
+        axis:   i32;
+        using hat_mask: struct #ordered
+        {
+            hat, mask: i32;
+        };
+    };
+};
 
 Message_Box_Data :: struct #ordered
 {
