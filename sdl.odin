@@ -1849,21 +1849,21 @@ Pixel_Format :: struct #ordered
 {
     format: u32;
     palette: ^Palette;
-    BitsPerPixel: u8;
-    BytesPerPixel: u8;
+    bits_per_pixel: u8;
+    bytes_per_pixel: u8;
     padding: [2]u8;
-    Rmask: u32;
-    Gmask: u32;
-    Bmask: u32;
-    Amask: u32;
-    Rloss: u8;
-    Gloss: u8;
-    Bloss: u8;
-    Aloss: u8;
-    Rshift: u8;
-    Gshift: u8;
-    Bshift: u8;
-    Ashift: u8;
+    r_mask: u32;
+    g_mask: u32;
+    b_mask: u32;
+    a_mask: u32;
+    r_loss: u8;
+    g_loss: u8;
+    b_loss: u8;
+    a_loss: u8;
+    r_shift: u8;
+    g_shift: u8;
+    b_shift: u8;
+    a_shift: u8;
     refcount: i32;
     next: ^Pixel_Format;
 }
