@@ -8,41 +8,12 @@ import . "fmt.odin";
 
 main :: proc()
 {
-	test_write_be16 := write_be16;
-	test_write_be32 := write_be32;
-	test_write_be64 := write_be64;
-	test_write_le16 := write_le16;
-	test_write_le32 := write_le32;
-	test_write_le64 := write_le64;
-	test_write_u8 := write_u8;
-
-	test_read_be16 := read_be16;
-	test_read_be32 := read_be32;
-	test_read_be64 := read_be64;
-	test_read_le16 := read_le16;
-	test_read_le32 := read_le32;
-	test_read_le64 := read_le64;
-	test_read_u8 := read_u8;
-
-	test_free_rw := free_rw;
-	test_game_controller_add_mappings_from_rw := game_controller_add_mappings_from_rw;
-	test_load_bmp_rw := load_bmp_rw;
-	test_load_dollar_templates := load_dollar_templates;
-	test_load_wav_rw := load_wav_rw;
-	test_rw_from_const_mem := rw_from_const_mem;
-	test_rw_from_fp := rw_from_fp;
-	test_rw_from_file := rw_from_file;
-	test_rw_from_mem := rw_from_mem;
-	test_save_all_dollar_templates := save_all_dollar_templates;
-	test_save_bmp_rw := save_bmp_rw;
-	test_save_dollar_template := save_dollar_template;
-	test_alloc_rw := alloc_rw;
-
 	test_add_event_watch := add_event_watch;
 	test_add_hint_callback := add_hint_callback;
 	test_add_timer := add_timer;
 	test_alloc_format := alloc_format;
 	test_alloc_palette := alloc_palette;
+	test_alloc_rw := alloc_rw;
 	test_atomic_add := atomic_add;
 	test_atomic_cas := atomic_cas;
 	test_atomic_cas_ptr := atomic_cas_ptr;
@@ -116,6 +87,7 @@ main :: proc()
 	test_free_cursor := free_cursor;
 	test_free_format := free_format;
 	test_free_palette := free_palette;
+	test_free_rw := free_rw;
 	test_free_surface := free_surface;
 	test_free_wav := free_wav;
 	test_gl_bind_texture := gl_bind_texture;
@@ -137,6 +109,7 @@ main :: proc()
 	test_gl_unbind_texture := gl_unbind_texture;
 	test_gl_unload_library := gl_unload_library;
 	test_game_controller_add_mapping := game_controller_add_mapping;
+	test_game_controller_add_mappings_from_rw := game_controller_add_mappings_from_rw;
 	test_game_controller_close := game_controller_close;
 	test_game_controller_event_state := game_controller_event_state;
 	test_game_controller_from_instance_id := game_controller_from_instance_id;
@@ -336,8 +309,11 @@ main :: proc()
 	test_joystick_num_hats := joystick_num_hats;
 	test_joystick_open := joystick_open;
 	test_joystick_update := joystick_update;
+	test_load_bmp_rw := load_bmp_rw;
+	test_load_dollar_templates := load_dollar_templates;
 	test_load_function := load_function;
 	test_load_object := load_object;
+	test_load_wav_rw := load_wav_rw;
 	test_lock_audio := lock_audio;
 	test_lock_audio_device := lock_audio_device;
 	test_lock_mutex := lock_mutex;
@@ -384,6 +360,13 @@ main :: proc()
 	test_quit := quit;
 	test_quit_sub_system := quit_sub_system;
 	test_raise_window := raise_window;
+	test_read_be16 := read_be16;
+	test_read_be32 := read_be32;
+	test_read_be64 := read_be64;
+	test_read_le16 := read_le16;
+	test_read_le32 := read_le32;
+	test_read_le64 := read_le64;
+	test_read_u8 := read_u8;
 	test_record_gesture := record_gesture;
 	test_register_app := register_app;
 	test_register_events := register_events;
@@ -416,6 +399,13 @@ main :: proc()
 	test_render_target_supported := render_target_supported;
 	test_reset_assertion_report := reset_assertion_report;
 	test_restore_window := restore_window;
+	test_rw_from_const_mem := rw_from_const_mem;
+	test_rw_from_fp := rw_from_fp;
+	test_rw_from_file := rw_from_file;
+	test_rw_from_mem := rw_from_mem;
+	test_save_all_dollar_templates := save_all_dollar_templates;
+	test_save_bmp_rw := save_bmp_rw;
+	test_save_dollar_template := save_dollar_template;
 	test_sem_post := sem_post;
 	test_sem_try_wait := sem_try_wait;
 	test_sem_value := sem_value;
@@ -502,4 +492,11 @@ main :: proc()
 	test_warp_mouse_global := warp_mouse_global;
 	test_warp_mouse_in_window := warp_mouse_in_window;
 	test_was_init := was_init;
+	test_write_be16 := write_be16;
+	test_write_be32 := write_be32;
+	test_write_be64 := write_be64;
+	test_write_le16 := write_le16;
+	test_write_le32 := write_le32;
+	test_write_le64 := write_le64;
+	test_write_u8 := write_u8;
 }
