@@ -627,15 +627,15 @@ RENDERER_TARGETTEXTURE :: 0x00000008;
 
 Blend_Mode :: enum i32
 {
-    BLENDMODE_NONE = 0x00000000,     /**< no blending
+    NONE = 0x00000000,     /**< no blending
                                               dstRGBA = srcRGBA */
-    BLENDMODE_BLEND = 0x00000001,    /**< alpha blending
+    BLEND = 0x00000001,    /**< alpha blending
                                               dstRGB = (srcRGB * srcA) + (dstRGB * (1-srcA))
                                               dstA = srcA + (dstA * (1-srcA)) */
-    BLENDMODE_ADD = 0x00000002,      /**< additive blending
+    ADD = 0x00000002,      /**< additive blending
                                               dstRGB = (srcRGB * srcA) + dstRGB
                                               dstA = dstA */
-    BLENDMODE_MOD = 0x00000004       /**< color modulate
+    MOD = 0x00000004       /**< color modulate
                                               dstRGB = srcRGB * dstRGB
                                               dstA = dstA */
 }
@@ -652,36 +652,36 @@ Error_Code :: enum i32
 
 Joystick_Power_Level :: enum i32
 {
-    JOYSTICK_POWER_UNKNOWN = -1,
-    JOYSTICK_POWER_EMPTY,
-    JOYSTICK_POWER_LOW,
-    JOYSTICK_POWER_MEDIUM,
-    JOYSTICK_POWER_FULL,
-    JOYSTICK_POWER_WIRED,
-    JOYSTICK_POWER_MAX
+    UNKNOWN = -1,
+    EMPTY,
+    LOW,
+    MEDIUM,
+    FULL,
+    WIRED,
+    MAX
 }
 
 Hint_Priority :: enum i32
 {
-    HINT_DEFAULT,
-    HINT_NORMAL,
-    HINT_OVERRIDE
+    DEFAULT,
+    NORMAL,
+    OVERRIDE
 }
 
 Thread_Priority :: enum i32
 {
-    THREAD_PRIORITY_LOW,
-    THREAD_PRIORITY_NORMAL,
-    THREAD_PRIORITY_HIGH
+    LOW,
+    NORMAL,
+    HIGH
 }
 
 Assert_State :: enum i32
 {
-    ASSERTION_RETRY,  /**< Retry the assert immediately. */
-    ASSERTION_BREAK,  /**< Make the debugger trigger a breakpoint. */
-    ASSERTION_ABORT,  /**< Terminate the program. */
-    ASSERTION_IGNORE,  /**< Ignore the assert. */
-    ASSERTION_ALWAYS_IGNORE  /**< Ignore the assert from now on. */
+    RETRY,  /**< Retry the assert immediately. */
+    BREAK,  /**< Make the debugger trigger a breakpoint. */
+    ABORT,  /**< Terminate the program. */
+    IGNORE,  /**< Ignore the assert. */
+    ALWAYS_IGNORE  /**< Ignore the assert from now on. */
 }
 
 Event_Action :: enum i32
@@ -693,16 +693,16 @@ Event_Action :: enum i32
 
 Hit_Test_Result :: enum i32
 {
-    HITTEST_NORMAL,  /**< Region is normal. No special properties. */
-    HITTEST_DRAGGABLE,  /**< Region can drag entire window. */
-    HITTEST_RESIZE_TOPLEFT,
-    HITTEST_RESIZE_TOP,
-    HITTEST_RESIZE_TOPRIGHT,
-    HITTEST_RESIZE_RIGHT,
-    HITTEST_RESIZE_BOTTOMRIGHT,
-    HITTEST_RESIZE_BOTTOM,
-    HITTEST_RESIZE_BOTTOMLEFT,
-    HITTEST_RESIZE_LEFT
+    NORMAL,  /**< Region is normal. No special properties. */
+    DRAGGABLE,  /**< Region can drag entire window. */
+    RESIZE_TOPLEFT,
+    RESIZE_TOP,
+    RESIZE_TOPRIGHT,
+    RESIZE_RIGHT,
+    RESIZE_BOTTOMRIGHT,
+    RESIZE_BOTTOM,
+    RESIZE_BOTTOMLEFT,
+    RESIZE_LEFT
 }
 
 Bool :: enum i32
@@ -714,102 +714,102 @@ Bool :: enum i32
 Window_Shape_Modes :: enum i32
 {
     /** \brief The default mode, a binarized alpha cutoff of 1. */
-    ShapeModeDefault,
+    DEFAULT,
     /** \brief A binarized alpha cutoff with a given integer value. */
-    ShapeModeBinarizeAlpha,
+    BINARIZE_ALPHA,
     /** \brief A binarized alpha cutoff with a given integer value, but with the opposite comparison. */
-    ShapeModeReverseBinarizeAlpha,
+    REVERSE_BINARIZE_ALPHA,
     /** \brief A color key is applied. */
-    ShapeModeColorKey
+    COLOR_KEY
 }
 
 Keymod :: enum i32
 {
-    KMOD_NONE = 0x0000,
-    KMOD_LSHIFT = 0x0001,
-    KMOD_RSHIFT = 0x0002,
-    KMOD_LCTRL = 0x0040,
-    KMOD_RCTRL = 0x0080,
-    KMOD_LALT = 0x0100,
-    KMOD_RALT = 0x0200,
-    KMOD_LGUI = 0x0400,
-    KMOD_RGUI = 0x0800,
-    KMOD_NUM = 0x1000,
-    KMOD_CAPS = 0x2000,
-    KMOD_MODE = 0x4000,
-    KMOD_RESERVED = 0x8000
+    NONE = 0x0000,
+    LSHIFT = 0x0001,
+    RSHIFT = 0x0002,
+    LCTRL = 0x0040,
+    RCTRL = 0x0080,
+    LALT = 0x0100,
+    RALT = 0x0200,
+    LGUI = 0x0400,
+    RGUI = 0x0800,
+    NUM = 0x1000,
+    CAPS = 0x2000,
+    MODE = 0x4000,
+    RESERVED = 0x8000
 }
 
 Renderer_Flip :: enum i32
 {
-    FLIP_NONE = 0x00000000,     /**< Do not flip */
-    FLIP_HORIZONTAL = 0x00000001,    /**< flip horizontally */
-    FLIP_VERTICAL = 0x00000002     /**< flip vertically */
+    NONE = 0x00000000,     /**< Do not flip */
+    HORIZONTAL = 0x00000001,    /**< flip horizontally */
+    VERTICAL = 0x00000002     /**< flip vertically */
 }
 
 GL_Attr :: enum i32
 {
-    GL_RED_SIZE,
-    GL_GREEN_SIZE,
-    GL_BLUE_SIZE,
-    GL_ALPHA_SIZE,
-    GL_BUFFER_SIZE,
-    GL_DOUBLEBUFFER,
-    GL_DEPTH_SIZE,
-    GL_STENCIL_SIZE,
-    GL_ACCUM_RED_SIZE,
-    GL_ACCUM_GREEN_SIZE,
-    GL_ACCUM_BLUE_SIZE,
-    GL_ACCUM_ALPHA_SIZE,
-    GL_STEREO,
-    GL_MULTISAMPLEBUFFERS,
-    GL_MULTISAMPLESAMPLES,
-    GL_ACCELERATED_VISUAL,
-    GL_RETAINED_BACKING,
-    GL_CONTEXT_MAJOR_VERSION,
-    GL_CONTEXT_MINOR_VERSION,
-    GL_CONTEXT_EGL,
-    GL_CONTEXT_FLAGS,
-    GL_CONTEXT_PROFILE_MASK,
-    GL_SHARE_WITH_CURRENT_CONTEXT,
-    GL_FRAMEBUFFER_SRGB_CAPABLE,
-    GL_CONTEXT_RELEASE_BEHAVIOR
+    RED_SIZE,
+    GREEN_SIZE,
+    BLUE_SIZE,
+    ALPHA_SIZE,
+    BUFFER_SIZE,
+    DOUBLEBUFFER,
+    DEPTH_SIZE,
+    STENCIL_SIZE,
+    ACCUM_RED_SIZE,
+    ACCUM_GREEN_SIZE,
+    ACCUM_BLUE_SIZE,
+    ACCUM_ALPHA_SIZE,
+    STEREO,
+    MULTISAMPLEBUFFERS,
+    MULTISAMPLESAMPLES,
+    ACCELERATED_VISUAL,
+    RETAINED_BACKING,
+    CONTEXT_MAJOR_VERSION,
+    CONTEXT_MINOR_VERSION,
+    CONTEXT_EGL,
+    CONTEXT_FLAGS,
+    CONTEXT_PROFILE_MASK,
+    SHARE_WITH_CURRENT_CONTEXT,
+    FRAMEBUFFER_SRGB_CAPABLE,
+    CONTEXT_RELEASE_BEHAVIOR
 }
 
 Message_Box_Color_Type :: enum i32
 {
-    MESSAGEBOX_COLOR_BACKGROUND,
-    MESSAGEBOX_COLOR_TEXT,
-    MESSAGEBOX_COLOR_BUTTON_BORDER,
-    MESSAGEBOX_COLOR_BUTTON_BACKGROUND,
-    MESSAGEBOX_COLOR_BUTTON_SELECTED,
-    MESSAGEBOX_COLOR_MAX
+    BACKGROUND,
+    TEXT,
+    BUTTON_BORDER,
+    BUTTON_BACKGROUND,
+    BUTTON_SELECTED,
+    MAX
 }
 
 Audio_Status :: enum i32
 {
-    AUDIO_STOPPED = 0,
-    AUDIO_PLAYING,
-    AUDIO_PAUSED
+    STOPPED = 0,
+    PLAYING,
+    PAUSED
 }
 
 Power_State :: enum i32
 {
-    POWERSTATE_UNKNOWN,      /**< cannot determine power status */
-    POWERSTATE_ON_BATTERY,   /**< Not plugged in, running on the battery */
-    POWERSTATE_NO_BATTERY,   /**< Plugged in, no battery available */
-    POWERSTATE_CHARGING,     /**< Plugged in, charging battery */
-    POWERSTATE_CHARGED       /**< Plugged in, battery charged */
+    UNKNOWN,      /**< cannot determine power status */
+    ON_BATTERY,   /**< Not plugged in, running on the battery */
+    NO_BATTERY,   /**< Plugged in, no battery available */
+    CHARGING,     /**< Plugged in, charging battery */
+    CHARGED       /**< Plugged in, battery charged */
 }
 
 Log_Priority :: enum i32
 {
-    LOG_PRIORITY_VERBOSE = 1,
-    LOG_PRIORITY_DEBUG,
-    LOG_PRIORITY_INFO,
-    LOG_PRIORITY_WARN,
-    LOG_PRIORITY_ERROR,
-    LOG_PRIORITY_CRITICAL,
+    VERBOSE = 1,
+    DEBUG,
+    INFO,
+    WARN,
+    ERROR,
+    CRITICAL,
     NUM_LOG_PRIORITIES
 }
 
@@ -819,60 +819,417 @@ Log_Priority :: enum i32
 
 Game_Controller_Button :: enum i32
 {
-    CONTROLLER_BUTTON_INVALID = -1,
-    CONTROLLER_BUTTON_A,
-    CONTROLLER_BUTTON_B,
-    CONTROLLER_BUTTON_X,
-    CONTROLLER_BUTTON_Y,
-    CONTROLLER_BUTTON_BACK,
-    CONTROLLER_BUTTON_GUIDE,
-    CONTROLLER_BUTTON_START,
-    CONTROLLER_BUTTON_LEFTSTICK,
-    CONTROLLER_BUTTON_RIGHTSTICK,
-    CONTROLLER_BUTTON_LEFTSHOULDER,
-    CONTROLLER_BUTTON_RIGHTSHOULDER,
-    CONTROLLER_BUTTON_DPAD_UP,
-    CONTROLLER_BUTTON_DPAD_DOWN,
-    CONTROLLER_BUTTON_DPAD_LEFT,
-    CONTROLLER_BUTTON_DPAD_RIGHT,
-    CONTROLLER_BUTTON_MAX
+    INVALID = -1,
+    A,
+    B,
+    X,
+    Y,
+    BACK,
+    GUIDE,
+    START,
+    LEFTSTICK,
+    RIGHTSTICK,
+    LEFTSHOULDER,
+    RIGHTSHOULDER,
+    DPAD_UP,
+    DPAD_DOWN,
+    DPAD_LEFT,
+    DPAD_RIGHT,
+    MAX
 }
 
 Game_Controller_Axis :: enum i32
 {
-    CONTROLLER_AXIS_INVALID = -1,
-    CONTROLLER_AXIS_LEFTX,
-    CONTROLLER_AXIS_LEFTY,
-    CONTROLLER_AXIS_RIGHTX,
-    CONTROLLER_AXIS_RIGHTY,
-    CONTROLLER_AXIS_TRIGGERLEFT,
-    CONTROLLER_AXIS_TRIGGERRIGHT,
-    CONTROLLER_AXIS_MAX
+    INVALID = -1,
+    LEFTX,
+    LEFTY,
+    RIGHTX,
+    RIGHTY,
+    TRIGGERLEFT,
+    TRIGGERRIGHT,
+    MAX
 }
 
 Game_Controller_Bind_Type :: enum i32
 {
-    CONTROLLER_BINDTYPE_NONE = 0,
-    CONTROLLER_BINDTYPE_BUTTON,
-    CONTROLLER_BINDTYPE_AXIS,
-    CONTROLLER_BINDTYPE_HAT
+    NONE = 0,
+    BUTTON,
+    AXIS,
+    HAT
 }
 
 System_Cursor :: enum i32
 {
-    SYSTEM_CURSOR_ARROW,     /**< Arrow */
-    SYSTEM_CURSOR_IBEAM,     /**< I-beam */
-    SYSTEM_CURSOR_WAIT,      /**< Wait */
-    SYSTEM_CURSOR_CROSSHAIR, /**< Crosshair */
-    SYSTEM_CURSOR_WAITARROW, /**< Small wait cursor (or Wait if not available) */
-    SYSTEM_CURSOR_SIZENWSE,  /**< Double arrow pointing northwest and southeast */
-    SYSTEM_CURSOR_SIZENESW,  /**< Double arrow pointing northeast and southwest */
-    SYSTEM_CURSOR_SIZEWE,    /**< Double arrow pointing west and east */
-    SYSTEM_CURSOR_SIZENS,    /**< Double arrow pointing north and south */
-    SYSTEM_CURSOR_SIZEALL,   /**< Four pointed arrow pointing north, south, east, and west */
-    SYSTEM_CURSOR_NO,        /**< Slashed circle or crossbones */
-    SYSTEM_CURSOR_HAND,      /**< Hand */
+    ARROW,     /**< Arrow */
+    IBEAM,     /**< I-beam */
+    WAIT,      /**< Wait */
+    CROSSHAIR, /**< Crosshair */
+    WAITARROW, /**< Small wait cursor (or Wait if not available) */
+    SIZENWSE,  /**< Double arrow pointing northwest and southeast */
+    SIZENESW,  /**< Double arrow pointing northeast and southwest */
+    SIZEWE,    /**< Double arrow pointing west and east */
+    SIZENS,    /**< Double arrow pointing north and south */
+    SIZEALL,   /**< Four pointed arrow pointing north, south, east, and west */
+    NO,        /**< Slashed circle or crossbones */
+    HAND,      /**< Hand */
     NUM_SYSTEM_CURSORS
+}
+
+
+Scancode :: enum i32
+{
+    UNKNOWN = 0,
+
+    /**
+     *  \name Usage page 0x07
+     *
+     *  These values are from usage page 0x07 (USB keyboard page).
+     */
+    /* @{ */
+
+    A = 4,
+    B = 5,
+    C = 6,
+    D = 7,
+    E = 8,
+    F = 9,
+    G = 10,
+    H = 11,
+    I = 12,
+    J = 13,
+    K = 14,
+    L = 15,
+    M = 16,
+    N = 17,
+    O = 18,
+    P = 19,
+    Q = 20,
+    R = 21,
+    S = 22,
+    T = 23,
+    U = 24,
+    V = 25,
+    W = 26,
+    X = 27,
+    Y = 28,
+    Z = 29,
+
+    NR_1 = 30,
+    NR_2 = 31,
+    NR_3 = 32,
+    NR_4 = 33,
+    NR_5 = 34,
+    NR_6 = 35,
+    NR_7 = 36,
+    NR_8 = 37,
+    NR_9 = 38,
+    NR_0 = 39,
+
+    RETURN = 40,
+    ESCAPE = 41,
+    BACKSPACE = 42,
+    TAB = 43,
+    SPACE = 44,
+
+    MINUS = 45,
+    EQUALS = 46,
+    LEFTBRACKET = 47,
+    RIGHTBRACKET = 48,
+    BACKSLASH = 49, /**< Located at the lower left of the return
+                                  *   key on ISO keyboards and at the right end
+                                  *   of the QWERTY row on ANSI keyboards.
+                                  *   Produces REVERSE SOLIDUS (backslash) and
+                                  *   VERTICAL LINE in a US layout, REVERSE
+                                  *   SOLIDUS and VERTICAL LINE in a UK Mac
+                                  *   layout, NUMBER SIGN and TILDE in a UK
+                                  *   Windows layout, DOLLAR SIGN and POUND SIGN
+                                  *   in a Swiss German layout, NUMBER SIGN and
+                                  *   APOSTROPHE in a German layout, GRAVE
+                                  *   ACCENT and POUND SIGN in a French Mac
+                                  *   layout, and ASTERISK and MICRO SIGN in a
+                                  *   French Windows layout.
+                                  */
+    NONUSHASH = 50, /**< ISO USB keyboards actually use this code
+                                  *   instead of 49 for the same key, but all
+                                  *   OSes I've seen treat the two codes
+                                  *   identically. So, as an implementor, unless
+                                  *   your keyboard generates both of those
+                                  *   codes and your OS treats them differently,
+                                  *   you should generate BACKSLASH
+                                  *   instead of this code. As a user, you
+                                  *   should not rely on this code because SDL
+                                  *   will never generate it with most (all?)
+                                  *   keyboards.
+                                  */
+    SEMICOLON = 51,
+    APOSTROPHE = 52,
+    GRAVE = 53, /**< Located in the top left corner (on both ANSI
+                              *   and ISO keyboards). Produces GRAVE ACCENT and
+                              *   TILDE in a US Windows layout and in US and UK
+                              *   Mac layouts on ANSI keyboards, GRAVE ACCENT
+                              *   and NOT SIGN in a UK Windows layout, SECTION
+                              *   SIGN and PLUS-MINUS SIGN in US and UK Mac
+                              *   layouts on ISO keyboards, SECTION SIGN and
+                              *   DEGREE SIGN in a Swiss German layout (Mac:
+                              *   only on ISO keyboards), CIRCUMFLEX ACCENT and
+                              *   DEGREE SIGN in a German layout (Mac: only on
+                              *   ISO keyboards), SUPERSCRIPT TWO and TILDE in a
+                              *   French Windows layout, COMMERCIAL AT and
+                              *   NUMBER SIGN in a French Mac layout on ISO
+                              *   keyboards, and LESS-THAN SIGN and GREATER-THAN
+                              *   SIGN in a Swiss German, German, or French Mac
+                              *   layout on ANSI keyboards.
+                              */
+    COMMA = 54,
+    PERIOD = 55,
+    SLASH = 56,
+
+    CAPSLOCK = 57,
+
+    F1 = 58,
+    F2 = 59,
+    F3 = 60,
+    F4 = 61,
+    F5 = 62,
+    F6 = 63,
+    F7 = 64,
+    F8 = 65,
+    F9 = 66,
+    F10 = 67,
+    F11 = 68,
+    F12 = 69,
+
+    PRINTSCREEN = 70,
+    SCROLLLOCK = 71,
+    PAUSE = 72,
+    INSERT = 73, /**< insert on PC, help on some Mac keyboards (but
+                                   does send code 73, not 117) */
+    HOME = 74,
+    PAGEUP = 75,
+    DELETE = 76,
+    END = 77,
+    PAGEDOWN = 78,
+    RIGHT = 79,
+    LEFT = 80,
+    DOWN = 81,
+    UP = 82,
+
+    NUMLOCKCLEAR = 83, /**< num lock on PC, clear on Mac keyboards
+                                     */
+    KP_DIVIDE = 84,
+    KP_MULTIPLY = 85,
+    KP_MINUS = 86,
+    KP_PLUS = 87,
+    KP_ENTER = 88,
+    KP_1 = 89,
+    KP_2 = 90,
+    KP_3 = 91,
+    KP_4 = 92,
+    KP_5 = 93,
+    KP_6 = 94,
+    KP_7 = 95,
+    KP_8 = 96,
+    KP_9 = 97,
+    KP_0 = 98,
+    KP_PERIOD = 99,
+
+    NONUSBACKSLASH = 100, /**< This is the additional key that ISO
+                                        *   keyboards have over ANSI ones,
+                                        *   located between left shift and Y.
+                                        *   Produces GRAVE ACCENT and TILDE in a
+                                        *   US or UK Mac layout, REVERSE SOLIDUS
+                                        *   (backslash) and VERTICAL LINE in a
+                                        *   US or UK Windows layout, and
+                                        *   LESS-THAN SIGN and GREATER-THAN SIGN
+                                        *   in a Swiss German, German, or French
+                                        *   layout. */
+    APPLICATION = 101, /**< windows contextual menu, compose */
+    POWER = 102, /**< The USB document says this is a status flag,
+                               *   not a physical key - but some Mac keyboards
+                               *   do have a power key. */
+    KP_EQUALS = 103,
+    F13 = 104,
+    F14 = 105,
+    F15 = 106,
+    F16 = 107,
+    F17 = 108,
+    F18 = 109,
+    F19 = 110,
+    F20 = 111,
+    F21 = 112,
+    F22 = 113,
+    F23 = 114,
+    F24 = 115,
+    EXECUTE = 116,
+    HELP = 117,
+    MENU = 118,
+    SELECT = 119,
+    STOP = 120,
+    AGAIN = 121,   /**< redo */
+    UNDO = 122,
+    CUT = 123,
+    COPY = 124,
+    PASTE = 125,
+    FIND = 126,
+    MUTE = 127,
+    VOLUMEUP = 128,
+    VOLUMEDOWN = 129,
+/* not sure whether there's a reason to enable these */
+/*     LOCKINGCAPSLOCK = 130,  */
+/*     LOCKINGNUMLOCK = 131, */
+/*     LOCKINGSCROLLLOCK = 132, */
+    KP_COMMA = 133,
+    KP_EQUALSAS400 = 134,
+
+    INTERNATIONAL1 = 135, /**< used on Asian keyboards, see
+                                            footnotes in USB doc */
+    INTERNATIONAL2 = 136,
+    INTERNATIONAL3 = 137, /**< Yen */
+    INTERNATIONAL4 = 138,
+    INTERNATIONAL5 = 139,
+    INTERNATIONAL6 = 140,
+    INTERNATIONAL7 = 141,
+    INTERNATIONAL8 = 142,
+    INTERNATIONAL9 = 143,
+    LANG1 = 144, /**< Hangul/English toggle */
+    LANG2 = 145, /**< Hanja conversion */
+    LANG3 = 146, /**< Katakana */
+    LANG4 = 147, /**< Hiragana */
+    LANG5 = 148, /**< Zenkaku/Hankaku */
+    LANG6 = 149, /**< reserved */
+    LANG7 = 150, /**< reserved */
+    LANG8 = 151, /**< reserved */
+    LANG9 = 152, /**< reserved */
+
+    ALTERASE = 153, /**< Erase-Eaze */
+    SYSREQ = 154,
+    CANCEL = 155,
+    CLEAR = 156,
+    PRIOR = 157,
+    RETURN2 = 158,
+    SEPARATOR = 159,
+    OUT = 160,
+    OPER = 161,
+    CLEARAGAIN = 162,
+    CRSEL = 163,
+    EXSEL = 164,
+
+    KP_00 = 176,
+    KP_000 = 177,
+    THOUSANDSSEPARATOR = 178,
+    DECIMALSEPARATOR = 179,
+    CURRENCYUNIT = 180,
+    CURRENCYSUBUNIT = 181,
+    KP_LEFTPAREN = 182,
+    KP_RIGHTPAREN = 183,
+    KP_LEFTBRACE = 184,
+    KP_RIGHTBRACE = 185,
+    KP_TAB = 186,
+    KP_BACKSPACE = 187,
+    KP_A = 188,
+    KP_B = 189,
+    KP_C = 190,
+    KP_D = 191,
+    KP_E = 192,
+    KP_F = 193,
+    KP_XOR = 194,
+    KP_POWER = 195,
+    KP_PERCENT = 196,
+    KP_LESS = 197,
+    KP_GREATER = 198,
+    KP_AMPERSAND = 199,
+    KP_DBLAMPERSAND = 200,
+    KP_VERTICALBAR = 201,
+    KP_DBLVERTICALBAR = 202,
+    KP_COLON = 203,
+    KP_HASH = 204,
+    KP_SPACE = 205,
+    KP_AT = 206,
+    KP_EXCLAM = 207,
+    KP_MEMSTORE = 208,
+    KP_MEMRECALL = 209,
+    KP_MEMCLEAR = 210,
+    KP_MEMADD = 211,
+    KP_MEMSUBTRACT = 212,
+    KP_MEMMULTIPLY = 213,
+    KP_MEMDIVIDE = 214,
+    KP_PLUSMINUS = 215,
+    KP_CLEAR = 216,
+    KP_CLEARENTRY = 217,
+    KP_BINARY = 218,
+    KP_OCTAL = 219,
+    KP_DECIMAL = 220,
+    KP_HEXADECIMAL = 221,
+
+    LCTRL = 224,
+    LSHIFT = 225,
+    LALT = 226, /**< alt, option */
+    LGUI = 227, /**< windows, command (apple), meta */
+    RCTRL = 228,
+    RSHIFT = 229,
+    RALT = 230, /**< alt gr, option */
+    RGUI = 231, /**< windows, command (apple), meta */
+
+    MODE = 257,    /**< I'm not sure if this is really not covered
+                                 *   by any of the above, but since there's a
+                                 *   special KMOD_MODE for it I'm adding it here
+                                 */
+
+    /* @} *//* Usage page 0x07 */
+
+    /**
+     *  \name Usage page 0x0C
+     *
+     *  These values are mapped from usage page 0x0C (USB consumer page).
+     */
+    /* @{ */
+
+    AUDIONEXT = 258,
+    AUDIOPREV = 259,
+    AUDIOSTOP = 260,
+    AUDIOPLAY = 261,
+    AUDIOMUTE = 262,
+    MEDIASELECT = 263,
+    WWW = 264,
+    MAIL = 265,
+    CALCULATOR = 266,
+    COMPUTER = 267,
+    AC_SEARCH = 268,
+    AC_HOME = 269,
+    AC_BACK = 270,
+    AC_FORWARD = 271,
+    AC_STOP = 272,
+    AC_REFRESH = 273,
+    AC_BOOKMARKS = 274,
+
+    /* @} *//* Usage page 0x0C */
+
+    /**
+     *  \name Walther keys
+     *
+     *  These are values that Christian Walther added (for mac keyboard?).
+     */
+    /* @{ */
+
+    BRIGHTNESSDOWN = 275,
+    BRIGHTNESSUP = 276,
+    DISPLAYSWITCH = 277, /**< display mirroring/dual display
+                                           switch, video mode switch */
+    KBDILLUMTOGGLE = 278,
+    KBDILLUMDOWN = 279,
+    KBDILLUMUP = 280,
+    EJECT = 281,
+    SLEEP = 282,
+
+    APP1 = 283,
+    APP2 = 284,
+
+    /* @} *//* Walther keys */
+
+    /* Add any other keys here. */
+
+    NUM_SCANCODES = 512 /**< not a key, just marks the number of scancodes
+                                 for array bounds */
 }
 
 
@@ -951,541 +1308,184 @@ SDLK_x :: 'x';
 SDLK_y :: 'y';
 SDLK_z :: 'z';
 
-SDLK_CAPSLOCK :: Scancode.SCANCODE_CAPSLOCK | SDLK_SCANCODE_MASK;
+SDLK_CAPSLOCK :: Scancode.CAPSLOCK | SDLK_SCANCODE_MASK;
 
-SDLK_F1 :: Scancode.SCANCODE_F1 | SDLK_SCANCODE_MASK;
-SDLK_F2 :: Scancode.SCANCODE_F2 | SDLK_SCANCODE_MASK;
-SDLK_F3 :: Scancode.SCANCODE_F3 | SDLK_SCANCODE_MASK;
-SDLK_F4 :: Scancode.SCANCODE_F4 | SDLK_SCANCODE_MASK;
-SDLK_F5 :: Scancode.SCANCODE_F5 | SDLK_SCANCODE_MASK;
-SDLK_F6 :: Scancode.SCANCODE_F6 | SDLK_SCANCODE_MASK;
-SDLK_F7 :: Scancode.SCANCODE_F7 | SDLK_SCANCODE_MASK;
-SDLK_F8 :: Scancode.SCANCODE_F8 | SDLK_SCANCODE_MASK;
-SDLK_F9 :: Scancode.SCANCODE_F9 | SDLK_SCANCODE_MASK;
-SDLK_F10 :: Scancode.SCANCODE_F10 | SDLK_SCANCODE_MASK;
-SDLK_F11 :: Scancode.SCANCODE_F11 | SDLK_SCANCODE_MASK;
-SDLK_F12 :: Scancode.SCANCODE_F12 | SDLK_SCANCODE_MASK;
+SDLK_F1 :: Scancode.F1 | SDLK_SCANCODE_MASK;
+SDLK_F2 :: Scancode.F2 | SDLK_SCANCODE_MASK;
+SDLK_F3 :: Scancode.F3 | SDLK_SCANCODE_MASK;
+SDLK_F4 :: Scancode.F4 | SDLK_SCANCODE_MASK;
+SDLK_F5 :: Scancode.F5 | SDLK_SCANCODE_MASK;
+SDLK_F6 :: Scancode.F6 | SDLK_SCANCODE_MASK;
+SDLK_F7 :: Scancode.F7 | SDLK_SCANCODE_MASK;
+SDLK_F8 :: Scancode.F8 | SDLK_SCANCODE_MASK;
+SDLK_F9 :: Scancode.F9 | SDLK_SCANCODE_MASK;
+SDLK_F10 :: Scancode.F10 | SDLK_SCANCODE_MASK;
+SDLK_F11 :: Scancode.F11 | SDLK_SCANCODE_MASK;
+SDLK_F12 :: Scancode.F12 | SDLK_SCANCODE_MASK;
 
-SDLK_PRINTSCREEN :: Scancode.SCANCODE_PRINTSCREEN | SDLK_SCANCODE_MASK;
-SDLK_SCROLLLOCK :: Scancode.SCANCODE_SCROLLLOCK | SDLK_SCANCODE_MASK;
-SDLK_PAUSE :: Scancode.SCANCODE_PAUSE | SDLK_SCANCODE_MASK;
-SDLK_INSERT :: Scancode.SCANCODE_INSERT | SDLK_SCANCODE_MASK;
-SDLK_HOME :: Scancode.SCANCODE_HOME | SDLK_SCANCODE_MASK;
-SDLK_PAGEUP :: Scancode.SCANCODE_PAGEUP | SDLK_SCANCODE_MASK;
+SDLK_PRINTSCREEN :: Scancode.PRINTSCREEN | SDLK_SCANCODE_MASK;
+SDLK_SCROLLLOCK :: Scancode.SCROLLLOCK | SDLK_SCANCODE_MASK;
+SDLK_PAUSE :: Scancode.PAUSE | SDLK_SCANCODE_MASK;
+SDLK_INSERT :: Scancode.INSERT | SDLK_SCANCODE_MASK;
+SDLK_HOME :: Scancode.HOME | SDLK_SCANCODE_MASK;
+SDLK_PAGEUP :: Scancode.PAGEUP | SDLK_SCANCODE_MASK;
 SDLK_DELETE :: '\177';
-SDLK_END :: Scancode.SCANCODE_END | SDLK_SCANCODE_MASK;
-SDLK_PAGEDOWN :: Scancode.SCANCODE_PAGEDOWN | SDLK_SCANCODE_MASK;
-SDLK_RIGHT :: Scancode.SCANCODE_RIGHT | SDLK_SCANCODE_MASK;
-SDLK_LEFT :: Scancode.SCANCODE_LEFT | SDLK_SCANCODE_MASK;
-SDLK_DOWN :: Scancode.SCANCODE_DOWN | SDLK_SCANCODE_MASK;
-SDLK_UP :: Scancode.SCANCODE_UP | SDLK_SCANCODE_MASK;
+SDLK_END :: Scancode.END | SDLK_SCANCODE_MASK;
+SDLK_PAGEDOWN :: Scancode.PAGEDOWN | SDLK_SCANCODE_MASK;
+SDLK_RIGHT :: Scancode.RIGHT | SDLK_SCANCODE_MASK;
+SDLK_LEFT :: Scancode.LEFT | SDLK_SCANCODE_MASK;
+SDLK_DOWN :: Scancode.DOWN | SDLK_SCANCODE_MASK;
+SDLK_UP :: Scancode.UP | SDLK_SCANCODE_MASK;
 
-SDLK_NUMLOCKCLEAR :: Scancode.SCANCODE_NUMLOCKCLEAR | SDLK_SCANCODE_MASK;
-SDLK_KP_DIVIDE :: Scancode.SCANCODE_KP_DIVIDE | SDLK_SCANCODE_MASK;
-SDLK_KP_MULTIPLY :: Scancode.SCANCODE_KP_MULTIPLY | SDLK_SCANCODE_MASK;
-SDLK_KP_MINUS :: Scancode.SCANCODE_KP_MINUS | SDLK_SCANCODE_MASK;
-SDLK_KP_PLUS :: Scancode.SCANCODE_KP_PLUS | SDLK_SCANCODE_MASK;
-SDLK_KP_ENTER :: Scancode.SCANCODE_KP_ENTER | SDLK_SCANCODE_MASK;
-SDLK_KP_1 :: Scancode.SCANCODE_KP_1 | SDLK_SCANCODE_MASK;
-SDLK_KP_2 :: Scancode.SCANCODE_KP_2 | SDLK_SCANCODE_MASK;
-SDLK_KP_3 :: Scancode.SCANCODE_KP_3 | SDLK_SCANCODE_MASK;
-SDLK_KP_4 :: Scancode.SCANCODE_KP_4 | SDLK_SCANCODE_MASK;
-SDLK_KP_5 :: Scancode.SCANCODE_KP_5 | SDLK_SCANCODE_MASK;
-SDLK_KP_6 :: Scancode.SCANCODE_KP_6 | SDLK_SCANCODE_MASK;
-SDLK_KP_7 :: Scancode.SCANCODE_KP_7 | SDLK_SCANCODE_MASK;
-SDLK_KP_8 :: Scancode.SCANCODE_KP_8 | SDLK_SCANCODE_MASK;
-SDLK_KP_9 :: Scancode.SCANCODE_KP_9 | SDLK_SCANCODE_MASK;
-SDLK_KP_0 :: Scancode.SCANCODE_KP_0 | SDLK_SCANCODE_MASK;
-SDLK_KP_PERIOD :: Scancode.SCANCODE_KP_PERIOD | SDLK_SCANCODE_MASK;
+SDLK_NUMLOCKCLEAR :: Scancode.NUMLOCKCLEAR | SDLK_SCANCODE_MASK;
+SDLK_KP_DIVIDE :: Scancode.KP_DIVIDE | SDLK_SCANCODE_MASK;
+SDLK_KP_MULTIPLY :: Scancode.KP_MULTIPLY | SDLK_SCANCODE_MASK;
+SDLK_KP_MINUS :: Scancode.KP_MINUS | SDLK_SCANCODE_MASK;
+SDLK_KP_PLUS :: Scancode.KP_PLUS | SDLK_SCANCODE_MASK;
+SDLK_KP_ENTER :: Scancode.KP_ENTER | SDLK_SCANCODE_MASK;
+SDLK_KP_1 :: Scancode.KP_1 | SDLK_SCANCODE_MASK;
+SDLK_KP_2 :: Scancode.KP_2 | SDLK_SCANCODE_MASK;
+SDLK_KP_3 :: Scancode.KP_3 | SDLK_SCANCODE_MASK;
+SDLK_KP_4 :: Scancode.KP_4 | SDLK_SCANCODE_MASK;
+SDLK_KP_5 :: Scancode.KP_5 | SDLK_SCANCODE_MASK;
+SDLK_KP_6 :: Scancode.KP_6 | SDLK_SCANCODE_MASK;
+SDLK_KP_7 :: Scancode.KP_7 | SDLK_SCANCODE_MASK;
+SDLK_KP_8 :: Scancode.KP_8 | SDLK_SCANCODE_MASK;
+SDLK_KP_9 :: Scancode.KP_9 | SDLK_SCANCODE_MASK;
+SDLK_KP_0 :: Scancode.KP_0 | SDLK_SCANCODE_MASK;
+SDLK_KP_PERIOD :: Scancode.KP_PERIOD | SDLK_SCANCODE_MASK;
 
-SDLK_APPLICATION :: Scancode.SCANCODE_APPLICATION | SDLK_SCANCODE_MASK;
-SDLK_POWER :: Scancode.SCANCODE_POWER | SDLK_SCANCODE_MASK;
-SDLK_KP_EQUALS :: Scancode.SCANCODE_KP_EQUALS | SDLK_SCANCODE_MASK;
-SDLK_F13 :: Scancode.SCANCODE_F13 | SDLK_SCANCODE_MASK;
-SDLK_F14 :: Scancode.SCANCODE_F14 | SDLK_SCANCODE_MASK;
-SDLK_F15 :: Scancode.SCANCODE_F15 | SDLK_SCANCODE_MASK;
-SDLK_F16 :: Scancode.SCANCODE_F16 | SDLK_SCANCODE_MASK;
-SDLK_F17 :: Scancode.SCANCODE_F17 | SDLK_SCANCODE_MASK;
-SDLK_F18 :: Scancode.SCANCODE_F18 | SDLK_SCANCODE_MASK;
-SDLK_F19 :: Scancode.SCANCODE_F19 | SDLK_SCANCODE_MASK;
-SDLK_F20 :: Scancode.SCANCODE_F20 | SDLK_SCANCODE_MASK;
-SDLK_F21 :: Scancode.SCANCODE_F21 | SDLK_SCANCODE_MASK;
-SDLK_F22 :: Scancode.SCANCODE_F22 | SDLK_SCANCODE_MASK;
-SDLK_F23 :: Scancode.SCANCODE_F23 | SDLK_SCANCODE_MASK;
-SDLK_F24 :: Scancode.SCANCODE_F24 | SDLK_SCANCODE_MASK;
-SDLK_EXECUTE :: Scancode.SCANCODE_EXECUTE | SDLK_SCANCODE_MASK;
-SDLK_HELP :: Scancode.SCANCODE_HELP | SDLK_SCANCODE_MASK;
-SDLK_MENU :: Scancode.SCANCODE_MENU | SDLK_SCANCODE_MASK;
-SDLK_SELECT :: Scancode.SCANCODE_SELECT | SDLK_SCANCODE_MASK;
-SDLK_STOP :: Scancode.SCANCODE_STOP | SDLK_SCANCODE_MASK;
-SDLK_AGAIN :: Scancode.SCANCODE_AGAIN | SDLK_SCANCODE_MASK;
-SDLK_UNDO :: Scancode.SCANCODE_UNDO | SDLK_SCANCODE_MASK;
-SDLK_CUT :: Scancode.SCANCODE_CUT | SDLK_SCANCODE_MASK;
-SDLK_COPY :: Scancode.SCANCODE_COPY | SDLK_SCANCODE_MASK;
-SDLK_PASTE :: Scancode.SCANCODE_PASTE | SDLK_SCANCODE_MASK;
-SDLK_FIND :: Scancode.SCANCODE_FIND | SDLK_SCANCODE_MASK;
-SDLK_MUTE :: Scancode.SCANCODE_MUTE | SDLK_SCANCODE_MASK;
-SDLK_VOLUMEUP :: Scancode.SCANCODE_VOLUMEUP | SDLK_SCANCODE_MASK;
-SDLK_VOLUMEDOWN :: Scancode.SCANCODE_VOLUMEDOWN | SDLK_SCANCODE_MASK;
-SDLK_KP_COMMA :: Scancode.SCANCODE_KP_COMMA | SDLK_SCANCODE_MASK;
-SDLK_KP_EQUALSAS400 :: Scancode.SCANCODE_KP_EQUALSAS400 | SDLK_SCANCODE_MASK;
+SDLK_APPLICATION :: Scancode.APPLICATION | SDLK_SCANCODE_MASK;
+SDLK_POWER :: Scancode.POWER | SDLK_SCANCODE_MASK;
+SDLK_KP_EQUALS :: Scancode.KP_EQUALS | SDLK_SCANCODE_MASK;
+SDLK_F13 :: Scancode.F13 | SDLK_SCANCODE_MASK;
+SDLK_F14 :: Scancode.F14 | SDLK_SCANCODE_MASK;
+SDLK_F15 :: Scancode.F15 | SDLK_SCANCODE_MASK;
+SDLK_F16 :: Scancode.F16 | SDLK_SCANCODE_MASK;
+SDLK_F17 :: Scancode.F17 | SDLK_SCANCODE_MASK;
+SDLK_F18 :: Scancode.F18 | SDLK_SCANCODE_MASK;
+SDLK_F19 :: Scancode.F19 | SDLK_SCANCODE_MASK;
+SDLK_F20 :: Scancode.F20 | SDLK_SCANCODE_MASK;
+SDLK_F21 :: Scancode.F21 | SDLK_SCANCODE_MASK;
+SDLK_F22 :: Scancode.F22 | SDLK_SCANCODE_MASK;
+SDLK_F23 :: Scancode.F23 | SDLK_SCANCODE_MASK;
+SDLK_F24 :: Scancode.F24 | SDLK_SCANCODE_MASK;
+SDLK_EXECUTE :: Scancode.EXECUTE | SDLK_SCANCODE_MASK;
+SDLK_HELP :: Scancode.HELP | SDLK_SCANCODE_MASK;
+SDLK_MENU :: Scancode.MENU | SDLK_SCANCODE_MASK;
+SDLK_SELECT :: Scancode.SELECT | SDLK_SCANCODE_MASK;
+SDLK_STOP :: Scancode.STOP | SDLK_SCANCODE_MASK;
+SDLK_AGAIN :: Scancode.AGAIN | SDLK_SCANCODE_MASK;
+SDLK_UNDO :: Scancode.UNDO | SDLK_SCANCODE_MASK;
+SDLK_CUT :: Scancode.CUT | SDLK_SCANCODE_MASK;
+SDLK_COPY :: Scancode.COPY | SDLK_SCANCODE_MASK;
+SDLK_PASTE :: Scancode.PASTE | SDLK_SCANCODE_MASK;
+SDLK_FIND :: Scancode.FIND | SDLK_SCANCODE_MASK;
+SDLK_MUTE :: Scancode.MUTE | SDLK_SCANCODE_MASK;
+SDLK_VOLUMEUP :: Scancode.VOLUMEUP | SDLK_SCANCODE_MASK;
+SDLK_VOLUMEDOWN :: Scancode.VOLUMEDOWN | SDLK_SCANCODE_MASK;
+SDLK_KP_COMMA :: Scancode.KP_COMMA | SDLK_SCANCODE_MASK;
+SDLK_KP_EQUALSAS400 :: Scancode.KP_EQUALSAS400 | SDLK_SCANCODE_MASK;
 
-SDLK_ALTERASE :: Scancode.SCANCODE_ALTERASE | SDLK_SCANCODE_MASK;
-SDLK_SYSREQ :: Scancode.SCANCODE_SYSREQ | SDLK_SCANCODE_MASK;
-SDLK_CANCEL :: Scancode.SCANCODE_CANCEL | SDLK_SCANCODE_MASK;
-SDLK_CLEAR :: Scancode.SCANCODE_CLEAR | SDLK_SCANCODE_MASK;
-SDLK_PRIOR :: Scancode.SCANCODE_PRIOR | SDLK_SCANCODE_MASK;
-SDLK_RETURN2 :: Scancode.SCANCODE_RETURN2 | SDLK_SCANCODE_MASK;
-SDLK_SEPARATOR :: Scancode.SCANCODE_SEPARATOR | SDLK_SCANCODE_MASK;
-SDLK_OUT :: Scancode.SCANCODE_OUT | SDLK_SCANCODE_MASK;
-SDLK_OPER :: Scancode.SCANCODE_OPER | SDLK_SCANCODE_MASK;
-SDLK_CLEARAGAIN :: Scancode.SCANCODE_CLEARAGAIN | SDLK_SCANCODE_MASK;
-SDLK_CRSEL :: Scancode.SCANCODE_CRSEL | SDLK_SCANCODE_MASK;
-SDLK_EXSEL :: Scancode.SCANCODE_EXSEL | SDLK_SCANCODE_MASK;
+SDLK_ALTERASE :: Scancode.ALTERASE | SDLK_SCANCODE_MASK;
+SDLK_SYSREQ :: Scancode.SYSREQ | SDLK_SCANCODE_MASK;
+SDLK_CANCEL :: Scancode.CANCEL | SDLK_SCANCODE_MASK;
+SDLK_CLEAR :: Scancode.CLEAR | SDLK_SCANCODE_MASK;
+SDLK_PRIOR :: Scancode.PRIOR | SDLK_SCANCODE_MASK;
+SDLK_RETURN2 :: Scancode.RETURN2 | SDLK_SCANCODE_MASK;
+SDLK_SEPARATOR :: Scancode.SEPARATOR | SDLK_SCANCODE_MASK;
+SDLK_OUT :: Scancode.OUT | SDLK_SCANCODE_MASK;
+SDLK_OPER :: Scancode.OPER | SDLK_SCANCODE_MASK;
+SDLK_CLEARAGAIN :: Scancode.CLEARAGAIN | SDLK_SCANCODE_MASK;
+SDLK_CRSEL :: Scancode.CRSEL | SDLK_SCANCODE_MASK;
+SDLK_EXSEL :: Scancode.EXSEL | SDLK_SCANCODE_MASK;
 
-SDLK_KP_00 :: Scancode.SCANCODE_KP_00 | SDLK_SCANCODE_MASK;
-SDLK_KP_000 :: Scancode.SCANCODE_KP_000 | SDLK_SCANCODE_MASK;
-SDLK_THOUSANDSSEPARATOR :: Scancode.SCANCODE_THOUSANDSSEPARATOR | SDLK_SCANCODE_MASK;
-SDLK_DECIMALSEPARATOR :: Scancode.SCANCODE_DECIMALSEPARATOR | SDLK_SCANCODE_MASK;
-SDLK_CURRENCYUNIT :: Scancode.SCANCODE_CURRENCYUNIT | SDLK_SCANCODE_MASK;
-SDLK_CURRENCYSUBUNIT :: Scancode.SCANCODE_CURRENCYSUBUNIT | SDLK_SCANCODE_MASK;
-SDLK_KP_LEFTPAREN :: Scancode.SCANCODE_KP_LEFTPAREN | SDLK_SCANCODE_MASK;
-SDLK_KP_RIGHTPAREN :: Scancode.SCANCODE_KP_RIGHTPAREN | SDLK_SCANCODE_MASK;
-SDLK_KP_LEFTBRACE :: Scancode.SCANCODE_KP_LEFTBRACE | SDLK_SCANCODE_MASK;
-SDLK_KP_RIGHTBRACE :: Scancode.SCANCODE_KP_RIGHTBRACE | SDLK_SCANCODE_MASK;
-SDLK_KP_TAB :: Scancode.SCANCODE_KP_TAB | SDLK_SCANCODE_MASK;
-SDLK_KP_BACKSPACE :: Scancode.SCANCODE_KP_BACKSPACE | SDLK_SCANCODE_MASK;
-SDLK_KP_A :: Scancode.SCANCODE_KP_A | SDLK_SCANCODE_MASK;
-SDLK_KP_B :: Scancode.SCANCODE_KP_B | SDLK_SCANCODE_MASK;
-SDLK_KP_C :: Scancode.SCANCODE_KP_C | SDLK_SCANCODE_MASK;
-SDLK_KP_D :: Scancode.SCANCODE_KP_D | SDLK_SCANCODE_MASK;
-SDLK_KP_E :: Scancode.SCANCODE_KP_E | SDLK_SCANCODE_MASK;
-SDLK_KP_F :: Scancode.SCANCODE_KP_F | SDLK_SCANCODE_MASK;
-SDLK_KP_XOR :: Scancode.SCANCODE_KP_XOR | SDLK_SCANCODE_MASK;
-SDLK_KP_POWER :: Scancode.SCANCODE_KP_POWER | SDLK_SCANCODE_MASK;
-SDLK_KP_PERCENT :: Scancode.SCANCODE_KP_PERCENT | SDLK_SCANCODE_MASK;
-SDLK_KP_LESS :: Scancode.SCANCODE_KP_LESS | SDLK_SCANCODE_MASK;
-SDLK_KP_GREATER :: Scancode.SCANCODE_KP_GREATER | SDLK_SCANCODE_MASK;
-SDLK_KP_AMPERSAND :: Scancode.SCANCODE_KP_AMPERSAND | SDLK_SCANCODE_MASK;
-SDLK_KP_DBLAMPERSAND :: Scancode.SCANCODE_KP_DBLAMPERSAND | SDLK_SCANCODE_MASK;
-SDLK_KP_VERTICALBAR :: Scancode.SCANCODE_KP_VERTICALBAR | SDLK_SCANCODE_MASK;
-SDLK_KP_DBLVERTICALBAR :: Scancode.SCANCODE_KP_DBLVERTICALBAR | SDLK_SCANCODE_MASK;
-SDLK_KP_COLON :: Scancode.SCANCODE_KP_COLON | SDLK_SCANCODE_MASK;
-SDLK_KP_HASH :: Scancode.SCANCODE_KP_HASH | SDLK_SCANCODE_MASK;
-SDLK_KP_SPACE :: Scancode.SCANCODE_KP_SPACE | SDLK_SCANCODE_MASK;
-SDLK_KP_AT :: Scancode.SCANCODE_KP_AT | SDLK_SCANCODE_MASK;
-SDLK_KP_EXCLAM :: Scancode.SCANCODE_KP_EXCLAM | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMSTORE :: Scancode.SCANCODE_KP_MEMSTORE | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMRECALL :: Scancode.SCANCODE_KP_MEMRECALL | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMCLEAR :: Scancode.SCANCODE_KP_MEMCLEAR | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMADD :: Scancode.SCANCODE_KP_MEMADD | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMSUBTRACT :: Scancode.SCANCODE_KP_MEMSUBTRACT | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMMULTIPLY :: Scancode.SCANCODE_KP_MEMMULTIPLY | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMDIVIDE :: Scancode.SCANCODE_KP_MEMDIVIDE | SDLK_SCANCODE_MASK;
-SDLK_KP_PLUSMINUS :: Scancode.SCANCODE_KP_PLUSMINUS | SDLK_SCANCODE_MASK;
-SDLK_KP_CLEAR :: Scancode.SCANCODE_KP_CLEAR | SDLK_SCANCODE_MASK;
-SDLK_KP_CLEARENTRY :: Scancode.SCANCODE_KP_CLEARENTRY | SDLK_SCANCODE_MASK;
-SDLK_KP_BINARY :: Scancode.SCANCODE_KP_BINARY | SDLK_SCANCODE_MASK;
-SDLK_KP_OCTAL :: Scancode.SCANCODE_KP_OCTAL | SDLK_SCANCODE_MASK;
-SDLK_KP_DECIMAL :: Scancode.SCANCODE_KP_DECIMAL | SDLK_SCANCODE_MASK;
-SDLK_KP_HEXADECIMAL :: Scancode.SCANCODE_KP_HEXADECIMAL | SDLK_SCANCODE_MASK;
+SDLK_KP_00 :: Scancode.KP_00 | SDLK_SCANCODE_MASK;
+SDLK_KP_000 :: Scancode.KP_000 | SDLK_SCANCODE_MASK;
+SDLK_THOUSANDSSEPARATOR :: Scancode.THOUSANDSSEPARATOR | SDLK_SCANCODE_MASK;
+SDLK_DECIMALSEPARATOR :: Scancode.DECIMALSEPARATOR | SDLK_SCANCODE_MASK;
+SDLK_CURRENCYUNIT :: Scancode.CURRENCYUNIT | SDLK_SCANCODE_MASK;
+SDLK_CURRENCYSUBUNIT :: Scancode.CURRENCYSUBUNIT | SDLK_SCANCODE_MASK;
+SDLK_KP_LEFTPAREN :: Scancode.KP_LEFTPAREN | SDLK_SCANCODE_MASK;
+SDLK_KP_RIGHTPAREN :: Scancode.KP_RIGHTPAREN | SDLK_SCANCODE_MASK;
+SDLK_KP_LEFTBRACE :: Scancode.KP_LEFTBRACE | SDLK_SCANCODE_MASK;
+SDLK_KP_RIGHTBRACE :: Scancode.KP_RIGHTBRACE | SDLK_SCANCODE_MASK;
+SDLK_KP_TAB :: Scancode.KP_TAB | SDLK_SCANCODE_MASK;
+SDLK_KP_BACKSPACE :: Scancode.KP_BACKSPACE | SDLK_SCANCODE_MASK;
+SDLK_KP_A :: Scancode.KP_A | SDLK_SCANCODE_MASK;
+SDLK_KP_B :: Scancode.KP_B | SDLK_SCANCODE_MASK;
+SDLK_KP_C :: Scancode.KP_C | SDLK_SCANCODE_MASK;
+SDLK_KP_D :: Scancode.KP_D | SDLK_SCANCODE_MASK;
+SDLK_KP_E :: Scancode.KP_E | SDLK_SCANCODE_MASK;
+SDLK_KP_F :: Scancode.KP_F | SDLK_SCANCODE_MASK;
+SDLK_KP_XOR :: Scancode.KP_XOR | SDLK_SCANCODE_MASK;
+SDLK_KP_POWER :: Scancode.KP_POWER | SDLK_SCANCODE_MASK;
+SDLK_KP_PERCENT :: Scancode.KP_PERCENT | SDLK_SCANCODE_MASK;
+SDLK_KP_LESS :: Scancode.KP_LESS | SDLK_SCANCODE_MASK;
+SDLK_KP_GREATER :: Scancode.KP_GREATER | SDLK_SCANCODE_MASK;
+SDLK_KP_AMPERSAND :: Scancode.KP_AMPERSAND | SDLK_SCANCODE_MASK;
+SDLK_KP_DBLAMPERSAND :: Scancode.KP_DBLAMPERSAND | SDLK_SCANCODE_MASK;
+SDLK_KP_VERTICALBAR :: Scancode.KP_VERTICALBAR | SDLK_SCANCODE_MASK;
+SDLK_KP_DBLVERTICALBAR :: Scancode.KP_DBLVERTICALBAR | SDLK_SCANCODE_MASK;
+SDLK_KP_COLON :: Scancode.KP_COLON | SDLK_SCANCODE_MASK;
+SDLK_KP_HASH :: Scancode.KP_HASH | SDLK_SCANCODE_MASK;
+SDLK_KP_SPACE :: Scancode.KP_SPACE | SDLK_SCANCODE_MASK;
+SDLK_KP_AT :: Scancode.KP_AT | SDLK_SCANCODE_MASK;
+SDLK_KP_EXCLAM :: Scancode.KP_EXCLAM | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMSTORE :: Scancode.KP_MEMSTORE | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMRECALL :: Scancode.KP_MEMRECALL | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMCLEAR :: Scancode.KP_MEMCLEAR | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMADD :: Scancode.KP_MEMADD | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMSUBTRACT :: Scancode.KP_MEMSUBTRACT | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMMULTIPLY :: Scancode.KP_MEMMULTIPLY | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMDIVIDE :: Scancode.KP_MEMDIVIDE | SDLK_SCANCODE_MASK;
+SDLK_KP_PLUSMINUS :: Scancode.KP_PLUSMINUS | SDLK_SCANCODE_MASK;
+SDLK_KP_CLEAR :: Scancode.KP_CLEAR | SDLK_SCANCODE_MASK;
+SDLK_KP_CLEARENTRY :: Scancode.KP_CLEARENTRY | SDLK_SCANCODE_MASK;
+SDLK_KP_BINARY :: Scancode.KP_BINARY | SDLK_SCANCODE_MASK;
+SDLK_KP_OCTAL :: Scancode.KP_OCTAL | SDLK_SCANCODE_MASK;
+SDLK_KP_DECIMAL :: Scancode.KP_DECIMAL | SDLK_SCANCODE_MASK;
+SDLK_KP_HEXADECIMAL :: Scancode.KP_HEXADECIMAL | SDLK_SCANCODE_MASK;
 
-SDLK_LCTRL :: Scancode.SCANCODE_LCTRL | SDLK_SCANCODE_MASK;
-SDLK_LSHIFT :: Scancode.SCANCODE_LSHIFT | SDLK_SCANCODE_MASK;
-SDLK_LALT :: Scancode.SCANCODE_LALT | SDLK_SCANCODE_MASK;
-SDLK_LGUI :: Scancode.SCANCODE_LGUI | SDLK_SCANCODE_MASK;
-SDLK_RCTRL :: Scancode.SCANCODE_RCTRL | SDLK_SCANCODE_MASK;
-SDLK_RSHIFT :: Scancode.SCANCODE_RSHIFT | SDLK_SCANCODE_MASK;
-SDLK_RALT :: Scancode.SCANCODE_RALT | SDLK_SCANCODE_MASK;
-SDLK_RGUI :: Scancode.SCANCODE_RGUI | SDLK_SCANCODE_MASK;
+SDLK_LCTRL :: Scancode.LCTRL | SDLK_SCANCODE_MASK;
+SDLK_LSHIFT :: Scancode.LSHIFT | SDLK_SCANCODE_MASK;
+SDLK_LALT :: Scancode.LALT | SDLK_SCANCODE_MASK;
+SDLK_LGUI :: Scancode.LGUI | SDLK_SCANCODE_MASK;
+SDLK_RCTRL :: Scancode.RCTRL | SDLK_SCANCODE_MASK;
+SDLK_RSHIFT :: Scancode.RSHIFT | SDLK_SCANCODE_MASK;
+SDLK_RALT :: Scancode.RALT | SDLK_SCANCODE_MASK;
+SDLK_RGUI :: Scancode.RGUI | SDLK_SCANCODE_MASK;
 
-SDLK_MODE :: Scancode.SCANCODE_MODE | SDLK_SCANCODE_MASK;
+SDLK_MODE :: Scancode.MODE | SDLK_SCANCODE_MASK;
 
-SDLK_AUDIONEXT :: Scancode.SCANCODE_AUDIONEXT | SDLK_SCANCODE_MASK;
-SDLK_AUDIOPREV :: Scancode.SCANCODE_AUDIOPREV | SDLK_SCANCODE_MASK;
-SDLK_AUDIOSTOP :: Scancode.SCANCODE_AUDIOSTOP | SDLK_SCANCODE_MASK;
-SDLK_AUDIOPLAY :: Scancode.SCANCODE_AUDIOPLAY | SDLK_SCANCODE_MASK;
-SDLK_AUDIOMUTE :: Scancode.SCANCODE_AUDIOMUTE | SDLK_SCANCODE_MASK;
-SDLK_MEDIASELECT :: Scancode.SCANCODE_MEDIASELECT | SDLK_SCANCODE_MASK;
-SDLK_WWW :: Scancode.SCANCODE_WWW | SDLK_SCANCODE_MASK;
-SDLK_MAIL :: Scancode.SCANCODE_MAIL | SDLK_SCANCODE_MASK;
-SDLK_CALCULATOR :: Scancode.SCANCODE_CALCULATOR | SDLK_SCANCODE_MASK;
-SDLK_COMPUTER :: Scancode.SCANCODE_COMPUTER | SDLK_SCANCODE_MASK;
-SDLK_AC_SEARCH :: Scancode.SCANCODE_AC_SEARCH | SDLK_SCANCODE_MASK;
-SDLK_AC_HOME :: Scancode.SCANCODE_AC_HOME | SDLK_SCANCODE_MASK;
-SDLK_AC_BACK :: Scancode.SCANCODE_AC_BACK | SDLK_SCANCODE_MASK;
-SDLK_AC_FORWARD :: Scancode.SCANCODE_AC_FORWARD | SDLK_SCANCODE_MASK;
-SDLK_AC_STOP :: Scancode.SCANCODE_AC_STOP | SDLK_SCANCODE_MASK;
-SDLK_AC_REFRESH :: Scancode.SCANCODE_AC_REFRESH | SDLK_SCANCODE_MASK;
-SDLK_AC_BOOKMARKS :: Scancode.SCANCODE_AC_BOOKMARKS | SDLK_SCANCODE_MASK;
+SDLK_AUDIONEXT :: Scancode.AUDIONEXT | SDLK_SCANCODE_MASK;
+SDLK_AUDIOPREV :: Scancode.AUDIOPREV | SDLK_SCANCODE_MASK;
+SDLK_AUDIOSTOP :: Scancode.AUDIOSTOP | SDLK_SCANCODE_MASK;
+SDLK_AUDIOPLAY :: Scancode.AUDIOPLAY | SDLK_SCANCODE_MASK;
+SDLK_AUDIOMUTE :: Scancode.AUDIOMUTE | SDLK_SCANCODE_MASK;
+SDLK_MEDIASELECT :: Scancode.MEDIASELECT | SDLK_SCANCODE_MASK;
+SDLK_WWW :: Scancode.WWW | SDLK_SCANCODE_MASK;
+SDLK_MAIL :: Scancode.MAIL | SDLK_SCANCODE_MASK;
+SDLK_CALCULATOR :: Scancode.CALCULATOR | SDLK_SCANCODE_MASK;
+SDLK_COMPUTER :: Scancode.COMPUTER | SDLK_SCANCODE_MASK;
+SDLK_AC_SEARCH :: Scancode.AC_SEARCH | SDLK_SCANCODE_MASK;
+SDLK_AC_HOME :: Scancode.AC_HOME | SDLK_SCANCODE_MASK;
+SDLK_AC_BACK :: Scancode.AC_BACK | SDLK_SCANCODE_MASK;
+SDLK_AC_FORWARD :: Scancode.AC_FORWARD | SDLK_SCANCODE_MASK;
+SDLK_AC_STOP :: Scancode.AC_STOP | SDLK_SCANCODE_MASK;
+SDLK_AC_REFRESH :: Scancode.AC_REFRESH | SDLK_SCANCODE_MASK;
+SDLK_AC_BOOKMARKS :: Scancode.AC_BOOKMARKS | SDLK_SCANCODE_MASK;
 
-SDLK_BRIGHTNESSDOWN :: Scancode.SCANCODE_BRIGHTNESSDOWN | SDLK_SCANCODE_MASK;
-SDLK_BRIGHTNESSUP :: Scancode.SCANCODE_BRIGHTNESSUP | SDLK_SCANCODE_MASK;
-SDLK_DISPLAYSWITCH :: Scancode.SCANCODE_DISPLAYSWITCH | SDLK_SCANCODE_MASK;
-SDLK_KBDILLUMTOGGLE :: Scancode.SCANCODE_KBDILLUMTOGGLE | SDLK_SCANCODE_MASK;
-SDLK_KBDILLUMDOWN :: Scancode.SCANCODE_KBDILLUMDOWN | SDLK_SCANCODE_MASK;
-SDLK_KBDILLUMUP :: Scancode.SCANCODE_KBDILLUMUP | SDLK_SCANCODE_MASK;
-SDLK_EJECT :: Scancode.SCANCODE_EJECT | SDLK_SCANCODE_MASK;
-SDLK_SLEEP :: Scancode.SCANCODE_SLEEP | SDLK_SCANCODE_MASK;
+SDLK_BRIGHTNESSDOWN :: Scancode.BRIGHTNESSDOWN | SDLK_SCANCODE_MASK;
+SDLK_BRIGHTNESSUP :: Scancode.BRIGHTNESSUP | SDLK_SCANCODE_MASK;
+SDLK_DISPLAYSWITCH :: Scancode.DISPLAYSWITCH | SDLK_SCANCODE_MASK;
+SDLK_KBDILLUMTOGGLE :: Scancode.KBDILLUMTOGGLE | SDLK_SCANCODE_MASK;
+SDLK_KBDILLUMDOWN :: Scancode.KBDILLUMDOWN | SDLK_SCANCODE_MASK;
+SDLK_KBDILLUMUP :: Scancode.KBDILLUMUP | SDLK_SCANCODE_MASK;
+SDLK_EJECT :: Scancode.EJECT | SDLK_SCANCODE_MASK;
+SDLK_SLEEP :: Scancode.SLEEP | SDLK_SCANCODE_MASK;
 
 SDLK_SCANCODE_MASK :: 1<<30;
-
-
-Scancode :: enum i32
-{
-    SCANCODE_UNKNOWN = 0,
-
-    /**
-     *  \name Usage page 0x07
-     *
-     *  These values are from usage page 0x07 (USB keyboard page).
-     */
-    /* @{ */
-
-    SCANCODE_A = 4,
-    SCANCODE_B = 5,
-    SCANCODE_C = 6,
-    SCANCODE_D = 7,
-    SCANCODE_E = 8,
-    SCANCODE_F = 9,
-    SCANCODE_G = 10,
-    SCANCODE_H = 11,
-    SCANCODE_I = 12,
-    SCANCODE_J = 13,
-    SCANCODE_K = 14,
-    SCANCODE_L = 15,
-    SCANCODE_M = 16,
-    SCANCODE_N = 17,
-    SCANCODE_O = 18,
-    SCANCODE_P = 19,
-    SCANCODE_Q = 20,
-    SCANCODE_R = 21,
-    SCANCODE_S = 22,
-    SCANCODE_T = 23,
-    SCANCODE_U = 24,
-    SCANCODE_V = 25,
-    SCANCODE_W = 26,
-    SCANCODE_X = 27,
-    SCANCODE_Y = 28,
-    SCANCODE_Z = 29,
-
-    SCANCODE_1 = 30,
-    SCANCODE_2 = 31,
-    SCANCODE_3 = 32,
-    SCANCODE_4 = 33,
-    SCANCODE_5 = 34,
-    SCANCODE_6 = 35,
-    SCANCODE_7 = 36,
-    SCANCODE_8 = 37,
-    SCANCODE_9 = 38,
-    SCANCODE_0 = 39,
-
-    SCANCODE_RETURN = 40,
-    SCANCODE_ESCAPE = 41,
-    SCANCODE_BACKSPACE = 42,
-    SCANCODE_TAB = 43,
-    SCANCODE_SPACE = 44,
-
-    SCANCODE_MINUS = 45,
-    SCANCODE_EQUALS = 46,
-    SCANCODE_LEFTBRACKET = 47,
-    SCANCODE_RIGHTBRACKET = 48,
-    SCANCODE_BACKSLASH = 49, /**< Located at the lower left of the return
-                                  *   key on ISO keyboards and at the right end
-                                  *   of the QWERTY row on ANSI keyboards.
-                                  *   Produces REVERSE SOLIDUS (backslash) and
-                                  *   VERTICAL LINE in a US layout, REVERSE
-                                  *   SOLIDUS and VERTICAL LINE in a UK Mac
-                                  *   layout, NUMBER SIGN and TILDE in a UK
-                                  *   Windows layout, DOLLAR SIGN and POUND SIGN
-                                  *   in a Swiss German layout, NUMBER SIGN and
-                                  *   APOSTROPHE in a German layout, GRAVE
-                                  *   ACCENT and POUND SIGN in a French Mac
-                                  *   layout, and ASTERISK and MICRO SIGN in a
-                                  *   French Windows layout.
-                                  */
-    SCANCODE_NONUSHASH = 50, /**< ISO USB keyboards actually use this code
-                                  *   instead of 49 for the same key, but all
-                                  *   OSes I've seen treat the two codes
-                                  *   identically. So, as an implementor, unless
-                                  *   your keyboard generates both of those
-                                  *   codes and your OS treats them differently,
-                                  *   you should generate SCANCODE_BACKSLASH
-                                  *   instead of this code. As a user, you
-                                  *   should not rely on this code because SDL
-                                  *   will never generate it with most (all?)
-                                  *   keyboards.
-                                  */
-    SCANCODE_SEMICOLON = 51,
-    SCANCODE_APOSTROPHE = 52,
-    SCANCODE_GRAVE = 53, /**< Located in the top left corner (on both ANSI
-                              *   and ISO keyboards). Produces GRAVE ACCENT and
-                              *   TILDE in a US Windows layout and in US and UK
-                              *   Mac layouts on ANSI keyboards, GRAVE ACCENT
-                              *   and NOT SIGN in a UK Windows layout, SECTION
-                              *   SIGN and PLUS-MINUS SIGN in US and UK Mac
-                              *   layouts on ISO keyboards, SECTION SIGN and
-                              *   DEGREE SIGN in a Swiss German layout (Mac:
-                              *   only on ISO keyboards), CIRCUMFLEX ACCENT and
-                              *   DEGREE SIGN in a German layout (Mac: only on
-                              *   ISO keyboards), SUPERSCRIPT TWO and TILDE in a
-                              *   French Windows layout, COMMERCIAL AT and
-                              *   NUMBER SIGN in a French Mac layout on ISO
-                              *   keyboards, and LESS-THAN SIGN and GREATER-THAN
-                              *   SIGN in a Swiss German, German, or French Mac
-                              *   layout on ANSI keyboards.
-                              */
-    SCANCODE_COMMA = 54,
-    SCANCODE_PERIOD = 55,
-    SCANCODE_SLASH = 56,
-
-    SCANCODE_CAPSLOCK = 57,
-
-    SCANCODE_F1 = 58,
-    SCANCODE_F2 = 59,
-    SCANCODE_F3 = 60,
-    SCANCODE_F4 = 61,
-    SCANCODE_F5 = 62,
-    SCANCODE_F6 = 63,
-    SCANCODE_F7 = 64,
-    SCANCODE_F8 = 65,
-    SCANCODE_F9 = 66,
-    SCANCODE_F10 = 67,
-    SCANCODE_F11 = 68,
-    SCANCODE_F12 = 69,
-
-    SCANCODE_PRINTSCREEN = 70,
-    SCANCODE_SCROLLLOCK = 71,
-    SCANCODE_PAUSE = 72,
-    SCANCODE_INSERT = 73, /**< insert on PC, help on some Mac keyboards (but
-                                   does send code 73, not 117) */
-    SCANCODE_HOME = 74,
-    SCANCODE_PAGEUP = 75,
-    SCANCODE_DELETE = 76,
-    SCANCODE_END = 77,
-    SCANCODE_PAGEDOWN = 78,
-    SCANCODE_RIGHT = 79,
-    SCANCODE_LEFT = 80,
-    SCANCODE_DOWN = 81,
-    SCANCODE_UP = 82,
-
-    SCANCODE_NUMLOCKCLEAR = 83, /**< num lock on PC, clear on Mac keyboards
-                                     */
-    SCANCODE_KP_DIVIDE = 84,
-    SCANCODE_KP_MULTIPLY = 85,
-    SCANCODE_KP_MINUS = 86,
-    SCANCODE_KP_PLUS = 87,
-    SCANCODE_KP_ENTER = 88,
-    SCANCODE_KP_1 = 89,
-    SCANCODE_KP_2 = 90,
-    SCANCODE_KP_3 = 91,
-    SCANCODE_KP_4 = 92,
-    SCANCODE_KP_5 = 93,
-    SCANCODE_KP_6 = 94,
-    SCANCODE_KP_7 = 95,
-    SCANCODE_KP_8 = 96,
-    SCANCODE_KP_9 = 97,
-    SCANCODE_KP_0 = 98,
-    SCANCODE_KP_PERIOD = 99,
-
-    SCANCODE_NONUSBACKSLASH = 100, /**< This is the additional key that ISO
-                                        *   keyboards have over ANSI ones,
-                                        *   located between left shift and Y.
-                                        *   Produces GRAVE ACCENT and TILDE in a
-                                        *   US or UK Mac layout, REVERSE SOLIDUS
-                                        *   (backslash) and VERTICAL LINE in a
-                                        *   US or UK Windows layout, and
-                                        *   LESS-THAN SIGN and GREATER-THAN SIGN
-                                        *   in a Swiss German, German, or French
-                                        *   layout. */
-    SCANCODE_APPLICATION = 101, /**< windows contextual menu, compose */
-    SCANCODE_POWER = 102, /**< The USB document says this is a status flag,
-                               *   not a physical key - but some Mac keyboards
-                               *   do have a power key. */
-    SCANCODE_KP_EQUALS = 103,
-    SCANCODE_F13 = 104,
-    SCANCODE_F14 = 105,
-    SCANCODE_F15 = 106,
-    SCANCODE_F16 = 107,
-    SCANCODE_F17 = 108,
-    SCANCODE_F18 = 109,
-    SCANCODE_F19 = 110,
-    SCANCODE_F20 = 111,
-    SCANCODE_F21 = 112,
-    SCANCODE_F22 = 113,
-    SCANCODE_F23 = 114,
-    SCANCODE_F24 = 115,
-    SCANCODE_EXECUTE = 116,
-    SCANCODE_HELP = 117,
-    SCANCODE_MENU = 118,
-    SCANCODE_SELECT = 119,
-    SCANCODE_STOP = 120,
-    SCANCODE_AGAIN = 121,   /**< redo */
-    SCANCODE_UNDO = 122,
-    SCANCODE_CUT = 123,
-    SCANCODE_COPY = 124,
-    SCANCODE_PASTE = 125,
-    SCANCODE_FIND = 126,
-    SCANCODE_MUTE = 127,
-    SCANCODE_VOLUMEUP = 128,
-    SCANCODE_VOLUMEDOWN = 129,
-/* not sure whether there's a reason to enable these */
-/*     SCANCODE_LOCKINGCAPSLOCK = 130,  */
-/*     SCANCODE_LOCKINGNUMLOCK = 131, */
-/*     SCANCODE_LOCKINGSCROLLLOCK = 132, */
-    SCANCODE_KP_COMMA = 133,
-    SCANCODE_KP_EQUALSAS400 = 134,
-
-    SCANCODE_INTERNATIONAL1 = 135, /**< used on Asian keyboards, see
-                                            footnotes in USB doc */
-    SCANCODE_INTERNATIONAL2 = 136,
-    SCANCODE_INTERNATIONAL3 = 137, /**< Yen */
-    SCANCODE_INTERNATIONAL4 = 138,
-    SCANCODE_INTERNATIONAL5 = 139,
-    SCANCODE_INTERNATIONAL6 = 140,
-    SCANCODE_INTERNATIONAL7 = 141,
-    SCANCODE_INTERNATIONAL8 = 142,
-    SCANCODE_INTERNATIONAL9 = 143,
-    SCANCODE_LANG1 = 144, /**< Hangul/English toggle */
-    SCANCODE_LANG2 = 145, /**< Hanja conversion */
-    SCANCODE_LANG3 = 146, /**< Katakana */
-    SCANCODE_LANG4 = 147, /**< Hiragana */
-    SCANCODE_LANG5 = 148, /**< Zenkaku/Hankaku */
-    SCANCODE_LANG6 = 149, /**< reserved */
-    SCANCODE_LANG7 = 150, /**< reserved */
-    SCANCODE_LANG8 = 151, /**< reserved */
-    SCANCODE_LANG9 = 152, /**< reserved */
-
-    SCANCODE_ALTERASE = 153, /**< Erase-Eaze */
-    SCANCODE_SYSREQ = 154,
-    SCANCODE_CANCEL = 155,
-    SCANCODE_CLEAR = 156,
-    SCANCODE_PRIOR = 157,
-    SCANCODE_RETURN2 = 158,
-    SCANCODE_SEPARATOR = 159,
-    SCANCODE_OUT = 160,
-    SCANCODE_OPER = 161,
-    SCANCODE_CLEARAGAIN = 162,
-    SCANCODE_CRSEL = 163,
-    SCANCODE_EXSEL = 164,
-
-    SCANCODE_KP_00 = 176,
-    SCANCODE_KP_000 = 177,
-    SCANCODE_THOUSANDSSEPARATOR = 178,
-    SCANCODE_DECIMALSEPARATOR = 179,
-    SCANCODE_CURRENCYUNIT = 180,
-    SCANCODE_CURRENCYSUBUNIT = 181,
-    SCANCODE_KP_LEFTPAREN = 182,
-    SCANCODE_KP_RIGHTPAREN = 183,
-    SCANCODE_KP_LEFTBRACE = 184,
-    SCANCODE_KP_RIGHTBRACE = 185,
-    SCANCODE_KP_TAB = 186,
-    SCANCODE_KP_BACKSPACE = 187,
-    SCANCODE_KP_A = 188,
-    SCANCODE_KP_B = 189,
-    SCANCODE_KP_C = 190,
-    SCANCODE_KP_D = 191,
-    SCANCODE_KP_E = 192,
-    SCANCODE_KP_F = 193,
-    SCANCODE_KP_XOR = 194,
-    SCANCODE_KP_POWER = 195,
-    SCANCODE_KP_PERCENT = 196,
-    SCANCODE_KP_LESS = 197,
-    SCANCODE_KP_GREATER = 198,
-    SCANCODE_KP_AMPERSAND = 199,
-    SCANCODE_KP_DBLAMPERSAND = 200,
-    SCANCODE_KP_VERTICALBAR = 201,
-    SCANCODE_KP_DBLVERTICALBAR = 202,
-    SCANCODE_KP_COLON = 203,
-    SCANCODE_KP_HASH = 204,
-    SCANCODE_KP_SPACE = 205,
-    SCANCODE_KP_AT = 206,
-    SCANCODE_KP_EXCLAM = 207,
-    SCANCODE_KP_MEMSTORE = 208,
-    SCANCODE_KP_MEMRECALL = 209,
-    SCANCODE_KP_MEMCLEAR = 210,
-    SCANCODE_KP_MEMADD = 211,
-    SCANCODE_KP_MEMSUBTRACT = 212,
-    SCANCODE_KP_MEMMULTIPLY = 213,
-    SCANCODE_KP_MEMDIVIDE = 214,
-    SCANCODE_KP_PLUSMINUS = 215,
-    SCANCODE_KP_CLEAR = 216,
-    SCANCODE_KP_CLEARENTRY = 217,
-    SCANCODE_KP_BINARY = 218,
-    SCANCODE_KP_OCTAL = 219,
-    SCANCODE_KP_DECIMAL = 220,
-    SCANCODE_KP_HEXADECIMAL = 221,
-
-    SCANCODE_LCTRL = 224,
-    SCANCODE_LSHIFT = 225,
-    SCANCODE_LALT = 226, /**< alt, option */
-    SCANCODE_LGUI = 227, /**< windows, command (apple), meta */
-    SCANCODE_RCTRL = 228,
-    SCANCODE_RSHIFT = 229,
-    SCANCODE_RALT = 230, /**< alt gr, option */
-    SCANCODE_RGUI = 231, /**< windows, command (apple), meta */
-
-    SCANCODE_MODE = 257,    /**< I'm not sure if this is really not covered
-                                 *   by any of the above, but since there's a
-                                 *   special KMOD_MODE for it I'm adding it here
-                                 */
-
-    /* @} *//* Usage page 0x07 */
-
-    /**
-     *  \name Usage page 0x0C
-     *
-     *  These values are mapped from usage page 0x0C (USB consumer page).
-     */
-    /* @{ */
-
-    SCANCODE_AUDIONEXT = 258,
-    SCANCODE_AUDIOPREV = 259,
-    SCANCODE_AUDIOSTOP = 260,
-    SCANCODE_AUDIOPLAY = 261,
-    SCANCODE_AUDIOMUTE = 262,
-    SCANCODE_MEDIASELECT = 263,
-    SCANCODE_WWW = 264,
-    SCANCODE_MAIL = 265,
-    SCANCODE_CALCULATOR = 266,
-    SCANCODE_COMPUTER = 267,
-    SCANCODE_AC_SEARCH = 268,
-    SCANCODE_AC_HOME = 269,
-    SCANCODE_AC_BACK = 270,
-    SCANCODE_AC_FORWARD = 271,
-    SCANCODE_AC_STOP = 272,
-    SCANCODE_AC_REFRESH = 273,
-    SCANCODE_AC_BOOKMARKS = 274,
-
-    /* @} *//* Usage page 0x0C */
-
-    /**
-     *  \name Walther keys
-     *
-     *  These are values that Christian Walther added (for mac keyboard?).
-     */
-    /* @{ */
-
-    SCANCODE_BRIGHTNESSDOWN = 275,
-    SCANCODE_BRIGHTNESSUP = 276,
-    SCANCODE_DISPLAYSWITCH = 277, /**< display mirroring/dual display
-                                           switch, video mode switch */
-    SCANCODE_KBDILLUMTOGGLE = 278,
-    SCANCODE_KBDILLUMDOWN = 279,
-    SCANCODE_KBDILLUMUP = 280,
-    SCANCODE_EJECT = 281,
-    SCANCODE_SLEEP = 282,
-
-    SCANCODE_APP1 = 283,
-    SCANCODE_APP2 = 284,
-
-    /* @} *//* Walther keys */
-
-    /* Add any other keys here. */
-
-    NUM_SCANCODES = 512 /**< not a key, just marks the number of scancodes
-                                 for array bounds */
-}
 
 
 HAT_CENTERED :: 0x00;
@@ -1705,7 +1705,7 @@ Message_Box_Button_Data :: struct #ordered
 
 Message_Box_Color_Scheme :: struct #ordered
 {
-    colors: [Message_Box_Color_Type.MESSAGEBOX_COLOR_MAX]Message_Box_Color;
+    colors: [Message_Box_Color_Type.MAX]Message_Box_Color;
 }
 
 Message_Box_Color :: struct #ordered
