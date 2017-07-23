@@ -1,8 +1,8 @@
 import . "sdl.odin";
 
 // !!!!!!!!!!
-// Not all of these tests pass yet as some structs aren't ported properly.
-// Don't bother running this yet.
+// All of these tests should pass except the ones I've commented out because
+// they rely on some structs that I haven't ported yet.
 // !!!!!!!!!!
 
 main :: proc()
