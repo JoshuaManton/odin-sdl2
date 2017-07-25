@@ -746,6 +746,21 @@ GLAttr :: enum i32 {
     CONTEXT_RELEASE_BEHAVIOR
 }
 
+GLContextFlag :: enum i32
+{
+    DEBUG              = 0x0001,
+    FORWARD_COMPATIBLE = 0x0002,
+    ROBUST_ACCESS      = 0x0004,
+    RESET_ISOLATION    = 0x0008
+}
+
+GLContextProfile :: enum i32
+{
+    CORE           = 0x0001,
+    COMPATIBILITY  = 0x0002,
+    ES             = 0x0004
+}
+
 MessageBoxColorType :: enum i32 {
     BACKGROUND,
     TEXT,
