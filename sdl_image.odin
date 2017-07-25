@@ -1,64 +1,57 @@
-// Incomplete
-// Incomplete
-// Incomplete
-// Incomplete
-// Incomplete
-// Incomplete
-
-import . "sdl.odin";
+import "sdl.odin";
 
 foreign_system_library (
 	lib "SDL2_image.lib";
 )
 
 foreign lib {
-	IMG_Init
-	IMG_Linked_Version
-	IMG_Load
-	IMG_LoadBMP_RW
-	IMG_LoadCUR_RW
-	IMG_LoadGIF_RW
-	IMG_LoadICO_RW
-	IMG_LoadJPG_RW
-	IMG_LoadLBM_RW
-	IMG_LoadPCX_RW
-	IMG_LoadPNG_RW
-	IMG_LoadPNM_RW
-	IMG_LoadTGA_RW
-	IMG_LoadTIF_RW
-	IMG_LoadTexture
-	IMG_LoadTextureTyped_RW
-	IMG_LoadTexture_RW
-	IMG_LoadTyped_RW
-	IMG_LoadWEBP_RW
-	IMG_LoadXCF_RW
-	IMG_LoadXPM_RW
-	IMG_LoadXV_RW
-	IMG_Load_RW
-	IMG_Quit
-	IMG_ReadXPMFromArray
-	IMG_SavePNG
-	IMG_SavePNG_RW
-	IMG_isBMP
-	IMG_isCUR
-	IMG_isGIF
-	IMG_isICO
-	IMG_isJPG
-	IMG_isLBM
-	IMG_isPCX
-	IMG_isPNG
-	IMG_isPNM
-	IMG_isTIF
-	IMG_isWEBP
-	IMG_isXCF
-	IMG_isXPM
-	IMG_isXV
+	init								:: proc(flags: i32) -> i32																					#link_name "IMG_Init" ---;
+	linked_version						:: proc() -> ^sdl.Version																					#link_name "IMG_Linked_Version" ---;
+	load								:: proc(file: ^u8) -> ^sdl.Surface																			#link_name "IMG_Load" ---;
+	load_bmp_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadBMP_RW" ---;
+	load_cur_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadCUR_RW" ---;
+	load_gif_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadGIF_RW" ---;
+	load_ico_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadICO_RW" ---;
+	load_jpg_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadJPG_RW" ---;
+	load_lbm_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadLBM_RW" ---;
+	load_pcx_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadPCX_RW" ---;
+	load_png_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadPNG_RW" ---;
+	load_pnm_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadPNM_RW" ---;
+	load_tga_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadTGA_RW" ---;
+	load_tif_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadTIF_RW" ---;
+	load_texture						:: proc(renderer: ^sdl.Renderer, file: ^u8) -> ^sdl.Texture													#link_name "IMG_LoadTexture" ---;
+	load_texture_typed_rw				:: proc(renderer: ^sdl.Renderer, src: ^sdl.RwOps, freesrc: i32, img_type: ^u8) -> ^sdl.Texture				#link_name "IMG_LoadTextureTyped_RW" ---;
+	load_texture_rw						:: proc(renderer: ^sdl.Renderer, src: ^sdl.RwOps, freesrc: i32) -> ^sdl.Texture								#link_name "IMG_LoadTexture_RW" ---;
+	load_typed_rw						:: proc(src: ^sdl.RwOps, freesrc: i32, img_type: ^u8) -> ^sdl.Surface										#link_name "IMG_LoadTyped_RW" ---;
+	load_webp_rw						:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadWEBP_RW" ---;
+	load_xcf_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadXCF_RW" ---;
+	load_xpm_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadXPM_RW" ---;
+	load_xv_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadXV_RW" ---;
+	load_rw								:: proc(src: ^sdl.RwOps, freesrc: i32) -> ^sdl.Surface														#link_name "IMG_Load_RW" ---;
+	quit								:: proc()																									#link_name "IMG_Quit" ---;
+	read_xpm_from_array					:: proc(xpm: ^^u8) -> ^sdl.Surface																			#link_name "IMG_ReadXPMFromArray" ---;
+	save_png							:: proc(surface: ^sdl.Surface, file: ^u8) -> i32															#link_name "IMG_SavePNG" ---;
+	save_png_rw							:: proc(surface: ^sdl.Surface, dst: ^sdl.RwOps, freedst: i32) -> i32										#link_name "IMG_SavePNG_RW" ---;
+	is_bmp								:: proc(src: ^sdl.RwOps) -> i32																				#link_name "IMG_isBMP" ---;
+	is_cur								:: proc(src: ^sdl.RwOps) -> i32																				#link_name "IMG_isCUR" ---;
+	is_gif								:: proc(src: ^sdl.RwOps) -> i32																				#link_name "IMG_isGIF" ---;
+	is_ico								:: proc(src: ^sdl.RwOps) -> i32																				#link_name "IMG_isICO" ---;
+	is_jpg								:: proc(src: ^sdl.RwOps) -> i32																				#link_name "IMG_isJPG" ---;
+	is_lbm								:: proc(src: ^sdl.RwOps) -> i32																				#link_name "IMG_isLBM" ---;
+	is_pcx								:: proc(src: ^sdl.RwOps) -> i32																				#link_name "IMG_isPCX" ---;
+	is_png								:: proc(src: ^sdl.RwOps) -> i32																				#link_name "IMG_isPNG" ---;
+	is_pnm								:: proc(src: ^sdl.RwOps) -> i32																				#link_name "IMG_isPNM" ---;
+	is_tif								:: proc(src: ^sdl.RwOps) -> i32																				#link_name "IMG_isTIF" ---;
+	is_webp								:: proc(src: ^sdl.RwOps) -> i32																				#link_name "IMG_isWEBP" ---;
+	is_xcf								:: proc(src: ^sdl.RwOps) -> i32																				#link_name "IMG_isXCF" ---;
+	is_xpm								:: proc(src: ^sdl.RwOps) -> i32																				#link_name "IMG_isXPM" ---;
+	is_xv								:: proc(src: ^sdl.RwOps) -> i32																				#link_name "IMG_isXV" ---;
 }
 
-IMG_InitFlags :: enum i32
+InitFlags :: enum i32
 {
-    IMG_INIT_JPG = 0x00000001,
-    IMG_INIT_PNG = 0x00000002,
-    IMG_INIT_TIF = 0x00000004,
-    IMG_INIT_WEBP = 0x00000008
+    JPG = 0x00000001,
+    PNG = 0x00000002,
+    TIF = 0x00000004,
+    WEBP = 0x00000008
 }
