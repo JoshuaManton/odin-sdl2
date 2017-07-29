@@ -50,11 +50,35 @@ foreign lib {
 }
 
 // Wrappers
-load :: proc(file: string) -> ^sdl.Surface { return _load(new_c_string(file)); }
-load_texture :: proc(renderer: ^sdl.Renderer, file: string) -> ^sdl.Texture { return _load_texture(renderer, new_c_string(file)); }
-load_texture_typed_rw :: proc(renderer: ^sdl.Renderer, src: ^sdl.RwOps, freesrc: i32, img_type: string) -> ^sdl.Texture { return _load_texture_typed_rw(renderer, src, freesrc, new_c_string(img_type)); }
-load_typed_rw :: proc(src: ^sdl.RwOps, freesrc: i32, img_type: string) -> ^sdl.Surface { return _load_typed_rw(src, freesrc, new_c_string(img_type)); }
-save_png :: proc(surface: ^sdl.Surface, file: string) -> i32 { return _save_png(surface, new_c_string(file)); }
+load :: proc(file: string) -> ^sdl.Surface {
+	file_c := new_c_string(file);
+	defer free(file_c);
+	return _load(file_c);
+}
+
+load_texture :: proc(renderer: ^sdl.Renderer, file: string) -> ^sdl.Texture {
+	file_c := new_c_string(file);
+	defer free(file_c);
+	return _load_texture(renderer, file_c);
+}
+
+load_texture_typed_rw :: proc(renderer: ^sdl.Renderer, src: ^sdl.RwOps, freesrc: i32, img_type: string) -> ^sdl.Texture {
+	type_c := new_c_string(img_type);
+	defer free(type_c);
+	return _load_texture_typed_rw(renderer, src, freesrc, type_c);
+}
+
+load_typed_rw :: proc(src: ^sdl.RwOps, freesrc: i32, img_type: string) -> ^sdl.Surface {
+	type_c := new_c_string(img_type);
+	defer free(type_c);
+	return _load_typed_rw(src, freesrc, type_c);
+}
+
+save_png :: proc(surface: ^sdl.Surface, file: string) -> i32 {
+	file_c := new_c_string(file);
+	defer free(file_c);
+	return _save_png(surface, file_c);
+}
 
 InitFlags :: enum i32
 {
