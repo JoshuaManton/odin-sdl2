@@ -2,7 +2,7 @@ import "sdl.odin";
 import . "strings.odin";
 
 foreign_system_library (
-	lib "SDL2_image.lib";
+	lib "SDL2_ttf.lib";
 )
 
 foreign lib {
