@@ -913,110 +913,118 @@ video_init 										:: proc(driver_name: string) -> i32 {
 	return video_init_c(driver_name_c);
 }
 
+InitFlags :: enum i32 {
+	Timer = 0x00000001,
+	Audio = 0x00000010,
+	Video = 0x00000020,
+	Joystick = 0x00000200,
+	Haptic = 0x00001000,
+	GameController = 0x00002000,
+	Events = 0x00004000,
+	NoParachute = 0x00100000,
+	Everything = Timer | Audio | Video | Events | Joystick | Haptic | GameController
+}
 
-INIT_TIMER :: 0x00000001;
-INIT_AUDIO :: 0x00000010;
-INIT_VIDEO :: 0x00000020;
-INIT_JOYSTICK :: 0x00000200;
-INIT_HAPTIC :: 0x00001000;
-INIT_GAMECONTROLLER :: 0x00002000;
-INIT_EVENTS :: 0x00004000;
-INIT_NOPARACHUTE :: 0x00100000;
-INIT_EVERYTHING :: INIT_TIMER | INIT_AUDIO | INIT_VIDEO | INIT_EVENTS | INIT_JOYSTICK | INIT_HAPTIC | INIT_GAMECONTROLLER;
+WindowFlags :: enum i32 {
+	Fullscreen = 0x00000001,
+	OpenGL = 0x00000002,
+	Shown = 0x00000004,
+	Hidden = 0x00000008,
+	Borderless = 0x00000010,
+	Resizable = 0x00000020,
+	Minimized = 0x00000040,
+	Maximized = 0x00000080,
+	InputGrabbed = 0x00000100,
+	InputFocus = 0x00000200,
+	MouseFocus = 0x00000400,
+	FullscreenDesktop = Fullscreen | 0x00001000,
+	Foreign = 0x00000800,
+	AllowHighDPI = 0x00002000,
+	MouseCapture = 0x00004000,
+	AlwaysOnTop = 0x00008000,
+	SkipTaskbar = 0x00010000,
+	Utility = 0x00020000,
+	Tooltip = 0x00040000,
+	PopupMenu = 0x00080000,
+	Vulkan = 0x00100000
+}
 
-WINDOW_FULLSCREEN :: 0x00000001;
-WINDOW_OPENGL :: 0x00000002;
-WINDOW_SHOWN :: 0x00000004;
-WINDOW_HIDDEN :: 0x00000008;
-WINDOW_BORDERLESS :: 0x00000010;
-WINDOW_RESIZABLE :: 0x00000020;
-WINDOW_MINIMIZED :: 0x00000040;
-WINDOW_MAXIMIZED :: 0x00000080;
-WINDOW_INPUT_GRABBED :: 0x00000100;
-WINDOW_INPUT_FOCUS :: 0x00000200;
-WINDOW_MOUSE_FOCUS :: 0x00000400;
-WINDOW_FULLSCREEN_DESKTOP :: WINDOW_FULLSCREEN | 0x00001000;
-WINDOW_FOREIGN :: 0x00000800;
-WINDOW_ALLOW_HIGHDPI :: 0x00002000;
-WINDOW_MOUSE_CAPTURE :: 0x00004000;
-WINDOW_ALWAYS_ON_TOP :: 0x00008000;
-WINDOW_SKIP_TASKBAR :: 0x00010000;
-WINDOW_UTILITY :: 0x00020000;
-WINDOW_TOOLTIP :: 0x00040000;
-WINDOW_POPUP_MENU :: 0x00080000;
-WINDOW_VULKAN :: 0x00100000;
+WindowPos :: enum i32 {
+	Undefined = 0x1FFF0000,
+	Centered = 0x2FFF0000
+}
 
-WINDOWPOS_UNDEFINED :: 0x1FFF0000;
-WINDOWPOS_CENTERED :: 0x2FFF0000;
+RendererFlags :: enum i32 {
+	Software = 0x00000001,
+	Accelerated = 0x00000002,
+	PresentVSync = 0x00000004,
+	TargetTexture = 0x00000008
+}
 
-RENDERER_SOFTWARE :: 0x00000001;
-RENDERER_ACCELERATED :: 0x00000002;
-RENDERER_PRESENTVSYNC :: 0x00000004;
-RENDERER_TARGETTEXTURE :: 0x00000008;
 
 BlendMode :: enum i32 {
-	NONE = 0x00000000,
-	BLEND = 0x00000001,
-	ADD = 0x00000002,
-	MOD = 0x00000004
+	None = 0x00000000,
+	Blend = 0x00000001,
+	Add = 0x00000002,
+	Mod = 0x00000004
 }
 
 ErrorCode :: enum i32 {
-	ENOMEM,
-	EFREAD,
-	EFWRITE,
-	EFSEEK,
-	UNSUPPORTED,
-	LASTERROR
+	NoMem,
+	FRead,
+	FWrite,
+	FSeek,
+	Unsupported,
+	LastError
 }
 
 JoystickPowerLevel :: enum i32 {
-	UNKNOWN = -1,
-	EMPTY,
-	LOW,
-	MEDIUM,
-	FULL,
-	WIRED,
-	MAX
+	Unknown = -1,
+	Empty,
+	Low,
+	Medium,
+	Full,
+	Wired,
+	Max
 }
 
 HintPriority :: enum i32 {
-	DEFAULT,
-	NORMAL,
-	OVERRIDE
+	Default,
+	Normal,
+	Override
 }
 
 ThreadPriority :: enum i32 {
-	LOW,
-	NORMAL,
-	HIGH
+	Low,
+	Normal,
+	High
 }
 
 AssertState :: enum i32 {
-	RETRY,
-	BREAK,
-	ABORT,
-	IGNORE,
-	ALWAYS_IGNORE
+	Retry,
+	Break,
+	Abort,
+	Ignore,
+	AlwaysIgnore
 }
 
 EventAction :: enum i32 {
-	ADDEVENT,
-	PEEKEVENT,
-	GETEVENT
+	AddEvent,
+	PeekEvent,
+	GetEvent
 }
 
 HitTestResult :: enum i32 {
-	NORMAL,
-	DRAGGABLE,
-	RESIZE_TOPLEFT,
-	RESIZE_TOP,
-	RESIZE_TOPRIGHT,
-	RESIZE_RIGHT,
-	RESIZE_BOTTOMRIGHT,
-	RESIZE_BOTTOM,
-	RESIZE_BOTTOMLEFT,
-	RESIZE_LEFT
+	Normal,
+	Draggable,
+	ResizeTopLeft,
+	ResizeTop,
+	ResizeTopRight,
+	ResizeRight,
+	ResizeBottomRight,
+	ResizeBottom,
+	ResizeBottomLeft,
+	ResizeLeft
 }
 
 Bool :: enum i32 {
@@ -1025,108 +1033,108 @@ Bool :: enum i32 {
 }
 
 WindowShapeModes :: enum i32 {
-	DEFAULT,
-	BINARIZE_ALPHA,
-	REVERSE_BINARIZE_ALPHA,
-	COLOR_KEY
+	Default,
+	BinarizeAlpha,
+	ReverseBinarizeAlpha,
+	ColorKey
 }
 
 Keymod :: enum i32 {
-	NONE = 0x0000,
-	LSHIFT = 0x0001,
-	RSHIFT = 0x0002,
-	LCTRL = 0x0040,
-	RCTRL = 0x0080,
-	LALT = 0x0100,
-	RALT = 0x0200,
-	LGUI = 0x0400,
-	RGUI = 0x0800,
-	NUM = 0x1000,
-	CAPS = 0x2000,
-	MODE = 0x4000,
-	RESERVED = 0x8000
+	None = 0x0000,
+	LShift = 0x0001,
+	RShift = 0x0002,
+	LCtrl = 0x0040,
+	RCtrl = 0x0080,
+	LAlt = 0x0100,
+	RAlt = 0x0200,
+	LGui = 0x0400,
+	RGui = 0x0800,
+	Num = 0x1000,
+	Caps = 0x2000,
+	Mode = 0x4000,
+	Reserved = 0x8000
 }
 
 RendererFlip :: enum i32 {
-	NONE = 0x00000000,
-	HORIZONTAL = 0x00000001,
-	VERTICAL = 0x00000002
+	None = 0x00000000,
+	Horizontal = 0x00000001,
+	Vertical = 0x00000002
 }
 
 GLAttr :: enum i32 {
-	RED_SIZE,
-	GREEN_SIZE,
-	BLUE_SIZE,
-	ALPHA_SIZE,
-	BUFFER_SIZE,
-	DOUBLEBUFFER,
-	DEPTH_SIZE,
-	STENCIL_SIZE,
-	ACCUM_RED_SIZE,
-	ACCUM_GREEN_SIZE,
-	ACCUM_BLUE_SIZE,
-	ACCUM_ALPHA_SIZE,
-	STEREO,
-	MULTISAMPLEBUFFERS,
-	MULTISAMPLESAMPLES,
-	ACCELERATED_VISUAL,
-	RETAINED_BACKING,
-	CONTEXT_MAJOR_VERSION,
-	CONTEXT_MINOR_VERSION,
-	CONTEXT_EGL,
-	CONTEXT_FLAGS,
-	CONTEXT_PROFILE_MASK,
-	SHARE_WITH_CURRENT_CONTEXT,
-	FRAMEBUFFER_SRGB_CAPABLE,
-	CONTEXT_RELEASE_BEHAVIOR
+	RedSize,
+	GreenSize,
+	BlueSize,
+	AlphaSize,
+	BufferSize,
+	Doublebuffer,
+	DepthSize,
+	StencilSize,
+	AccumRedSize,
+	AccumGreenSize,
+	AccumBlueSize,
+	AccumAlphaSize,
+	Stereo,
+	Multisamplebuffers,
+	MultisampleSamples,
+	AcceleratedVisual,
+	RetainedBacking,
+	ContextMajorVersion,
+	ContextMinorVersion,
+	ContextEGL,
+	ContextFlags,
+	ContextProfileMask,
+	ShareWithCurrentContext,
+	FramebufferSRGBCapable,
+	ContextReleaseBehavior
 }
 
 GLContextFlag :: enum i32
 {
-	DEBUG              = 0x0001,
-	FORWARD_COMPATIBLE = 0x0002,
-	ROBUST_ACCESS      = 0x0004,
-	RESET_ISOLATION    = 0x0008
+	Debug              = 0x0001,
+	ForwardCompatible = 0x0002,
+	RobustAccess      = 0x0004,
+	ResetIsolation    = 0x0008
 }
 
 GLContextProfile :: enum i32
 {
-	CORE           = 0x0001,
-	COMPATIBILITY  = 0x0002,
+	Core           = 0x0001,
+	Compatibility  = 0x0002,
 	ES             = 0x0004
 }
 
 MessageBoxColorType :: enum i32 {
-	BACKGROUND,
-	TEXT,
-	BUTTON_BORDER,
-	BUTTON_BACKGROUND,
-	BUTTON_SELECTED,
-	MAX
+	Background,
+	Text,
+	ButtonBorder,
+	ButtonBackground,
+	ButtonSelected,
+	Max
 }
 
 AudioStatus :: enum i32 {
-	STOPPED = 0,
-	PLAYING,
-	PAUSED
+	Stopped = 0,
+	Playing,
+	Paused
 }
 
 PowerState :: enum i32 {
-	UNKNOWN,
-	ON_BATTERY,
-	NO_BATTERY,
-	CHARGING,
-	CHARGED
+	Unknown,
+	OnBattery,
+	NoBattery,
+	Charging,
+	Charged
 }
 
 LogPriority :: enum i32 {
-	VERBOSE = 1,
-	DEBUG,
-	INFO,
-	WARN,
-	ERROR,
-	CRITICAL,
-	NUM_LOG_PRIORITIES
+	Verbose = 1,
+	Debug,
+	Info,
+	Warn,
+	Error,
+	Critical,
+	NumLogPriorities
 }
 
 
@@ -1134,62 +1142,62 @@ LogPriority :: enum i32 {
 
 
 GameControllerButton :: enum i32 {
-	INVALID = -1,
+	Invalid = -1,
 	A,
 	B,
 	X,
 	Y,
-	BACK,
-	GUIDE,
-	START,
-	LEFTSTICK,
-	RIGHTSTICK,
-	LEFTSHOULDER,
-	RIGHTSHOULDER,
-	DPAD_UP,
-	DPAD_DOWN,
-	DPAD_LEFT,
-	DPAD_RIGHT,
-	MAX
+	Back,
+	Guide,
+	Start,
+	LeftStick,
+	RightStick,
+	LeftShoulder,
+	RightShoulder,
+	DPadUp,
+	DPadDown,
+	DPadLeft,
+	DPadRight,
+	Max
 }
 
 GameControllerAxis :: enum i32 {
-	INVALID = -1,
-	LEFTX,
-	LEFTY,
-	RIGHTX,
-	RIGHTY,
-	TRIGGERLEFT,
-	TRIGGERRIGHT,
-	MAX
+	Invalid = -1,
+	LeftX,
+	LeftY,
+	RightX,
+	RightY,
+	TriggerLeft,
+	TriggerRight,
+	Max
 }
 
 GameControllerBindType :: enum i32 {
-	NONE = 0,
-	BUTTON,
-	AXIS,
-	HAT
+	None = 0,
+	Button,
+	Axis,
+	Hat
 }
 
 SystemCursor :: enum i32 {
-	ARROW,
-	IBEAM,
-	WAIT,
-	CROSSHAIR,
-	WAITARROW,
-	SIZENWSE,
-	SIZENESW,
-	SIZEWE,
-	SIZENS,
-	SIZEALL,
-	NO,
-	HAND,
-	NUM_SYSTEM_CURSORS
+	Arrow,
+	IBeam,
+	Wait,
+	Crosshair,
+	WaitArrow,
+	SizeNWSE,
+	SizeNESW,
+	SizeWE,
+	SizeNS,
+	SizeAll,
+	No,
+	Hand,
+	NumSystemCursors
 }
 
 
 Scancode :: enum i32 {
-	UNKNOWN = 0,
+	Unknown = 0,
 
 	A = 4,
 	B = 5,
@@ -1218,37 +1226,38 @@ Scancode :: enum i32 {
 	Y = 28,
 	Z = 29,
 
-	NR_1 = 30,
-	NR_2 = 31,
-	NR_3 = 32,
-	NR_4 = 33,
-	NR_5 = 34,
-	NR_6 = 35,
-	NR_7 = 36,
-	NR_8 = 37,
-	NR_9 = 38,
-	NR_0 = 39,
+	// Number row
+	Nr1 = 30,
+	Nr2 = 31,
+	Nr3 = 32,
+	Nr4 = 33,
+	Nr5 = 34,
+	Nr6 = 35,
+	Nr7 = 36,
+	Nr8 = 37,
+	Nr9 = 38,
+	Nr0 = 39,
 
-	RETURN = 40,
-	ESCAPE = 41,
-	BACKSPACE = 42,
-	TAB = 43,
-	SPACE = 44,
+	Return = 40,
+	Escape = 41,
+	Backspace = 42,
+	Tab = 43,
+	Space = 44,
 
-	MINUS = 45,
-	EQUALS = 46,
-	LEFTBRACKET = 47,
-	RIGHTBRACKET = 48,
-	BACKSLASH = 49,
-	NONUSHASH = 50,
-	SEMICOLON = 51,
-	APOSTROPHE = 52,
-	GRAVE = 53,
-	COMMA = 54,
-	PERIOD = 55,
-	SLASH = 56,
+	Minus = 45,
+	Equals = 46,
+	Leftbracket = 47,
+	Rightbracket = 48,
+	Backslash = 49,
+	Nonushash = 50, // ???
+	Semicolon = 51,
+	Apostrophe = 52,
+	Grave = 53,
+	Comma = 54,
+	Period = 55,
+	Slash = 56,
 
-	CAPSLOCK = 57,
+	CapsLock = 57,
 
 	F1 = 58,
 	F2 = 59,
@@ -1263,42 +1272,42 @@ Scancode :: enum i32 {
 	F11 = 68,
 	F12 = 69,
 
-	PRINTSCREEN = 70,
-	SCROLLLOCK = 71,
-	PAUSE = 72,
-	INSERT = 73,
-	HOME = 74,
-	PAGEUP = 75,
-	DELETE = 76,
-	END = 77,
-	PAGEDOWN = 78,
-	RIGHT = 79,
-	LEFT = 80,
-	DOWN = 81,
-	UP = 82,
+	PrintScreen = 70,
+	ScrollLock = 71,
+	Pause = 72,
+	Insert = 73,
+	Home = 74,
+	PageUp = 75,
+	Delete = 76,
+	End = 77,
+	PageDown = 78,
+	Right = 79,
+	Left = 80,
+	Down = 81,
+	Up = 82,
 
-	NUMLOCKCLEAR = 83,
-	KP_DIVIDE = 84,
-	KP_MULTIPLY = 85,
-	KP_MINUS = 86,
-	KP_PLUS = 87,
-	KP_ENTER = 88,
-	KP_1 = 89,
-	KP_2 = 90,
-	KP_3 = 91,
-	KP_4 = 92,
-	KP_5 = 93,
-	KP_6 = 94,
-	KP_7 = 95,
-	KP_8 = 96,
-	KP_9 = 97,
-	KP_0 = 98,
-	KP_PERIOD = 99,
+	NumLockClear = 83,
+	KpDivide = 84,
+	KpMultiply = 85,
+	KpMinus = 86,
+	KpPlus = 87,
+	KpEnter = 88,
+	Kp1 = 89,
+	Kp2 = 90,
+	Kp3 = 91,
+	Kp4 = 92,
+	Kp5 = 93,
+	Kp6 = 94,
+	Kp7 = 95,
+	Kp8 = 96,
+	Kp9 = 97,
+	Kp0 = 98,
+	KpPeriod = 99,
 
-	NONUSBACKSLASH = 100,
-	APPLICATION = 101,
-	POWER = 102,
-	KP_EQUALS = 103,
+	NonUSBackslash = 100,
+	Application = 101,
+	Power = 102,
+	KpEquals = 103,
 	F13 = 104,
 	F14 = 105,
 	F15 = 106,
@@ -1311,150 +1320,145 @@ Scancode :: enum i32 {
 	F22 = 113,
 	F23 = 114,
 	F24 = 115,
-	EXECUTE = 116,
-	HELP = 117,
-	MENU = 118,
-	SELECT = 119,
-	STOP = 120,
-	AGAIN = 121,
-	UNDO = 122,
-	CUT = 123,
-	COPY = 124,
-	PASTE = 125,
-	FIND = 126,
-	MUTE = 127,
-	VOLUMEUP = 128,
-	VOLUMEDOWN = 129,
-/* not sure whether there's a reason to enable these */
-/*     LOCKINGCAPSLOCK = 130,  */
-/*     LOCKINGNUMLOCK = 131, */
-/*     LOCKINGSCROLLLOCK = 132, */
-	KP_COMMA = 133,
-	KP_EQUALSAS400 = 134,
+	Execute = 116,
+	Help = 117,
+	Menu = 118,
+	Select = 119,
+	Stop = 120,
+	Again = 121,
+	Undo = 122,
+	Cut = 123,
+	Copy = 124,
+	Paste = 125,
+	Find = 126,
+	Mute = 127,
+	VolumeUp = 128,
+	VolumeDown = 129,
+	KpComma = 133,
+	KpEqualsAS400 = 134,
 
-	INTERNATIONAL1 = 135,
-	INTERNATIONAL2 = 136,
-	INTERNATIONAL3 = 137,
-	INTERNATIONAL4 = 138,
-	INTERNATIONAL5 = 139,
-	INTERNATIONAL6 = 140,
-	INTERNATIONAL7 = 141,
-	INTERNATIONAL8 = 142,
-	INTERNATIONAL9 = 143,
-	LANG1 = 144,
-	LANG2 = 145,
-	LANG3 = 146,
-	LANG4 = 147,
-	LANG5 = 148,
-	LANG6 = 149,
-	LANG7 = 150,
-	LANG8 = 151,
-	LANG9 = 152,
+	International1 = 135,
+	International2 = 136,
+	International3 = 137,
+	International4 = 138,
+	International5 = 139,
+	International6 = 140,
+	International7 = 141,
+	International8 = 142,
+	International9 = 143,
+	Lang1 = 144,
+	Lang2 = 145,
+	Lang3 = 146,
+	Lang4 = 147,
+	Lang5 = 148,
+	Lang6 = 149,
+	Lang7 = 150,
+	Lang8 = 151,
+	Lang9 = 152,
 
-	ALTERASE = 153,
-	SYSREQ = 154,
-	CANCEL = 155,
-	CLEAR = 156,
-	PRIOR = 157,
-	RETURN2 = 158,
-	SEPARATOR = 159,
-	OUT = 160,
-	OPER = 161,
-	CLEARAGAIN = 162,
-	CRSEL = 163,
-	EXSEL = 164,
+	AltErase = 153,
+	SysReq = 154,
+	Cancel = 155,
+	Clear = 156,
+	Prior = 157,
+	Return2 = 158,
+	Separator = 159,
+	Out = 160,
+	Oper = 161,
+	ClearAgain = 162,
+	CrSel = 163,
+	ExSel = 164,
 
-	KP_00 = 176,
-	KP_000 = 177,
-	THOUSANDSSEPARATOR = 178,
-	DECIMALSEPARATOR = 179,
-	CURRENCYUNIT = 180,
-	CURRENCYSUBUNIT = 181,
-	KP_LEFTPAREN = 182,
-	KP_RIGHTPAREN = 183,
-	KP_LEFTBRACE = 184,
-	KP_RIGHTBRACE = 185,
-	KP_TAB = 186,
-	KP_BACKSPACE = 187,
-	KP_A = 188,
-	KP_B = 189,
-	KP_C = 190,
-	KP_D = 191,
-	KP_E = 192,
-	KP_F = 193,
-	KP_XOR = 194,
-	KP_POWER = 195,
-	KP_PERCENT = 196,
-	KP_LESS = 197,
-	KP_GREATER = 198,
-	KP_AMPERSAND = 199,
-	KP_DBLAMPERSAND = 200,
-	KP_VERTICALBAR = 201,
-	KP_DBLVERTICALBAR = 202,
-	KP_COLON = 203,
-	KP_HASH = 204,
-	KP_SPACE = 205,
-	KP_AT = 206,
-	KP_EXCLAM = 207,
-	KP_MEMSTORE = 208,
-	KP_MEMRECALL = 209,
-	KP_MEMCLEAR = 210,
-	KP_MEMADD = 211,
-	KP_MEMSUBTRACT = 212,
-	KP_MEMMULTIPLY = 213,
-	KP_MEMDIVIDE = 214,
-	KP_PLUSMINUS = 215,
-	KP_CLEAR = 216,
-	KP_CLEARENTRY = 217,
-	KP_BINARY = 218,
-	KP_OCTAL = 219,
-	KP_DECIMAL = 220,
-	KP_HEXADECIMAL = 221,
+	Kp00 = 176,
+	Kp000 = 177,
+	ThousandsSeparator = 178,
+	DecimalSeparator = 179,
+	CurrencyUnit = 180,
+	CurrencySubUnit = 181,
+	KpLeftParen = 182,
+	KpRightParen = 183,
+	KpLeftBrace = 184,
+	KpRightBrace = 185,
+	KpTab = 186,
+	KpBackspace = 187,
+	KpA = 188,
+	KpB = 189,
+	KpC = 190,
+	KpD = 191,
+	KpE = 192,
+	KpF = 193,
+	KpXor = 194,
+	KpPower = 195,
+	KpPercent = 196,
+	KpLess = 197,
+	KpGreater = 198,
+	KpAmpersand = 199,
+	KpDblAmpersand = 200,
+	KpVerticalBar = 201,
+	KpDblVerticalBar = 202,
+	KpColon = 203,
+	KpHash = 204,
+	KpSpace = 205,
+	KpAt = 206,
+	KpExclam = 207,
+	KpMemStore = 208,
+	KpMemRecall = 209,
+	KpMemClear = 210,
+	KpMemAdd = 211,
+	KpMemSubtract = 212,
+	KpMemMultiply = 213,
+	KpMemDivide = 214,
+	KpPlusMinus = 215,
+	KpClear = 216,
+	KpClearEntry = 217,
+	KpBinary = 218,
+	KpOctal = 219,
+	KpDecimal = 220,
+	KpHexadecimal = 221,
 
-	LCTRL = 224,
-	LSHIFT = 225,
-	LALT = 226,
-	LGUI = 227,
-	RCTRL = 228,
-	RSHIFT = 229,
-	RALT = 230,
-	RGUI = 231,
+	LCtrl = 224,
+	LShift = 225,
+	LAlt = 226,
+	LGui = 227,
+	RCtrl = 228,
+	RShift = 229,
+	RAlt = 230,
+	RGui = 231,
 
-	MODE = 257,
+	Mode = 257,
 
-	AUDIONEXT = 258,
-	AUDIOPREV = 259,
-	AUDIOSTOP = 260,
-	AUDIOPLAY = 261,
-	AUDIOMUTE = 262,
-	MEDIASELECT = 263,
+	AudioNext = 258,
+	AudioPrev = 259,
+	AudioStop = 260,
+	AudioPlay = 261,
+	AudioMute = 262,
+	MediaSelect = 263,
 	WWW = 264,
-	MAIL = 265,
-	CALCULATOR = 266,
-	COMPUTER = 267,
-	AC_SEARCH = 268,
-	AC_HOME = 269,
-	AC_BACK = 270,
-	AC_FORWARD = 271,
-	AC_STOP = 272,
-	AC_REFRESH = 273,
-	AC_BOOKMARKS = 274,
+	Mail = 265,
+	Calculator = 266,
+	Computer = 267,
+	AcSearch = 268,
+	AcHome = 269,
+	AcBack = 270,
+	AcForward = 271,
+	AcStop = 272,
+	AcRefresh = 273,
+	AcBookmarks = 274,
 
-	BRIGHTNESSDOWN = 275,
-	BRIGHTNESSUP = 276,
-	DISPLAYSWITCH = 277,
-	KBDILLUMTOGGLE = 278,
-	KBDILLUMDOWN = 279,
-	KBDILLUMUP = 280,
-	EJECT = 281,
-	SLEEP = 282,
+	BrightnessDown = 275,
+	BrightnessUp = 276,
+	DisplaySwitch = 277,
+	KbDillumToggle = 278,
+	KbDillumDown = 279,
+	KbDillumUp = 280,
+	Eject = 281,
+	Sleep = 282,
 
-	APP1 = 283,
-	APP2 = 284,
+	App1 = 283,
+	App2 = 284,
 
-	NUM_SCANCODES = 512
+	NumScancodes = 512
 }
-
 
 SDLK_UNKNOWN :: 0;
 
@@ -1529,7 +1533,7 @@ SDLK_x :: 'x';
 SDLK_y :: 'y';
 SDLK_z :: 'z';
 
-SDLK_CAPSLOCK :: Scancode.CAPSLOCK | SDLK_SCANCODE_MASK;
+SDLK_CAPSLOCK :: Scancode.CapsLock | SDLK_SCANCODE_MASK;
 
 SDLK_F1 :: Scancode.F1 | SDLK_SCANCODE_MASK;
 SDLK_F2 :: Scancode.F2 | SDLK_SCANCODE_MASK;
@@ -1544,41 +1548,41 @@ SDLK_F10 :: Scancode.F10 | SDLK_SCANCODE_MASK;
 SDLK_F11 :: Scancode.F11 | SDLK_SCANCODE_MASK;
 SDLK_F12 :: Scancode.F12 | SDLK_SCANCODE_MASK;
 
-SDLK_PRINTSCREEN :: Scancode.PRINTSCREEN | SDLK_SCANCODE_MASK;
-SDLK_SCROLLLOCK :: Scancode.SCROLLLOCK | SDLK_SCANCODE_MASK;
-SDLK_PAUSE :: Scancode.PAUSE | SDLK_SCANCODE_MASK;
-SDLK_INSERT :: Scancode.INSERT | SDLK_SCANCODE_MASK;
-SDLK_HOME :: Scancode.HOME | SDLK_SCANCODE_MASK;
-SDLK_PAGEUP :: Scancode.PAGEUP | SDLK_SCANCODE_MASK;
+SDLK_PRINTSCREEN :: Scancode.PrintScreen | SDLK_SCANCODE_MASK;
+SDLK_SCROLLLOCK :: Scancode.ScrollLock | SDLK_SCANCODE_MASK;
+SDLK_PAUSE :: Scancode.Pause | SDLK_SCANCODE_MASK;
+SDLK_INSERT :: Scancode.Insert | SDLK_SCANCODE_MASK;
+SDLK_HOME :: Scancode.Home | SDLK_SCANCODE_MASK;
+SDLK_PAGEUP :: Scancode.PageUp | SDLK_SCANCODE_MASK;
 SDLK_DELETE :: '\177';
-SDLK_END :: Scancode.END | SDLK_SCANCODE_MASK;
-SDLK_PAGEDOWN :: Scancode.PAGEDOWN | SDLK_SCANCODE_MASK;
-SDLK_RIGHT :: Scancode.RIGHT | SDLK_SCANCODE_MASK;
-SDLK_LEFT :: Scancode.LEFT | SDLK_SCANCODE_MASK;
-SDLK_DOWN :: Scancode.DOWN | SDLK_SCANCODE_MASK;
-SDLK_UP :: Scancode.UP | SDLK_SCANCODE_MASK;
+SDLK_END :: Scancode.End | SDLK_SCANCODE_MASK;
+SDLK_PAGEDOWN :: Scancode.PageDown | SDLK_SCANCODE_MASK;
+SDLK_RIGHT :: Scancode.Right | SDLK_SCANCODE_MASK;
+SDLK_LEFT :: Scancode.Left | SDLK_SCANCODE_MASK;
+SDLK_DOWN :: Scancode.Down | SDLK_SCANCODE_MASK;
+SDLK_UP :: Scancode.Up | SDLK_SCANCODE_MASK;
 
-SDLK_NUMLOCKCLEAR :: Scancode.NUMLOCKCLEAR | SDLK_SCANCODE_MASK;
-SDLK_KP_DIVIDE :: Scancode.KP_DIVIDE | SDLK_SCANCODE_MASK;
-SDLK_KP_MULTIPLY :: Scancode.KP_MULTIPLY | SDLK_SCANCODE_MASK;
-SDLK_KP_MINUS :: Scancode.KP_MINUS | SDLK_SCANCODE_MASK;
-SDLK_KP_PLUS :: Scancode.KP_PLUS | SDLK_SCANCODE_MASK;
-SDLK_KP_ENTER :: Scancode.KP_ENTER | SDLK_SCANCODE_MASK;
-SDLK_KP_1 :: Scancode.KP_1 | SDLK_SCANCODE_MASK;
-SDLK_KP_2 :: Scancode.KP_2 | SDLK_SCANCODE_MASK;
-SDLK_KP_3 :: Scancode.KP_3 | SDLK_SCANCODE_MASK;
-SDLK_KP_4 :: Scancode.KP_4 | SDLK_SCANCODE_MASK;
-SDLK_KP_5 :: Scancode.KP_5 | SDLK_SCANCODE_MASK;
-SDLK_KP_6 :: Scancode.KP_6 | SDLK_SCANCODE_MASK;
-SDLK_KP_7 :: Scancode.KP_7 | SDLK_SCANCODE_MASK;
-SDLK_KP_8 :: Scancode.KP_8 | SDLK_SCANCODE_MASK;
-SDLK_KP_9 :: Scancode.KP_9 | SDLK_SCANCODE_MASK;
-SDLK_KP_0 :: Scancode.KP_0 | SDLK_SCANCODE_MASK;
-SDLK_KP_PERIOD :: Scancode.KP_PERIOD | SDLK_SCANCODE_MASK;
+SDLK_NUMLOCKCLEAR :: Scancode.NumLockClear | SDLK_SCANCODE_MASK;
+SDLK_KP_DIVIDE :: Scancode.KpDivide | SDLK_SCANCODE_MASK;
+SDLK_KP_MULTIPLY :: Scancode.KpMultiply | SDLK_SCANCODE_MASK;
+SDLK_KP_MINUS :: Scancode.KpMinus | SDLK_SCANCODE_MASK;
+SDLK_KP_PLUS :: Scancode.KpPlus | SDLK_SCANCODE_MASK;
+SDLK_KP_ENTER :: Scancode.KpEnter | SDLK_SCANCODE_MASK;
+SDLK_KP_1 :: Scancode.Kp1 | SDLK_SCANCODE_MASK;
+SDLK_KP_2 :: Scancode.Kp2 | SDLK_SCANCODE_MASK;
+SDLK_KP_3 :: Scancode.Kp3 | SDLK_SCANCODE_MASK;
+SDLK_KP_4 :: Scancode.Kp4 | SDLK_SCANCODE_MASK;
+SDLK_KP_5 :: Scancode.Kp5 | SDLK_SCANCODE_MASK;
+SDLK_KP_6 :: Scancode.Kp6 | SDLK_SCANCODE_MASK;
+SDLK_KP_7 :: Scancode.Kp7 | SDLK_SCANCODE_MASK;
+SDLK_KP_8 :: Scancode.Kp8 | SDLK_SCANCODE_MASK;
+SDLK_KP_9 :: Scancode.Kp9 | SDLK_SCANCODE_MASK;
+SDLK_KP_0 :: Scancode.Kp0 | SDLK_SCANCODE_MASK;
+SDLK_KP_PERIOD :: Scancode.KpPeriod | SDLK_SCANCODE_MASK;
 
-SDLK_APPLICATION :: Scancode.APPLICATION | SDLK_SCANCODE_MASK;
-SDLK_POWER :: Scancode.POWER | SDLK_SCANCODE_MASK;
-SDLK_KP_EQUALS :: Scancode.KP_EQUALS | SDLK_SCANCODE_MASK;
+SDLK_APPLICATION :: Scancode.Application | SDLK_SCANCODE_MASK;
+SDLK_POWER :: Scancode.Power | SDLK_SCANCODE_MASK;
+SDLK_KP_EQUALS :: Scancode.KpEquals | SDLK_SCANCODE_MASK;
 SDLK_F13 :: Scancode.F13 | SDLK_SCANCODE_MASK;
 SDLK_F14 :: Scancode.F14 | SDLK_SCANCODE_MASK;
 SDLK_F15 :: Scancode.F15 | SDLK_SCANCODE_MASK;
@@ -1591,200 +1595,201 @@ SDLK_F21 :: Scancode.F21 | SDLK_SCANCODE_MASK;
 SDLK_F22 :: Scancode.F22 | SDLK_SCANCODE_MASK;
 SDLK_F23 :: Scancode.F23 | SDLK_SCANCODE_MASK;
 SDLK_F24 :: Scancode.F24 | SDLK_SCANCODE_MASK;
-SDLK_EXECUTE :: Scancode.EXECUTE | SDLK_SCANCODE_MASK;
-SDLK_HELP :: Scancode.HELP | SDLK_SCANCODE_MASK;
-SDLK_MENU :: Scancode.MENU | SDLK_SCANCODE_MASK;
-SDLK_SELECT :: Scancode.SELECT | SDLK_SCANCODE_MASK;
-SDLK_STOP :: Scancode.STOP | SDLK_SCANCODE_MASK;
-SDLK_AGAIN :: Scancode.AGAIN | SDLK_SCANCODE_MASK;
-SDLK_UNDO :: Scancode.UNDO | SDLK_SCANCODE_MASK;
-SDLK_CUT :: Scancode.CUT | SDLK_SCANCODE_MASK;
-SDLK_COPY :: Scancode.COPY | SDLK_SCANCODE_MASK;
-SDLK_PASTE :: Scancode.PASTE | SDLK_SCANCODE_MASK;
-SDLK_FIND :: Scancode.FIND | SDLK_SCANCODE_MASK;
-SDLK_MUTE :: Scancode.MUTE | SDLK_SCANCODE_MASK;
-SDLK_VOLUMEUP :: Scancode.VOLUMEUP | SDLK_SCANCODE_MASK;
-SDLK_VOLUMEDOWN :: Scancode.VOLUMEDOWN | SDLK_SCANCODE_MASK;
-SDLK_KP_COMMA :: Scancode.KP_COMMA | SDLK_SCANCODE_MASK;
-SDLK_KP_EQUALSAS400 :: Scancode.KP_EQUALSAS400 | SDLK_SCANCODE_MASK;
+SDLK_EXECUTE :: Scancode.Execute | SDLK_SCANCODE_MASK;
+SDLK_HELP :: Scancode.Help | SDLK_SCANCODE_MASK;
+SDLK_MENU :: Scancode.Menu | SDLK_SCANCODE_MASK;
+SDLK_SELECT :: Scancode.Select | SDLK_SCANCODE_MASK;
+SDLK_STOP :: Scancode.Stop | SDLK_SCANCODE_MASK;
+SDLK_AGAIN :: Scancode.Again | SDLK_SCANCODE_MASK;
+SDLK_UNDO :: Scancode.Undo | SDLK_SCANCODE_MASK;
+SDLK_CUT :: Scancode.Cut | SDLK_SCANCODE_MASK;
+SDLK_COPY :: Scancode.Copy | SDLK_SCANCODE_MASK;
+SDLK_PASTE :: Scancode.Paste | SDLK_SCANCODE_MASK;
+SDLK_FIND :: Scancode.Find | SDLK_SCANCODE_MASK;
+SDLK_MUTE :: Scancode.Mute | SDLK_SCANCODE_MASK;
+SDLK_VOLUMEUP :: Scancode.VolumeUp | SDLK_SCANCODE_MASK;
+SDLK_VOLUMEDOWN :: Scancode.VolumeDown | SDLK_SCANCODE_MASK;
+SDLK_KP_COMMA :: Scancode.KpComma | SDLK_SCANCODE_MASK;
+SDLK_KP_EQUALSAS400 :: Scancode.KpEqualsAS400 | SDLK_SCANCODE_MASK;
 
-SDLK_ALTERASE :: Scancode.ALTERASE | SDLK_SCANCODE_MASK;
-SDLK_SYSREQ :: Scancode.SYSREQ | SDLK_SCANCODE_MASK;
-SDLK_CANCEL :: Scancode.CANCEL | SDLK_SCANCODE_MASK;
-SDLK_CLEAR :: Scancode.CLEAR | SDLK_SCANCODE_MASK;
-SDLK_PRIOR :: Scancode.PRIOR | SDLK_SCANCODE_MASK;
-SDLK_RETURN2 :: Scancode.RETURN2 | SDLK_SCANCODE_MASK;
-SDLK_SEPARATOR :: Scancode.SEPARATOR | SDLK_SCANCODE_MASK;
-SDLK_OUT :: Scancode.OUT | SDLK_SCANCODE_MASK;
-SDLK_OPER :: Scancode.OPER | SDLK_SCANCODE_MASK;
-SDLK_CLEARAGAIN :: Scancode.CLEARAGAIN | SDLK_SCANCODE_MASK;
-SDLK_CRSEL :: Scancode.CRSEL | SDLK_SCANCODE_MASK;
-SDLK_EXSEL :: Scancode.EXSEL | SDLK_SCANCODE_MASK;
+SDLK_ALTERASE :: Scancode.AltErase | SDLK_SCANCODE_MASK;
+SDLK_SYSREQ :: Scancode.SysReq | SDLK_SCANCODE_MASK;
+SDLK_CANCEL :: Scancode.Cancel | SDLK_SCANCODE_MASK;
+SDLK_CLEAR :: Scancode.Clear | SDLK_SCANCODE_MASK;
+SDLK_PRIOR :: Scancode.Prior | SDLK_SCANCODE_MASK;
+SDLK_RETURN2 :: Scancode.Return2 | SDLK_SCANCODE_MASK;
+SDLK_SEPARATOR :: Scancode.Separator | SDLK_SCANCODE_MASK;
+SDLK_OUT :: Scancode.Out | SDLK_SCANCODE_MASK;
+SDLK_OPER :: Scancode.Oper | SDLK_SCANCODE_MASK;
+SDLK_CLEARAGAIN :: Scancode.ClearAgain | SDLK_SCANCODE_MASK;
+SDLK_CRSEL :: Scancode.CrSel | SDLK_SCANCODE_MASK;
+SDLK_EXSEL :: Scancode.ExSel | SDLK_SCANCODE_MASK;
 
-SDLK_KP_00 :: Scancode.KP_00 | SDLK_SCANCODE_MASK;
-SDLK_KP_000 :: Scancode.KP_000 | SDLK_SCANCODE_MASK;
-SDLK_THOUSANDSSEPARATOR :: Scancode.THOUSANDSSEPARATOR | SDLK_SCANCODE_MASK;
-SDLK_DECIMALSEPARATOR :: Scancode.DECIMALSEPARATOR | SDLK_SCANCODE_MASK;
-SDLK_CURRENCYUNIT :: Scancode.CURRENCYUNIT | SDLK_SCANCODE_MASK;
-SDLK_CURRENCYSUBUNIT :: Scancode.CURRENCYSUBUNIT | SDLK_SCANCODE_MASK;
-SDLK_KP_LEFTPAREN :: Scancode.KP_LEFTPAREN | SDLK_SCANCODE_MASK;
-SDLK_KP_RIGHTPAREN :: Scancode.KP_RIGHTPAREN | SDLK_SCANCODE_MASK;
-SDLK_KP_LEFTBRACE :: Scancode.KP_LEFTBRACE | SDLK_SCANCODE_MASK;
-SDLK_KP_RIGHTBRACE :: Scancode.KP_RIGHTBRACE | SDLK_SCANCODE_MASK;
-SDLK_KP_TAB :: Scancode.KP_TAB | SDLK_SCANCODE_MASK;
-SDLK_KP_BACKSPACE :: Scancode.KP_BACKSPACE | SDLK_SCANCODE_MASK;
-SDLK_KP_A :: Scancode.KP_A | SDLK_SCANCODE_MASK;
-SDLK_KP_B :: Scancode.KP_B | SDLK_SCANCODE_MASK;
-SDLK_KP_C :: Scancode.KP_C | SDLK_SCANCODE_MASK;
-SDLK_KP_D :: Scancode.KP_D | SDLK_SCANCODE_MASK;
-SDLK_KP_E :: Scancode.KP_E | SDLK_SCANCODE_MASK;
-SDLK_KP_F :: Scancode.KP_F | SDLK_SCANCODE_MASK;
-SDLK_KP_XOR :: Scancode.KP_XOR | SDLK_SCANCODE_MASK;
-SDLK_KP_POWER :: Scancode.KP_POWER | SDLK_SCANCODE_MASK;
-SDLK_KP_PERCENT :: Scancode.KP_PERCENT | SDLK_SCANCODE_MASK;
-SDLK_KP_LESS :: Scancode.KP_LESS | SDLK_SCANCODE_MASK;
-SDLK_KP_GREATER :: Scancode.KP_GREATER | SDLK_SCANCODE_MASK;
-SDLK_KP_AMPERSAND :: Scancode.KP_AMPERSAND | SDLK_SCANCODE_MASK;
-SDLK_KP_DBLAMPERSAND :: Scancode.KP_DBLAMPERSAND | SDLK_SCANCODE_MASK;
-SDLK_KP_VERTICALBAR :: Scancode.KP_VERTICALBAR | SDLK_SCANCODE_MASK;
-SDLK_KP_DBLVERTICALBAR :: Scancode.KP_DBLVERTICALBAR | SDLK_SCANCODE_MASK;
-SDLK_KP_COLON :: Scancode.KP_COLON | SDLK_SCANCODE_MASK;
-SDLK_KP_HASH :: Scancode.KP_HASH | SDLK_SCANCODE_MASK;
-SDLK_KP_SPACE :: Scancode.KP_SPACE | SDLK_SCANCODE_MASK;
-SDLK_KP_AT :: Scancode.KP_AT | SDLK_SCANCODE_MASK;
-SDLK_KP_EXCLAM :: Scancode.KP_EXCLAM | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMSTORE :: Scancode.KP_MEMSTORE | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMRECALL :: Scancode.KP_MEMRECALL | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMCLEAR :: Scancode.KP_MEMCLEAR | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMADD :: Scancode.KP_MEMADD | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMSUBTRACT :: Scancode.KP_MEMSUBTRACT | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMMULTIPLY :: Scancode.KP_MEMMULTIPLY | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMDIVIDE :: Scancode.KP_MEMDIVIDE | SDLK_SCANCODE_MASK;
-SDLK_KP_PLUSMINUS :: Scancode.KP_PLUSMINUS | SDLK_SCANCODE_MASK;
-SDLK_KP_CLEAR :: Scancode.KP_CLEAR | SDLK_SCANCODE_MASK;
-SDLK_KP_CLEARENTRY :: Scancode.KP_CLEARENTRY | SDLK_SCANCODE_MASK;
-SDLK_KP_BINARY :: Scancode.KP_BINARY | SDLK_SCANCODE_MASK;
-SDLK_KP_OCTAL :: Scancode.KP_OCTAL | SDLK_SCANCODE_MASK;
-SDLK_KP_DECIMAL :: Scancode.KP_DECIMAL | SDLK_SCANCODE_MASK;
-SDLK_KP_HEXADECIMAL :: Scancode.KP_HEXADECIMAL | SDLK_SCANCODE_MASK;
+SDLK_KP_00 :: Scancode.Kp00 | SDLK_SCANCODE_MASK;
+SDLK_KP_000 :: Scancode.Kp000 | SDLK_SCANCODE_MASK;
+SDLK_THOUSANDSSEPARATOR :: Scancode.ThousandsSeparator | SDLK_SCANCODE_MASK;
+SDLK_DECIMALSEPARATOR :: Scancode.DecimalSeparator | SDLK_SCANCODE_MASK;
+SDLK_CURRENCYUNIT :: Scancode.CurrencyUnit | SDLK_SCANCODE_MASK;
+SDLK_CURRENCYSUBUNIT :: Scancode.CurrencySubUnit | SDLK_SCANCODE_MASK;
+SDLK_KP_LEFTPAREN :: Scancode.KpLeftParen | SDLK_SCANCODE_MASK;
+SDLK_KP_RIGHTPAREN :: Scancode.KpRightParen | SDLK_SCANCODE_MASK;
+SDLK_KP_LEFTBRACE :: Scancode.KpLeftBrace | SDLK_SCANCODE_MASK;
+SDLK_KP_RIGHTBRACE :: Scancode.KpRightBrace | SDLK_SCANCODE_MASK;
+SDLK_KP_TAB :: Scancode.KpTab | SDLK_SCANCODE_MASK;
+SDLK_KP_BACKSPACE :: Scancode.KpBackspace | SDLK_SCANCODE_MASK;
+SDLK_KP_A :: Scancode.KpA | SDLK_SCANCODE_MASK;
+SDLK_KP_B :: Scancode.KpB | SDLK_SCANCODE_MASK;
+SDLK_KP_C :: Scancode.KpC | SDLK_SCANCODE_MASK;
+SDLK_KP_D :: Scancode.KpD | SDLK_SCANCODE_MASK;
+SDLK_KP_E :: Scancode.KpE | SDLK_SCANCODE_MASK;
+SDLK_KP_F :: Scancode.KpF | SDLK_SCANCODE_MASK;
+SDLK_KP_XOR :: Scancode.KpXor | SDLK_SCANCODE_MASK;
+SDLK_KP_POWER :: Scancode.KpPower | SDLK_SCANCODE_MASK;
+SDLK_KP_PERCENT :: Scancode.KpPercent | SDLK_SCANCODE_MASK;
+SDLK_KP_LESS :: Scancode.KpLess | SDLK_SCANCODE_MASK;
+SDLK_KP_GREATER :: Scancode.KpGreater | SDLK_SCANCODE_MASK;
+SDLK_KP_AMPERSAND :: Scancode.KpAmpersand | SDLK_SCANCODE_MASK;
+SDLK_KP_DBLAMPERSAND :: Scancode.KpDblAmpersand | SDLK_SCANCODE_MASK;
+SDLK_KP_VERTICALBAR :: Scancode.KpVerticalBar | SDLK_SCANCODE_MASK;
+SDLK_KP_DBLVERTICALBAR :: Scancode.KpDblVerticalBar | SDLK_SCANCODE_MASK;
+SDLK_KP_COLON :: Scancode.KpColon | SDLK_SCANCODE_MASK;
+SDLK_KP_HASH :: Scancode.KpHash | SDLK_SCANCODE_MASK;
+SDLK_KP_SPACE :: Scancode.KpSpace | SDLK_SCANCODE_MASK;
+SDLK_KP_AT :: Scancode.KpAt | SDLK_SCANCODE_MASK;
+SDLK_KP_EXCLAM :: Scancode.KpExclam | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMSTORE :: Scancode.KpMemStore | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMRECALL :: Scancode.KpMemRecall | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMCLEAR :: Scancode.KpMemClear | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMADD :: Scancode.KpMemAdd | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMSUBTRACT :: Scancode.KpMemSubtract | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMMULTIPLY :: Scancode.KpMemMultiply | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMDIVIDE :: Scancode.KpMemDivide | SDLK_SCANCODE_MASK;
+SDLK_KP_PLUSMINUS :: Scancode.KpPlusMinus | SDLK_SCANCODE_MASK;
+SDLK_KP_CLEAR :: Scancode.KpClear | SDLK_SCANCODE_MASK;
+SDLK_KP_CLEARENTRY :: Scancode.KpClearEntry | SDLK_SCANCODE_MASK;
+SDLK_KP_BINARY :: Scancode.KpBinary | SDLK_SCANCODE_MASK;
+SDLK_KP_OCTAL :: Scancode.KpOctal | SDLK_SCANCODE_MASK;
+SDLK_KP_DECIMAL :: Scancode.KpDecimal | SDLK_SCANCODE_MASK;
+SDLK_KP_HEXADECIMAL :: Scancode.KpHexadecimal | SDLK_SCANCODE_MASK;
 
-SDLK_LCTRL :: Scancode.LCTRL | SDLK_SCANCODE_MASK;
-SDLK_LSHIFT :: Scancode.LSHIFT | SDLK_SCANCODE_MASK;
-SDLK_LALT :: Scancode.LALT | SDLK_SCANCODE_MASK;
-SDLK_LGUI :: Scancode.LGUI | SDLK_SCANCODE_MASK;
-SDLK_RCTRL :: Scancode.RCTRL | SDLK_SCANCODE_MASK;
-SDLK_RSHIFT :: Scancode.RSHIFT | SDLK_SCANCODE_MASK;
-SDLK_RALT :: Scancode.RALT | SDLK_SCANCODE_MASK;
-SDLK_RGUI :: Scancode.RGUI | SDLK_SCANCODE_MASK;
+SDLK_LCTRL :: Scancode.LCtrl | SDLK_SCANCODE_MASK;
+SDLK_LSHIFT :: Scancode.LShift | SDLK_SCANCODE_MASK;
+SDLK_LALT :: Scancode.LAlt | SDLK_SCANCODE_MASK;
+SDLK_LGUI :: Scancode.LGui | SDLK_SCANCODE_MASK;
+SDLK_RCTRL :: Scancode.RCtrl | SDLK_SCANCODE_MASK;
+SDLK_RSHIFT :: Scancode.RShift | SDLK_SCANCODE_MASK;
+SDLK_RALT :: Scancode.RAlt | SDLK_SCANCODE_MASK;
+SDLK_RGUI :: Scancode.RGui | SDLK_SCANCODE_MASK;
 
-SDLK_MODE :: Scancode.MODE | SDLK_SCANCODE_MASK;
+SDLK_MODE :: Scancode.Mode | SDLK_SCANCODE_MASK;
 
-SDLK_AUDIONEXT :: Scancode.AUDIONEXT | SDLK_SCANCODE_MASK;
-SDLK_AUDIOPREV :: Scancode.AUDIOPREV | SDLK_SCANCODE_MASK;
-SDLK_AUDIOSTOP :: Scancode.AUDIOSTOP | SDLK_SCANCODE_MASK;
-SDLK_AUDIOPLAY :: Scancode.AUDIOPLAY | SDLK_SCANCODE_MASK;
-SDLK_AUDIOMUTE :: Scancode.AUDIOMUTE | SDLK_SCANCODE_MASK;
-SDLK_MEDIASELECT :: Scancode.MEDIASELECT | SDLK_SCANCODE_MASK;
+SDLK_AUDIONEXT :: Scancode.AudioNext | SDLK_SCANCODE_MASK;
+SDLK_AUDIOPREV :: Scancode.AudioPrev | SDLK_SCANCODE_MASK;
+SDLK_AUDIOSTOP :: Scancode.AudioStop | SDLK_SCANCODE_MASK;
+SDLK_AUDIOPLAY :: Scancode.AudioPlay | SDLK_SCANCODE_MASK;
+SDLK_AUDIOMUTE :: Scancode.AudioMute | SDLK_SCANCODE_MASK;
+SDLK_MEDIASELECT :: Scancode.MediaSelect | SDLK_SCANCODE_MASK;
 SDLK_WWW :: Scancode.WWW | SDLK_SCANCODE_MASK;
-SDLK_MAIL :: Scancode.MAIL | SDLK_SCANCODE_MASK;
-SDLK_CALCULATOR :: Scancode.CALCULATOR | SDLK_SCANCODE_MASK;
-SDLK_COMPUTER :: Scancode.COMPUTER | SDLK_SCANCODE_MASK;
-SDLK_AC_SEARCH :: Scancode.AC_SEARCH | SDLK_SCANCODE_MASK;
-SDLK_AC_HOME :: Scancode.AC_HOME | SDLK_SCANCODE_MASK;
-SDLK_AC_BACK :: Scancode.AC_BACK | SDLK_SCANCODE_MASK;
-SDLK_AC_FORWARD :: Scancode.AC_FORWARD | SDLK_SCANCODE_MASK;
-SDLK_AC_STOP :: Scancode.AC_STOP | SDLK_SCANCODE_MASK;
-SDLK_AC_REFRESH :: Scancode.AC_REFRESH | SDLK_SCANCODE_MASK;
-SDLK_AC_BOOKMARKS :: Scancode.AC_BOOKMARKS | SDLK_SCANCODE_MASK;
+SDLK_MAIL :: Scancode.Mail | SDLK_SCANCODE_MASK;
+SDLK_CALCULATOR :: Scancode.Calculator | SDLK_SCANCODE_MASK;
+SDLK_COMPUTER :: Scancode.Computer | SDLK_SCANCODE_MASK;
+SDLK_AC_SEARCH :: Scancode.AcSearch | SDLK_SCANCODE_MASK;
+SDLK_AC_HOME :: Scancode.AcHome | SDLK_SCANCODE_MASK;
+SDLK_AC_BACK :: Scancode.AcBack | SDLK_SCANCODE_MASK;
+SDLK_AC_FORWARD :: Scancode.AcForward | SDLK_SCANCODE_MASK;
+SDLK_AC_STOP :: Scancode.AcStop | SDLK_SCANCODE_MASK;
+SDLK_AC_REFRESH :: Scancode.AcRefresh | SDLK_SCANCODE_MASK;
+SDLK_AC_BOOKMARKS :: Scancode.AcBookmarks | SDLK_SCANCODE_MASK;
 
-SDLK_BRIGHTNESSDOWN :: Scancode.BRIGHTNESSDOWN | SDLK_SCANCODE_MASK;
-SDLK_BRIGHTNESSUP :: Scancode.BRIGHTNESSUP | SDLK_SCANCODE_MASK;
-SDLK_DISPLAYSWITCH :: Scancode.DISPLAYSWITCH | SDLK_SCANCODE_MASK;
-SDLK_KBDILLUMTOGGLE :: Scancode.KBDILLUMTOGGLE | SDLK_SCANCODE_MASK;
-SDLK_KBDILLUMDOWN :: Scancode.KBDILLUMDOWN | SDLK_SCANCODE_MASK;
-SDLK_KBDILLUMUP :: Scancode.KBDILLUMUP | SDLK_SCANCODE_MASK;
-SDLK_EJECT :: Scancode.EJECT | SDLK_SCANCODE_MASK;
-SDLK_SLEEP :: Scancode.SLEEP | SDLK_SCANCODE_MASK;
+SDLK_BRIGHTNESSDOWN :: Scancode.BrightnessDown | SDLK_SCANCODE_MASK;
+SDLK_BRIGHTNESSUP :: Scancode.BrightnessUp | SDLK_SCANCODE_MASK;
+SDLK_DISPLAYSWITCH :: Scancode.DisplaySwitch | SDLK_SCANCODE_MASK;
+SDLK_KBDILLUMTOGGLE :: Scancode.KbDillumToggle | SDLK_SCANCODE_MASK;
+SDLK_KBDILLUMDOWN :: Scancode.KbDillumDown | SDLK_SCANCODE_MASK;
+SDLK_KBDILLUMUP :: Scancode.KbDillumUp | SDLK_SCANCODE_MASK;
+SDLK_EJECT :: Scancode.Eject | SDLK_SCANCODE_MASK;
+SDLK_SLEEP :: Scancode.Sleep | SDLK_SCANCODE_MASK;
 
 SDLK_SCANCODE_MASK :: 1<<30;
 
+Hat :: enum i32 {
+	Centered = 0x00,
+	Up = 0x01,
+	Right = 0x02,
+	Down = 0x04,
+	Left = 0x08,
+	RightUp = Right | Up,
+	RightDown = Right | Down,
+	LeftUp = Left | Up,
+	LeftDown = Left | Down
+}
 
-HAT_CENTERED :: 0x00;
-HAT_UP :: 0x01;
-HAT_RIGHT :: 0x02;
-HAT_DOWN :: 0x04;
-HAT_LEFT :: 0x08;
-HAT_RIGHTUP :: HAT_RIGHT | HAT_UP;
-HAT_RIGHTDOWN :: HAT_RIGHT | HAT_DOWN;
-HAT_LEFTUP :: HAT_LEFT | HAT_UP;
-HAT_LEFTDOWN :: HAT_LEFT | HAT_DOWN;
+EventType :: enum i32  {
+	FirstEvent = 0,
 
+	Quit = 0x100,
 
+	AppTerminating = 257,
+	AppLowMemory = 258,
+	AppWillEnterBackground = 259,
+	AppDidEnterBackground = 260,
+	AppWillEnterForeground = 261,
+	AppDidEnterForeground = 262,
 
-FIRST_EVENT :: 0;
+	WindowEvent = 0x200,
+	SysWmEvent = 513,
 
-QUIT :: 0x100;
+	KeyDown = 0x300,
+	KeyUp = 769,
+	TextEditing = 770,
+	TextInput = 771,
+	KeyMapChanged = 772,
 
-APP_TERMINATING :: 257;
-APP_LOW_MEMORY :: 258;
-APP_WILL_ENTER_BACKGROUND :: 259;
-APP_DID_ENTER_BACKGROUND :: 260;
-APP_WILL_ENTER_FOREGROUND :: 261;
-APP_DID_ENTER_FOREGROUND :: 262;
+	MouseMotion = 0x400,
+	MouseButtonDown = 1025,
+	MouseButtonUp = 1026,
+	MouseWheel = 1027,
 
-WINDOW_EVENT :: 0x200;
-SYS_WM_EVENT :: 513;
+	JoyAxisMotion = 0x600,
+	JoyBallMotion = 1537,
+	JoyHatMotion = 1538,
+	JoyButtonDown = 1539,
+	JoyButtonUp = 1540,
+	JoyDeviceAdded = 1541,
+	JoyDeviceRemoved = 1542,
 
-KEY_DOWN :: 0x300;
-KEY_UP :: 769;
-TEXT_EDITING :: 770;
-TEXT_INPUT :: 771;
-KEY_MAP_CHANGED :: 772;
+	ControllerAxisMotion = 0x650,
+	ControllerButtonDown = 1617,
+	ControllerButtonUp = 1618,
+	ControllerDeviceAdded = 1619,
+	ControllerDeviceRemoved = 1620,
+	ControllerDeviceRemapped = 1621,
 
-MOUSE_MOTION :: 0x400;
-MOUSE_BUTTON_DOWN :: 1025;
-MOUSE_BUTTON_UP :: 1026;
-MOUSE_WHEEL :: 1027;
+	FingerDown = 0x700,
+	FingerUp = 1793,
+	FingerMotion = 1794,
 
-JOY_AXIS_MOTION :: 0x600;
-JOY_BALL_MOTION :: 1537;
-JOY_HAT_MOTION :: 1538;
-JOY_BUTTON_DOWN :: 1539;
-JOY_BUTTON_UP :: 1540;
-JOY_DEVICE_ADDED :: 1541;
-JOY_DEVICE_REMOVED :: 1542;
+	DollarGesture = 0x800,
+	DollarRecord = 2049,
+	Multigesture = 2050,
 
-CONTROLLER_AXIS_MOTION :: 0x650;
-CONTROLLER_BUTTON_DOWN :: 1617;
-CONTROLLER_BUTTON_UP :: 1618;
-CONTROLLER_DEVICE_ADDED :: 1619;
-CONTROLLER_DEVICE_REMOVED :: 1620;
-CONTROLLER_DEVICE_REMAPPED :: 1621;
+	ClipboardUpdate = 0x900,
 
-FINGER_DOWN :: 0x700;
-FINGER_UP :: 1793;
-FINGER_MOTION :: 1794;
+	DropFile = 0x1000,
+	DropText = 4097,
+	DropBegin = 4098,
+	DropComplete = 4099,
 
-DOLLAR_GESTURE :: 0x800;
-DOLLAR_RECORD :: 2049;
-MULTIGESTURE :: 2050;
+	AudioDeviceAdded = 0x1100,
+	AudioDeviceRemoved = 4353,
 
-CLIPBOARD_UPDATE :: 0x900;
+	RenderTargetsReset = 0x2000,
+	RenderDeviceReset = 8193,
 
-DROP_FILE :: 0x1000;
-DROP_TEXT :: 4097;
-DROP_BEGIN :: 4098;
-DROP_COMPLETE :: 4099;
+	UserEvent = 0x8000,
 
-AUDIO_DEVICE_ADDED :: 0x1100;
-AUDIO_DEVICE_REMOVED :: 4353;
-
-RENDER_TARGETS_RESET :: 0x2000;
-RENDER_DEVICE_RESET :: 8193;
-
-USER_EVENT :: 0x8000;
-
-LAST_EVENT :: 0xFFFF;
+	LastEvent = 0xFFFF
+}
 
 GLContext :: rawptr;
 
@@ -1862,7 +1867,7 @@ MessageBoxButtonData :: struct #ordered {
 }
 
 MessageBoxColorScheme :: struct #ordered {
-	colors: [MessageBoxColorType.MAX]MessageBoxColor;
+	colors: [MessageBoxColorType.Max]MessageBoxColor;
 }
 
 MessageBoxColor :: struct #ordered {
