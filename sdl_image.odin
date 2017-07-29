@@ -8,7 +8,7 @@ foreign_system_library (
 foreign lib {
 	init								:: proc(flags: i32) -> i32																					#link_name "IMG_Init" ---;
 	linked_version						:: proc() -> ^sdl.Version																					#link_name "IMG_Linked_Version" ---;
-	_load								:: proc(file: ^u8) -> ^sdl.Surface																			#link_name "IMG_Load" ---;
+	load_c								:: proc(file: ^u8) -> ^sdl.Surface																			#link_name "IMG_Load" ---;
 	load_bmp_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadBMP_RW" ---;
 	load_cur_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadCUR_RW" ---;
 	load_gif_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadGIF_RW" ---;
@@ -20,10 +20,10 @@ foreign lib {
 	load_pnm_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadPNM_RW" ---;
 	load_tga_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadTGA_RW" ---;
 	load_tif_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadTIF_RW" ---;
-	_load_texture						:: proc(renderer: ^sdl.Renderer, file: ^u8) -> ^sdl.Texture													#link_name "IMG_LoadTexture" ---;
-	_load_texture_typed_rw				:: proc(renderer: ^sdl.Renderer, src: ^sdl.RwOps, freesrc: i32, img_type: ^u8) -> ^sdl.Texture				#link_name "IMG_LoadTextureTyped_RW" ---;
+	load_texture_c						:: proc(renderer: ^sdl.Renderer, file: ^u8) -> ^sdl.Texture													#link_name "IMG_LoadTexture" ---;
+	load_texture_typed_rw_c				:: proc(renderer: ^sdl.Renderer, src: ^sdl.RwOps, freesrc: i32, img_type: ^u8) -> ^sdl.Texture				#link_name "IMG_LoadTextureTyped_RW" ---;
 	load_texture_rw						:: proc(renderer: ^sdl.Renderer, src: ^sdl.RwOps, freesrc: i32) -> ^sdl.Texture								#link_name "IMG_LoadTexture_RW" ---;
-	_load_typed_rw						:: proc(src: ^sdl.RwOps, freesrc: i32, img_type: ^u8) -> ^sdl.Surface										#link_name "IMG_LoadTyped_RW" ---;
+	load_typed_rw_c						:: proc(src: ^sdl.RwOps, freesrc: i32, img_type: ^u8) -> ^sdl.Surface										#link_name "IMG_LoadTyped_RW" ---;
 	load_webp_rw						:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadWEBP_RW" ---;
 	load_xcf_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadXCF_RW" ---;
 	load_xpm_rw							:: proc(src: ^sdl.RwOps) -> ^sdl.Surface																	#link_name "IMG_LoadXPM_RW" ---;
@@ -31,7 +31,7 @@ foreign lib {
 	load_rw								:: proc(src: ^sdl.RwOps, freesrc: i32) -> ^sdl.Surface														#link_name "IMG_Load_RW" ---;
 	quit								:: proc()																									#link_name "IMG_Quit" ---;
 	read_xpm_from_array					:: proc(xpm: ^^u8) -> ^sdl.Surface																			#link_name "IMG_ReadXPMFromArray" ---;
-	_save_png							:: proc(surface: ^sdl.Surface, file: ^u8) -> i32															#link_name "IMG_SavePNG" ---;
+	save_png_c							:: proc(surface: ^sdl.Surface, file: ^u8) -> i32															#link_name "IMG_SavePNG" ---;
 	save_png_rw							:: proc(surface: ^sdl.Surface, dst: ^sdl.RwOps, freedst: i32) -> i32										#link_name "IMG_SavePNG_RW" ---;
 	is_bmp								:: proc(src: ^sdl.RwOps) -> i32																				#link_name "IMG_isBMP" ---;
 	is_cur								:: proc(src: ^sdl.RwOps) -> i32																				#link_name "IMG_isCUR" ---;
@@ -53,31 +53,31 @@ foreign lib {
 load :: proc(file: string) -> ^sdl.Surface {
 	file_c := new_c_string(file);
 	defer free(file_c);
-	return _load(file_c);
+	return load_c(file_c);
 }
 
 load_texture :: proc(renderer: ^sdl.Renderer, file: string) -> ^sdl.Texture {
 	file_c := new_c_string(file);
 	defer free(file_c);
-	return _load_texture(renderer, file_c);
+	return load_texture_c(renderer, file_c);
 }
 
 load_texture_typed_rw :: proc(renderer: ^sdl.Renderer, src: ^sdl.RwOps, freesrc: i32, img_type: string) -> ^sdl.Texture {
 	type_c := new_c_string(img_type);
 	defer free(type_c);
-	return _load_texture_typed_rw(renderer, src, freesrc, type_c);
+	return load_texture_typed_rw_c(renderer, src, freesrc, type_c);
 }
 
 load_typed_rw :: proc(src: ^sdl.RwOps, freesrc: i32, img_type: string) -> ^sdl.Surface {
 	type_c := new_c_string(img_type);
 	defer free(type_c);
-	return _load_typed_rw(src, freesrc, type_c);
+	return load_typed_rw_c(src, freesrc, type_c);
 }
 
 save_png :: proc(surface: ^sdl.Surface, file: string) -> i32 {
 	file_c := new_c_string(file);
 	defer free(file_c);
-	return _save_png(surface, file_c);
+	return save_png_c(surface, file_c);
 }
 
 InitFlags :: enum i32
