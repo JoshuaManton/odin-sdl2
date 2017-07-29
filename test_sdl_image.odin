@@ -1,5 +1,4 @@
 import . "sdl_image.odin";
-import . "fmt.odin";
 
 main :: proc()
 {

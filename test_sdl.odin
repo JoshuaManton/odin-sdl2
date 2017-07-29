@@ -1,5 +1,4 @@
 import . "sdl.odin";
-import . "fmt.odin";
 
 // !!!!!!!!!!
 // All of these tests should pass except the ones I've commented out because
