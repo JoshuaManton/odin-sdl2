@@ -620,178 +620,178 @@ RENDERER_PRESENTVSYNC :: 0x00000004;
 RENDERER_TARGETTEXTURE :: 0x00000008;
 
 BlendMode :: enum i32 {
-    NONE = 0x00000000,
-    BLEND = 0x00000001,
-    ADD = 0x00000002,
-    MOD = 0x00000004
+	NONE = 0x00000000,
+	BLEND = 0x00000001,
+	ADD = 0x00000002,
+	MOD = 0x00000004
 }
 
 ErrorCode :: enum i32 {
-    ENOMEM,
-    EFREAD,
-    EFWRITE,
-    EFSEEK,
-    UNSUPPORTED,
-    LASTERROR
+	ENOMEM,
+	EFREAD,
+	EFWRITE,
+	EFSEEK,
+	UNSUPPORTED,
+	LASTERROR
 }
 
 JoystickPowerLevel :: enum i32 {
-    UNKNOWN = -1,
-    EMPTY,
-    LOW,
-    MEDIUM,
-    FULL,
-    WIRED,
-    MAX
+	UNKNOWN = -1,
+	EMPTY,
+	LOW,
+	MEDIUM,
+	FULL,
+	WIRED,
+	MAX
 }
 
 HintPriority :: enum i32 {
-    DEFAULT,
-    NORMAL,
-    OVERRIDE
+	DEFAULT,
+	NORMAL,
+	OVERRIDE
 }
 
 ThreadPriority :: enum i32 {
-    LOW,
-    NORMAL,
-    HIGH
+	LOW,
+	NORMAL,
+	HIGH
 }
 
 AssertState :: enum i32 {
-    RETRY,
-    BREAK,
-    ABORT,
-    IGNORE,
-    ALWAYS_IGNORE
+	RETRY,
+	BREAK,
+	ABORT,
+	IGNORE,
+	ALWAYS_IGNORE
 }
 
 EventAction :: enum i32 {
-    ADDEVENT,
-    PEEKEVENT,
-    GETEVENT
+	ADDEVENT,
+	PEEKEVENT,
+	GETEVENT
 }
 
 HitTestResult :: enum i32 {
-    NORMAL,
-    DRAGGABLE,
-    RESIZE_TOPLEFT,
-    RESIZE_TOP,
-    RESIZE_TOPRIGHT,
-    RESIZE_RIGHT,
-    RESIZE_BOTTOMRIGHT,
-    RESIZE_BOTTOM,
-    RESIZE_BOTTOMLEFT,
-    RESIZE_LEFT
+	NORMAL,
+	DRAGGABLE,
+	RESIZE_TOPLEFT,
+	RESIZE_TOP,
+	RESIZE_TOPRIGHT,
+	RESIZE_RIGHT,
+	RESIZE_BOTTOMRIGHT,
+	RESIZE_BOTTOM,
+	RESIZE_BOTTOMLEFT,
+	RESIZE_LEFT
 }
 
 Bool :: enum i32 {
-    False,
-    True
+	False,
+	True
 }
 
 WindowShapeModes :: enum i32 {
-    DEFAULT,
-    BINARIZE_ALPHA,
-    REVERSE_BINARIZE_ALPHA,
-    COLOR_KEY
+	DEFAULT,
+	BINARIZE_ALPHA,
+	REVERSE_BINARIZE_ALPHA,
+	COLOR_KEY
 }
 
 Keymod :: enum i32 {
-    NONE = 0x0000,
-    LSHIFT = 0x0001,
-    RSHIFT = 0x0002,
-    LCTRL = 0x0040,
-    RCTRL = 0x0080,
-    LALT = 0x0100,
-    RALT = 0x0200,
-    LGUI = 0x0400,
-    RGUI = 0x0800,
-    NUM = 0x1000,
-    CAPS = 0x2000,
-    MODE = 0x4000,
-    RESERVED = 0x8000
+	NONE = 0x0000,
+	LSHIFT = 0x0001,
+	RSHIFT = 0x0002,
+	LCTRL = 0x0040,
+	RCTRL = 0x0080,
+	LALT = 0x0100,
+	RALT = 0x0200,
+	LGUI = 0x0400,
+	RGUI = 0x0800,
+	NUM = 0x1000,
+	CAPS = 0x2000,
+	MODE = 0x4000,
+	RESERVED = 0x8000
 }
 
 RendererFlip :: enum i32 {
-    NONE = 0x00000000,
-    HORIZONTAL = 0x00000001,
-    VERTICAL = 0x00000002
+	NONE = 0x00000000,
+	HORIZONTAL = 0x00000001,
+	VERTICAL = 0x00000002
 }
 
 GLAttr :: enum i32 {
-    RED_SIZE,
-    GREEN_SIZE,
-    BLUE_SIZE,
-    ALPHA_SIZE,
-    BUFFER_SIZE,
-    DOUBLEBUFFER,
-    DEPTH_SIZE,
-    STENCIL_SIZE,
-    ACCUM_RED_SIZE,
-    ACCUM_GREEN_SIZE,
-    ACCUM_BLUE_SIZE,
-    ACCUM_ALPHA_SIZE,
-    STEREO,
-    MULTISAMPLEBUFFERS,
-    MULTISAMPLESAMPLES,
-    ACCELERATED_VISUAL,
-    RETAINED_BACKING,
-    CONTEXT_MAJOR_VERSION,
-    CONTEXT_MINOR_VERSION,
-    CONTEXT_EGL,
-    CONTEXT_FLAGS,
-    CONTEXT_PROFILE_MASK,
-    SHARE_WITH_CURRENT_CONTEXT,
-    FRAMEBUFFER_SRGB_CAPABLE,
-    CONTEXT_RELEASE_BEHAVIOR
+	RED_SIZE,
+	GREEN_SIZE,
+	BLUE_SIZE,
+	ALPHA_SIZE,
+	BUFFER_SIZE,
+	DOUBLEBUFFER,
+	DEPTH_SIZE,
+	STENCIL_SIZE,
+	ACCUM_RED_SIZE,
+	ACCUM_GREEN_SIZE,
+	ACCUM_BLUE_SIZE,
+	ACCUM_ALPHA_SIZE,
+	STEREO,
+	MULTISAMPLEBUFFERS,
+	MULTISAMPLESAMPLES,
+	ACCELERATED_VISUAL,
+	RETAINED_BACKING,
+	CONTEXT_MAJOR_VERSION,
+	CONTEXT_MINOR_VERSION,
+	CONTEXT_EGL,
+	CONTEXT_FLAGS,
+	CONTEXT_PROFILE_MASK,
+	SHARE_WITH_CURRENT_CONTEXT,
+	FRAMEBUFFER_SRGB_CAPABLE,
+	CONTEXT_RELEASE_BEHAVIOR
 }
 
 GLContextFlag :: enum i32
 {
-    DEBUG              = 0x0001,
-    FORWARD_COMPATIBLE = 0x0002,
-    ROBUST_ACCESS      = 0x0004,
-    RESET_ISOLATION    = 0x0008
+	DEBUG              = 0x0001,
+	FORWARD_COMPATIBLE = 0x0002,
+	ROBUST_ACCESS      = 0x0004,
+	RESET_ISOLATION    = 0x0008
 }
 
 GLContextProfile :: enum i32
 {
-    CORE           = 0x0001,
-    COMPATIBILITY  = 0x0002,
-    ES             = 0x0004
+	CORE           = 0x0001,
+	COMPATIBILITY  = 0x0002,
+	ES             = 0x0004
 }
 
 MessageBoxColorType :: enum i32 {
-    BACKGROUND,
-    TEXT,
-    BUTTON_BORDER,
-    BUTTON_BACKGROUND,
-    BUTTON_SELECTED,
-    MAX
+	BACKGROUND,
+	TEXT,
+	BUTTON_BORDER,
+	BUTTON_BACKGROUND,
+	BUTTON_SELECTED,
+	MAX
 }
 
 AudioStatus :: enum i32 {
-    STOPPED = 0,
-    PLAYING,
-    PAUSED
+	STOPPED = 0,
+	PLAYING,
+	PAUSED
 }
 
 PowerState :: enum i32 {
-    UNKNOWN,
-    ON_BATTERY,
-    NO_BATTERY,
-    CHARGING,
-    CHARGED
+	UNKNOWN,
+	ON_BATTERY,
+	NO_BATTERY,
+	CHARGING,
+	CHARGED
 }
 
 LogPriority :: enum i32 {
-    VERBOSE = 1,
-    DEBUG,
-    INFO,
-    WARN,
-    ERROR,
-    CRITICAL,
-    NUM_LOG_PRIORITIES
+	VERBOSE = 1,
+	DEBUG,
+	INFO,
+	WARN,
+	ERROR,
+	CRITICAL,
+	NUM_LOG_PRIORITIES
 }
 
 
@@ -799,325 +799,325 @@ LogPriority :: enum i32 {
 
 
 GameControllerButton :: enum i32 {
-    INVALID = -1,
-    A,
-    B,
-    X,
-    Y,
-    BACK,
-    GUIDE,
-    START,
-    LEFTSTICK,
-    RIGHTSTICK,
-    LEFTSHOULDER,
-    RIGHTSHOULDER,
-    DPAD_UP,
-    DPAD_DOWN,
-    DPAD_LEFT,
-    DPAD_RIGHT,
-    MAX
+	INVALID = -1,
+	A,
+	B,
+	X,
+	Y,
+	BACK,
+	GUIDE,
+	START,
+	LEFTSTICK,
+	RIGHTSTICK,
+	LEFTSHOULDER,
+	RIGHTSHOULDER,
+	DPAD_UP,
+	DPAD_DOWN,
+	DPAD_LEFT,
+	DPAD_RIGHT,
+	MAX
 }
 
 GameControllerAxis :: enum i32 {
-    INVALID = -1,
-    LEFTX,
-    LEFTY,
-    RIGHTX,
-    RIGHTY,
-    TRIGGERLEFT,
-    TRIGGERRIGHT,
-    MAX
+	INVALID = -1,
+	LEFTX,
+	LEFTY,
+	RIGHTX,
+	RIGHTY,
+	TRIGGERLEFT,
+	TRIGGERRIGHT,
+	MAX
 }
 
 GameControllerBindType :: enum i32 {
-    NONE = 0,
-    BUTTON,
-    AXIS,
-    HAT
+	NONE = 0,
+	BUTTON,
+	AXIS,
+	HAT
 }
 
 SystemCursor :: enum i32 {
-    ARROW,
-    IBEAM,
-    WAIT,
-    CROSSHAIR,
-    WAITARROW,
-    SIZENWSE,
-    SIZENESW,
-    SIZEWE,
-    SIZENS,
-    SIZEALL,
-    NO,
-    HAND,
-    NUM_SYSTEM_CURSORS
+	ARROW,
+	IBEAM,
+	WAIT,
+	CROSSHAIR,
+	WAITARROW,
+	SIZENWSE,
+	SIZENESW,
+	SIZEWE,
+	SIZENS,
+	SIZEALL,
+	NO,
+	HAND,
+	NUM_SYSTEM_CURSORS
 }
 
 
 Scancode :: enum i32 {
-    UNKNOWN = 0,
+	UNKNOWN = 0,
 
-    A = 4,
-    B = 5,
-    C = 6,
-    D = 7,
-    E = 8,
-    F = 9,
-    G = 10,
-    H = 11,
-    I = 12,
-    J = 13,
-    K = 14,
-    L = 15,
-    M = 16,
-    N = 17,
-    O = 18,
-    P = 19,
-    Q = 20,
-    R = 21,
-    S = 22,
-    T = 23,
-    U = 24,
-    V = 25,
-    W = 26,
-    X = 27,
-    Y = 28,
-    Z = 29,
+	A = 4,
+	B = 5,
+	C = 6,
+	D = 7,
+	E = 8,
+	F = 9,
+	G = 10,
+	H = 11,
+	I = 12,
+	J = 13,
+	K = 14,
+	L = 15,
+	M = 16,
+	N = 17,
+	O = 18,
+	P = 19,
+	Q = 20,
+	R = 21,
+	S = 22,
+	T = 23,
+	U = 24,
+	V = 25,
+	W = 26,
+	X = 27,
+	Y = 28,
+	Z = 29,
 
-    NR_1 = 30,
-    NR_2 = 31,
-    NR_3 = 32,
-    NR_4 = 33,
-    NR_5 = 34,
-    NR_6 = 35,
-    NR_7 = 36,
-    NR_8 = 37,
-    NR_9 = 38,
-    NR_0 = 39,
+	NR_1 = 30,
+	NR_2 = 31,
+	NR_3 = 32,
+	NR_4 = 33,
+	NR_5 = 34,
+	NR_6 = 35,
+	NR_7 = 36,
+	NR_8 = 37,
+	NR_9 = 38,
+	NR_0 = 39,
 
-    RETURN = 40,
-    ESCAPE = 41,
-    BACKSPACE = 42,
-    TAB = 43,
-    SPACE = 44,
+	RETURN = 40,
+	ESCAPE = 41,
+	BACKSPACE = 42,
+	TAB = 43,
+	SPACE = 44,
 
-    MINUS = 45,
-    EQUALS = 46,
-    LEFTBRACKET = 47,
-    RIGHTBRACKET = 48,
-    BACKSLASH = 49,
-    NONUSHASH = 50,
-    SEMICOLON = 51,
-    APOSTROPHE = 52,
-    GRAVE = 53,
-    COMMA = 54,
-    PERIOD = 55,
-    SLASH = 56,
+	MINUS = 45,
+	EQUALS = 46,
+	LEFTBRACKET = 47,
+	RIGHTBRACKET = 48,
+	BACKSLASH = 49,
+	NONUSHASH = 50,
+	SEMICOLON = 51,
+	APOSTROPHE = 52,
+	GRAVE = 53,
+	COMMA = 54,
+	PERIOD = 55,
+	SLASH = 56,
 
-    CAPSLOCK = 57,
+	CAPSLOCK = 57,
 
-    F1 = 58,
-    F2 = 59,
-    F3 = 60,
-    F4 = 61,
-    F5 = 62,
-    F6 = 63,
-    F7 = 64,
-    F8 = 65,
-    F9 = 66,
-    F10 = 67,
-    F11 = 68,
-    F12 = 69,
+	F1 = 58,
+	F2 = 59,
+	F3 = 60,
+	F4 = 61,
+	F5 = 62,
+	F6 = 63,
+	F7 = 64,
+	F8 = 65,
+	F9 = 66,
+	F10 = 67,
+	F11 = 68,
+	F12 = 69,
 
-    PRINTSCREEN = 70,
-    SCROLLLOCK = 71,
-    PAUSE = 72,
-    INSERT = 73,
-    HOME = 74,
-    PAGEUP = 75,
-    DELETE = 76,
-    END = 77,
-    PAGEDOWN = 78,
-    RIGHT = 79,
-    LEFT = 80,
-    DOWN = 81,
-    UP = 82,
+	PRINTSCREEN = 70,
+	SCROLLLOCK = 71,
+	PAUSE = 72,
+	INSERT = 73,
+	HOME = 74,
+	PAGEUP = 75,
+	DELETE = 76,
+	END = 77,
+	PAGEDOWN = 78,
+	RIGHT = 79,
+	LEFT = 80,
+	DOWN = 81,
+	UP = 82,
 
-    NUMLOCKCLEAR = 83,
-    KP_DIVIDE = 84,
-    KP_MULTIPLY = 85,
-    KP_MINUS = 86,
-    KP_PLUS = 87,
-    KP_ENTER = 88,
-    KP_1 = 89,
-    KP_2 = 90,
-    KP_3 = 91,
-    KP_4 = 92,
-    KP_5 = 93,
-    KP_6 = 94,
-    KP_7 = 95,
-    KP_8 = 96,
-    KP_9 = 97,
-    KP_0 = 98,
-    KP_PERIOD = 99,
+	NUMLOCKCLEAR = 83,
+	KP_DIVIDE = 84,
+	KP_MULTIPLY = 85,
+	KP_MINUS = 86,
+	KP_PLUS = 87,
+	KP_ENTER = 88,
+	KP_1 = 89,
+	KP_2 = 90,
+	KP_3 = 91,
+	KP_4 = 92,
+	KP_5 = 93,
+	KP_6 = 94,
+	KP_7 = 95,
+	KP_8 = 96,
+	KP_9 = 97,
+	KP_0 = 98,
+	KP_PERIOD = 99,
 
-    NONUSBACKSLASH = 100,
-    APPLICATION = 101,
-    POWER = 102,
-    KP_EQUALS = 103,
-    F13 = 104,
-    F14 = 105,
-    F15 = 106,
-    F16 = 107,
-    F17 = 108,
-    F18 = 109,
-    F19 = 110,
-    F20 = 111,
-    F21 = 112,
-    F22 = 113,
-    F23 = 114,
-    F24 = 115,
-    EXECUTE = 116,
-    HELP = 117,
-    MENU = 118,
-    SELECT = 119,
-    STOP = 120,
-    AGAIN = 121,
-    UNDO = 122,
-    CUT = 123,
-    COPY = 124,
-    PASTE = 125,
-    FIND = 126,
-    MUTE = 127,
-    VOLUMEUP = 128,
-    VOLUMEDOWN = 129,
+	NONUSBACKSLASH = 100,
+	APPLICATION = 101,
+	POWER = 102,
+	KP_EQUALS = 103,
+	F13 = 104,
+	F14 = 105,
+	F15 = 106,
+	F16 = 107,
+	F17 = 108,
+	F18 = 109,
+	F19 = 110,
+	F20 = 111,
+	F21 = 112,
+	F22 = 113,
+	F23 = 114,
+	F24 = 115,
+	EXECUTE = 116,
+	HELP = 117,
+	MENU = 118,
+	SELECT = 119,
+	STOP = 120,
+	AGAIN = 121,
+	UNDO = 122,
+	CUT = 123,
+	COPY = 124,
+	PASTE = 125,
+	FIND = 126,
+	MUTE = 127,
+	VOLUMEUP = 128,
+	VOLUMEDOWN = 129,
 /* not sure whether there's a reason to enable these */
 /*     LOCKINGCAPSLOCK = 130,  */
 /*     LOCKINGNUMLOCK = 131, */
 /*     LOCKINGSCROLLLOCK = 132, */
-    KP_COMMA = 133,
-    KP_EQUALSAS400 = 134,
+	KP_COMMA = 133,
+	KP_EQUALSAS400 = 134,
 
-    INTERNATIONAL1 = 135,
-    INTERNATIONAL2 = 136,
-    INTERNATIONAL3 = 137,
-    INTERNATIONAL4 = 138,
-    INTERNATIONAL5 = 139,
-    INTERNATIONAL6 = 140,
-    INTERNATIONAL7 = 141,
-    INTERNATIONAL8 = 142,
-    INTERNATIONAL9 = 143,
-    LANG1 = 144,
-    LANG2 = 145,
-    LANG3 = 146,
-    LANG4 = 147,
-    LANG5 = 148,
-    LANG6 = 149,
-    LANG7 = 150,
-    LANG8 = 151,
-    LANG9 = 152,
+	INTERNATIONAL1 = 135,
+	INTERNATIONAL2 = 136,
+	INTERNATIONAL3 = 137,
+	INTERNATIONAL4 = 138,
+	INTERNATIONAL5 = 139,
+	INTERNATIONAL6 = 140,
+	INTERNATIONAL7 = 141,
+	INTERNATIONAL8 = 142,
+	INTERNATIONAL9 = 143,
+	LANG1 = 144,
+	LANG2 = 145,
+	LANG3 = 146,
+	LANG4 = 147,
+	LANG5 = 148,
+	LANG6 = 149,
+	LANG7 = 150,
+	LANG8 = 151,
+	LANG9 = 152,
 
-    ALTERASE = 153,
-    SYSREQ = 154,
-    CANCEL = 155,
-    CLEAR = 156,
-    PRIOR = 157,
-    RETURN2 = 158,
-    SEPARATOR = 159,
-    OUT = 160,
-    OPER = 161,
-    CLEARAGAIN = 162,
-    CRSEL = 163,
-    EXSEL = 164,
+	ALTERASE = 153,
+	SYSREQ = 154,
+	CANCEL = 155,
+	CLEAR = 156,
+	PRIOR = 157,
+	RETURN2 = 158,
+	SEPARATOR = 159,
+	OUT = 160,
+	OPER = 161,
+	CLEARAGAIN = 162,
+	CRSEL = 163,
+	EXSEL = 164,
 
-    KP_00 = 176,
-    KP_000 = 177,
-    THOUSANDSSEPARATOR = 178,
-    DECIMALSEPARATOR = 179,
-    CURRENCYUNIT = 180,
-    CURRENCYSUBUNIT = 181,
-    KP_LEFTPAREN = 182,
-    KP_RIGHTPAREN = 183,
-    KP_LEFTBRACE = 184,
-    KP_RIGHTBRACE = 185,
-    KP_TAB = 186,
-    KP_BACKSPACE = 187,
-    KP_A = 188,
-    KP_B = 189,
-    KP_C = 190,
-    KP_D = 191,
-    KP_E = 192,
-    KP_F = 193,
-    KP_XOR = 194,
-    KP_POWER = 195,
-    KP_PERCENT = 196,
-    KP_LESS = 197,
-    KP_GREATER = 198,
-    KP_AMPERSAND = 199,
-    KP_DBLAMPERSAND = 200,
-    KP_VERTICALBAR = 201,
-    KP_DBLVERTICALBAR = 202,
-    KP_COLON = 203,
-    KP_HASH = 204,
-    KP_SPACE = 205,
-    KP_AT = 206,
-    KP_EXCLAM = 207,
-    KP_MEMSTORE = 208,
-    KP_MEMRECALL = 209,
-    KP_MEMCLEAR = 210,
-    KP_MEMADD = 211,
-    KP_MEMSUBTRACT = 212,
-    KP_MEMMULTIPLY = 213,
-    KP_MEMDIVIDE = 214,
-    KP_PLUSMINUS = 215,
-    KP_CLEAR = 216,
-    KP_CLEARENTRY = 217,
-    KP_BINARY = 218,
-    KP_OCTAL = 219,
-    KP_DECIMAL = 220,
-    KP_HEXADECIMAL = 221,
+	KP_00 = 176,
+	KP_000 = 177,
+	THOUSANDSSEPARATOR = 178,
+	DECIMALSEPARATOR = 179,
+	CURRENCYUNIT = 180,
+	CURRENCYSUBUNIT = 181,
+	KP_LEFTPAREN = 182,
+	KP_RIGHTPAREN = 183,
+	KP_LEFTBRACE = 184,
+	KP_RIGHTBRACE = 185,
+	KP_TAB = 186,
+	KP_BACKSPACE = 187,
+	KP_A = 188,
+	KP_B = 189,
+	KP_C = 190,
+	KP_D = 191,
+	KP_E = 192,
+	KP_F = 193,
+	KP_XOR = 194,
+	KP_POWER = 195,
+	KP_PERCENT = 196,
+	KP_LESS = 197,
+	KP_GREATER = 198,
+	KP_AMPERSAND = 199,
+	KP_DBLAMPERSAND = 200,
+	KP_VERTICALBAR = 201,
+	KP_DBLVERTICALBAR = 202,
+	KP_COLON = 203,
+	KP_HASH = 204,
+	KP_SPACE = 205,
+	KP_AT = 206,
+	KP_EXCLAM = 207,
+	KP_MEMSTORE = 208,
+	KP_MEMRECALL = 209,
+	KP_MEMCLEAR = 210,
+	KP_MEMADD = 211,
+	KP_MEMSUBTRACT = 212,
+	KP_MEMMULTIPLY = 213,
+	KP_MEMDIVIDE = 214,
+	KP_PLUSMINUS = 215,
+	KP_CLEAR = 216,
+	KP_CLEARENTRY = 217,
+	KP_BINARY = 218,
+	KP_OCTAL = 219,
+	KP_DECIMAL = 220,
+	KP_HEXADECIMAL = 221,
 
-    LCTRL = 224,
-    LSHIFT = 225,
-    LALT = 226,
-    LGUI = 227,
-    RCTRL = 228,
-    RSHIFT = 229,
-    RALT = 230,
-    RGUI = 231,
+	LCTRL = 224,
+	LSHIFT = 225,
+	LALT = 226,
+	LGUI = 227,
+	RCTRL = 228,
+	RSHIFT = 229,
+	RALT = 230,
+	RGUI = 231,
 
-    MODE = 257,
+	MODE = 257,
 
-    AUDIONEXT = 258,
-    AUDIOPREV = 259,
-    AUDIOSTOP = 260,
-    AUDIOPLAY = 261,
-    AUDIOMUTE = 262,
-    MEDIASELECT = 263,
-    WWW = 264,
-    MAIL = 265,
-    CALCULATOR = 266,
-    COMPUTER = 267,
-    AC_SEARCH = 268,
-    AC_HOME = 269,
-    AC_BACK = 270,
-    AC_FORWARD = 271,
-    AC_STOP = 272,
-    AC_REFRESH = 273,
-    AC_BOOKMARKS = 274,
+	AUDIONEXT = 258,
+	AUDIOPREV = 259,
+	AUDIOSTOP = 260,
+	AUDIOPLAY = 261,
+	AUDIOMUTE = 262,
+	MEDIASELECT = 263,
+	WWW = 264,
+	MAIL = 265,
+	CALCULATOR = 266,
+	COMPUTER = 267,
+	AC_SEARCH = 268,
+	AC_HOME = 269,
+	AC_BACK = 270,
+	AC_FORWARD = 271,
+	AC_STOP = 272,
+	AC_REFRESH = 273,
+	AC_BOOKMARKS = 274,
 
-    BRIGHTNESSDOWN = 275,
-    BRIGHTNESSUP = 276,
-    DISPLAYSWITCH = 277,
-    KBDILLUMTOGGLE = 278,
-    KBDILLUMDOWN = 279,
-    KBDILLUMUP = 280,
-    EJECT = 281,
-    SLEEP = 282,
+	BRIGHTNESSDOWN = 275,
+	BRIGHTNESSUP = 276,
+	DISPLAYSWITCH = 277,
+	KBDILLUMTOGGLE = 278,
+	KBDILLUMDOWN = 279,
+	KBDILLUMUP = 280,
+	EJECT = 281,
+	SLEEP = 282,
 
-    APP1 = 283,
-    APP2 = 284,
+	APP1 = 283,
+	APP2 = 284,
 
-    NUM_SCANCODES = 512
+	NUM_SCANCODES = 512
 }
 
 
@@ -1498,582 +1498,581 @@ LogOutputFunction :: proc(userdata: rawptr, category: i32, priority: LogPriority
 
 // Thanks gingerBill for this one!
 GameControllerButtonBind :: struct #ordered {
-    bind_type: GameControllerBindType;
-    value: struct #raw_union {
-        button: i32;
-        axis:   i32;
-        using hat_mask: struct #ordered {
-            hat, mask: i32;
-        };
-    };
+	bind_type: GameControllerBindType;
+	value: struct #raw_union {
+	    button: i32;
+	    axis:   i32;
+	    using hat_mask: struct #ordered {
+	        hat, mask: i32;
+	    };
+	};
 };
 
 MessageBoxData :: struct #ordered {
-    flags: u32;
-    window: ^Window;
-    title: ^u8;
-    message: ^u8;
+	flags: u32;
+	window: ^Window;
+	title: ^u8;
+	message: ^u8;
 
-    num_buttons: i32;
-    buttons: ^MessageBoxButtonData;
+	num_buttons: i32;
+	buttons: ^MessageBoxButtonData;
 
-    color_scheme: ^MessageBoxColorScheme;
+	color_scheme: ^MessageBoxColorScheme;
 }
 
 MessageBoxButtonData :: struct #ordered {
-    flags: u32;
-    button_id: i32;
-    text: ^u8;
+	flags: u32;
+	button_id: i32;
+	text: ^u8;
 }
 
 MessageBoxColorScheme :: struct #ordered {
-    colors: [MessageBoxColorType.MAX]MessageBoxColor;
+	colors: [MessageBoxColorType.MAX]MessageBoxColor;
 }
 
 MessageBoxColor :: struct #ordered {
-    r, g, b: u8;
+	r, g, b: u8;
 }
 
 AssertData :: struct #ordered {
-    always_ignore: i32;
-    trigger_count: u32;
-    condition: ^u8;
-    filename: ^u8;
-    linenum: i32;
-    function: ^u8;
-    next: ^AssertData;
+	always_ignore: i32;
+	trigger_count: u32;
+	condition: ^u8;
+	filename: ^u8;
+	linenum: i32;
+	function: ^u8;
+	next: ^AssertData;
 }
 
 WindowShapeParams :: struct #raw_union {
-    binarizationCutoff: u8;
-    colorKey: Color;
+	binarizationCutoff: u8;
+	colorKey: Color;
 }
 
 WindowShapeMode :: struct #ordered {
-    mode: WindowShapeModes;
-    parameters: WindowShapeParams;
+	mode: WindowShapeModes;
+	parameters: WindowShapeParams;
 }
 
 Point :: struct #ordered {
-    x: i32;
-    y: i32;
+	x: i32;
+	y: i32;
 }
 
 RendererInfo :: struct #ordered {
-    name: ^u8;
-    flags: u32;
-    num_texture_formats: u32;
-    texture_formats: [16]u32;
-    max_texture_width: i32;
-    max_texture_height: i32;
+	name: ^u8;
+	flags: u32;
+	num_texture_formats: u32;
+	texture_formats: [16]u32;
+	max_texture_width: i32;
+	max_texture_height: i32;
 }
 
 Version :: struct #ordered {
-    major: u8;
-    minor: u8;
-    patch: u8;
+	major: u8;
+	minor: u8;
+	patch: u8;
 }
 
 DisplayMode :: struct #ordered {
-    format: u32;
-    w: i32;
-    h: i32;
-    refresh_rate: i32;
-    driverdata: rawptr;
+	format: u32;
+	w: i32;
+	h: i32;
+	refresh_rate: i32;
+	driverdata: rawptr;
 }
 
 Finger :: struct #ordered {
-    id: FingerId;
-    x: f32;
-    y: f32;
-    pressure: f32;
+	id: FingerId;
+	x: f32;
+	y: f32;
+	pressure: f32;
 }
 
 AudioSpec :: struct #ordered {
-    freq: i32;
-    format: AudioFormat;
-    channels: u8;
-    silence: u8;
-    samples: u16;
-    padding: u16;
-    size: u32;
-    callback: AudioCallback;
-    userdata: rawptr;
+	freq: i32;
+	format: AudioFormat;
+	channels: u8;
+	silence: u8;
+	samples: u16;
+	padding: u16;
+	size: u32;
+	callback: AudioCallback;
+	userdata: rawptr;
 }
 
 JoystickGuid :: struct #ordered {
-    data: [16]u8;
+	data: [16]u8;
 }
 
 AudioCvt :: struct #ordered {
-    needed: i32;
-    src_format: AudioFormat;
-    dst_format: AudioFormat;
-    rate_incr: i64;
-    buf: ^u8;
-    len: i32;
-    len_cvt: i32;
-    len_mult: i32;
-    len_ratio: i64;
-    filters: [10]AudioFilter;
-    filter_index: i32;
+	needed: i32;
+	src_format: AudioFormat;
+	dst_format: AudioFormat;
+	rate_incr: i64;
+	buf: ^u8;
+	len: i32;
+	len_cvt: i32;
+	len_mult: i32;
+	len_ratio: i64;
+	filters: [10]AudioFilter;
+	filter_index: i32;
 }
 
 Surface :: struct #ordered {
-    flags: u32;
-    format: ^PixelFormat;
-    w, h: i32;
-    pitch: i32;
-    pixels: rawptr;
+	flags: u32;
+	format: ^PixelFormat;
+	w, h: i32;
+	pitch: i32;
+	pixels: rawptr;
 
-    userdata: rawptr;
+	userdata: rawptr;
 
-    locked: i32;
-    lock_data: rawptr;
+	locked: i32;
+	lock_data: rawptr;
 
-    clip_rect: Rect;
-    blip_map: ^BlitMap;
+	clip_rect: Rect;
+	blip_map: ^BlitMap;
 
-    refcount: i32;
+	refcount: i32;
 }
 
 Color :: struct #ordered {
-    r: u8;
-    g: u8;
-    b: u8;
-    a: u8;
+	r: u8;
+	g: u8;
+	b: u8;
+	a: u8;
 }
 
 Palette :: struct #ordered {
-    ncolors: i32;
-    colors: ^Color;
-    version: u32;
-    refcount: i32;
+	ncolors: i32;
+	colors: ^Color;
+	version: u32;
+	refcount: i32;
 }
 
 PixelFormat :: struct #ordered {
-    format: u32;
-    palette: ^Palette;
-    bits_per_pixel: u8;
-    bytes_per_pixel: u8;
-    padding: [2]u8;
-    r_mask: u32;
-    g_mask: u32;
-    b_mask: u32;
-    a_mask: u32;
-    r_loss: u8;
-    g_loss: u8;
-    b_loss: u8;
-    a_loss: u8;
-    r_shift: u8;
-    g_shift: u8;
-    b_shift: u8;
-    a_shift: u8;
-    refcount: i32;
-    next: ^PixelFormat;
+	format: u32;
+	palette: ^Palette;
+	bits_per_pixel: u8;
+	bytes_per_pixel: u8;
+	padding: [2]u8;
+	r_mask: u32;
+	g_mask: u32;
+	b_mask: u32;
+	a_mask: u32;
+	r_loss: u8;
+	g_loss: u8;
+	b_loss: u8;
+	a_loss: u8;
+	r_shift: u8;
+	g_shift: u8;
+	b_shift: u8;
+	a_shift: u8;
+	refcount: i32;
+	next: ^PixelFormat;
 }
 
 Rect :: struct #ordered {
-    x, y: u32;
-    w, h: u32;
+	x, y: u32;
+	w, h: u32;
 }
 
 Atomic :: struct #ordered {
-    value: i32;
+	value: i32;
 }
 
 Keysym :: struct #ordered {
-    scancode: u32;
-    sym: i32;
-    mod: u16;
-    unused: u32;
+	scancode: u32;
+	sym: i32;
+	mod: u16;
+	unused: u32;
 }
 
 HapticEffect :: struct #raw_union {
-    haptic_type: u16;
-    constant: HapticConstant;
-    periodic: HapticPeriodic;
-    condition: HapticCondition;
-    ramp: HapticRamp;
-    leftright: HapticLeftRight;
-    custom: HapticCustom;
+	haptic_type: u16;
+	constant: HapticConstant;
+	periodic: HapticPeriodic;
+	condition: HapticCondition;
+	ramp: HapticRamp;
+	leftright: HapticLeftRight;
+	custom: HapticCustom;
 }
 
 HapticConstant :: struct {
-    haptic_type: u16;
-    direction: HapticDirection;
+	haptic_type: u16;
+	direction: HapticDirection;
 
-    length: u32;
-    delay: u16;
+	length: u32;
+	delay: u16;
 
-    button: u16;
-    interval: u16;
+	button: u16;
+	interval: u16;
 
-    level: i16;
+	level: i16;
 
-    attack_length: u16;
-    attack_level: u16;
-    fade_length: u16;
-    fade_level: u16;
+	attack_length: u16;
+	attack_level: u16;
+	fade_length: u16;
+	fade_level: u16;
 }
 
 HapticPeriodic :: struct {
-    haptic_type: u16;
-    direction: HapticDirection;
+	haptic_type: u16;
+	direction: HapticDirection;
 
-    length: u32;
-    delay: u16;
+	length: u32;
+	delay: u16;
 
-    button: u16;
-    interval: u16;
+	button: u16;
+	interval: u16;
 
-    period: u16;
-    magnitude: i16;
-    offset: i16;
-    phase: u16;
+	period: u16;
+	magnitude: i16;
+	offset: i16;
+	phase: u16;
 
-    attack_length: u16;
-    attack_level: u16;
-    fade_length: u16;
-    fade_level: u16;
+	attack_length: u16;
+	attack_level: u16;
+	fade_length: u16;
+	fade_level: u16;
 }
 
 HapticDirection :: struct {
-    haptic_type: u8;
-    dir: [3]i32;
+	haptic_type: u8;
+	dir: [3]i32;
 }
 
 HapticCondition :: struct {
-    haptic_type: u16;
-    direction: HapticDirection;
+	haptic_type: u16;
+	direction: HapticDirection;
 
-    length: u32;
-    delay: u16;
+	length: u32;
+	delay: u16;
 
-    button: u16;
-    interval: u16;
+	button: u16;
+	interval: u16;
 
-    right_sat: [3]u16;
-    left_sat: [3]u16;
-    right_coeff: [3]i16;
-    left_coeff: [3]i16;
-    deadband: [3]u16;
-    center: [3]i16;
+	right_sat: [3]u16;
+	left_sat: [3]u16;
+	right_coeff: [3]i16;
+	left_coeff: [3]i16;
+	deadband: [3]u16;
+	center: [3]i16;
 }
 
 HapticRamp :: struct {
-    haptic_type: u16;
-    direction: HapticDirection;
+	haptic_type: u16;
+	direction: HapticDirection;
 
-    length: u32;
-    delay: u16;
+	length: u32;
+	delay: u16;
 
-    button: u16;
-    interval: u16;
+	button: u16;
+	interval: u16;
 
-    start: i16;
-    end: i16;
+	start: i16;
+	end: i16;
 
-    attack_length: u16;
-    attack_level: u16;
-    fade_length: u16;
-    fade_level: u16;
+	attack_length: u16;
+	attack_level: u16;
+	fade_length: u16;
+	fade_level: u16;
 }
 
 HapticLeftRight :: struct {
-    haptic_type: u16;
+	haptic_type: u16;
 
-    length: u32;
+	length: u32;
 
-    large_magnitude: u16;
-    small_magnitude: u16;
+	large_magnitude: u16;
+	small_magnitude: u16;
 }
 
 HapticCustom :: struct {
-    haptic_type: u16;
-    direction: HapticDirection;
+	haptic_type: u16;
+	direction: HapticDirection;
 
-    length: u32;
-    delay: u16;
+	length: u32;
+	delay: u16;
 
-    button: u16;
-    interval: u16;
+	button: u16;
+	interval: u16;
 
-    channels: u8;
-    period: u16;
-    samples: u16;
-    data: ^u16;
+	channels: u8;
+	period: u16;
+	samples: u16;
+	data: ^u16;
 
-    attack_length: u16;
-    attack_level: u16;
-    fade_length: u16;
-    fade_level: u16;
+	attack_length: u16;
+	attack_level: u16;
+	fade_length: u16;
+	fade_level: u16;
 }
 
 Event :: struct #raw_union {
-    event_type: u32;
-    common: CommonEvent;
-    window: WindowEvent;
-    key: KeyboardEvent;
-    edit: TextEditingEvent;
-    text: TextInputEvent;
-    motion: MouseMotionEvent;
-    button: MouseButtonEvent;
-    wheel: MouseWheelEvent;
-    jaxis: JoyAxisEvent;
-    jball: JoyBall_Event;
-    jhat: JoyHat_Event;
-    jbutton: JoyButtonEvent;
-    jdevice: JoyDeviceEvent;
-    caxis: ControllerAxisEvent;
-    cbutton: ControllerButtonEvent;
-    cdevice: ControllerDeviceEvent;
-    adevice: AudioDeviceEvent;
-    quit: QuitEvent;
-    user: UserEvent;
-    syswm: SysWmEvent;
-    tfinger: TouchFingerEvent;
-    mgesture: MultiGestureEvent;
-    dgesture: DollarGestureEvent;
-    drop: DropEvent;
+	event_type: u32;
+	common: CommonEvent;
+	window: WindowEvent;
+	key: KeyboardEvent;
+	edit: TextEditingEvent;
+	text: TextInputEvent;
+	motion: MouseMotionEvent;
+	button: MouseButtonEvent;
+	wheel: MouseWheelEvent;
+	jaxis: JoyAxisEvent;
+	jball: JoyBallEvent;
+	jhat: JoyHatEvent;
+	jbutton: JoyButtonEvent;
+	jdevice: JoyDeviceEvent;
+	caxis: ControllerAxisEvent;
+	cbutton: ControllerButtonEvent;
+	cdevice: ControllerDeviceEvent;
+	adevice: AudioDeviceEvent;
+	quit: QuitEvent;
+	user: UserEvent;
+	syswm: SysWmEvent;
+	tfinger: TouchFingerEvent;
+	mgesture: MultiGestureEvent;
+	dgesture: DollarGestureEvent;
+	drop: DropEvent;
 
-    padding: [56]u8;
+	padding: [56]u8;
 }
 
-
 CommonEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
+	event_type: u32;
+	timestamp: u32;
 }
 
 WindowEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    window_id: u32;
-    event: u8;
-    padding1: u8;
-    padding2: u8;
-    padding3: u8;
-    data1: i32;
-    data2: i32;
+	event_type: u32;
+	timestamp: u32;
+	window_id: u32;
+	event: u8;
+	padding1: u8;
+	padding2: u8;
+	padding3: u8;
+	data1: i32;
+	data2: i32;
 }
 
 KeyboardEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    window_id: u32;
-    state: u8;
-    repeat: u8;
-    padding2: u8;
-    padding3: u8;
-    keysym: Keysym;
+	event_type: u32;
+	timestamp: u32;
+	window_id: u32;
+	state: u8;
+	repeat: u8;
+	padding2: u8;
+	padding3: u8;
+	keysym: Keysym;
 }
 
 TEXT_EDITING_EVENT_TEXT_SIZE :: 32;
 TextEditingEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    window_id: u32;
-    text: [TEXT_EDITING_EVENT_TEXT_SIZE]u8;
-    start: i32;
-    length: i32;
+	event_type: u32;
+	timestamp: u32;
+	window_id: u32;
+	text: [TEXT_EDITING_EVENT_TEXT_SIZE]u8;
+	start: i32;
+	length: i32;
 }
 
 
 TEXT_INPUT_EVENT_TEXT_SIZE :: 32;
 TextInputEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    window_id: u32;
-    text: [TEXT_INPUT_EVENT_TEXT_SIZE]u8;
+	event_type: u32;
+	timestamp: u32;
+	window_id: u32;
+	text: [TEXT_INPUT_EVENT_TEXT_SIZE]u8;
 }
 
 MouseMotionEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    window_id: u32;
-    which: u32;
-    state: u32;
-    x: i32;
-    y: i32;
-    xrel: i32;
-    yrel: i32;
+	event_type: u32;
+	timestamp: u32;
+	window_id: u32;
+	which: u32;
+	state: u32;
+	x: i32;
+	y: i32;
+	xrel: i32;
+	yrel: i32;
 }
 
 MouseButtonEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    window_id: u32;
-    which: u32;
-    button: u8;
-    state: u8;
-    clicks: u8;
-    padding1: u8;
-    x: i32;
-    y: i32;
+	event_type: u32;
+	timestamp: u32;
+	window_id: u32;
+	which: u32;
+	button: u8;
+	state: u8;
+	clicks: u8;
+	padding1: u8;
+	x: i32;
+	y: i32;
 }
 
 MouseWheelEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    window_id: u32;
-    which: u32;
-    x: i32;
-    y: i32;
-    direction: u32;
+	event_type: u32;
+	timestamp: u32;
+	window_id: u32;
+	which: u32;
+	x: i32;
+	y: i32;
+	direction: u32;
 }
 
 JoyAxisEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    which: i32;
-    axis: u8;
-    padding1: u8;
-    padding2: u8;
-    padding3: u8;
-    value: i16;
-    padding4: u16;
+	event_type: u32;
+	timestamp: u32;
+	which: i32;
+	axis: u8;
+	padding1: u8;
+	padding2: u8;
+	padding3: u8;
+	value: i16;
+	padding4: u16;
 }
 
-JoyBall_Event :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    which: i32;
-    ball: u8;
-    padding1: u8;
-    padding2: u8;
-    padding3: u8;
-    xrel: i16;
-    yrel: i16;
+JoyBallEvent :: struct #ordered {
+	event_type: u32;
+	timestamp: u32;
+	which: i32;
+	ball: u8;
+	padding1: u8;
+	padding2: u8;
+	padding3: u8;
+	xrel: i16;
+	yrel: i16;
 }
 
-JoyHat_Event :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    which: i32;
-    hat: u8;
-    value: u8;
-    padding1: u8;
-    padding2: u8;
+JoyHatEvent :: struct #ordered {
+	event_type: u32;
+	timestamp: u32;
+	which: i32;
+	hat: u8;
+	value: u8;
+	padding1: u8;
+	padding2: u8;
 }
 
 JoyButtonEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    which: i32;
-    button: u8;
-    state: u8;
-    padding1: u8;
-    padding2: u8;
+	event_type: u32;
+	timestamp: u32;
+	which: i32;
+	button: u8;
+	state: u8;
+	padding1: u8;
+	padding2: u8;
 }
 
 JoyDeviceEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    which: i32;
+	event_type: u32;
+	timestamp: u32;
+	which: i32;
 }
 
 ControllerAxisEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    which: i32;
-    axis: u8;
-    padding1: u8;
-    padding2: u8;
-    padding3: u8;
-    value: i16;
-    padding4: u16;
+	event_type: u32;
+	timestamp: u32;
+	which: i32;
+	axis: u8;
+	padding1: u8;
+	padding2: u8;
+	padding3: u8;
+	value: i16;
+	padding4: u16;
 }
 
 ControllerButtonEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    which: i32;
-    button: u8;
-    state: u8;
-    padding1: u8;
-    padding2: u8;
+	event_type: u32;
+	timestamp: u32;
+	which: i32;
+	button: u8;
+	state: u8;
+	padding1: u8;
+	padding2: u8;
 }
 
 ControllerDeviceEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    which: i32;
+	event_type: u32;
+	timestamp: u32;
+	which: i32;
 }
 
 AudioDeviceEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    which: u32;
-    iscapture: u8;
-    padding1: u8;
-    padding2: u8;
-    padding3: u8;
+	event_type: u32;
+	timestamp: u32;
+	which: u32;
+	iscapture: u8;
+	padding1: u8;
+	padding2: u8;
+	padding3: u8;
 }
 
 TouchFingerEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    touchId: i64;
-    fingerId: i64;
-    x: f32;
-    y: f32;
-    dx: f32;
-    dy: f32;
-    pressure: f32;
+	event_type: u32;
+	timestamp: u32;
+	touchId: i64;
+	fingerId: i64;
+	x: f32;
+	y: f32;
+	dx: f32;
+	dy: f32;
+	pressure: f32;
 }
 
 MultiGestureEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    touchId: i64;
-    dTheta: f32;
-    dDist: f32;
-    x: f32;
-    y: f32;
-    numFingers: u16;
-    padding: u16;
+	event_type: u32;
+	timestamp: u32;
+	touchId: i64;
+	dTheta: f32;
+	dDist: f32;
+	x: f32;
+	y: f32;
+	numFingers: u16;
+	padding: u16;
 }
 
 DollarGestureEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    touchId: i64;
-    gestureId: i64;
-    numFingers: u32;
-    error: f32;
-    x: f32;
-    y: f32;
+	event_type: u32;
+	timestamp: u32;
+	touchId: i64;
+	gestureId: i64;
+	numFingers: u32;
+	error: f32;
+	x: f32;
+	y: f32;
 }
 
 DropEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    file: ^u8;
-    window_id: u32;
+	event_type: u32;
+	timestamp: u32;
+	file: ^u8;
+	window_id: u32;
 }
 
 QuitEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
+	event_type: u32;
+	timestamp: u32;
 }
 
 OSEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
+	event_type: u32;
+	timestamp: u32;
 }
 
 UserEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    window_id: u32;
-    code: i32;
-    data1: ^rawptr;
-    data2: ^rawptr;
+	event_type: u32;
+	timestamp: u32;
+	window_id: u32;
+	code: i32;
+	data1: ^rawptr;
+	data2: ^rawptr;
 }
 
 SysWmEvent :: struct #ordered {
-    event_type: u32;
-    timestamp: u32;
-    msg: ^SysWmMsg;
+	event_type: u32;
+	timestamp: u32;
+	msg: ^SysWmMsg;
 }

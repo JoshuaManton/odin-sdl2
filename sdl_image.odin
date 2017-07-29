@@ -58,8 +58,8 @@ save_png :: proc(surface: ^sdl.Surface, file: string) -> i32 { return _save_png(
 
 InitFlags :: enum i32
 {
-    JPG = 0x00000001,
-    PNG = 0x00000002,
-    TIF = 0x00000004,
-    WEBP = 0x00000008
+	JPG = 0x00000001,
+	PNG = 0x00000002,
+	TIF = 0x00000004,
+	WEBP = 0x00000008
 }
