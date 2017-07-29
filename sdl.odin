@@ -1500,11 +1500,11 @@ LogOutputFunction :: proc(userdata: rawptr, category: i32, priority: LogPriority
 GameControllerButtonBind :: struct #ordered {
 	bind_type: GameControllerBindType;
 	value: struct #raw_union {
-	    button: i32;
-	    axis:   i32;
-	    using hat_mask: struct #ordered {
-	        hat, mask: i32;
-	    };
+		button: i32;
+		axis:   i32;
+		using hat_mask: struct #ordered {
+			hat, mask: i32;
+		};
 	};
 };
 
