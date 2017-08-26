@@ -385,8 +385,8 @@ foreign lib {
 	render_draw_points 								:: proc(renderer: ^Renderer, points: ^Point, count: i32) -> i32																														#link_name "SDL_RenderDrawPoints" ---;
 	render_draw_rect 								:: proc(renderer: ^Renderer, rect: ^Rect) -> i32																																	#link_name "SDL_RenderDrawRect" ---;
 	render_draw_rects 								:: proc(renderer: ^Renderer, rects: ^Rect, count: i32) -> i32																														#link_name "SDL_RenderDrawRects" ---;
-	render_fill_rect 								:: proc(dst: ^Surface, rect: ^Rect, color: u32) -> i32																																#link_name "SDL_RenderFillRect" ---;
-	render_fill_rects 								:: proc(dst: ^Surface, rect: ^Rect, count: i32, color: u32) -> i32																													#link_name "SDL_RenderFillRects" ---;
+	render_fill_rect 								:: proc(dst: ^Renderer, rect: ^Rect) -> i32																																			#link_name "SDL_RenderFillRect" ---;
+	render_fill_rects 								:: proc(dst: ^Renderer, rect: ^Rect, count: i32) -> i32																																#link_name "SDL_RenderFillRects" ---;
 	render_get_clip_rect 							:: proc(surface: ^Surface, rect: ^Rect)																																				#link_name "SDL_RenderGetClipRect" ---;
 	render_get_d3d9_device 							:: proc(renderer: ^Renderer) ->	^IDirect3DDevice9																																	#link_name "SDL_RenderGetD3D9Device" ---;
 	render_get_integer_scale 						:: proc(renderer: ^Renderer) -> Bool																																				#link_name "SDL_RenderGetIntegerScale" ---;
@@ -1635,6 +1635,15 @@ SDLK_SLEEP :: Scancode.Sleep | SDLK_SCANCODE_MASK;
 
 SDLK_SCANCODE_MASK :: 1<<30;
 
+Mousecode :: enum i32 {
+	Left   = 1 << 0,
+	Middle = 1 << 1,
+	Right  = 1 << 2,
+	X1 	   = 1 << 3,
+	X2 	   = 1 << 4
+}
+
+
 Hat :: enum i32 {
 	Centered = 0x00,
 	Up = 0x01,
@@ -1937,8 +1946,8 @@ PixelFormat :: struct #ordered {
 }
 
 Rect :: struct #ordered {
-	x, y: u32;
-	w, h: u32;
+	x, y: i32;
+	w, h: i32;
 }
 
 Atomic :: struct #ordered {
