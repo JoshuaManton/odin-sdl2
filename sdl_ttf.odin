@@ -1,9 +1,7 @@
 import "sdl.odin";
-import . "strings.odin";
+using import "strings.odin";
 
-foreign_system_library (
-	lib "SDL2_ttf.lib";
-)
+foreign_system_library lib "SDL2_ttf.lib";
 
 foreign lib {
 	byte_swapped_unicode							:: proc(swapped: i32) 																					#link_name "TTF_ByteSwappedUNICODE" ---;

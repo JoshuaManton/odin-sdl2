@@ -1,10 +1,6 @@
-import (
-	. "strings.odin";
-)
+using import "strings.odin";
 
-foreign_system_library (
-	lib "SDL2.lib";
-)
+foreign_system_library lib "SDL2.lib";
 
 foreign lib {
 	// This one is missing from my source of SDL2 ???
