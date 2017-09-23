@@ -1,7 +1,6 @@
-import . "sdl_ttf.odin";
+using import "sdl_ttf.odin";
 
-main :: proc()
-{
+main :: proc() {
 	test_byte_swapped_unicode := byte_swapped_unicode;
 	test_close_font := close_font;
 	test_font_ascent := font_ascent;

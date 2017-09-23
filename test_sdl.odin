@@ -1,12 +1,11 @@
-import . "sdl.odin";
+using import "sdl.odin";
 
 // !!!!!!!!!!
 // All of these tests should pass except the ones I've commented out because
 // they rely on some structs that I haven't ported yet.
 // !!!!!!!!!!
 
-main :: proc()
-{
+main :: proc() {
 	test_add_event_watch := add_event_watch;
 	test_add_hint_callback := add_hint_callback;
 	test_add_timer := add_timer;

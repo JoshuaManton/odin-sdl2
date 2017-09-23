@@ -1,5 +1,5 @@
 import "sdl.odin";
-using import "strings.odin";
+using import "core:strings.odin";
 
 foreign_system_library lib "SDL2_ttf.lib";
 
@@ -25,8 +25,8 @@ foreign lib {
 	linked_version									:: proc() -> ^sdl.Version 																				#link_name "TTF_Linked_Version" ---;
 	open_font_c										:: proc(file: ^u8, pt_size: i32) -> ^Font 																#link_name "TTF_OpenFont" ---;
 	open_font_index_c								:: proc(file: ^u8, pt_size: i32, index: i32) -> ^Font 												#link_name "TTF_OpenFontIndex" ---;
-	open_font_index_rw								:: proc(src: ^sdl.RwOps, freesrc, pt_size: i32, index: u64) -> ^Font 									#link_name "TTF_OpenFontIndexRW" ---;
-	open_font_rw									:: proc(src: ^sdl.RwOps, freesrc, pt_size: i32) -> ^Font 												#link_name "TTF_OpenFontRW" ---;
+	open_font_index_rw								:: proc(src: ^sdl.Rw_Ops, freesrc, pt_size: i32, index: u64) -> ^Font 									#link_name "TTF_OpenFontIndexRW" ---;
+	open_font_rw									:: proc(src: ^sdl.Rw_Ops, freesrc, pt_size: i32) -> ^Font 												#link_name "TTF_OpenFontRW" ---;
 	quit											:: proc() 																								#link_name "TTF_Quit" ---;
 	render_glyph_blended							:: proc(font: ^Font, ch: u16, fg: sdl.Color) -> ^sdl.Surface 											#link_name "TTF_RenderGlyph_Blended" ---;
 	render_glyph_shaded								:: proc(font: ^Font, ch: u16, fg, bg: sdl.Color) -> ^sdl.Surface										#link_name "TTF_RenderGlyph_Shaded" ---;

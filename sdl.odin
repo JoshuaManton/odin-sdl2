@@ -1,4 +1,4 @@
-using import "strings.odin";
+using import "core:strings.odin";
 
 foreign_system_library lib "SDL2.lib";
 
@@ -9,39 +9,39 @@ foreign lib {
 	// The source for this one says you should never call it directly, but rather use the macros provided. Need to port those over still
 	//report_assertion 								:: proc() ->																																										#link_name "SDL_ReportAssertion" ---;
 
-	add_event_watch 								:: proc(filter: EventFilter, userdata: rawptr)																																		#link_name "SDL_AddEventWatch" ---;
-	add_hint_callback_c  							:: proc(name: ^u8, callback: HintCallback, userdata: rawptr)  																														#link_name "SDL_AddHintCallback" ---;
-	add_timer 										:: proc(interval: u32, callback: TimerCallback, param: rawptr) -> TimerId																											#link_name "SDL_AddTimer" ---;
-	alloc_format 									:: proc(pixel_format: u32) -> ^PixelFormat																																			#link_name "SDL_AllocFormat" ---;
+	add_event_watch 								:: proc(filter: Event_Filter, userdata: rawptr)																																		#link_name "SDL_AddEventWatch" ---;
+	add_hint_callback_c  							:: proc(name: ^u8, callback: Hint_Callback, userdata: rawptr)  																														#link_name "SDL_AddHintCallback" ---;
+	add_timer 										:: proc(interval: u32, callback: Timer_Callback, param: rawptr) -> Timer_Id																											#link_name "SDL_AddTimer" ---;
+	alloc_format 									:: proc(pixel_format: u32) -> ^Pixel_Format																																			#link_name "SDL_AllocFormat" ---;
 	alloc_palette 									:: proc(ncolors: i32) -> ^Palette																																					#link_name "SDL_AllocPalette" ---;
-	alloc_rw 										:: proc() -> ^RwOps 																																								#link_name "SDL_AllocRW" ---;
+	alloc_rw 										:: proc() -> ^Rw_Ops 																																								#link_name "SDL_AllocRW" ---;
 	atomic_add 										:: proc(a: ^Atomic, v: i32) -> i32																																					#link_name "SDL_AtomicAdd" ---;
 	atomic_cas 										:: proc(a: ^Atomic, oldval: i32, newval: i32) -> Bool																																#link_name "SDL_AtomicCAS" ---;
 	atomic_cas_ptr 									:: proc(a: ^rawptr, oldval: rawptr, newval: rawptr) -> Bool																															#link_name "SDL_AtomicCASPtr" ---;
 	atomic_get 										:: proc(a: ^Atomic) -> i32																																							#link_name "SDL_AtomicGet" ---;
 	atomic_get_ptr 									:: proc(a: ^rawptr) -> rawptr																																						#link_name "SDL_AtomicGetPtr" ---;
-	atomic_lock 									:: proc(lock: ^SpinLock)																																							#link_name "SDL_AtomicLock" ---;
+	atomic_lock 									:: proc(lock: ^Spin_Lock)																																							#link_name "SDL_AtomicLock" ---;
 	atomic_set 										:: proc(a: ^Atomic, v: i32) -> i32																																					#link_name "SDL_AtomicSet" ---;
 	atomic_set_ptr 									:: proc(a: ^rawptr, v: rawptr) -> rawptr																																			#link_name "SDL_AtomicSetPtr" ---;
-	atomic_try_lock 								:: proc(lock: ^SpinLock) -> Bool																																					#link_name "SDL_AtomicTryLock" ---;
-	atomic_unlock 									:: proc(lock: ^SpinLock)																																							#link_name "SDL_AtomicUnlock" ---;
+	atomic_try_lock 								:: proc(lock: ^Spin_Lock) -> Bool																																					#link_name "SDL_AtomicTryLock" ---;
+	atomic_unlock 									:: proc(lock: ^Spin_Lock)																																							#link_name "SDL_AtomicUnlock" ---;
 	audio_init_c 									:: proc(driver_name: ^u8) -> i32																																					#link_name "SDL_AudioInit" ---;
 	audio_quit 										:: proc()																																											#link_name "SDL_AudioQuit" ---;
-	build_audio_cvt 								:: proc(cvt: ^AudioCvt, src_format: AudioFormat, src_channels: u8, src_rate: i32, dst_format: AudioFormat, dst_channels: u8, dst_rate: i32) -> i32									#link_name "SDL_BuildAudioCVT" ---;
+	build_audio_cvt 								:: proc(cvt: ^Audio_Cvt, src_format: Audio_Format, src_channels: u8, src_rate: i32, dst_format: Audio_Format, dst_channels: u8, dst_rate: i32) -> i32									#link_name "SDL_BuildAudioCVT" ---;
 	calculate_gamma_ramp 							:: proc(gamma: f32, ramp: ^u16)																																						#link_name "SDL_CalculateGammaRamp" ---;
 	capture_mouse 									:: proc(enabled: Bool) -> i32																																						#link_name "SDL_CaptureMouse" ---;
 	clear_error 									:: proc()																																											#link_name "SDL_ClearError" ---;
 	clear_hints 									:: proc()																																											#link_name "SDL_ClearHints" ---;
-	clear_queued_audio 								:: proc(dev: AudioDevice)																																							#link_name "SDL_ClearQueuedAudio" ---;
+	clear_queued_audio 								:: proc(dev: Audio_Device)																																							#link_name "SDL_ClearQueuedAudio" ---;
 	close_audio 									:: proc()																																											#link_name "SDL_CloseAudio" ---;
-	close_audio_device 								:: proc(dev: AudioDevice)																																							#link_name "SDL_CloseAudioDevice" ---;
+	close_audio_device 								:: proc(dev: Audio_Device)																																							#link_name "SDL_CloseAudioDevice" ---;
 	cond_broadcast 									:: proc(cond: ^Cond) -> i32																																							#link_name "SDL_CondBroadcast" ---;
 	cond_signal 									:: proc(cond: ^Cond) -> i32																																							#link_name "SDL_CondSignal" ---;
 	cond_wait 										:: proc(cond: ^Cond, mutex: ^Mutex) -> i32																																			#link_name "SDL_CondWait" ---;
 	cond_wait_timeout 								:: proc(cond: ^Cond, mutex: ^Mutex, ms: u32) -> i32																																	#link_name "SDL_CondWaitTimeout" ---;
-	convert_audio 									:: proc(cvt: ^AudioCvt) -> i32																																						#link_name "SDL_ConvertAudio" ---;
+	convert_audio 									:: proc(cvt: ^Audio_Cvt) -> i32																																						#link_name "SDL_ConvertAudio" ---;
 	convert_pixels 									:: proc(width: i32, height: i32, src_format: u32, src: rawptr, src_pitch: i32, dst_format: u32, dst: rawptr, dst_pitch: i32) -> i32													#link_name "SDL_ConvertPixels" ---;
-	convert_surface 								:: proc(src: ^Surface, fmt: ^PixelFormat, flags: u32) -> ^Surface																													#link_name "SDL_ConvertSurface" ---;
+	convert_surface 								:: proc(src: ^Surface, fmt: ^Pixel_Format, flags: u32) -> ^Surface																													#link_name "SDL_ConvertSurface" ---;
 	convert_surface_format 							:: proc(src: ^Surface, pixel_format: u32, flags: u32) -> ^Surface																													#link_name "SDL_ConvertSurfaceFormat" ---;
 	create_color_cursor 							:: proc(surface: ^Surface, hot_x, hot_y: i32) -> ^Cursor																															#link_name "SDL_CreateColorCursor" ---;
 	create_cond 									:: proc() -> ^Cond																																									#link_name "SDL_CreateCond" ---;
@@ -55,18 +55,18 @@ foreign lib {
 	create_semaphore 								:: proc(initial_value: u32) -> ^Sem																																					#link_name "SDL_CreateSemaphore" ---;
 	create_shaped_window_c 							:: proc(title: ^u8, x, y, w, h: u32, flags: u32) -> ^Window																															#link_name "SDL_CreateShapedWindow" ---;
 	create_software_renderer 						:: proc(surface: ^Surface) -> ^Renderer																																				#link_name "SDL_CreateSoftwareRenderer" ---;
-	create_system_cursor 							:: proc(id: SystemCursor) -> ^Cursor																																				#link_name "SDL_CreateSystemCursor" ---;
+	create_system_cursor 							:: proc(id: System_Cursor) -> ^Cursor																																				#link_name "SDL_CreateSystemCursor" ---;
 	create_texture 									:: proc(renderer: ^Renderer, format: u32, access: i32, w, h: i32) -> ^Texture																										#link_name "SDL_CreateTexture" ---;
 	create_texture_from_surface 					:: proc(renderer: ^Renderer, surface: ^Surface) -> ^Texture																															#link_name "SDL_CreateTextureFromSurface" ---;
-	create_thread_c 								:: proc(fn: ThreadFunction, name: ^u8, data: rawptr) -> ^Thread 																													#link_name "SDL_CreateThread" ---;
+	create_thread_c 								:: proc(fn: Thread_Function, name: ^u8, data: rawptr) -> ^Thread 																													#link_name "SDL_CreateThread" ---;
 	create_window_c 								:: proc(title: ^u8, x, y, w, h: i32, flags: u32) -> ^Window																															#link_name "SDL_CreateWindow" ---;
 	create_window_and_renderer 						:: proc(width, height: i32, window_flags: u32, window: ^^Window, renderer: ^^Renderer) -> i32																						#link_name "SDL_CreateWindowAndRenderer" ---;
 	create_window_from 								:: proc(data: rawptr) -> ^Window																																					#link_name "SDL_CreateWindowFrom" ---;
 	dxgi_get_output_info 							:: proc(display_index: i32, adapter_index: ^i32, output_index: ^i32) -> Bool																										#link_name "SDL_DXGIGetOutputInfo" ---;
-	del_event_watch 								:: proc(filter: EventFilter, userdata: rawptr)																																		#link_name "SDL_DelEventWatch" ---;
-	del_hint_callback_c 							:: proc(name: ^u8, callback: HintCallback, userdata: rawptr)																														#link_name "SDL_DelHintCallback" ---;
+	del_event_watch 								:: proc(filter: Event_Filter, userdata: rawptr)																																		#link_name "SDL_DelEventWatch" ---;
+	del_hint_callback_c 							:: proc(name: ^u8, callback: Hint_Callback, userdata: rawptr)																														#link_name "SDL_DelHintCallback" ---;
 	delay 											:: proc(ms: u32)																																									#link_name "SDL_Delay" ---;
-	dequeue_audio 									:: proc(dev: AudioDeviceId, data: rawptr, len: u32) -> u32																															#link_name "SDL_DequeueAudio" ---;
+	dequeue_audio 									:: proc(dev: Audio_Device_Id, data: rawptr, len: u32) -> u32																															#link_name "SDL_DequeueAudio" ---;
 	destroy_cond 									:: proc(cond: ^Cond)																																								#link_name "SDL_DestroyCond" ---;
 	destroy_mutex 									:: proc(mutex: ^Mutex)																																								#link_name "SDL_DestroyMutex" ---;
 	destroy_renderer 								:: proc(renderer: ^Renderer)																																						#link_name "SDL_DestroyRenderer" ---;
@@ -78,85 +78,85 @@ foreign lib {
 	disable_screen_saver 							:: proc()																																											#link_name "SDL_DisableScreenSaver" ---;
 	enable_screen_saver 							:: proc()																																											#link_name "SDL_EnableScreenSaver" ---;
 	enclose_points 									:: proc(points: ^Point, count: i32, clip: ^Rect, result: ^Rect) -> Bool																												#link_name "SDL_EnclosePoints" ---;
-	error 											:: proc(code: ErrorCode) -> i32																																						#link_name "SDL_Error" ---;
+	error 											:: proc(code: Error_Code) -> i32																																						#link_name "SDL_Error" ---;
 	event_state 									:: proc(event_type: u32, state: i32) -> u8																																			#link_name "SDL_EventState" ---;
 	fill_rect 										:: proc(dst: ^Surface, rect: ^Rect, color: u32) -> i32																																#link_name "SDL_FillRect" ---;
 	fill_rects 										:: proc(dst: ^Surface, rect: ^Rect, count: i32, color: u32) -> i32																													#link_name "SDL_FillRects" ---;
-	filter_events 									:: proc(filter: EventFilter, userdata: rawptr)																																		#link_name "SDL_FilterEvents" ---;
+	filter_events 									:: proc(filter: Event_Filter, userdata: rawptr)																																		#link_name "SDL_FilterEvents" ---;
 	flush_event 									:: proc(event_type: u32)																																							#link_name "SDL_FlushEvent" ---;
 	flush_events 									:: proc(min_type: u32, max_type: u32)																																				#link_name "SDL_FlushEvents" ---;
 	free_cursor 									:: proc(cursor: ^Cursor)																																							#link_name "SDL_FreeCursor" ---;
-	free_format 									:: proc(format: ^PixelFormat)																																						#link_name "SDL_FreeFormat" ---;
+	free_format 									:: proc(format: ^Pixel_Format)																																						#link_name "SDL_FreeFormat" ---;
 	free_palette 									:: proc(palette: ^Palette)																																							#link_name "SDL_FreePalette" ---;
-	free_rw 										:: proc(area: ^RwOps)																																								#link_name "SDL_FreeRW" ---;
+	free_rw 										:: proc(area: ^Rw_Ops)																																								#link_name "SDL_FreeRW" ---;
 	free_surface 									:: proc(surface: ^Surface)																																							#link_name "SDL_FreeSurface" ---;
 	free_wav 										:: proc(audio_buf: ^u8)																																								#link_name "SDL_FreeWAV" ---;
 	gl_bind_texture 								:: proc(texture: ^Texture, texw, texh: ^f32) -> i32																																	#link_name "SDL_GL_BindTexture" ---;
-	gl_create_context 								:: proc(window: ^Window) -> GLContext																																				#link_name "SDL_GL_CreateContext" ---;
-	gl_delete_context 								:: proc(gl_context: GLContext)																																						#link_name "SDL_GL_DeleteContext" ---;
+	gl_create_context 								:: proc(window: ^Window) -> GL_Context																																				#link_name "SDL_GL_CreateContext" ---;
+	gl_delete_context 								:: proc(gl_context: GL_Context)																																						#link_name "SDL_GL_DeleteContext" ---;
 	gl_extension_supported_c 						:: proc(extension: ^u8) -> Bool																																						#link_name "SDL_GL_ExtensionSupported" ---;
-	gl_get_attribute 								:: proc(attr: GLAttr, value: ^i32) -> i32																																			#link_name "SDL_GL_GetAttribute" ---;
-	gl_get_current_context 							:: proc() -> GLContext																																								#link_name "SDL_GL_GetCurrentContext" ---;
+	gl_get_attribute 								:: proc(attr: GL_Attr, value: ^i32) -> i32																																			#link_name "SDL_GL_GetAttribute" ---;
+	gl_get_current_context 							:: proc() -> GL_Context																																								#link_name "SDL_GL_GetCurrentContext" ---;
 	gl_get_current_window 							:: proc() -> ^Window																																								#link_name "SDL_GL_GetCurrentWindow" ---;
 	gl_get_drawable_size 							:: proc(window: ^Window, w, h: ^i32)																																				#link_name "SDL_GL_GetDrawableSize" ---;
 	gl_get_proc_address_c 							:: proc(name: ^u8) -> rawptr																																						#link_name "SDL_GL_GetProcAddress" ---;
 	gl_get_swap_interval 							:: proc() -> i32																																									#link_name "SDL_GL_GetSwapInterval" ---;
 	gl_load_library_c 								:: proc(path: ^u8) -> i32																																							#link_name "SDL_GL_LoadLibrary" ---;
-	gl_make_current 								:: proc(window: ^Window, gl_context: GLContext) -> i32																																#link_name "SDL_GL_MakeCurrent" ---;
+	gl_make_current 								:: proc(window: ^Window, gl_context: GL_Context) -> i32																																#link_name "SDL_GL_MakeCurrent" ---;
 	gl_reset_attributes 							:: proc()																																											#link_name "SDL_GL_ResetAttributes" ---;
-	gl_set_attribute 								:: proc(attr: GLAttr, value: i32) -> i32																																			#link_name "SDL_GL_SetAttribute" ---;
+	gl_set_attribute 								:: proc(attr: GL_Attr, value: i32) -> i32																																			#link_name "SDL_GL_SetAttribute" ---;
 	gl_set_swap_interval 							:: proc(interval: i32) -> i32																																						#link_name "SDL_GL_SetSwapInterval" ---;
 	gl_swap_window 									:: proc(window: ^Window)																																							#link_name "SDL_GL_SwapWindow" ---;
 	gl_unbind_texture 								:: proc(texture: ^Texture) -> i32																																					#link_name "SDL_GL_UnbindTexture" ---;
 	gl_unload_library 								:: proc()																																											#link_name "SDL_GL_UnloadLibrary" ---;
 	game_controller_add_mapping_c 					:: proc(mapping_string: ^u8) -> i32																																					#link_name "SDL_GameControllerAddMapping" ---;
-	game_controller_add_mappings_from_rw 			:: proc(area: ^RwOps, freerw: i32) -> i32																																			#link_name "SDL_GameControllerAddMappingsFromRW" ---;
-	game_controller_close 							:: proc(game_controller: ^GameController)																																			#link_name "SDL_GameControllerClose" ---;
+	game_controller_add_mappings_from_rw 			:: proc(area: ^Rw_Ops, freerw: i32) -> i32																																			#link_name "SDL_GameControllerAddMappingsFromRW" ---;
+	game_controller_close 							:: proc(game_controller: ^Game_Controller)																																			#link_name "SDL_GameControllerClose" ---;
 	game_controller_event_state 					:: proc(state: i32) -> i32																																							#link_name "SDL_GameControllerEventState" ---;
-	game_controller_from_instance_id 				:: proc(joy_id: JoystickId) ->	^GameController																																		#link_name "SDL_GameControllerFromInstanceID" ---;
-	game_controller_get_attached 					:: proc(game_controller: ^GameController) -> Bool																																	#link_name "SDL_GameControllerGetAttached" ---;
-	game_controller_get_axis 						:: proc(game_controller: ^GameController, axis: GameControllerAxis) -> i16																											#link_name "SDL_GameControllerGetAxis" ---;
+	game_controller_from_instance_id 				:: proc(joy_id: Joystick_Id) ->	^Game_Controller																																		#link_name "SDL_GameControllerFromInstanceID" ---;
+	game_controller_get_attached 					:: proc(game_controller: ^Game_Controller) -> Bool																																	#link_name "SDL_GameControllerGetAttached" ---;
+	game_controller_get_axis 						:: proc(game_controller: ^Game_Controller, axis: Game_Controller_Axis) -> i16																											#link_name "SDL_GameControllerGetAxis" ---;
 	game_controller_get_axis_from_string_c 			:: proc(pch_string: ^u8) -> ^u8																																						#link_name "SDL_GameControllerGetAxisFromString" ---;
-	game_controller_get_bind_for_axis 				:: proc(game_controller: ^GameController, axis: GameControllerAxis) -> GameControllerButtonBind																						#link_name "SDL_GameControllerGetBindForAxis" ---;
-	game_controller_get_bind_for_button 			:: proc(game_controller: ^GameController, button: GameControllerButton) -> GameControllerButtonBind																					#link_name "SDL_GameControllerGetBindForButton" ---;
-	game_controller_get_button 						:: proc(game_controller: ^GameController, button: GameControllerButton) -> u8																										#link_name "SDL_GameControllerGetButton" ---;
-	game_controller_get_button_from_string_c 		:: proc(pch_string: ^u8) -> GameControllerButton																																	#link_name "SDL_GameControllerGetButtonFromString" ---;
-	game_controller_get_joystick 					:: proc(game_controller: ^GameController) -> ^Joystick																																#link_name "SDL_GameControllerGetJoystick" ---;
-	game_controller_get_string_for_axis_c 			:: proc(axis: GameControllerAxis) -> ^u8																																			#link_name "SDL_GameControllerGetStringForAxis" ---;
-	game_controller_get_string_for_button_c 		:: proc(button: GameControllerButton) -> ^u8																																		#link_name "SDL_GameControllerGetStringForButton" ---;
-	game_controller_mapping_c 						:: proc(game_controller: ^GameController) -> ^u8																																	#link_name "SDL_GameControllerMapping" ---;
-	game_controller_mapping_for_guid_c 				:: proc(guid: JoystickGuid) -> ^u8																																					#link_name "SDL_GameControllerMappingForGUID" ---;
-	game_controller_name_c 							:: proc(game_controller: ^GameController) -> ^u8																																	#link_name "SDL_GameControllerName" ---;
+	game_controller_get_bind_for_axis 				:: proc(game_controller: ^Game_Controller, axis: Game_Controller_Axis) -> Game_Controller_Button_Bind																						#link_name "SDL_GameControllerGetBindForAxis" ---;
+	game_controller_get_bind_for_button 			:: proc(game_controller: ^Game_Controller, button: Game_Controller_Button) -> Game_Controller_Button_Bind																					#link_name "SDL_GameControllerGetBindForButton" ---;
+	game_controller_get_button 						:: proc(game_controller: ^Game_Controller, button: Game_Controller_Button) -> u8																										#link_name "SDL_GameControllerGetButton" ---;
+	game_controller_get_button_from_string_c 		:: proc(pch_string: ^u8) -> Game_Controller_Button																																	#link_name "SDL_GameControllerGetButtonFromString" ---;
+	game_controller_get_joystick 					:: proc(game_controller: ^Game_Controller) -> ^Joystick																																#link_name "SDL_GameControllerGetJoystick" ---;
+	game_controller_get_string_for_axis_c 			:: proc(axis: Game_Controller_Axis) -> ^u8																																			#link_name "SDL_GameControllerGetStringForAxis" ---;
+	game_controller_get_string_for_button_c 		:: proc(button: Game_Controller_Button) -> ^u8																																		#link_name "SDL_GameControllerGetStringForButton" ---;
+	game_controller_mapping_c 						:: proc(game_controller: ^Game_Controller) -> ^u8																																	#link_name "SDL_GameControllerMapping" ---;
+	game_controller_mapping_for_guid_c 				:: proc(guid: Joystick_Guid) -> ^u8																																					#link_name "SDL_GameControllerMappingForGUID" ---;
+	game_controller_name_c 							:: proc(game_controller: ^Game_Controller) -> ^u8																																	#link_name "SDL_GameControllerName" ---;
 	game_controller_name_for_index_c 				:: proc(joystick_index: i32) -> ^u8																																					#link_name "SDL_GameControllerNameForIndex" ---;
-	game_controller_open 							:: proc(joystick_index: i32) -> ^GameController																																		#link_name "SDL_GameControllerOpen" ---;
+	game_controller_open 							:: proc(joystick_index: i32) -> ^Game_Controller																																		#link_name "SDL_GameControllerOpen" ---;
 	game_controller_update 							:: proc()																																											#link_name "SDL_GameControllerUpdate" ---;
-	get_assertion_handler 							:: proc(userdata: ^rawptr) -> AssertionHandler																																		#link_name "SDL_GetAssertionHandler" ---;
-	get_assertion_report 							:: proc() -> ^AssertData																																							#link_name "SDL_GetAssertionReport" ---;
+	get_assertion_handler 							:: proc(userdata: ^rawptr) -> Assertion_Handler																																		#link_name "SDL_GetAssertionHandler" ---;
+	get_assertion_report 							:: proc() -> ^Assert_Data																																							#link_name "SDL_GetAssertionReport" ---;
 	get_audio_device_name_c 						:: proc(index: i32, iscapture: i32) -> ^u8																																			#link_name "SDL_GetAudioDeviceName" ---;
-	get_audio_device_status 						:: proc(dev: AudioDeviceId) -> AudioStatus																																			#link_name "SDL_GetAudioDeviceStatus" ---;
+	get_audio_device_status 						:: proc(dev: Audio_Device_Id) -> Audio_Status																																			#link_name "SDL_GetAudioDeviceStatus" ---;
 	get_audio_driver_c 								:: proc(index: i32) -> ^u8																																							#link_name "SDL_GetAudioDriver" ---;
-	get_audio_status 								:: proc() -> AudioStatus																																							#link_name "SDL_GetAudioStatus" ---;
+	get_audio_status 								:: proc() -> Audio_Status																																							#link_name "SDL_GetAudioStatus" ---;
 	get_base_path_c 								:: proc() -> ^u8																																									#link_name "SDL_GetBasePath" ---;
 	get_cpu_cache_line_size 						:: proc() -> i32																																									#link_name "SDL_GetCPUCacheLineSize" ---;
 	get_cpu_count 									:: proc() -> i32																																									#link_name "SDL_GetCPUCount" ---;
 	get_clip_rect 									:: proc(surface: ^Surface, rect: ^Rect)																																				#link_name "SDL_GetClipRect" ---;
 	get_clipboard_text_c 							:: proc() -> ^u8																																									#link_name "SDL_GetClipboardText" ---;
-	get_closest_display_mode 						:: proc(display_index: i32, mode: ^DisplayMode, closest: ^DisplayMode) -> ^DisplayMode																								#link_name "SDL_GetClosestDisplayMode" ---;
+	get_closest_display_mode 						:: proc(display_index: i32, mode: ^Display_Mode, closest: ^Display_Mode) -> ^Display_Mode																								#link_name "SDL_GetClosestDisplayMode" ---;
 	get_color_key 									:: proc(surface: ^Surface, key: ^u32) -> i32																																		#link_name "SDL_GetColorKey" ---;
 	get_current_audio_driver_c 						:: proc() -> ^u8																																									#link_name "SDL_GetCurrentAudioDriver" ---;
-	get_current_display_mode 						:: proc(display_index: i32, mode: ^DisplayMode) -> i32																																#link_name "SDL_GetCurrentDisplayMode" ---;
+	get_current_display_mode 						:: proc(display_index: i32, mode: ^Display_Mode) -> i32																																#link_name "SDL_GetCurrentDisplayMode" ---;
 	get_current_video_driver_c 						:: proc() -> ^u8																																									#link_name "SDL_GetCurrentVideoDriver" ---;
 	get_cursor 										:: proc() -> ^Cursor																																								#link_name "SDL_GetCursor" ---;
-	get_default_assertion_handler 					:: proc() -> AssertionHandler																																						#link_name "SDL_GetDefaultAssertionHandler" ---;
+	get_default_assertion_handler 					:: proc() -> Assertion_Handler																																						#link_name "SDL_GetDefaultAssertionHandler" ---;
 	get_default_cursor 								:: proc() -> ^Cursor																																								#link_name "SDL_GetDefaultCursor" ---;
-	get_desktop_display_mode 						:: proc(display_index: i32, mode: ^DisplayMode) -> i32																																#link_name "SDL_GetDesktopDisplayMode" ---;
+	get_desktop_display_mode 						:: proc(display_index: i32, mode: ^Display_Mode) -> i32																																#link_name "SDL_GetDesktopDisplayMode" ---;
 	get_display_bounds 								:: proc(display_index: i32, rect: ^Rect) -> i32																																		#link_name "SDL_GetDisplayBounds" ---;
 	get_display_dpi 								:: proc(display_index: i32, ddpi, hdpi, vdpi: ^f32) -> i32																															#link_name "SDL_GetDisplayDPI" ---;
-	get_display_mode 								:: proc(display_index: i32, mode_index: i32, mode: ^DisplayMode) -> i32																												#link_name "SDL_GetDisplayMode" ---;
+	get_display_mode 								:: proc(display_index: i32, mode_index: i32, mode: ^Display_Mode) -> i32																												#link_name "SDL_GetDisplayMode" ---;
 	get_display_name_c 								:: proc(display_index: i32) -> ^u8																																					#link_name "SDL_GetDisplayName" ---;
 	get_display_usable_bounds 						:: proc(display_index: i32, rect: ^Rect) -> i32																																		#link_name "SDL_GetDisplayUsableBounds" ---;
 	get_error_c 									:: proc() -> ^u8																																									#link_name "SDL_GetError" ---;
-	get_event_filter 								:: proc(filter: ^EventFilter, userdata: ^rawptr) -> Bool																															#link_name "SDL_GetEventFilter" ---;
+	get_event_filter 								:: proc(filter: ^Event_Filter, userdata: ^rawptr) -> Bool																															#link_name "SDL_GetEventFilter" ---;
 	get_global_mouse_state 							:: proc(x, y: ^i32) -> u32																																							#link_name "SDL_GetGlobalMouseState" ---;
 	get_grabbed_window 								:: proc() -> ^Window																																								#link_name "SDL_GetGrabbedWindow" ---;
 	get_hint_c 										:: proc(name: ^u8) -> ^u8																																							#link_name "SDL_GetHint" ---;
@@ -174,52 +174,52 @@ foreign lib {
 	get_num_display_modes 							:: proc(display_index: i32) -> i32																																					#link_name "SDL_GetNumDisplayModes" ---;
 	get_num_render_drivers 							:: proc() -> i32																																									#link_name "SDL_GetNumRenderDrivers" ---;
 	get_num_touch_devices 							:: proc() -> i32																																									#link_name "SDL_GetNumTouchDevices" ---;
-	get_num_touch_fingers 							:: proc(touch_id: TouchId) -> i32																																					#link_name "SDL_GetNumTouchFingers" ---;
+	get_num_touch_fingers 							:: proc(touch_id: Touch_Id) -> i32																																					#link_name "SDL_GetNumTouchFingers" ---;
 	get_num_video_displays 							:: proc() -> i32																																									#link_name "SDL_GetNumVideoDisplays" ---;
 	get_num_video_drivers 							:: proc() -> i32																																									#link_name "SDL_GetNumVideoDrivers" ---;
 	get_performance_counter 						:: proc() -> u64																																									#link_name "SDL_GetPerformanceCounter" ---;
 	get_performance_frequency 						:: proc() -> u64																																									#link_name "SDL_GetPerformanceFrequency" ---;
 	get_pixel_format_name_c 						:: proc(format: u32) -> ^u8																																							#link_name "SDL_GetPixelFormatName" ---;
 	get_platform_c 									:: proc() -> ^u8																																									#link_name "SDL_GetPlatform" ---;
-	get_power_info 									:: proc(secs, pct: ^i32) -> PowerState																																				#link_name "SDL_GetPowerInfo" ---;
+	get_power_info 									:: proc(secs, pct: ^i32) -> Power_State																																				#link_name "SDL_GetPowerInfo" ---;
 	get_pref_path_c 								:: proc(org, app: ^u8) -> ^u8																																						#link_name "SDL_GetPrefPath" ---;
-	get_queued_audio_size 							:: proc(dev: AudioDeviceId) -> u32																																					#link_name "SDL_GetQueuedAudioSize" ---;
-	get_rgb 										:: proc(pixel: u32, format: ^PixelFormat, r, g, b: ^u8)																																#link_name "SDL_GetRGB" ---;
-	get_rgba 										:: proc(pixel: u32, format: ^PixelFormat, r, g, b, a: ^u8)																															#link_name "SDL_GetRGBA" ---;
+	get_queued_audio_size 							:: proc(dev: Audio_Device_Id) -> u32																																					#link_name "SDL_GetQueuedAudioSize" ---;
+	get_rgb 										:: proc(pixel: u32, format: ^Pixel_Format, r, g, b: ^u8)																																#link_name "SDL_GetRGB" ---;
+	get_rgba 										:: proc(pixel: u32, format: ^Pixel_Format, r, g, b, a: ^u8)																															#link_name "SDL_GetRGBA" ---;
 	get_relative_mouse_mode 						:: proc() -> Bool																																									#link_name "SDL_GetRelativeMouseMode" ---;
 	get_relative_mouse_state 						:: proc(x, y: ^i32) -> u32																																							#link_name "SDL_GetRelativeMouseState" ---;
-	get_render_draw_blend_mode 						:: proc(renderer: ^Renderer, blend_mode: ^BlendMode) -> i32																															#link_name "SDL_GetRenderDrawBlendMode" ---;
+	get_render_draw_blend_mode 						:: proc(renderer: ^Renderer, blend_mode: ^Blend_Mode) -> i32																															#link_name "SDL_GetRenderDrawBlendMode" ---;
 	get_render_draw_color 							:: proc(renderer: ^Renderer, r, g, b, a: ^u8) -> i32																																#link_name "SDL_GetRenderDrawColor" ---;
-	get_render_driver_info 							:: proc(index: i32, info: ^RendererInfo) -> i32																																		#link_name "SDL_GetRenderDriverInfo" ---;
+	get_render_driver_info 							:: proc(index: i32, info: ^Renderer_Info) -> i32																																		#link_name "SDL_GetRenderDriverInfo" ---;
 	get_render_target 								:: proc(renderer: ^Renderer) -> ^Texture																																			#link_name "SDL_GetRenderTarget" ---;
 	get_renderer 									:: proc(window: ^Window) -> ^Renderer																																				#link_name "SDL_GetRenderer" ---;
-	get_renderer_info 								:: proc(renderer: ^Renderer, info: ^RendererInfo) -> i32																															#link_name "SDL_GetRendererInfo" ---;
+	get_renderer_info 								:: proc(renderer: ^Renderer, info: ^Renderer_Info) -> i32																															#link_name "SDL_GetRendererInfo" ---;
 	get_renderer_output_size 						:: proc(renderer: ^Renderer, w, h: ^i32) -> i32																																		#link_name "SDL_GetRendererOutputSize" ---;
 	get_revision_c 									:: proc() -> ^u8																																									#link_name "SDL_GetRevision" ---;
 	get_revision_number 							:: proc() -> i32																																									#link_name "SDL_GetRevisionNumber" ---;
 	get_scancode_from_key 							:: proc(key: Keycode) -> Scancode																																					#link_name "SDL_GetScancodeFromKey" ---;
 	get_scancode_from_name_c 						:: proc(name: ^u8) -> Scancode																																						#link_name "SDL_GetScancodeFromName" ---;
 	get_scancode_name_c 							:: proc(scancode: Scancode) -> ^u8																																					#link_name "SDL_GetScancodeName" ---;
-	get_shaped_window_mode 							:: proc(window: ^Window, shape_mode: ^WindowShapeMode) -> i32																														#link_name "SDL_GetShapedWindowMode" ---;
+	get_shaped_window_mode 							:: proc(window: ^Window, shape_mode: ^Window_Shape_Mode) -> i32																														#link_name "SDL_GetShapedWindowMode" ---;
 	get_surface_alpha_mod 							:: proc(surface: ^Surface, alpha: ^u8) -> i32																																		#link_name "SDL_GetSurfaceAlphaMod" ---;
-	get_surface_blend_mode 							:: proc(surface: ^Surface, blend_mode: ^BlendMode) -> i32																															#link_name "SDL_GetSurfaceBlendMode" ---;
+	get_surface_blend_mode 							:: proc(surface: ^Surface, blend_mode: ^Blend_Mode) -> i32																															#link_name "SDL_GetSurfaceBlendMode" ---;
 	get_surface_color_mod 							:: proc(surface: ^Surface, r, g, b: ^u8) -> i32																																		#link_name "SDL_GetSurfaceColorMod" ---;
 	get_system_ram 									:: proc() -> i32																																									#link_name "SDL_GetSystemRAM" ---;
 	get_texture_alpha_mod 							:: proc(texture: ^Texture, alpha: ^u8) -> i32																																		#link_name "SDL_GetTextureAlphaMod" ---;
-	get_texture_blend_mode 							:: proc(texture: ^Texture, blend_mode: ^BlendMode) -> i32																															#link_name "SDL_GetTextureBlendMode" ---;
+	get_texture_blend_mode 							:: proc(texture: ^Texture, blend_mode: ^Blend_Mode) -> i32																															#link_name "SDL_GetTextureBlendMode" ---;
 	get_texture_color_mod 							:: proc(texture: ^Texture, r, g, b: ^u8) -> i32																																		#link_name "SDL_GetTextureColorMod" ---;
-	get_thread_id 									:: proc(thread: ^Thread) -> ThreadId																																				#link_name "SDL_GetThreadID" ---;
+	get_thread_id 									:: proc(thread: ^Thread) -> Thread_Id																																				#link_name "SDL_GetThreadID" ---;
 	get_thread_name_c 								:: proc(thread: ^Thread) -> ^u8																																						#link_name "SDL_GetThreadName" ---;
 	get_ticks 										:: proc() -> u32																																									#link_name "SDL_GetTicks" ---;
-	get_touch_device 								:: proc(index: i32) -> TouchId																																						#link_name "SDL_GetTouchDevice" ---;
-	get_touch_finger 								:: proc(touch_id: TouchId, index: i32) -> ^Finger																																	#link_name "SDL_GetTouchFinger" ---;
+	get_touch_device 								:: proc(index: i32) -> Touch_Id																																						#link_name "SDL_GetTouchDevice" ---;
+	get_touch_finger 								:: proc(touch_id: Touch_Id, index: i32) -> ^Finger																																	#link_name "SDL_GetTouchFinger" ---;
 	get_version 									:: proc(ver: ^Version)																																								#link_name "SDL_GetVersion" ---;
 	get_video_driver_c 								:: proc(index: i32) -> ^u8																																							#link_name "SDL_GetVideoDriver" ---;
 	get_window_borders_size 						:: proc(window: ^Window, top, left, bottom, right: ^i32) -> i32																														#link_name "SDL_GetWindowBordersSize" ---;
 	get_window_brightness 							:: proc(window: ^Window) -> f32																																						#link_name "SDL_GetWindowBrightness" ---;
 	get_window_data_c 								:: proc(window: ^Window, name: ^u8) -> rawptr																																		#link_name "SDL_GetWindowData" ---;
 	get_window_display_index 						:: proc(window: ^Window) -> i32																																						#link_name "SDL_GetWindowDisplayIndex" ---;
-	get_window_display_mode 						:: proc(window: ^Window, mode: ^DisplayMode) -> i32																																	#link_name "SDL_GetWindowDisplayMode" ---;
+	get_window_display_mode 						:: proc(window: ^Window, mode: ^Display_Mode) -> i32																																	#link_name "SDL_GetWindowDisplayMode" ---;
 	get_window_flags 								:: proc(window: ^Window) -> u32																																						#link_name "SDL_GetWindowFlags" ---;
 	get_window_fromid 								:: proc(id: u32) -> ^Window																																							#link_name "SDL_GetWindowFromID" ---;
 	get_window_gammaramp 							:: proc(window: ^Window, r, g, b: u16) -> i32																																		#link_name "SDL_GetWindowGammaRamp" ---;
@@ -233,14 +233,14 @@ foreign lib {
 	get_window_size 								:: proc(window: ^Window, w, h: ^i32)																																				#link_name "SDL_GetWindowSize" ---;
 	get_window_surface 								:: proc(window: ^Window) -> ^Surface																																				#link_name "SDL_GetWindowSurface" ---;
 	get_window_title_c 								:: proc(window: ^Window) -> ^u8																																						#link_name "SDL_GetWindowTitle" ---;
-	get_window_wm_info 								:: proc(window: ^Window, info: ^SysWmInfo) -> Bool																																	#link_name "SDL_GetWindowWMInfo" ---;
+	get_window_wm_info 								:: proc(window: ^Window, info: ^Sys_Wm_Info) -> Bool																																	#link_name "SDL_GetWindowWMInfo" ---;
 	haptic_close 									:: proc(haptic: ^Haptic)																																							#link_name "SDL_HapticClose" ---;
 	haptic_destroy_effect 							:: proc(haptic: ^Haptic, effect: i32)																																				#link_name "SDL_HapticDestroyEffect" ---;
-	haptic_effect_supported 						:: proc(haptic: ^Haptic, effect: ^HapticEffect) -> i32																																#link_name "SDL_HapticEffectSupported" ---;
+	haptic_effect_supported 						:: proc(haptic: ^Haptic, effect: ^Haptic_Effect) -> i32																																#link_name "SDL_HapticEffectSupported" ---;
 	haptic_get_effect_status 						:: proc(haptic: ^Haptic, effect: i32) -> i32																																		#link_name "SDL_HapticGetEffectStatus" ---;
 	haptic_index 									:: proc(haptic: ^Haptic) -> i32																																						#link_name "SDL_HapticIndex" ---;
 	haptic_name_c 									:: proc(device_index: i32) -> ^u8																																					#link_name "SDL_HapticName" ---;
-	haptic_new_effect 								:: proc(haptic: ^Haptic, effect: ^HapticEffect) -> i32																																#link_name "SDL_HapticNewEffect" ---;
+	haptic_new_effect 								:: proc(haptic: ^Haptic, effect: ^Haptic_Effect) -> i32																																#link_name "SDL_HapticNewEffect" ---;
 	haptic_num_axes 								:: proc(haptic: ^Haptic) -> i32																																						#link_name "SDL_HapticNumAxes" ---;
 	haptic_num_effects 								:: proc(haptic: ^Haptic) -> i32																																						#link_name "SDL_HapticNumEffects" ---;
 	haptic_num_effects_playing 						:: proc(haptic: ^Haptic) -> i32																																						#link_name "SDL_HapticNumEffectsPlaying" ---;
@@ -260,7 +260,7 @@ foreign lib {
 	haptic_stop_all 								:: proc(haptic: ^Haptic) -> i32																																						#link_name "SDL_HapticStopAll" ---;
 	haptic_stop_effect 								:: proc(haptic: ^Haptic, effect: i32) -> i32																																		#link_name "SDL_HapticStopEffect" ---;
 	haptic_unpause 									:: proc(haptic: ^Haptic) -> i32																																						#link_name "SDL_HapticUnpause" ---;
-	haptic_update_effect 							:: proc(haptic: ^Haptic, effect: i32, data: ^HapticEffect) -> i32																													#link_name "SDL_HapticUpdateEffect" ---;
+	haptic_update_effect 							:: proc(haptic: ^Haptic, effect: i32, data: ^Haptic_Effect) -> i32																													#link_name "SDL_HapticUpdateEffect" ---;
 	has_3d_now 										:: proc() -> Bool																																									#link_name "SDL_Has3DNow" ---;
 	has_avx 										:: proc() -> Bool																																									#link_name "SDL_HasAVX" ---;
 	has_avx2 										:: proc() -> Bool																																									#link_name "SDL_HasAVX2" ---;
@@ -288,19 +288,19 @@ foreign lib {
 	is_shaped_window 								:: proc(window: Window) -> Bool																																						#link_name "SDL_IsShapedWindow" ---;
 	is_text_input_active 							:: proc() -> Bool																																									#link_name "SDL_IsTextInputActive" ---;
 	joystick_close 									:: proc(joystick: ^Joystick)																																						#link_name "SDL_JoystickClose" ---;
-	joystick_current_power_level 					:: proc(joystick: ^Joystick) -> JoystickPowerLevel																																	#link_name "SDL_JoystickCurrentPowerLevel" ---;
+	joystick_current_power_level 					:: proc(joystick: ^Joystick) -> Joystick_Power_Level																																	#link_name "SDL_JoystickCurrentPowerLevel" ---;
 	joystick_event_state 							:: proc(state: i32) -> i32																																							#link_name "SDL_JoystickEventState" ---;
-	joystick_from_instance_id 						:: proc(joystick_id: ^JoystickId) -> ^Joystick																																		#link_name "SDL_JoystickFromInstanceID" ---;
+	joystick_from_instance_id 						:: proc(joystick_id: ^Joystick_Id) -> ^Joystick																																		#link_name "SDL_JoystickFromInstanceID" ---;
 	joystick_get_attached 							:: proc(joystick: ^Joystick) -> Bool																																				#link_name "SDL_JoystickGetAttached" ---;
 	joystick_get_axis 								:: proc(joystick: ^Joystick, axis: i32) -> i16																																		#link_name "SDL_JoystickGetAxis" ---;
 	joystick_get_ball 								:: proc(joystick: ^Joystick, ball: i32, dx, dy: ^i32) -> i32																														#link_name "SDL_JoystickGetBall" ---;
 	joystick_get_button 							:: proc(joystick: ^Joystick, button: i32) -> u8																																		#link_name "SDL_JoystickGetButton" ---;
-	joystick_get_device_guid 						:: proc(device_index: i32) -> JoystickGuid																																			#link_name "SDL_JoystickGetDeviceGUID" ---;
-	joystick_get_guid 								:: proc(joystick: ^Joystick) -> JoystickGuid																																		#link_name "SDL_JoystickGetGUID" ---;
-	joystick_get_guid_from_string_c 				:: proc(pch_guid: ^u8) -> JoystickGuid																																				#link_name "SDL_JoystickGetGUIDFromString" ---;
-	joystick_get_guid_string 						:: proc(guid: JoystickGuid, psz_guid: ^u8, cb_guid: i32)																															#link_name "SDL_JoystickGetGUIDString" ---;
+	joystick_get_device_guid 						:: proc(device_index: i32) -> Joystick_Guid																																			#link_name "SDL_JoystickGetDeviceGUID" ---;
+	joystick_get_guid 								:: proc(joystick: ^Joystick) -> Joystick_Guid																																		#link_name "SDL_JoystickGetGUID" ---;
+	joystick_get_guid_from_string_c 				:: proc(pch_guid: ^u8) -> Joystick_Guid																																				#link_name "SDL_JoystickGetGUIDFromString" ---;
+	joystick_get_guid_string 						:: proc(guid: Joystick_Guid, psz_guid: ^u8, cb_guid: i32)																															#link_name "SDL_JoystickGetGUIDString" ---;
 	joystick_get_hat 								:: proc(joystick: ^Joystick, hat: i32) -> u8																																		#link_name "SDL_JoystickGetHat" ---;
-	joystick_instance_id 							:: proc(joystick: ^Joystick) -> JoystickId																																			#link_name "SDL_JoystickInstanceID" ---;
+	joystick_instance_id 							:: proc(joystick: ^Joystick) -> Joystick_Id																																			#link_name "SDL_JoystickInstanceID" ---;
 	joystick_is_haptic 								:: proc(joystick: ^Joystick) -> i32																																					#link_name "SDL_JoystickIsHaptic" ---;
 	joystick_name_c 								:: proc(joystick: ^Joystick) -> ^u8																																					#link_name "SDL_JoystickName" ---;
 	joystick_name_for_index_c 						:: proc(device_index: i32) -> ^u8																																					#link_name "SDL_JoystickNameForIndex" ---;
@@ -310,13 +310,13 @@ foreign lib {
 	joystick_num_hats 								:: proc(joystick: ^Joystick) -> i32 																																				#link_name "SDL_JoystickNumHats" ---;
 	joystick_open 									:: proc(device_index: i32) -> ^Joystick																																				#link_name "SDL_JoystickOpen" ---;
 	joystick_update 								:: proc()																																											#link_name "SDL_JoystickUpdate" ---;
-	load_bmp_rw 									:: proc(src: ^RwOps, freerw: i32) -> ^Surface																																		#link_name "SDL_LoadBMP_RW" ---;
-	load_dollar_templates 							:: proc(touch_id: TouchId, src: ^RwOps) -> i32																																		#link_name "SDL_LoadDollarTemplates" ---;
+	load_bmp_rw 									:: proc(src: ^Rw_Ops, freerw: i32) -> ^Surface																																		#link_name "SDL_LoadBMP_RW" ---;
+	load_dollar_templates 							:: proc(touch_id: Touch_Id, src: ^Rw_Ops) -> i32																																		#link_name "SDL_LoadDollarTemplates" ---;
 	load_function_c 								:: proc(handle: rawptr, name: ^u8) -> rawptr																																		#link_name "SDL_LoadFunction" ---;
 	load_object_c 									:: proc(sofile: ^u8) -> ^u8																																							#link_name "SDL_LoadObject" ---;
-	load_wav_rw 									:: proc(src: ^RwOps, freesrc: i32, spec: ^AudioSpec, audio_buf: ^^u8, audio_len: ^u32) -> ^AudioSpec																				#link_name "SDL_LoadWAV_RW" ---;
+	load_wav_rw 									:: proc(src: ^Rw_Ops, freesrc: i32, spec: ^Audio_Spec, audio_buf: ^^u8, audio_len: ^u32) -> ^Audio_Spec																				#link_name "SDL_LoadWAV_RW" ---;
 	lock_audio 										:: proc()																																											#link_name "SDL_LockAudio" ---;
-	lock_audio_device 								:: proc(dev: AudioDeviceId)																																							#link_name "SDL_LockAudioDevice" ---;
+	lock_audio_device 								:: proc(dev: Audio_Device_Id)																																							#link_name "SDL_LockAudioDevice" ---;
 	lock_mutex 										:: proc(mutex: ^Mutex) -> i32																																						#link_name "SDL_LockMutex" ---;
 	lock_surface 									:: proc(surface: ^Surface) -> i32																																					#link_name "SDL_LockSurface" ---;
 	lock_texture 									:: proc(texture: ^Texture, rect: ^Rect, pixels: ^rawptr, pitch: ^i32) -> i32																										#link_name "SDL_LockTexture" ---;
@@ -324,57 +324,57 @@ foreign lib {
 	log_critical 									:: proc(category: i32, fmt: ...^u8)																																					#link_name "SDL_LogCritical" ---;
 	log_debug 										:: proc(category: i32, fmt: ...^u8)																																					#link_name "SDL_LogDebug" ---;
 	log_error 										:: proc(category: i32, fmt: ...^u8)																																					#link_name "SDL_LogError" ---;
-	log_get_output_function 						:: proc(callback: ^LogOutputFunction, userdata: ^rawptr)																															#link_name "SDL_LogGetOutputFunction" ---;
-	log_get_priority 								:: proc(category: i32) -> LogPriority																																				#link_name "SDL_LogGetPriority" ---;
+	log_get_output_function 						:: proc(callback: ^Log_Output_Function, userdata: ^rawptr)																															#link_name "SDL_LogGetOutputFunction" ---;
+	log_get_priority 								:: proc(category: i32) -> Log_Priority																																				#link_name "SDL_LogGetPriority" ---;
 	log_info 										:: proc(category: i32, fmt: ...^u8)																																					#link_name "SDL_LogInfo" ---;
-	log_message 									:: proc(category: i32, priority: LogPriority, fmt: ...^u8)																															#link_name "SDL_LogMessage" ---;
-	log_message_v 									:: proc(category: i32, priority: LogPriority, fmt: ^u8, va_list: ^u8)																												#link_name "SDL_LogMessageV" ---;
+	log_message 									:: proc(category: i32, priority: Log_Priority, fmt: ...^u8)																															#link_name "SDL_LogMessage" ---;
+	log_message_v 									:: proc(category: i32, priority: Log_Priority, fmt: ^u8, va_list: ^u8)																												#link_name "SDL_LogMessageV" ---;
 	log_reset_priorities 							:: proc()																																											#link_name "SDL_LogResetPriorities" ---;
-	log_set_all_priority 							:: proc(priority: LogPriority)																																						#link_name "SDL_LogSetAllPriority" ---;
-	log_set_output_function 						:: proc(callback: LogOutputFunction, userdata: rawptr)																																#link_name "SDL_LogSetOutputFunction" ---;
-	log_set_priority 								:: proc(category: i32, priority: LogPriority)																																		#link_name "SDL_LogSetPriority" ---;
+	log_set_all_priority 							:: proc(priority: Log_Priority)																																						#link_name "SDL_LogSetAllPriority" ---;
+	log_set_output_function 						:: proc(callback: Log_Output_Function, userdata: rawptr)																																#link_name "SDL_LogSetOutputFunction" ---;
+	log_set_priority 								:: proc(category: i32, priority: Log_Priority)																																		#link_name "SDL_LogSetPriority" ---;
 	log_verbose 									:: proc(category: i32, fmt: ...^u8)																																					#link_name "SDL_LogVerbose" ---;
 	log_warn 										:: proc(category: i32, fmt: ...^u8)																																					#link_name "SDL_LogWarn" ---;
 	lower_blit 										:: proc(src: ^Surface, srcrect: ^Rect, dst: ^Surface, dstrect: ^Rect) -> i32																										#link_name "SDL_LowerBlit" ---;
 	lower_blit_scaled 								:: proc(src: ^Surface, srcrect: ^Rect, dst: ^Surface, dstrect: ^Rect) -> i32																										#link_name "SDL_LowerBlitScaled" ---;
-	map_rgb 										:: proc(format: PixelFormat, r, g, b: u8) -> u32																																	#link_name "SDL_MapRGB" ---;
-	map_rgba 										:: proc(format: PixelFormat, r, g, b, a: u8) -> u32																																	#link_name "SDL_MapRGBA" ---;
+	map_rgb 										:: proc(format: Pixel_Format, r, g, b: u8) -> u32																																	#link_name "SDL_MapRGB" ---;
+	map_rgba 										:: proc(format: Pixel_Format, r, g, b, a: u8) -> u32																																	#link_name "SDL_MapRGBA" ---;
 	masks_to_pixel_format_enum 						:: proc(bpp: i32, r_mask, g_mask, b_mask, a_mask: u32) -> u32																														#link_name "SDL_MasksToPixelFormatEnum" ---;
 	maximize_window 								:: proc(window: ^Window)																																							#link_name "SDL_MaximizeWindow" ---;
 	minimize_window 								:: proc(window: ^Window)																																							#link_name "SDL_MinimizeWindow" ---;
 	mix_audio 										:: proc(dst, src: ^u8, len: u32, volume: i32)																																		#link_name "SDL_MixAudio" ---;
-	mix_audio_format 								:: proc(dst, src: ^u8, format: AudioFormat, len: u32, volume: i32)																													#link_name "SDL_MixAudioFormat" ---;
+	mix_audio_format 								:: proc(dst, src: ^u8, format: Audio_Format, len: u32, volume: i32)																													#link_name "SDL_MixAudioFormat" ---;
 	mouse_is_haptic 								:: proc() -> i32																																									#link_name "SDL_MouseIsHaptic" ---;
 	num_haptics 									:: proc() -> i32																																									#link_name "SDL_NumHaptics" ---;
 	num_joysticks 									:: proc() -> i32																																									#link_name "SDL_NumJoysticks" ---;
-	open_audio 										:: proc(desired, obtained: ^AudioSpec) -> i32																																		#link_name "SDL_OpenAudio" ---;
-	open_audio_device_c 							:: proc(device: ^u8, iscapture: i32, desired, obtained: ^AudioSpec, allowed_changed: i32) -> AudioDeviceId																			#link_name "SDL_OpenAudioDevice" ---;
+	open_audio 										:: proc(desired, obtained: ^Audio_Spec) -> i32																																		#link_name "SDL_OpenAudio" ---;
+	open_audio_device_c 							:: proc(device: ^u8, iscapture: i32, desired, obtained: ^Audio_Spec, allowed_changed: i32) -> Audio_Device_Id																			#link_name "SDL_OpenAudioDevice" ---;
 	pause_audio 									:: proc(pause_on: i32)																																								#link_name "SDL_PauseAudio" ---;
-	pause_audio_device 								:: proc(dev: AudioDeviceId, pause_on: i32)																																			#link_name "SDL_PauseAudioDevice" ---;
-	peep_events 									:: proc(events: ^Event, num_events: i32, action: EventAction, min_type, max_type: u32) -> i32																						#link_name "SDL_PeepEvents" ---;
+	pause_audio_device 								:: proc(dev: Audio_Device_Id, pause_on: i32)																																			#link_name "SDL_PauseAudioDevice" ---;
+	peep_events 									:: proc(events: ^Event, num_events: i32, action: Event_Action, min_type, max_type: u32) -> i32																						#link_name "SDL_PeepEvents" ---;
 	pixel_format_enum_to_masks 						:: proc(format: u32, bpp: ^i32, r_mask, g_mask, b_mask, a_mask: ^u32) -> Bool																										#link_name "SDL_PixelFormatEnumToMasks" ---;
 	poll_event 										:: proc(event: ^Event) -> i32																																						#link_name "SDL_PollEvent" ---;
 	pump_events 									:: proc()																																											#link_name "SDL_PumpEvents" ---;
 	push_event 										:: proc(event: ^Event) -> i32																																						#link_name "SDL_PushEvent" ---;
 	query_texture 									:: proc(texture: ^Texture, format: ^u32, access, w, h: ^i32) -> i32																													#link_name "SDL_QueryTexture" ---;
-	queue_audio 									:: proc(dev: AudioDeviceId, data: rawptr, len: u32) -> i32																															#link_name "SDL_QueueAudio" ---;
+	queue_audio 									:: proc(dev: Audio_Device_Id, data: rawptr, len: u32) -> i32																															#link_name "SDL_QueueAudio" ---;
 	quit 											:: proc()																																											#link_name "SDL_Quit" ---;
 	quit_sub_system 								:: proc(flags: u32)																																									#link_name "SDL_QuitSubSystem" ---;
 	raise_window 									:: proc(window: ^Window)																																							#link_name "SDL_RaiseWindow" ---;
-	read_be16 										:: proc(src: ^RwOps) -> u16																																							#link_name "SDL_ReadBE16" ---;
-	read_be32 										:: proc(src: ^RwOps) -> u32																																							#link_name "SDL_ReadBE32" ---;
-	read_be64 										:: proc(src: ^RwOps) -> u64																																							#link_name "SDL_ReadBE64" ---;
-	read_le16 										:: proc(src: ^RwOps) -> u16																																							#link_name "SDL_ReadLE16" ---;
-	read_le32 										:: proc(src: ^RwOps) -> u32																																							#link_name "SDL_ReadLE32" ---;
-	read_le64 										:: proc(src: ^RwOps) -> u64																																							#link_name "SDL_ReadLE64" ---;
-	read_u8 										:: proc(src: ^RwOps) -> u8																																							#link_name "SDL_ReadU8" ---;
-	record_gesture 									:: proc(touch_id: TouchId) -> i32																																					#link_name "SDL_RecordGesture" ---;
+	read_be16 										:: proc(src: ^Rw_Ops) -> u16																																							#link_name "SDL_ReadBE16" ---;
+	read_be32 										:: proc(src: ^Rw_Ops) -> u32																																							#link_name "SDL_ReadBE32" ---;
+	read_be64 										:: proc(src: ^Rw_Ops) -> u64																																							#link_name "SDL_ReadBE64" ---;
+	read_le16 										:: proc(src: ^Rw_Ops) -> u16																																							#link_name "SDL_ReadLE16" ---;
+	read_le32 										:: proc(src: ^Rw_Ops) -> u32																																							#link_name "SDL_ReadLE32" ---;
+	read_le64 										:: proc(src: ^Rw_Ops) -> u64																																							#link_name "SDL_ReadLE64" ---;
+	read_u8 										:: proc(src: ^Rw_Ops) -> u8																																							#link_name "SDL_ReadU8" ---;
+	record_gesture 									:: proc(touch_id: Touch_Id) -> i32																																					#link_name "SDL_RecordGesture" ---;
 	register_app_c 									:: proc(name: ^u8, style: u32, h_inst: rawptr) -> i32																																#link_name "SDL_RegisterApp" ---;
 	register_events 								:: proc(num_events: i32) -> u32																																						#link_name "SDL_RegisterEvents" ---;
-	remove_timer 									:: proc(id: TimerId) -> Bool																																						#link_name "SDL_RemoveTimer" ---;
+	remove_timer 									:: proc(id: Timer_Id) -> Bool																																						#link_name "SDL_RemoveTimer" ---;
 	render_clear 									:: proc(renderer: ^Renderer) -> i32																																					#link_name "SDL_RenderClear" ---;
 	render_copy 									:: proc(renderer: ^Renderer, texture: ^Texture, srcrect, dstrect: ^Rect) -> i32																										#link_name "SDL_RenderCopy" ---;
-	render_copy_ex 									:: proc(renderer: ^Renderer, texture: ^Texture, srcrect, dstrect: ^Rect, angle: f64, center: ^Point, flip: RendererFlip) -> i32														#link_name "SDL_RenderCopyEx" ---;
+	render_copy_ex 									:: proc(renderer: ^Renderer, texture: ^Texture, srcrect, dstrect: ^Rect, angle: f64, center: ^Point, flip: Renderer_Flip) -> i32														#link_name "SDL_RenderCopyEx" ---;
 	render_draw_line 								:: proc(renderer: ^Renderer, x1, y1, x2, y2: i32) -> i32																															#link_name "SDL_RenderDrawLine" ---;
 	render_draw_lines 								:: proc(renderer: ^Renderer, points: ^Point, count: i32) -> i32																														#link_name "SDL_RenderDrawLines" ---;
 	render_draw_point 								:: proc(renderer: ^Renderer, x, y: i32) -> i32																																		#link_name "SDL_RenderDrawPoint" ---;
@@ -384,7 +384,7 @@ foreign lib {
 	render_fill_rect 								:: proc(dst: ^Renderer, rect: ^Rect) -> i32																																			#link_name "SDL_RenderFillRect" ---;
 	render_fill_rects 								:: proc(dst: ^Renderer, rect: ^Rect, count: i32) -> i32																																#link_name "SDL_RenderFillRects" ---;
 	render_get_clip_rect 							:: proc(surface: ^Surface, rect: ^Rect)																																				#link_name "SDL_RenderGetClipRect" ---;
-	render_get_d3d9_device 							:: proc(renderer: ^Renderer) ->	^IDirect3DDevice9																																	#link_name "SDL_RenderGetD3D9Device" ---;
+	render_get_d3d9_device 							:: proc(renderer: ^Renderer) ->	^IDirect3D_Device9																																	#link_name "SDL_RenderGetD3D9Device" ---;
 	render_get_integer_scale 						:: proc(renderer: ^Renderer) -> Bool																																				#link_name "SDL_RenderGetIntegerScale" ---;
 	render_get_logical_size 						:: proc(renderer: ^Renderer, w, h: ^i32)																																			#link_name "SDL_RenderGetLogicalSize" ---;
 	render_get_scale 								:: proc(renderer: ^Renderer, scale_x, scale_y: ^f32)																																#link_name "SDL_RenderGetScale" ---;
@@ -400,53 +400,53 @@ foreign lib {
 	render_target_supported 						:: proc(renderer: ^Renderer) -> Bool																																				#link_name "SDL_RenderTargetSupported" ---;
 	reset_assertion_report 							:: proc()																																											#link_name "SDL_ResetAssertionReport" ---;
 	restore_window 									:: proc(window: ^Window)																																							#link_name "SDL_RestoreWindow" ---;
-	rw_from_const_mem 								:: proc(mem: rawptr, size: i32) -> ^RwOps																																			#link_name "SDL_RWFromConstMem" ---;
-	rw_from_fp 										:: proc(fp: rawptr, auto_close: Bool) -> ^RwOps																																		#link_name "SDL_RWFromFP" ---;
-	rw_from_file_c 									:: proc(file: ^u8, mode: ^u8) -> ^RwOps																																				#link_name "SDL_RWFromFile" ---;
-	rw_from_mem 									:: proc(mem: rawptr, size:i32) -> ^RwOps																																			#link_name "SDL_RWFromMem" ---;
-	save_all_dollar_templates 						:: proc(dst: ^RwOps) -> i32																																							#link_name "SDL_SaveAllDollarTemplates" ---;
-	save_bmp_rw 									:: proc(surface: ^Surface, dst: ^RwOps, free_dst: i32) -> i32																														#link_name "SDL_SaveBMP_RW" ---;
-	save_dollar_template 							:: proc(gesture_id: GestureId, dst: ^RwOps) -> i32																																	#link_name "SDL_SaveDollarTemplate" ---;
+	rw_from_const_mem 								:: proc(mem: rawptr, size: i32) -> ^Rw_Ops																																			#link_name "SDL_RWFromConstMem" ---;
+	rw_from_fp 										:: proc(fp: rawptr, auto_close: Bool) -> ^Rw_Ops																																		#link_name "SDL_RWFromFP" ---;
+	rw_from_file_c 									:: proc(file: ^u8, mode: ^u8) -> ^Rw_Ops																																				#link_name "SDL_RWFromFile" ---;
+	rw_from_mem 									:: proc(mem: rawptr, size:i32) -> ^Rw_Ops																																			#link_name "SDL_RWFromMem" ---;
+	save_all_dollar_templates 						:: proc(dst: ^Rw_Ops) -> i32																																							#link_name "SDL_SaveAllDollarTemplates" ---;
+	save_bmp_rw 									:: proc(surface: ^Surface, dst: ^Rw_Ops, free_dst: i32) -> i32																														#link_name "SDL_SaveBMP_RW" ---;
+	save_dollar_template 							:: proc(gesture_id: Gesture_Id, dst: ^Rw_Ops) -> i32																																	#link_name "SDL_SaveDollarTemplate" ---;
 	sem_post 										:: proc(sem: Sem) -> i32																																							#link_name "SDL_SemPost" ---;
 	sem_try_wait 									:: proc(sem: Sem) -> i32																																							#link_name "SDL_SemTryWait" ---;
 	sem_value 										:: proc(sem: Sem) -> u32																																							#link_name "SDL_SemValue" ---;
 	sem_wait 										:: proc(sem: Sem) -> i32																																							#link_name "SDL_SemWait" ---;
 	sem_wait_timeout 								:: proc(sem: Sem, ms: u32) -> i32																																					#link_name "SDL_SemWaitTimeout" ---;
-	set_assertion_handler 							:: proc(handler: AssertionHandler, userdata: rawptr)																																#link_name "SDL_SetAssertionHandler" ---;
+	set_assertion_handler 							:: proc(handler: Assertion_Handler, userdata: rawptr)																																#link_name "SDL_SetAssertionHandler" ---;
 	set_clip_rect 									:: proc(surface: ^Surface, rect: ^Rect) -> Bool																																		#link_name "SDL_SetClipRect" ---;
 	set_clipboard_text_c 							:: proc(text: ^u8) -> i32																																							#link_name "SDL_SetClipboardText" ---;
 	set_color_key 									:: proc(surface: ^Surface, flag: i32, key: u32) -> i32																																#link_name "SDL_SetColorKey" ---;
 	set_cursor 										:: proc(cursor: ^Cursor)																																							#link_name "SDL_SetCursor" ---;
 	set_error 										:: proc(fmt: ...^u8) -> i32																																							#link_name "SDL_SetError" ---;
-	set_event_filter 								:: proc(filter: EventFilter, userdata: rawptr)																																		#link_name "SDL_SetEventFilter" ---;
+	set_event_filter 								:: proc(filter: Event_Filter, userdata: rawptr)																																		#link_name "SDL_SetEventFilter" ---;
 	set_hint_c 										:: proc(name, value: ^u8) -> Bool																																					#link_name "SDL_SetHint" ---;
-	set_hint_with_priority_c 						:: proc(name, value: ^u8, priority: HintPriority) -> Bool																															#link_name "SDL_SetHintWithPriority" ---;
+	set_hint_with_priority_c 						:: proc(name, value: ^u8, priority: Hint_Priority) -> Bool																															#link_name "SDL_SetHintWithPriority" ---;
 	set_main_ready 									:: proc()																																											#link_name "SDL_SetMainReady" ---;
 	set_mod_state 									:: proc(modstate: Keymod)																																							#link_name "SDL_SetModState" ---;
 	set_palette_colors 								:: proc(palette: ^Palette, colors: ^Color, firstcolor, ncolors: i32) -> i32																											#link_name "SDL_SetPaletteColors" ---;
-	set_pixel_format_palette 						:: proc(format: ^PixelFormat, palette: ^Palette) -> i32																																#link_name "SDL_SetPixelFormatPalette" ---;
+	set_pixel_format_palette 						:: proc(format: ^Pixel_Format, palette: ^Palette) -> i32																																#link_name "SDL_SetPixelFormatPalette" ---;
 	set_relative_mouse_mode 						:: proc(enabled: Bool) -> i32																																						#link_name "SDL_SetRelativeMouseMode" ---;
-	set_render_draw_blend_mode 						:: proc(renderer: ^Renderer, blend_mode: BlendMode) -> i32																															#link_name "SDL_SetRenderDrawBlendMode" ---;
+	set_render_draw_blend_mode 						:: proc(renderer: ^Renderer, blend_mode: Blend_Mode) -> i32																															#link_name "SDL_SetRenderDrawBlendMode" ---;
 	set_render_draw_color 							:: proc(renderer: ^Renderer, r, g, b, a: u8) -> i32																																	#link_name "SDL_SetRenderDrawColor" ---;
 	set_render_target 								:: proc(renderer: ^Renderer, texture: ^Texture) -> i32																																#link_name "SDL_SetRenderTarget" ---;
 	set_surface_alpha_mod 							:: proc(surface: ^Surface, alpha: u8) -> i32																																		#link_name "SDL_SetSurfaceAlphaMod" ---;
-	set_surface_blend_mode 							:: proc(surface: ^Surface, blend_mode: BlendMode) -> i32																															#link_name "SDL_SetSurfaceBlendMode" ---;
+	set_surface_blend_mode 							:: proc(surface: ^Surface, blend_mode: Blend_Mode) -> i32																															#link_name "SDL_SetSurfaceBlendMode" ---;
 	set_surface_color_mod 							:: proc(surface: ^Surface, r, g, b: u8) -> i32																																		#link_name "SDL_SetSurfaceColorMod" ---;
 	set_surface_palette 							:: proc(surface: ^Surface, palette: ^Palette) -> i32																																#link_name "SDL_SetSurfacePalette" ---;
 	set_surface_rle 								:: proc(surface: ^Surface, flag: i32) -> i32																																		#link_name "SDL_SetSurfaceRLE" ---;
 	set_text_input_rect 							:: proc(rect: ^Rect)																																								#link_name "SDL_SetTextInputRect" ---;
 	set_texture_alpha_mod 							:: proc(texture: ^Texture, alpha: u8) -> i32																																		#link_name "SDL_SetTextureAlphaMod" ---;
-	set_texture_blend_mode 							:: proc(texture: ^Texture, blend_mode: BlendMode) -> i32																															#link_name "SDL_SetTextureBlendMode" ---;
+	set_texture_blend_mode 							:: proc(texture: ^Texture, blend_mode: Blend_Mode) -> i32																															#link_name "SDL_SetTextureBlendMode" ---;
 	set_texture_color_mod 							:: proc(texture: ^Texture, r, g, b: u8) -> i32																																		#link_name "SDL_SetTextureColorMod" ---;
-	set_thread_priority 							:: proc(priority: ThreadPriority) -> i32																																			#link_name "SDL_SetThreadPriority" ---;
+	set_thread_priority 							:: proc(priority: Thread_Priority) -> i32																																			#link_name "SDL_SetThreadPriority" ---;
 	set_window_bordered 							:: proc(window: ^Window, bordered: Bool)																																			#link_name "SDL_SetWindowBordered" ---;
 	set_window_brightness 							:: proc(window: ^Window, brightness: f32) -> i32																																	#link_name "SDL_SetWindowBrightness" ---;
 	set_window_data_c 								:: proc(window: ^Window, name: ^u8, userdata: rawptr) -> rawptr																														#link_name "SDL_SetWindowData" ---;
-	set_window_display_mode 						:: proc(window: ^Window, mode: ^DisplayMode) -> i32																																	#link_name "SDL_SetWindowDisplayMode" ---;
+	set_window_display_mode 						:: proc(window: ^Window, mode: ^Display_Mode) -> i32																																	#link_name "SDL_SetWindowDisplayMode" ---;
 	set_window_fullscreen 							:: proc(window: ^Window, flags: u32) -> i32																																			#link_name "SDL_SetWindowFullscreen" ---;
 	set_window_gamma_ramp 							:: proc(window: ^Window, r, g, b: ^u16) -> i32																																		#link_name "SDL_SetWindowGammaRamp" ---;
 	set_window_grab 								:: proc(window: ^Window, grabbed: Bool)																																				#link_name "SDL_SetWindowGrab" ---;
-	set_window_hit_test 							:: proc(window: ^Window, callback: HitTest, callback_data: rawptr) -> i32																											#link_name "SDL_SetWindowHitTest" ---;
+	set_window_hit_test 							:: proc(window: ^Window, callback: Hit_Test, callback_data: rawptr) -> i32																											#link_name "SDL_SetWindowHitTest" ---;
 	set_window_icon 								:: proc(window: ^Window, icon: ^Surface)																																			#link_name "SDL_SetWindowIcon" ---;
 	set_window_input_focus 							:: proc(window: ^Window) -> i32																																						#link_name "SDL_SetWindowInputFocus" ---;
 	set_window_maximum_size 						:: proc(window: ^Window, w, h: i32)																																					#link_name "SDL_SetWindowMaximumSize" ---;
@@ -455,26 +455,26 @@ foreign lib {
 	set_window_opacity 								:: proc(window: ^Window, opacity: f32) -> i32																																		#link_name "SDL_SetWindowOpacity" ---;
 	set_window_position 							:: proc(window: ^Window, x, y: i32)																																					#link_name "SDL_SetWindowPosition" ---;
 	set_window_resizable 							:: proc(window: ^Window, resizable: Bool)																																			#link_name "SDL_SetWindowResizable" ---;
-	set_window_shape 								:: proc(window: ^Window, shape: ^Surface, shape_mode: WindowShapeMode) -> i32																										#link_name "SDL_SetWindowShape" ---;
+	set_window_shape 								:: proc(window: ^Window, shape: ^Surface, shape_mode: Window_Shape_Mode) -> i32																										#link_name "SDL_SetWindowShape" ---;
 	set_window_size 								:: proc(window: ^Window, w, h: i32)																																					#link_name "SDL_SetWindowSize" ---;
 	set_window_title_c 								:: proc(window: ^Window, title: ^u8)																																				#link_name "SDL_SetWindowTitle" ---;
-	set_windows_message_hook 						:: proc(callback: WindowsMessageHook, userdata: rawptr)																																#link_name "SDL_SetWindowsMessageHook" ---;
+	set_windows_message_hook 						:: proc(callback: Windows_Message_Hook, userdata: rawptr)																																#link_name "SDL_SetWindowsMessageHook" ---;
 	show_cursor 									:: proc(toggle: i32) -> i32																																							#link_name "SDL_ShowCursor" ---;
-	show_message_box 								:: proc(message_box_data: ^MessageBoxData, button_id: ^i32) -> i32																													#link_name "SDL_ShowMessageBox" ---;
+	show_message_box 								:: proc(message_box_data: ^Message_Box_Data, button_id: ^i32) -> i32																													#link_name "SDL_ShowMessageBox" ---;
 	show_simple_message_box_c 						:: proc(flags: u32, title, message: ^u8, window: ^Window) -> i32																													#link_name "SDL_ShowSimpleMessageBox" ---;
 	show_window 									:: proc(window: ^Window)																																							#link_name "SDL_ShowWindow" ---;
 	soft_stretch 									:: proc(src: ^Surface, srcrect: ^Rect, dst: ^Surface, dstrect: ^Rect) -> i32																										#link_name "SDL_SoftStretch" ---;
 	start_text_input 								:: proc()																																											#link_name "SDL_StartTextInput" ---;
 	stop_text_input 								:: proc()																																											#link_name "SDL_StopTextInput" ---;
-	tls_create 										:: proc() -> TlsId																																									#link_name "SDL_TLSCreate" ---;
-	tls_get 										:: proc(id: TlsId) -> rawptr																																						#link_name "SDL_TLSGet" ---;
-	tls_set 										:: proc(id: TlsId, value: rawptr, destructor: proc(data: rawptr)) -> i32																											#link_name "SDL_TLSSet" ---;
-	thread_id 										:: proc() -> ThreadId																																								#link_name "SDL_ThreadID" ---;
+	tls_create 										:: proc() -> Tls_Id																																									#link_name "SDL_TLSCreate" ---;
+	tls_get 										:: proc(id: Tls_Id) -> rawptr																																						#link_name "SDL_TLSGet" ---;
+	tls_set 										:: proc(id: Tls_Id, value: rawptr, destructor: proc(data: rawptr)) -> i32																											#link_name "SDL_TLSSet" ---;
+	thread_id 										:: proc() -> Thread_Id																																								#link_name "SDL_ThreadID" ---;
 	try_lock_mutex 									:: proc(mutex: ^Mutex) -> i32																																						#link_name "SDL_TryLockMutex" ---;
 	union_rect 										:: proc(a, b, result: ^Rect)																																						#link_name "SDL_UnionRect" ---;
 	unload_object 									:: proc(handle: rawptr)																																								#link_name "SDL_UnloadObject" ---;
 	unlock_audio 									:: proc()																																											#link_name "SDL_UnlockAudio" ---;
-	unlock_audio_device 							:: proc(dev: AudioDeviceId)																																							#link_name "SDL_UnlockAudioDevice" ---;
+	unlock_audio_device 							:: proc(dev: Audio_Device_Id)																																							#link_name "SDL_UnlockAudioDevice" ---;
 	unlock_mutex 									:: proc(mutex: ^Mutex) -> i32																																						#link_name "SDL_UnlockMutex" ---;
 	unlock_surface 									:: proc(surface: ^Surface)																																							#link_name "SDL_UnlockSurface" ---;
 	unlock_texture 									:: proc(texture: ^Texture)																																							#link_name "SDL_UnlockTexture" ---;
@@ -493,17 +493,17 @@ foreign lib {
 	warp_mouse_global 								:: proc(x, y: i32) -> i32																																							#link_name "SDL_WarpMouseGlobal" ---;
 	warp_mouse_in_window 							:: proc(window: ^Window, x, y: i32)																																					#link_name "SDL_WarpMouseInWindow" ---;
 	was_init 										:: proc(flags: u32) -> u32																																							#link_name "SDL_WasInit" ---;
-	write_be16 										:: proc(dst: ^RwOps, value: u16) -> u64																																				#link_name "SDL_WriteBE16" ---;
-	write_be32 										:: proc(dst: ^RwOps, value: u32) -> u64																																				#link_name "SDL_WriteBE32" ---;
-	write_be64 										:: proc(dst: ^RwOps, value: u64) -> u64																																				#link_name "SDL_WriteBE64" ---;
-	write_le16 										:: proc(dst: ^RwOps, value: u16) -> u64																																				#link_name "SDL_WriteLE16" ---;
-	write_le32 										:: proc(dst: ^RwOps, value: u32) -> u64																																				#link_name "SDL_WriteLE32" ---;
-	write_le64 										:: proc(dst: ^RwOps, value: u64) -> u64																																				#link_name "SDL_WriteLE64" ---;
-	write_u8 										:: proc(dst: ^RwOps, value: u8) -> u64																																				#link_name "SDL_WriteU8" ---;
+	write_be16 										:: proc(dst: ^Rw_Ops, value: u16) -> u64																																				#link_name "SDL_WriteBE16" ---;
+	write_be32 										:: proc(dst: ^Rw_Ops, value: u32) -> u64																																				#link_name "SDL_WriteBE32" ---;
+	write_be64 										:: proc(dst: ^Rw_Ops, value: u64) -> u64																																				#link_name "SDL_WriteBE64" ---;
+	write_le16 										:: proc(dst: ^Rw_Ops, value: u16) -> u64																																				#link_name "SDL_WriteLE16" ---;
+	write_le32 										:: proc(dst: ^Rw_Ops, value: u32) -> u64																																				#link_name "SDL_WriteLE32" ---;
+	write_le64 										:: proc(dst: ^Rw_Ops, value: u64) -> u64																																				#link_name "SDL_WriteLE64" ---;
+	write_u8 										:: proc(dst: ^Rw_Ops, value: u8) -> u64																																				#link_name "SDL_WriteU8" ---;
 }
 
 // Wrappers
-add_hint_callback  								:: proc(name: string, callback: HintCallback, userdata: rawptr) {
+add_hint_callback  								:: proc(name: string, callback: Hint_Callback, userdata: rawptr) {
 	name_c := new_c_string(name);
 	defer free(name_c);
 	add_hint_callback_c(name_c, callback, userdata);
@@ -530,7 +530,7 @@ create_shaped_window 							:: proc(title: string, x, y, w, h: u32, flags: u32) 
 	return create_shaped_window_c(title_c, x, y, w, h, flags);
 }
 
-create_thread 									:: proc(fn: ThreadFunction, name: string, data: rawptr) -> ^Thread {
+create_thread 									:: proc(fn: Thread_Function, name: string, data: rawptr) -> ^Thread {
 	name_c := new_c_string(name);
 	defer free(name_c);
 	return create_thread_c(fn, name_c, data);
@@ -542,7 +542,7 @@ create_window 									:: proc(title: string, x, y, w, h: i32, flags: u32) -> ^W
 	return create_window_c(title_c, x, y, w, h, flags);
 }
 
-del_hint_callback 								:: proc(name: string, callback: HintCallback, userdata: rawptr) {
+del_hint_callback 								:: proc(name: string, callback: Hint_Callback, userdata: rawptr) {
 	name_c := new_c_string(name);
 	defer free(name_c);
 	del_hint_callback_c(name_c, callback, userdata);
@@ -578,33 +578,33 @@ game_controller_get_axis_from_string 			:: proc(pch_string: string) -> string {
 	return to_odin_string(game_controller_get_axis_from_string_c(pch_string_c));
 }
 
-game_controller_get_button_from_string 			:: proc(pch_string: string) -> GameControllerButton {
+game_controller_get_button_from_string 			:: proc(pch_string: string) -> Game_Controller_Button {
 	pch_string_c := new_c_string(pch_string);
 	defer free(pch_string_c);
 	return game_controller_get_button_from_string_c(pch_string_c);
 }
 
-game_controller_get_string_for_axis 			:: proc(axis: GameControllerAxis) -> string {
+game_controller_get_string_for_axis 			:: proc(axis: Game_Controller_Axis) -> string {
 	odin_str := to_odin_string(game_controller_get_string_for_axis_c(axis));
 	return odin_str;
 }
 
-game_controller_get_string_for_button 			:: proc(button: GameControllerButton) -> string {
+game_controller_get_string_for_button 			:: proc(button: Game_Controller_Button) -> string {
 	odin_str := to_odin_string(game_controller_get_string_for_button_c(button));
 	return odin_str;
 }
 
-game_controller_mapping 						:: proc(game_controller: ^GameController) -> string {
+game_controller_mapping 						:: proc(game_controller: ^Game_Controller) -> string {
 	odin_str := to_odin_string(game_controller_mapping_c(game_controller));
 	return odin_str;
 }
 
-game_controller_mapping_for_guid 				:: proc(guid: JoystickGuid) -> string {
+game_controller_mapping_for_guid 				:: proc(guid: Joystick_Guid) -> string {
 	odin_str := to_odin_string(game_controller_mapping_for_guid_c(guid));
 	return odin_str;
 }
 
-game_controller_name 							:: proc(game_controller: ^GameController) -> string {
+game_controller_name 							:: proc(game_controller: ^Game_Controller) -> string {
 	odin_str := to_odin_string(game_controller_name_c(game_controller));
 	return odin_str;
 }
@@ -732,7 +732,7 @@ haptic_name 									:: proc(device_index: i32) -> string {
 	return odin_str;
 }
 
-joystick_get_guid_from_string 					:: proc(pch_guid: string) -> JoystickGuid {
+joystick_get_guid_from_string 					:: proc(pch_guid: string) -> Joystick_Guid {
 	pch_guid_c := new_c_string(pch_guid);
 	defer free(pch_guid_c);
 	return joystick_get_guid_from_string_c(pch_guid_c);
@@ -760,7 +760,7 @@ load_object 									:: proc(sofile: string) -> string {
 	return to_odin_string(load_object_c(sofile_c));
 }
 
-open_audio_device 								:: proc(device: string, iscapture: i32, desired, obtained: ^AudioSpec, allowed_changed: i32) -> AudioDeviceId {
+open_audio_device 								:: proc(device: string, iscapture: i32, desired, obtained: ^Audio_Spec, allowed_changed: i32) -> Audio_Device_Id {
 	device_c := new_c_string(device);
 	defer free(device_c);
 	return open_audio_device_c(device_c, iscapture, desired, obtained, allowed_changed);
@@ -772,7 +772,7 @@ register_app 									:: proc(name: string, style: u32, h_inst: rawptr) -> i32 {
 	return register_app_c(name_c, style, h_inst);
 }
 
-rw_from_file 									:: proc(file: string, mode: string) -> ^RwOps {
+rw_from_file 									:: proc(file: string, mode: string) -> ^Rw_Ops {
 	file_c := new_c_string(file);
 	defer free(file_c);
 
@@ -796,7 +796,7 @@ set_hint 										:: proc(name, value: string) -> Bool {
 	return set_hint_c(name_c, value_c);
 }
 
-set_hint_with_priority 							:: proc(name, value: string, priority: HintPriority) -> Bool {
+set_hint_with_priority 							:: proc(name, value: string, priority: Hint_Priority) -> Bool {
 	name_c := new_c_string(name);
 	defer free(name_c);
 
@@ -832,7 +832,7 @@ video_init 										:: proc(driver_name: string) -> i32 {
 	return video_init_c(driver_name_c);
 }
 
-InitFlags :: enum i32 {
+Init_Flags :: enum i32 {
 	Timer = 0x00000001,
 	Audio = 0x00000010,
 	Video = 0x00000020,
@@ -844,60 +844,60 @@ InitFlags :: enum i32 {
 	Everything = Timer | Audio | Video | Events | Joystick | Haptic | GameController
 }
 
-WindowFlags :: enum i32 {
+Window_Flags :: enum i32 {
 	Fullscreen = 0x00000001,
-	OpenGL = 0x00000002,
+	Open_GL = 0x00000002,
 	Shown = 0x00000004,
 	Hidden = 0x00000008,
 	Borderless = 0x00000010,
 	Resizable = 0x00000020,
 	Minimized = 0x00000040,
 	Maximized = 0x00000080,
-	InputGrabbed = 0x00000100,
-	InputFocus = 0x00000200,
-	MouseFocus = 0x00000400,
-	FullscreenDesktop = Fullscreen | 0x00001000,
+	Input_Grabbed = 0x00000100,
+	Input_Focus = 0x00000200,
+	Mouse_Focus = 0x00000400,
+	Fullscreen_Desktop = Fullscreen | 0x00001000,
 	Foreign = 0x00000800,
-	AllowHighDPI = 0x00002000,
-	MouseCapture = 0x00004000,
-	AlwaysOnTop = 0x00008000,
-	SkipTaskbar = 0x00010000,
+	Allow_High_DPI = 0x00002000,
+	Mouse_Capture = 0x00004000,
+	Always_On_Top = 0x00008000,
+	Skip_Taskbar = 0x00010000,
 	Utility = 0x00020000,
 	Tooltip = 0x00040000,
-	PopupMenu = 0x00080000,
+	Popup_Menu = 0x00080000,
 	Vulkan = 0x00100000
 }
 
-WindowPos :: enum i32 {
+Window_Pos :: enum i32 {
 	Undefined = 0x1FFF0000,
 	Centered = 0x2FFF0000
 }
 
-RendererFlags :: enum i32 {
+Renderer_Flags :: enum i32 {
 	Software = 0x00000001,
 	Accelerated = 0x00000002,
-	PresentVSync = 0x00000004,
-	TargetTexture = 0x00000008
+	Present_VSync = 0x00000004,
+	Target_Texture = 0x00000008
 }
 
 
-BlendMode :: enum i32 {
+Blend_Mode :: enum i32 {
 	None = 0x00000000,
 	Blend = 0x00000001,
 	Add = 0x00000002,
 	Mod = 0x00000004
 }
 
-ErrorCode :: enum i32 {
-	NoMem,
+Error_Code :: enum i32 {
+	No_Mem,
 	FRead,
 	FWrite,
 	FSeek,
 	Unsupported,
-	LastError
+	Last_Error
 }
 
-JoystickPowerLevel :: enum i32 {
+Joystick_Power_Level :: enum i32 {
 	Unknown = -1,
 	Empty,
 	Low,
@@ -907,43 +907,43 @@ JoystickPowerLevel :: enum i32 {
 	Max
 }
 
-HintPriority :: enum i32 {
+Hint_Priority :: enum i32 {
 	Default,
 	Normal,
 	Override
 }
 
-ThreadPriority :: enum i32 {
+Thread_Priority :: enum i32 {
 	Low,
 	Normal,
 	High
 }
 
-AssertState :: enum i32 {
+Assert_State :: enum i32 {
 	Retry,
 	Break,
 	Abort,
 	Ignore,
-	AlwaysIgnore
+	Always_Ignore
 }
 
-EventAction :: enum i32 {
-	AddEvent,
-	PeekEvent,
-	GetEvent
+Event_Action :: enum i32 {
+	Add_Event,
+	Peek_Event,
+	Get_Event
 }
 
-HitTestResult :: enum i32 {
+Hit_Test_Result :: enum i32 {
 	Normal,
 	Draggable,
-	ResizeTopLeft,
-	ResizeTop,
-	ResizeTopRight,
-	ResizeRight,
-	ResizeBottomRight,
-	ResizeBottom,
-	ResizeBottomLeft,
-	ResizeLeft
+	Resize_Top_Left,
+	Resize_Top,
+	Resize_Top_Right,
+	Resize_Right,
+	Resize_Bottom_Right,
+	Resize_Bottom,
+	Resize_Bottom_Left,
+	Resize_Left
 }
 
 Bool :: enum i32 {
@@ -951,11 +951,11 @@ Bool :: enum i32 {
 	True
 }
 
-WindowShapeModes :: enum i32 {
+Window_Shape_Modes :: enum i32 {
 	Default,
-	BinarizeAlpha,
-	ReverseBinarizeAlpha,
-	ColorKey
+	Binarize_Alpha,
+	Reverse_Binarize_Alpha,
+	Color_Key
 }
 
 Keymod :: enum i32 {
@@ -974,93 +974,91 @@ Keymod :: enum i32 {
 	Reserved = 0x8000
 }
 
-RendererFlip :: enum i32 {
+Renderer_Flip :: enum i32 {
 	None = 0x00000000,
 	Horizontal = 0x00000001,
 	Vertical = 0x00000002
 }
 
-GLAttr :: enum i32 {
-	RedSize,
-	GreenSize,
-	BlueSize,
-	AlphaSize,
-	BufferSize,
+GL_Attr :: enum i32 {
+	Red_Size,
+	Green_Size,
+	Blue_Size,
+	Alpha_Size,
+	Buffer_Size,
 	Doublebuffer,
-	DepthSize,
-	StencilSize,
-	AccumRedSize,
-	AccumGreenSize,
-	AccumBlueSize,
-	AccumAlphaSize,
+	Depth_Size,
+	Stencil_Size,
+	Accum_Red_Size,
+	Accum_Green_Size,
+	Accum_Blue_Size,
+	Accum_Alpha_Size,
 	Stereo,
 	Multisamplebuffers,
-	MultisampleSamples,
-	AcceleratedVisual,
-	RetainedBacking,
-	ContextMajorVersion,
-	ContextMinorVersion,
-	ContextEGL,
-	ContextFlags,
-	ContextProfileMask,
-	ShareWithCurrentContext,
-	FramebufferSRGBCapable,
-	ContextReleaseBehavior
+	Multisample_Samples,
+	Accelerated_Visual,
+	Retained_Backing,
+	Context_Major_Version,
+	Context_Minor_Version,
+	Context_EGL,
+	Context_Flags,
+	Context_Profile_Mask,
+	Share_With_Current_Context,
+	Framebuffer_SRGB_Capable,
+	Context_Release_Behavior
 }
 
-GLContextFlag :: enum i32
-{
+GL_Context_Flag :: enum i32 {
 	Debug              = 0x0001,
-	ForwardCompatible = 0x0002,
-	RobustAccess      = 0x0004,
-	ResetIsolation    = 0x0008
+	Forward_Compatible = 0x0002,
+	Robust_Access      = 0x0004,
+	Reset_Isolation    = 0x0008
 }
 
-GLContextProfile :: enum i32
-{
+GL_Context_Profile :: enum i32 {
 	Core           = 0x0001,
 	Compatibility  = 0x0002,
 	ES             = 0x0004
 }
 
-MessageBoxColorType :: enum i32 {
+Message_Box_Color_Type :: enum i32 {
 	Background,
 	Text,
-	ButtonBorder,
-	ButtonBackground,
-	ButtonSelected,
+	Button_Border,
+	Button_Background,
+	Button_Selected,
 	Max
 }
 
-AudioStatus :: enum i32 {
+Audio_Status :: enum i32 {
 	Stopped = 0,
 	Playing,
 	Paused
 }
 
-PowerState :: enum i32 {
+Power_State :: enum i32 {
 	Unknown,
-	OnBattery,
-	NoBattery,
+	On_Battery,
+	No_Battery,
 	Charging,
 	Charged
 }
 
-LogPriority :: enum i32 {
+Log_Priority :: enum i32 {
 	Verbose = 1,
 	Debug,
 	Info,
 	Warn,
 	Error,
 	Critical,
-	NumLogPriorities
+	Num_Log_Priorities
 }
 
 
 // Input stuff
 
 
-GameControllerButton :: enum i32 {
+Game_Controller_Button :: enum i32 {
 	Invalid = -1,
 	A,
 	B,
@@ -1069,49 +1067,49 @@ GameControllerButton :: enum i32 {
 	Back,
 	Guide,
 	Start,
-	LeftStick,
-	RightStick,
-	LeftShoulder,
-	RightShoulder,
-	DPadUp,
-	DPadDown,
-	DPadLeft,
-	DPadRight,
+	Left_Stick,
+	Right_Stick,
+	Left_Shoulder,
+	Right_Shoulder,
+	DPad_Up,
+	DPad_Down,
+	DPad_Left,
+	DPad_Right,
 	Max
 }
 
-GameControllerAxis :: enum i32 {
+Game_Controller_Axis :: enum i32 {
 	Invalid = -1,
 	LeftX,
 	LeftY,
 	RightX,
 	RightY,
-	TriggerLeft,
-	TriggerRight,
+	Trigger_Left,
+	Trigger_Right,
 	Max
 }
 
-GameControllerBindType :: enum i32 {
+Game_Controller_Bind_Type :: enum i32 {
 	None = 0,
 	Button,
 	Axis,
 	Hat
 }
 
-SystemCursor :: enum i32 {
+System_Cursor :: enum i32 {
 	Arrow,
 	IBeam,
 	Wait,
 	Crosshair,
-	WaitArrow,
-	SizeNWSE,
-	SizeNESW,
-	SizeWE,
-	SizeNS,
-	SizeAll,
+	Wait_Arrow,
+	Size_NWSE,
+	Size_NESW,
+	Size_WE,
+	Size_NS,
+	Size_All,
 	No,
 	Hand,
-	NumSystemCursors
+	Num_System_Cursors
 }
 
 
@@ -1176,7 +1174,7 @@ Scancode :: enum i32 {
 	Period = 55,
 	Slash = 56,
 
-	CapsLock = 57,
+	Caps_Lock = 57,
 
 	F1 = 58,
 	F2 = 59,
@@ -1191,42 +1189,42 @@ Scancode :: enum i32 {
 	F11 = 68,
 	F12 = 69,
 
-	PrintScreen = 70,
-	ScrollLock = 71,
+	Print_Screen = 70,
+	Scroll_Lock = 71,
 	Pause = 72,
 	Insert = 73,
 	Home = 74,
-	PageUp = 75,
+	Page_Up = 75,
 	Delete = 76,
 	End = 77,
-	PageDown = 78,
+	Page_Down = 78,
 	Right = 79,
 	Left = 80,
 	Down = 81,
 	Up = 82,
 
-	NumLockClear = 83,
-	KpDivide = 84,
-	KpMultiply = 85,
-	KpMinus = 86,
-	KpPlus = 87,
-	KpEnter = 88,
-	Kp1 = 89,
-	Kp2 = 90,
-	Kp3 = 91,
-	Kp4 = 92,
-	Kp5 = 93,
-	Kp6 = 94,
-	Kp7 = 95,
-	Kp8 = 96,
-	Kp9 = 97,
-	Kp0 = 98,
-	KpPeriod = 99,
+	Num_Lock_Clear = 83,
+	Kp_Divide = 84,
+	Kp_Multiply = 85,
+	Kp_Minus = 86,
+	Kp_Plus = 87,
+	Kp_Enter = 88,
+	Kp_1 = 89,
+	Kp_2 = 90,
+	Kp_3 = 91,
+	Kp_4 = 92,
+	Kp_5 = 93,
+	Kp_6 = 94,
+	Kp_7 = 95,
+	Kp_8 = 96,
+	Kp_9 = 97,
+	Kp_0 = 98,
+	Kp_Period = 99,
 
-	NonUSBackslash = 100,
+	Non_US_Backslash = 100,
 	Application = 101,
 	Power = 102,
-	KpEquals = 103,
+	Kp_Equals = 103,
 	F13 = 104,
 	F14 = 105,
 	F15 = 106,
@@ -1251,10 +1249,10 @@ Scancode :: enum i32 {
 	Paste = 125,
 	Find = 126,
 	Mute = 127,
-	VolumeUp = 128,
-	VolumeDown = 129,
-	KpComma = 133,
-	KpEqualsAS400 = 134,
+	Volume_Up = 128,
+	Volume_Down = 129,
+	Kp_Comma = 133,
+	Kp_Equals_AS400 = 134,
 
 	International1 = 135,
 	International2 = 136,
@@ -1275,8 +1273,8 @@ Scancode :: enum i32 {
 	Lang8 = 151,
 	Lang9 = 152,
 
-	AltErase = 153,
-	SysReq = 154,
+	Alt_Erase = 153,
+	Sys_Req = 154,
 	Cancel = 155,
 	Clear = 156,
 	Prior = 157,
@@ -1284,56 +1282,56 @@ Scancode :: enum i32 {
 	Separator = 159,
 	Out = 160,
 	Oper = 161,
-	ClearAgain = 162,
-	CrSel = 163,
-	ExSel = 164,
+	Clear_Again = 162,
+	Cr_Sel = 163,
+	Ex_Sel = 164,
 
-	Kp00 = 176,
-	Kp000 = 177,
-	ThousandsSeparator = 178,
-	DecimalSeparator = 179,
-	CurrencyUnit = 180,
-	CurrencySubUnit = 181,
-	KpLeftParen = 182,
-	KpRightParen = 183,
-	KpLeftBrace = 184,
-	KpRightBrace = 185,
-	KpTab = 186,
-	KpBackspace = 187,
-	KpA = 188,
-	KpB = 189,
-	KpC = 190,
-	KpD = 191,
-	KpE = 192,
-	KpF = 193,
-	KpXor = 194,
-	KpPower = 195,
-	KpPercent = 196,
-	KpLess = 197,
-	KpGreater = 198,
-	KpAmpersand = 199,
-	KpDblAmpersand = 200,
-	KpVerticalBar = 201,
-	KpDblVerticalBar = 202,
-	KpColon = 203,
-	KpHash = 204,
-	KpSpace = 205,
-	KpAt = 206,
-	KpExclam = 207,
-	KpMemStore = 208,
-	KpMemRecall = 209,
-	KpMemClear = 210,
-	KpMemAdd = 211,
-	KpMemSubtract = 212,
-	KpMemMultiply = 213,
-	KpMemDivide = 214,
-	KpPlusMinus = 215,
-	KpClear = 216,
-	KpClearEntry = 217,
-	KpBinary = 218,
-	KpOctal = 219,
-	KpDecimal = 220,
-	KpHexadecimal = 221,
+	Kp_00 = 176,
+	Kp_000 = 177,
+	Thousands_Separator = 178,
+	Decimal_Separator = 179,
+	Currency_Unit = 180,
+	Currency_Sub_Unit = 181,
+	Kp_Left_Paren = 182,
+	Kp_Right_Paren = 183,
+	Kp_Left_Brace = 184,
+	Kp_Right_Brace = 185,
+	Kp_Tab = 186,
+	Kp_Backspace = 187,
+	Kp_A = 188,
+	Kp_B = 189,
+	Kp_C = 190,
+	Kp_D = 191,
+	Kp_E = 192,
+	Kp_F = 193,
+	Kp_Xor = 194,
+	Kp_Power = 195,
+	Kp_Percent = 196,
+	Kp_Less = 197,
+	Kp_Greater = 198,
+	Kp_Ampersand = 199,
+	Kp_Dbl_Ampersand = 200,
+	Kp_Vertical_Bar = 201,
+	Kp_Dbl_Vertical_Bar = 202,
+	Kp_Colon = 203,
+	Kp_Hash = 204,
+	Kp_Space = 205,
+	Kp_At = 206,
+	Kp_Exclam = 207,
+	Kp_Mem_Store = 208,
+	Kp_Mem_Recall = 209,
+	Kp_Mem_Clear = 210,
+	Kp_Mem_Add = 211,
+	Kp_Mem_Subtract = 212,
+	Kp_Mem_Multiply = 213,
+	Kp_Mem_Divide = 214,
+	Kp_Plus_Minus = 215,
+	Kp_Clear = 216,
+	Kp_Clear_Entry = 217,
+	Kp_Binary = 218,
+	Kp_Octal = 219,
+	Kp_Decimal = 220,
+	Kp_Hexadecimal = 221,
 
 	LCtrl = 224,
 	LShift = 225,
@@ -1346,37 +1344,37 @@ Scancode :: enum i32 {
 
 	Mode = 257,
 
-	AudioNext = 258,
-	AudioPrev = 259,
-	AudioStop = 260,
-	AudioPlay = 261,
-	AudioMute = 262,
-	MediaSelect = 263,
+	Audio_Next = 258,
+	Audio_Prev = 259,
+	Audio_Stop = 260,
+	Audio_Play = 261,
+	Audio_Mute = 262,
+	Media_Select = 263,
 	WWW = 264,
 	Mail = 265,
 	Calculator = 266,
 	Computer = 267,
-	AcSearch = 268,
-	AcHome = 269,
-	AcBack = 270,
-	AcForward = 271,
-	AcStop = 272,
-	AcRefresh = 273,
-	AcBookmarks = 274,
+	Ac_Search = 268,
+	Ac_Home = 269,
+	Ac_Back = 270,
+	Ac_Forward = 271,
+	Ac_Stop = 272,
+	Ac_Refresh = 273,
+	Ac_Bookmarks = 274,
 
-	BrightnessDown = 275,
-	BrightnessUp = 276,
-	DisplaySwitch = 277,
-	KbDillumToggle = 278,
-	KbDillumDown = 279,
-	KbDillumUp = 280,
+	Brightness_Down = 275,
+	Brightness_Up = 276,
+	Display_Switch = 277,
+	Kb_Dillum_Toggle = 278,
+	Kb_Dillum_Down = 279,
+	Kb_Dillum_Up = 280,
 	Eject = 281,
 	Sleep = 282,
 
 	App1 = 283,
 	App2 = 284,
 
-	NumScancodes = 512
+	Num_Scancodes = 512
 }
 
 SDLK_UNKNOWN :: 0;
@@ -1452,7 +1450,7 @@ SDLK_x :: 'x';
 SDLK_y :: 'y';
 SDLK_z :: 'z';
 
-SDLK_CAPSLOCK :: Scancode.CapsLock | SDLK_SCANCODE_MASK;
+SDLK_CAPSLOCK :: Scancode.Caps_Lock | SDLK_SCANCODE_MASK;
 
 SDLK_F1 :: Scancode.F1 | SDLK_SCANCODE_MASK;
 SDLK_F2 :: Scancode.F2 | SDLK_SCANCODE_MASK;
@@ -1467,41 +1465,41 @@ SDLK_F10 :: Scancode.F10 | SDLK_SCANCODE_MASK;
 SDLK_F11 :: Scancode.F11 | SDLK_SCANCODE_MASK;
 SDLK_F12 :: Scancode.F12 | SDLK_SCANCODE_MASK;
 
-SDLK_PRINTSCREEN :: Scancode.PrintScreen | SDLK_SCANCODE_MASK;
-SDLK_SCROLLLOCK :: Scancode.ScrollLock | SDLK_SCANCODE_MASK;
+SDLK_PRINTSCREEN :: Scancode.Print_Screen | SDLK_SCANCODE_MASK;
+SDLK_SCROLLLOCK :: Scancode.Scroll_Lock | SDLK_SCANCODE_MASK;
 SDLK_PAUSE :: Scancode.Pause | SDLK_SCANCODE_MASK;
 SDLK_INSERT :: Scancode.Insert | SDLK_SCANCODE_MASK;
 SDLK_HOME :: Scancode.Home | SDLK_SCANCODE_MASK;
-SDLK_PAGEUP :: Scancode.PageUp | SDLK_SCANCODE_MASK;
+SDLK_PAGEUP :: Scancode.Page_Up | SDLK_SCANCODE_MASK;
 SDLK_DELETE :: '\177';
 SDLK_END :: Scancode.End | SDLK_SCANCODE_MASK;
-SDLK_PAGEDOWN :: Scancode.PageDown | SDLK_SCANCODE_MASK;
+SDLK_PAGEDOWN :: Scancode.Page_Down | SDLK_SCANCODE_MASK;
 SDLK_RIGHT :: Scancode.Right | SDLK_SCANCODE_MASK;
 SDLK_LEFT :: Scancode.Left | SDLK_SCANCODE_MASK;
 SDLK_DOWN :: Scancode.Down | SDLK_SCANCODE_MASK;
 SDLK_UP :: Scancode.Up | SDLK_SCANCODE_MASK;
 
-SDLK_NUMLOCKCLEAR :: Scancode.NumLockClear | SDLK_SCANCODE_MASK;
-SDLK_KP_DIVIDE :: Scancode.KpDivide | SDLK_SCANCODE_MASK;
-SDLK_KP_MULTIPLY :: Scancode.KpMultiply | SDLK_SCANCODE_MASK;
-SDLK_KP_MINUS :: Scancode.KpMinus | SDLK_SCANCODE_MASK;
-SDLK_KP_PLUS :: Scancode.KpPlus | SDLK_SCANCODE_MASK;
-SDLK_KP_ENTER :: Scancode.KpEnter | SDLK_SCANCODE_MASK;
-SDLK_KP_1 :: Scancode.Kp1 | SDLK_SCANCODE_MASK;
-SDLK_KP_2 :: Scancode.Kp2 | SDLK_SCANCODE_MASK;
-SDLK_KP_3 :: Scancode.Kp3 | SDLK_SCANCODE_MASK;
-SDLK_KP_4 :: Scancode.Kp4 | SDLK_SCANCODE_MASK;
-SDLK_KP_5 :: Scancode.Kp5 | SDLK_SCANCODE_MASK;
-SDLK_KP_6 :: Scancode.Kp6 | SDLK_SCANCODE_MASK;
-SDLK_KP_7 :: Scancode.Kp7 | SDLK_SCANCODE_MASK;
-SDLK_KP_8 :: Scancode.Kp8 | SDLK_SCANCODE_MASK;
-SDLK_KP_9 :: Scancode.Kp9 | SDLK_SCANCODE_MASK;
-SDLK_KP_0 :: Scancode.Kp0 | SDLK_SCANCODE_MASK;
-SDLK_KP_PERIOD :: Scancode.KpPeriod | SDLK_SCANCODE_MASK;
+SDLK_NUMLOCKCLEAR :: Scancode.Num_Lock_Clear | SDLK_SCANCODE_MASK;
+SDLK_KP_DIVIDE :: Scancode.Kp_Divide | SDLK_SCANCODE_MASK;
+SDLK_KP_MULTIPLY :: Scancode.Kp_Multiply | SDLK_SCANCODE_MASK;
+SDLK_KP_MINUS :: Scancode.Kp_Minus | SDLK_SCANCODE_MASK;
+SDLK_KP_PLUS :: Scancode.Kp_Plus | SDLK_SCANCODE_MASK;
+SDLK_KP_ENTER :: Scancode.Kp_Enter | SDLK_SCANCODE_MASK;
+SDLK_KP_1 :: Scancode.Kp_1 | SDLK_SCANCODE_MASK;
+SDLK_KP_2 :: Scancode.Kp_2 | SDLK_SCANCODE_MASK;
+SDLK_KP_3 :: Scancode.Kp_3 | SDLK_SCANCODE_MASK;
+SDLK_KP_4 :: Scancode.Kp_4 | SDLK_SCANCODE_MASK;
+SDLK_KP_5 :: Scancode.Kp_5 | SDLK_SCANCODE_MASK;
+SDLK_KP_6 :: Scancode.Kp_6 | SDLK_SCANCODE_MASK;
+SDLK_KP_7 :: Scancode.Kp_7 | SDLK_SCANCODE_MASK;
+SDLK_KP_8 :: Scancode.Kp_8 | SDLK_SCANCODE_MASK;
+SDLK_KP_9 :: Scancode.Kp_9 | SDLK_SCANCODE_MASK;
+SDLK_KP_0 :: Scancode.Kp_0 | SDLK_SCANCODE_MASK;
+SDLK_KP_PERIOD :: Scancode.Kp_Period | SDLK_SCANCODE_MASK;
 
 SDLK_APPLICATION :: Scancode.Application | SDLK_SCANCODE_MASK;
 SDLK_POWER :: Scancode.Power | SDLK_SCANCODE_MASK;
-SDLK_KP_EQUALS :: Scancode.KpEquals | SDLK_SCANCODE_MASK;
+SDLK_KP_EQUALS :: Scancode.Kp_Equals | SDLK_SCANCODE_MASK;
 SDLK_F13 :: Scancode.F13 | SDLK_SCANCODE_MASK;
 SDLK_F14 :: Scancode.F14 | SDLK_SCANCODE_MASK;
 SDLK_F15 :: Scancode.F15 | SDLK_SCANCODE_MASK;
@@ -1526,13 +1524,13 @@ SDLK_COPY :: Scancode.Copy | SDLK_SCANCODE_MASK;
 SDLK_PASTE :: Scancode.Paste | SDLK_SCANCODE_MASK;
 SDLK_FIND :: Scancode.Find | SDLK_SCANCODE_MASK;
 SDLK_MUTE :: Scancode.Mute | SDLK_SCANCODE_MASK;
-SDLK_VOLUMEUP :: Scancode.VolumeUp | SDLK_SCANCODE_MASK;
-SDLK_VOLUMEDOWN :: Scancode.VolumeDown | SDLK_SCANCODE_MASK;
-SDLK_KP_COMMA :: Scancode.KpComma | SDLK_SCANCODE_MASK;
-SDLK_KP_EQUALSAS400 :: Scancode.KpEqualsAS400 | SDLK_SCANCODE_MASK;
+SDLK_VOLUMEUP :: Scancode.Volume_Up | SDLK_SCANCODE_MASK;
+SDLK_VOLUMEDOWN :: Scancode.Volume_Down | SDLK_SCANCODE_MASK;
+SDLK_KP_COMMA :: Scancode.Kp_Comma | SDLK_SCANCODE_MASK;
+SDLK_KP_EQUALSAS400 :: Scancode.Kp_Equals_AS400 | SDLK_SCANCODE_MASK;
 
-SDLK_ALTERASE :: Scancode.AltErase | SDLK_SCANCODE_MASK;
-SDLK_SYSREQ :: Scancode.SysReq | SDLK_SCANCODE_MASK;
+SDLK_ALTERASE :: Scancode.Alt_Erase | SDLK_SCANCODE_MASK;
+SDLK_SYSREQ :: Scancode.Sys_Req | SDLK_SCANCODE_MASK;
 SDLK_CANCEL :: Scancode.Cancel | SDLK_SCANCODE_MASK;
 SDLK_CLEAR :: Scancode.Clear | SDLK_SCANCODE_MASK;
 SDLK_PRIOR :: Scancode.Prior | SDLK_SCANCODE_MASK;
@@ -1540,56 +1538,56 @@ SDLK_RETURN2 :: Scancode.Return2 | SDLK_SCANCODE_MASK;
 SDLK_SEPARATOR :: Scancode.Separator | SDLK_SCANCODE_MASK;
 SDLK_OUT :: Scancode.Out | SDLK_SCANCODE_MASK;
 SDLK_OPER :: Scancode.Oper | SDLK_SCANCODE_MASK;
-SDLK_CLEARAGAIN :: Scancode.ClearAgain | SDLK_SCANCODE_MASK;
-SDLK_CRSEL :: Scancode.CrSel | SDLK_SCANCODE_MASK;
-SDLK_EXSEL :: Scancode.ExSel | SDLK_SCANCODE_MASK;
+SDLK_CLEARAGAIN :: Scancode.Clear_Again | SDLK_SCANCODE_MASK;
+SDLK_CRSEL :: Scancode.Cr_Sel | SDLK_SCANCODE_MASK;
+SDLK_EXSEL :: Scancode.Ex_Sel | SDLK_SCANCODE_MASK;
 
-SDLK_KP_00 :: Scancode.Kp00 | SDLK_SCANCODE_MASK;
-SDLK_KP_000 :: Scancode.Kp000 | SDLK_SCANCODE_MASK;
-SDLK_THOUSANDSSEPARATOR :: Scancode.ThousandsSeparator | SDLK_SCANCODE_MASK;
-SDLK_DECIMALSEPARATOR :: Scancode.DecimalSeparator | SDLK_SCANCODE_MASK;
-SDLK_CURRENCYUNIT :: Scancode.CurrencyUnit | SDLK_SCANCODE_MASK;
-SDLK_CURRENCYSUBUNIT :: Scancode.CurrencySubUnit | SDLK_SCANCODE_MASK;
-SDLK_KP_LEFTPAREN :: Scancode.KpLeftParen | SDLK_SCANCODE_MASK;
-SDLK_KP_RIGHTPAREN :: Scancode.KpRightParen | SDLK_SCANCODE_MASK;
-SDLK_KP_LEFTBRACE :: Scancode.KpLeftBrace | SDLK_SCANCODE_MASK;
-SDLK_KP_RIGHTBRACE :: Scancode.KpRightBrace | SDLK_SCANCODE_MASK;
-SDLK_KP_TAB :: Scancode.KpTab | SDLK_SCANCODE_MASK;
-SDLK_KP_BACKSPACE :: Scancode.KpBackspace | SDLK_SCANCODE_MASK;
-SDLK_KP_A :: Scancode.KpA | SDLK_SCANCODE_MASK;
-SDLK_KP_B :: Scancode.KpB | SDLK_SCANCODE_MASK;
-SDLK_KP_C :: Scancode.KpC | SDLK_SCANCODE_MASK;
-SDLK_KP_D :: Scancode.KpD | SDLK_SCANCODE_MASK;
-SDLK_KP_E :: Scancode.KpE | SDLK_SCANCODE_MASK;
-SDLK_KP_F :: Scancode.KpF | SDLK_SCANCODE_MASK;
-SDLK_KP_XOR :: Scancode.KpXor | SDLK_SCANCODE_MASK;
-SDLK_KP_POWER :: Scancode.KpPower | SDLK_SCANCODE_MASK;
-SDLK_KP_PERCENT :: Scancode.KpPercent | SDLK_SCANCODE_MASK;
-SDLK_KP_LESS :: Scancode.KpLess | SDLK_SCANCODE_MASK;
-SDLK_KP_GREATER :: Scancode.KpGreater | SDLK_SCANCODE_MASK;
-SDLK_KP_AMPERSAND :: Scancode.KpAmpersand | SDLK_SCANCODE_MASK;
-SDLK_KP_DBLAMPERSAND :: Scancode.KpDblAmpersand | SDLK_SCANCODE_MASK;
-SDLK_KP_VERTICALBAR :: Scancode.KpVerticalBar | SDLK_SCANCODE_MASK;
-SDLK_KP_DBLVERTICALBAR :: Scancode.KpDblVerticalBar | SDLK_SCANCODE_MASK;
-SDLK_KP_COLON :: Scancode.KpColon | SDLK_SCANCODE_MASK;
-SDLK_KP_HASH :: Scancode.KpHash | SDLK_SCANCODE_MASK;
-SDLK_KP_SPACE :: Scancode.KpSpace | SDLK_SCANCODE_MASK;
-SDLK_KP_AT :: Scancode.KpAt | SDLK_SCANCODE_MASK;
-SDLK_KP_EXCLAM :: Scancode.KpExclam | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMSTORE :: Scancode.KpMemStore | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMRECALL :: Scancode.KpMemRecall | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMCLEAR :: Scancode.KpMemClear | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMADD :: Scancode.KpMemAdd | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMSUBTRACT :: Scancode.KpMemSubtract | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMMULTIPLY :: Scancode.KpMemMultiply | SDLK_SCANCODE_MASK;
-SDLK_KP_MEMDIVIDE :: Scancode.KpMemDivide | SDLK_SCANCODE_MASK;
-SDLK_KP_PLUSMINUS :: Scancode.KpPlusMinus | SDLK_SCANCODE_MASK;
-SDLK_KP_CLEAR :: Scancode.KpClear | SDLK_SCANCODE_MASK;
-SDLK_KP_CLEARENTRY :: Scancode.KpClearEntry | SDLK_SCANCODE_MASK;
-SDLK_KP_BINARY :: Scancode.KpBinary | SDLK_SCANCODE_MASK;
-SDLK_KP_OCTAL :: Scancode.KpOctal | SDLK_SCANCODE_MASK;
-SDLK_KP_DECIMAL :: Scancode.KpDecimal | SDLK_SCANCODE_MASK;
-SDLK_KP_HEXADECIMAL :: Scancode.KpHexadecimal | SDLK_SCANCODE_MASK;
+SDLK_KP_00 :: Scancode.Kp_00 | SDLK_SCANCODE_MASK;
+SDLK_KP_000 :: Scancode.Kp_000 | SDLK_SCANCODE_MASK;
+SDLK_THOUSANDSSEPARATOR :: Scancode.Thousands_Separator | SDLK_SCANCODE_MASK;
+SDLK_DECIMALSEPARATOR :: Scancode.Decimal_Separator | SDLK_SCANCODE_MASK;
+SDLK_CURRENCYUNIT :: Scancode.Currency_Unit | SDLK_SCANCODE_MASK;
+SDLK_CURRENCYSUBUNIT :: Scancode.Currency_Sub_Unit | SDLK_SCANCODE_MASK;
+SDLK_KP_LEFTPAREN :: Scancode.Kp_Left_Paren | SDLK_SCANCODE_MASK;
+SDLK_KP_RIGHTPAREN :: Scancode.Kp_Right_Paren | SDLK_SCANCODE_MASK;
+SDLK_KP_LEFTBRACE :: Scancode.Kp_Left_Brace | SDLK_SCANCODE_MASK;
+SDLK_KP_RIGHTBRACE :: Scancode.Kp_Right_Brace | SDLK_SCANCODE_MASK;
+SDLK_KP_TAB :: Scancode.Kp_Tab | SDLK_SCANCODE_MASK;
+SDLK_KP_BACKSPACE :: Scancode.Kp_Backspace | SDLK_SCANCODE_MASK;
+SDLK_KP_A :: Scancode.Kp_A | SDLK_SCANCODE_MASK;
+SDLK_KP_B :: Scancode.Kp_B | SDLK_SCANCODE_MASK;
+SDLK_KP_C :: Scancode.Kp_C | SDLK_SCANCODE_MASK;
+SDLK_KP_D :: Scancode.Kp_D | SDLK_SCANCODE_MASK;
+SDLK_KP_E :: Scancode.Kp_E | SDLK_SCANCODE_MASK;
+SDLK_KP_F :: Scancode.Kp_F | SDLK_SCANCODE_MASK;
+SDLK_KP_XOR :: Scancode.Kp_Xor | SDLK_SCANCODE_MASK;
+SDLK_KP_POWER :: Scancode.Kp_Power | SDLK_SCANCODE_MASK;
+SDLK_KP_PERCENT :: Scancode.Kp_Percent | SDLK_SCANCODE_MASK;
+SDLK_KP_LESS :: Scancode.Kp_Less | SDLK_SCANCODE_MASK;
+SDLK_KP_GREATER :: Scancode.Kp_Greater | SDLK_SCANCODE_MASK;
+SDLK_KP_AMPERSAND :: Scancode.Kp_Ampersand | SDLK_SCANCODE_MASK;
+SDLK_KP_DBLAMPERSAND :: Scancode.Kp_Dbl_Ampersand | SDLK_SCANCODE_MASK;
+SDLK_KP_VERTICALBAR :: Scancode.Kp_Vertical_Bar | SDLK_SCANCODE_MASK;
+SDLK_KP_DBLVERTICALBAR :: Scancode.Kp_Dbl_Vertical_Bar | SDLK_SCANCODE_MASK;
+SDLK_KP_COLON :: Scancode.Kp_Colon | SDLK_SCANCODE_MASK;
+SDLK_KP_HASH :: Scancode.Kp_Hash | SDLK_SCANCODE_MASK;
+SDLK_KP_SPACE :: Scancode.Kp_Space | SDLK_SCANCODE_MASK;
+SDLK_KP_AT :: Scancode.Kp_At | SDLK_SCANCODE_MASK;
+SDLK_KP_EXCLAM :: Scancode.Kp_Exclam | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMSTORE :: Scancode.Kp_Mem_Store | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMRECALL :: Scancode.Kp_Mem_Recall | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMCLEAR :: Scancode.Kp_Mem_Clear | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMADD :: Scancode.Kp_Mem_Add | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMSUBTRACT :: Scancode.Kp_Mem_Subtract | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMMULTIPLY :: Scancode.Kp_Mem_Multiply | SDLK_SCANCODE_MASK;
+SDLK_KP_MEMDIVIDE :: Scancode.Kp_Mem_Divide | SDLK_SCANCODE_MASK;
+SDLK_KP_PLUSMINUS :: Scancode.Kp_Plus_Minus | SDLK_SCANCODE_MASK;
+SDLK_KP_CLEAR :: Scancode.Kp_Clear | SDLK_SCANCODE_MASK;
+SDLK_KP_CLEARENTRY :: Scancode.Kp_Clear_Entry | SDLK_SCANCODE_MASK;
+SDLK_KP_BINARY :: Scancode.Kp_Binary | SDLK_SCANCODE_MASK;
+SDLK_KP_OCTAL :: Scancode.Kp_Octal | SDLK_SCANCODE_MASK;
+SDLK_KP_DECIMAL :: Scancode.Kp_Decimal | SDLK_SCANCODE_MASK;
+SDLK_KP_HEXADECIMAL :: Scancode.Kp_Hexadecimal | SDLK_SCANCODE_MASK;
 
 SDLK_LCTRL :: Scancode.LCtrl | SDLK_SCANCODE_MASK;
 SDLK_LSHIFT :: Scancode.LShift | SDLK_SCANCODE_MASK;
@@ -1602,30 +1600,30 @@ SDLK_RGUI :: Scancode.RGui | SDLK_SCANCODE_MASK;
 
 SDLK_MODE :: Scancode.Mode | SDLK_SCANCODE_MASK;
 
-SDLK_AUDIONEXT :: Scancode.AudioNext | SDLK_SCANCODE_MASK;
-SDLK_AUDIOPREV :: Scancode.AudioPrev | SDLK_SCANCODE_MASK;
-SDLK_AUDIOSTOP :: Scancode.AudioStop | SDLK_SCANCODE_MASK;
-SDLK_AUDIOPLAY :: Scancode.AudioPlay | SDLK_SCANCODE_MASK;
-SDLK_AUDIOMUTE :: Scancode.AudioMute | SDLK_SCANCODE_MASK;
-SDLK_MEDIASELECT :: Scancode.MediaSelect | SDLK_SCANCODE_MASK;
+SDLK_AUDIONEXT :: Scancode.Audio_Next | SDLK_SCANCODE_MASK;
+SDLK_AUDIOPREV :: Scancode.Audio_Prev | SDLK_SCANCODE_MASK;
+SDLK_AUDIOSTOP :: Scancode.Audio_Stop | SDLK_SCANCODE_MASK;
+SDLK_AUDIOPLAY :: Scancode.Audio_Play | SDLK_SCANCODE_MASK;
+SDLK_AUDIOMUTE :: Scancode.Audio_Mute | SDLK_SCANCODE_MASK;
+SDLK_MEDIASELECT :: Scancode.Media_Select | SDLK_SCANCODE_MASK;
 SDLK_WWW :: Scancode.WWW | SDLK_SCANCODE_MASK;
 SDLK_MAIL :: Scancode.Mail | SDLK_SCANCODE_MASK;
 SDLK_CALCULATOR :: Scancode.Calculator | SDLK_SCANCODE_MASK;
 SDLK_COMPUTER :: Scancode.Computer | SDLK_SCANCODE_MASK;
-SDLK_AC_SEARCH :: Scancode.AcSearch | SDLK_SCANCODE_MASK;
-SDLK_AC_HOME :: Scancode.AcHome | SDLK_SCANCODE_MASK;
-SDLK_AC_BACK :: Scancode.AcBack | SDLK_SCANCODE_MASK;
-SDLK_AC_FORWARD :: Scancode.AcForward | SDLK_SCANCODE_MASK;
-SDLK_AC_STOP :: Scancode.AcStop | SDLK_SCANCODE_MASK;
-SDLK_AC_REFRESH :: Scancode.AcRefresh | SDLK_SCANCODE_MASK;
-SDLK_AC_BOOKMARKS :: Scancode.AcBookmarks | SDLK_SCANCODE_MASK;
+SDLK_AC_SEARCH :: Scancode.Ac_Search | SDLK_SCANCODE_MASK;
+SDLK_AC_HOME :: Scancode.Ac_Home | SDLK_SCANCODE_MASK;
+SDLK_AC_BACK :: Scancode.Ac_Back | SDLK_SCANCODE_MASK;
+SDLK_AC_FORWARD :: Scancode.Ac_Forward | SDLK_SCANCODE_MASK;
+SDLK_AC_STOP :: Scancode.Ac_Stop | SDLK_SCANCODE_MASK;
+SDLK_AC_REFRESH :: Scancode.Ac_Refresh | SDLK_SCANCODE_MASK;
+SDLK_AC_BOOKMARKS :: Scancode.Ac_Bookmarks | SDLK_SCANCODE_MASK;
 
-SDLK_BRIGHTNESSDOWN :: Scancode.BrightnessDown | SDLK_SCANCODE_MASK;
-SDLK_BRIGHTNESSUP :: Scancode.BrightnessUp | SDLK_SCANCODE_MASK;
-SDLK_DISPLAYSWITCH :: Scancode.DisplaySwitch | SDLK_SCANCODE_MASK;
-SDLK_KBDILLUMTOGGLE :: Scancode.KbDillumToggle | SDLK_SCANCODE_MASK;
-SDLK_KBDILLUMDOWN :: Scancode.KbDillumDown | SDLK_SCANCODE_MASK;
-SDLK_KBDILLUMUP :: Scancode.KbDillumUp | SDLK_SCANCODE_MASK;
+SDLK_BRIGHTNESSDOWN :: Scancode.Brightness_Down | SDLK_SCANCODE_MASK;
+SDLK_BRIGHTNESSUP :: Scancode.Brightness_Up | SDLK_SCANCODE_MASK;
+SDLK_DISPLAYSWITCH :: Scancode.Display_Switch | SDLK_SCANCODE_MASK;
+SDLK_KBDILLUMTOGGLE :: Scancode.Kb_Dillum_Toggle | SDLK_SCANCODE_MASK;
+SDLK_KBDILLUMDOWN :: Scancode.Kb_Dillum_Down | SDLK_SCANCODE_MASK;
+SDLK_KBDILLUMUP :: Scancode.Kb_Dillum_Up | SDLK_SCANCODE_MASK;
 SDLK_EJECT :: Scancode.Eject | SDLK_SCANCODE_MASK;
 SDLK_SLEEP :: Scancode.Sleep | SDLK_SCANCODE_MASK;
 
@@ -1646,82 +1644,82 @@ Hat :: enum i32 {
 	Right = 0x02,
 	Down = 0x04,
 	Left = 0x08,
-	RightUp = Right | Up,
-	RightDown = Right | Down,
-	LeftUp = Left | Up,
-	LeftDown = Left | Down
+	Right_Up = Right | Up,
+	Right_Down = Right | Down,
+	Left_Up = Left | Up,
+	Left_Down = Left | Down
 }
 
-EventType :: enum i32  {
-	FirstEvent = 0,
+Event_Type :: enum i32  {
+	First_Event = 0,
 
 	Quit = 0x100,
 
-	AppTerminating = 257,
-	AppLowMemory = 258,
-	AppWillEnterBackground = 259,
-	AppDidEnterBackground = 260,
-	AppWillEnterForeground = 261,
-	AppDidEnterForeground = 262,
+	App_Terminating = 257,
+	App_Low_Memory = 258,
+	App_Will_Enter_Background = 259,
+	App_Did_Enter_Background = 260,
+	App_Will_Enter_Foreground = 261,
+	App_Did_Enter_Foreground = 262,
 
-	WindowEvent = 0x200,
-	SysWmEvent = 513,
+	Window_Event = 0x200,
+	Sys_Wm_Event = 513,
 
-	KeyDown = 0x300,
-	KeyUp = 769,
-	TextEditing = 770,
-	TextInput = 771,
-	KeyMapChanged = 772,
+	Key_Down = 0x300,
+	Key_Up = 769,
+	Text_Editing = 770,
+	Text_Input = 771,
+	Key_Map_Changed = 772,
 
-	MouseMotion = 0x400,
-	MouseButtonDown = 1025,
-	MouseButtonUp = 1026,
-	MouseWheel = 1027,
+	Mouse_Motion = 0x400,
+	Mouse_Button_Down = 1025,
+	Mouse_Button_Up = 1026,
+	Mouse_Wheel = 1027,
 
-	JoyAxisMotion = 0x600,
-	JoyBallMotion = 1537,
-	JoyHatMotion = 1538,
-	JoyButtonDown = 1539,
-	JoyButtonUp = 1540,
-	JoyDeviceAdded = 1541,
-	JoyDeviceRemoved = 1542,
+	Joy_Axis_Motion = 0x600,
+	Joy_Ball_Motion = 1537,
+	Joy_Hat_Motion = 1538,
+	Joy_Button_Down = 1539,
+	Joy_Button_Up = 1540,
+	Joy_Device_Added = 1541,
+	Joy_Device_Removed = 1542,
 
-	ControllerAxisMotion = 0x650,
-	ControllerButtonDown = 1617,
-	ControllerButtonUp = 1618,
-	ControllerDeviceAdded = 1619,
-	ControllerDeviceRemoved = 1620,
-	ControllerDeviceRemapped = 1621,
+	Controller_Axis_Motion = 0x650,
+	Controller_Button_Down = 1617,
+	Controller_Button_Up = 1618,
+	Controller_Device_Added = 1619,
+	Controller_Device_Removed = 1620,
+	Controller_Device_Remapped = 1621,
 
-	FingerDown = 0x700,
-	FingerUp = 1793,
-	FingerMotion = 1794,
+	Finger_Down = 0x700,
+	Finger_Up = 1793,
+	Finger_Motion = 1794,
 
-	DollarGesture = 0x800,
-	DollarRecord = 2049,
+	Dollar_Gesture = 0x800,
+	Dollar_Record = 2049,
 	Multigesture = 2050,
 
-	ClipboardUpdate = 0x900,
+	Clipboard_Update = 0x900,
 
-	DropFile = 0x1000,
-	DropText = 4097,
-	DropBegin = 4098,
-	DropComplete = 4099,
+	Drop_File = 0x1000,
+	Drop_Text = 4097,
+	Drop_Begin = 4098,
+	Drop_Complete = 4099,
 
-	AudioDeviceAdded = 0x1100,
-	AudioDeviceRemoved = 4353,
+	Audio_Device_Added = 0x1100,
+	Audio_Device_Removed = 4353,
 
-	RenderTargetsReset = 0x2000,
-	RenderDeviceReset = 8193,
+	Render_Targets_Reset = 0x2000,
+	Render_Device_Reset = 8193,
 
-	UserEvent = 0x8000,
+	User_Event = 0x8000,
 
-	LastEvent = 0xFFFF
+	Last_Event = 0xFFFF
 }
 
-GLContext :: rawptr;
+GL_Context :: rawptr;
 
-BlitMap :: struct #ordered {};
+Blit_Map :: struct #ordered {};
 Window :: struct #ordered {};
 Renderer :: struct #ordered {};
 Texture :: struct #ordered {};
@@ -1731,42 +1729,42 @@ Sem :: struct #ordered {};
 Thread :: struct #ordered {};
 Haptic :: struct #ordered {};
 Joystick :: struct #ordered {};
-GameController :: struct #ordered {};
+Game_Controller :: struct #ordered {};
 Cursor :: struct #ordered {};
-IDirect3DDevice9 :: struct #ordered {};
-RwOps :: struct #ordered {};
+IDirect3D_Device9 :: struct #ordered {};
+Rw_Ops :: struct #ordered {};
 
 // Unsure of these
-SysWmInfo :: struct #ordered {};
-SysWmMsg :: struct #ordered {};
+Sys_Wm_Info :: struct #ordered {};
+Sys_Wm_Msg :: struct #ordered {};
 
-JoystickId :: i32;
-TimerId :: i32;
-SpinLock :: i32;
-TlsId :: u32;
-AudioDeviceId :: u32;
-AudioDevice :: u32;
-AudioFormat :: u16;
+Joystick_Id :: i32;
+Timer_Id :: i32;
+Spin_Lock :: i32;
+Tls_Id :: u32;
+Audio_Device_Id :: u32;
+Audio_Device :: u32;
+Audio_Format :: u16;
 Keycode :: i32;
-ThreadId :: u64;
-TouchId :: i64;
-GestureId :: i64;
-FingerId :: i64;
+Thread_Id :: u64;
+Touch_Id :: i64;
+Gesture_Id :: i64;
+Finger_Id :: i64;
 
-HintCallback :: proc(interval: u32, param: rawptr) -> u32 #cc_c;
-EventFilter :: proc(userdata: rawptr, param: ^Event) -> i32 #cc_c;
-TimerCallback :: proc(interval: u32, param: rawptr) -> u32 #cc_c;
-AudioCallback :: proc(userdata: rawptr, stream: ^u8, len: i32) #cc_c;
-AssertionHandler :: proc(data: ^AssertData, userdata: rawptr) -> AssertState #cc_c;
-AudioFilter :: proc(cvt: ^AudioCvt, format: AudioFormat) #cc_c;
-ThreadFunction :: proc(data: rawptr) -> i32 #cc_c;
-HitTest :: proc(window: ^Window, area: ^Point, data: rawptr) -> HitTestResult #cc_c;
-WindowsMessageHook :: proc(userdata: rawptr, hwnd: rawptr, message: u32, wparam: u64, lparam: i64) #cc_c;
-LogOutputFunction :: proc(userdata: rawptr, category: i32, priority: LogPriority, message: ^u8) #cc_c;
+Hint_Callback :: proc(interval: u32, param: rawptr) -> u32 #cc_c;
+Event_Filter :: proc(userdata: rawptr, param: ^Event) -> i32 #cc_c;
+Timer_Callback :: proc(interval: u32, param: rawptr) -> u32 #cc_c;
+Audio_Callback :: proc(userdata: rawptr, stream: ^u8, len: i32) #cc_c;
+Assertion_Handler :: proc(data: ^Assert_Data, userdata: rawptr) -> Assert_State #cc_c;
+Audio_Filter :: proc(cvt: ^Audio_Cvt, format: Audio_Format) #cc_c;
+Thread_Function :: proc(data: rawptr) -> i32 #cc_c;
+Hit_Test :: proc(window: ^Window, area: ^Point, data: rawptr) -> Hit_Test_Result #cc_c;
+Windows_Message_Hook :: proc(userdata: rawptr, hwnd: rawptr, message: u32, wparam: u64, lparam: i64) #cc_c;
+Log_Output_Function :: proc(userdata: rawptr, category: i32, priority: Log_Priority, message: ^u8) #cc_c;
 
 // Thanks gingerBill for this one!
-GameControllerButtonBind :: struct #ordered {
-	bind_type: GameControllerBindType;
+Game_Controller_Button_Bind :: struct #ordered {
+	bind_type: Game_Controller_Bind_Type;
 	value: struct #raw_union {
 		button: i32;
 		axis:   i32;
@@ -1776,50 +1774,50 @@ GameControllerButtonBind :: struct #ordered {
 	};
 };
 
-MessageBoxData :: struct #ordered {
+Message_Box_Data :: struct #ordered {
 	flags: u32;
 	window: ^Window;
 	title: ^u8;
 	message: ^u8;
 
 	num_buttons: i32;
-	buttons: ^MessageBoxButtonData;
+	buttons: ^Message_Box_Button_Data;
 
-	color_scheme: ^MessageBoxColorScheme;
+	color_scheme: ^Message_Box_Color_Scheme;
 }
 
-MessageBoxButtonData :: struct #ordered {
+Message_Box_Button_Data :: struct #ordered {
 	flags: u32;
 	button_id: i32;
 	text: ^u8;
 }
 
-MessageBoxColorScheme :: struct #ordered {
-	colors: [MessageBoxColorType.Max]MessageBoxColor;
+Message_Box_Color_Scheme :: struct #ordered {
+	colors: [Message_Box_Color_Type.Max]Message_Box_Color;
 }
 
-MessageBoxColor :: struct #ordered {
+Message_Box_Color :: struct #ordered {
 	r, g, b: u8;
 }
 
-AssertData :: struct #ordered {
+Assert_Data :: struct #ordered {
 	always_ignore: i32;
 	trigger_count: u32;
 	condition: ^u8;
 	filename: ^u8;
 	linenum: i32;
 	function: ^u8;
-	next: ^AssertData;
+	next: ^Assert_Data;
 }
 
-WindowShapeParams :: struct #raw_union {
-	binarizationCutoff: u8;
-	colorKey: Color;
+Window_Shape_Params :: struct #raw_union {
+	binarization_cutoff: u8;
+	color_key: Color;
 }
 
-WindowShapeMode :: struct #ordered {
-	mode: WindowShapeModes;
-	parameters: WindowShapeParams;
+Window_Shape_Mode :: struct #ordered {
+	mode: Window_Shape_Modes;
+	parameters: Window_Shape_Params;
 }
 
 Point :: struct #ordered {
@@ -1827,7 +1825,7 @@ Point :: struct #ordered {
 	y: i32;
 }
 
-RendererInfo :: struct #ordered {
+Renderer_Info :: struct #ordered {
 	name: ^u8;
 	flags: u32;
 	num_texture_formats: u32;
@@ -1842,54 +1840,54 @@ Version :: struct #ordered {
 	patch: u8;
 }
 
-DisplayMode :: struct #ordered {
+Display_Mode :: struct #ordered {
 	format: u32;
 	w: i32;
 	h: i32;
 	refresh_rate: i32;
-	driverdata: rawptr;
+	driver_data: rawptr;
 }
 
 Finger :: struct #ordered {
-	id: FingerId;
+	id: Finger_Id;
 	x: f32;
 	y: f32;
 	pressure: f32;
 }
 
-AudioSpec :: struct #ordered {
+Audio_Spec :: struct #ordered {
 	freq: i32;
-	format: AudioFormat;
+	format: Audio_Format;
 	channels: u8;
 	silence: u8;
 	samples: u16;
 	padding: u16;
 	size: u32;
-	callback: AudioCallback;
+	callback: Audio_Callback;
 	userdata: rawptr;
 }
 
-JoystickGuid :: struct #ordered {
+Joystick_Guid :: struct #ordered {
 	data: [16]u8;
 }
 
-AudioCvt :: struct #ordered {
+Audio_Cvt :: struct #ordered {
 	needed: i32;
-	src_format: AudioFormat;
-	dst_format: AudioFormat;
+	src_format: Audio_Format;
+	dst_format: Audio_Format;
 	rate_incr: i64;
 	buf: ^u8;
 	len: i32;
 	len_cvt: i32;
 	len_mult: i32;
 	len_ratio: i64;
-	filters: [10]AudioFilter;
+	filters: [10]Audio_Filter;
 	filter_index: i32;
 }
 
 Surface :: struct #ordered {
 	flags: u32;
-	format: ^PixelFormat;
+	format: ^Pixel_Format;
 	w, h: i32;
 	pitch: i32;
 	pixels: rawptr;
@@ -1900,7 +1898,7 @@ Surface :: struct #ordered {
 	lock_data: rawptr;
 
 	clip_rect: Rect;
-	blip_map: ^BlitMap;
+	blip_map: ^Blit_Map;
 
 	refcount: i32;
 }
@@ -1913,13 +1911,13 @@ Color :: struct #ordered {
 }
 
 Palette :: struct #ordered {
-	ncolors: i32;
+	num_colors: i32;
 	colors: ^Color;
 	version: u32;
-	refcount: i32;
+	ref_count: i32;
 }
 
-PixelFormat :: struct #ordered {
+Pixel_Format :: struct #ordered {
 	format: u32;
 	palette: ^Palette;
 	bits_per_pixel: u8;
@@ -1937,8 +1935,8 @@ PixelFormat :: struct #ordered {
 	g_shift: u8;
 	b_shift: u8;
 	a_shift: u8;
-	refcount: i32;
-	next: ^PixelFormat;
+	ref_count: i32;
+	next: ^Pixel_Format;
 }
 
 Rect :: struct #ordered {
@@ -1957,19 +1955,19 @@ Keysym :: struct #ordered {
 	unused: u32;
 }
 
-HapticEffect :: struct #raw_union {
+Haptic_Effect :: struct #raw_union {
 	haptic_type: u16;
-	constant: HapticConstant;
-	periodic: HapticPeriodic;
-	condition: HapticCondition;
-	ramp: HapticRamp;
-	leftright: HapticLeftRight;
-	custom: HapticCustom;
+	constant: Haptic_Constant;
+	periodic: Haptic_Periodic;
+	condition: Haptic_Condition;
+	ramp: Haptic_Ramp;
+	left_right: Haptic_Left_Right;
+	custom: Haptic_Custom;
 }
 
-HapticConstant :: struct {
+Haptic_Constant :: struct {
 	haptic_type: u16;
-	direction: HapticDirection;
+	direction: Haptic_Direction;
 
 	length: u32;
 	delay: u16;
@@ -1985,9 +1983,9 @@ HapticConstant :: struct {
 	fade_level: u16;
 }
 
-HapticPeriodic :: struct {
+Haptic_Periodic :: struct {
 	haptic_type: u16;
-	direction: HapticDirection;
+	direction: Haptic_Direction;
 
 	length: u32;
 	delay: u16;
@@ -2006,14 +2004,14 @@ HapticPeriodic :: struct {
 	fade_level: u16;
 }
 
-HapticDirection :: struct {
+Haptic_Direction :: struct {
 	haptic_type: u8;
 	dir: [3]i32;
 }
 
-HapticCondition :: struct {
+Haptic_Condition :: struct {
 	haptic_type: u16;
-	direction: HapticDirection;
+	direction: Haptic_Direction;
 
 	length: u32;
 	delay: u16;
@@ -2025,13 +2023,13 @@ HapticCondition :: struct {
 	left_sat: [3]u16;
 	right_coeff: [3]i16;
 	left_coeff: [3]i16;
-	deadband: [3]u16;
+	dead_band: [3]u16;
 	center: [3]i16;
 }
 
-HapticRamp :: struct {
+Haptic_Ramp :: struct {
 	haptic_type: u16;
-	direction: HapticDirection;
+	direction: Haptic_Direction;
 
 	length: u32;
 	delay: u16;
@@ -2048,7 +2046,7 @@ HapticRamp :: struct {
 	fade_level: u16;
 }
 
-HapticLeftRight :: struct {
+Haptic_Left_Right :: struct {
 	haptic_type: u16;
 
 	length: u32;
@@ -2057,9 +2055,9 @@ HapticLeftRight :: struct {
 	small_magnitude: u16;
 }
 
-HapticCustom :: struct {
+Haptic_Custom :: struct {
 	haptic_type: u16;
-	direction: HapticDirection;
+	direction: Haptic_Direction;
 
 	length: u32;
 	delay: u16;
@@ -2080,40 +2078,40 @@ HapticCustom :: struct {
 
 Event :: struct #raw_union {
 	event_type: u32;
-	common: CommonEvent;
-	window: WindowEvent;
-	key: KeyboardEvent;
-	edit: TextEditingEvent;
-	text: TextInputEvent;
-	motion: MouseMotionEvent;
-	button: MouseButtonEvent;
-	wheel: MouseWheelEvent;
-	jaxis: JoyAxisEvent;
-	jball: JoyBallEvent;
-	jhat: JoyHatEvent;
-	jbutton: JoyButtonEvent;
-	jdevice: JoyDeviceEvent;
-	caxis: ControllerAxisEvent;
-	cbutton: ControllerButtonEvent;
-	cdevice: ControllerDeviceEvent;
-	adevice: AudioDeviceEvent;
-	quit: QuitEvent;
-	user: UserEvent;
-	syswm: SysWmEvent;
-	tfinger: TouchFingerEvent;
-	mgesture: MultiGestureEvent;
-	dgesture: DollarGestureEvent;
-	drop: DropEvent;
+	common: Common_Event;
+	window: Window_Event;
+	key: Keyboard_Event;
+	edit: Text_Editing_Event;
+	text: Text_Input_Event;
+	motion: Mouse_Motion_Event;
+	button: Mouse_Button_Event;
+	wheel: Mouse_Wheel_Event;
+	jaxis: Joy_Axis_Event;
+	jball: Joy_Ball_Event;
+	jhat: Joy_Hat_Event;
+	jbutton: Joy_Button_Event;
+	jdevice: Joy_Device_Event;
+	caxis: Controller_Axis_Event;
+	cbutton: Controller_Button_Event;
+	cdevice: Controller_Device_Event;
+	adevice: Audio_Device_Event;
+	quit: Quit_Event;
+	user: User_Event;
+	syswm: Sys_Wm_Event;
+	tfinger: Touch_Finger_Event;
+	mgesture: Multi_Gesture_Event;
+	dgesture: Dollar_Gesture_Event;
+	drop: Drop_Event;
 
 	padding: [56]u8;
 }
 
-CommonEvent :: struct #ordered {
+Common_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 }
 
-WindowEvent :: struct #ordered {
+Window_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	window_id: u32;
@@ -2125,7 +2123,7 @@ WindowEvent :: struct #ordered {
 	data2: i32;
 }
 
-KeyboardEvent :: struct #ordered {
+Keyboard_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	window_id: u32;
@@ -2137,7 +2135,7 @@ KeyboardEvent :: struct #ordered {
 }
 
 TEXT_EDITING_EVENT_TEXT_SIZE :: 32;
-TextEditingEvent :: struct #ordered {
+Text_Editing_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	window_id: u32;
@@ -2148,14 +2146,14 @@ TextEditingEvent :: struct #ordered {
 
 
 TEXT_INPUT_EVENT_TEXT_SIZE :: 32;
-TextInputEvent :: struct #ordered {
+Text_Input_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	window_id: u32;
 	text: [TEXT_INPUT_EVENT_TEXT_SIZE]u8;
 }
 
-MouseMotionEvent :: struct #ordered {
+Mouse_Motion_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	window_id: u32;
@@ -2167,7 +2165,7 @@ MouseMotionEvent :: struct #ordered {
 	yrel: i32;
 }
 
-MouseButtonEvent :: struct #ordered {
+Mouse_Button_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	window_id: u32;
@@ -2180,7 +2178,7 @@ MouseButtonEvent :: struct #ordered {
 	y: i32;
 }
 
-MouseWheelEvent :: struct #ordered {
+Mouse_Wheel_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	window_id: u32;
@@ -2190,7 +2188,7 @@ MouseWheelEvent :: struct #ordered {
 	direction: u32;
 }
 
-JoyAxisEvent :: struct #ordered {
+Joy_Axis_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	which: i32;
@@ -2202,7 +2200,7 @@ JoyAxisEvent :: struct #ordered {
 	padding4: u16;
 }
 
-JoyBallEvent :: struct #ordered {
+Joy_Ball_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	which: i32;
@@ -2214,7 +2212,7 @@ JoyBallEvent :: struct #ordered {
 	yrel: i16;
 }
 
-JoyHatEvent :: struct #ordered {
+Joy_Hat_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	which: i32;
@@ -2224,7 +2222,7 @@ JoyHatEvent :: struct #ordered {
 	padding2: u8;
 }
 
-JoyButtonEvent :: struct #ordered {
+Joy_Button_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	which: i32;
@@ -2234,13 +2232,13 @@ JoyButtonEvent :: struct #ordered {
 	padding2: u8;
 }
 
-JoyDeviceEvent :: struct #ordered {
+Joy_Device_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	which: i32;
 }
 
-ControllerAxisEvent :: struct #ordered {
+Controller_Axis_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	which: i32;
@@ -2252,7 +2250,7 @@ ControllerAxisEvent :: struct #ordered {
 	padding4: u16;
 }
 
-ControllerButtonEvent :: struct #ordered {
+Controller_Button_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	which: i32;
@@ -2262,13 +2260,13 @@ ControllerButtonEvent :: struct #ordered {
 	padding2: u8;
 }
 
-ControllerDeviceEvent :: struct #ordered {
+Controller_Device_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	which: i32;
 }
 
-AudioDeviceEvent :: struct #ordered {
+Audio_Device_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	which: u32;
@@ -2278,11 +2276,11 @@ AudioDeviceEvent :: struct #ordered {
 	padding3: u8;
 }
 
-TouchFingerEvent :: struct #ordered {
+Touch_Finger_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
-	touchId: i64;
-	fingerId: i64;
+	touch_id: i64;
+	finger_id: i64;
 	x: f32;
 	y: f32;
 	dx: f32;
@@ -2290,47 +2288,47 @@ TouchFingerEvent :: struct #ordered {
 	pressure: f32;
 }
 
-MultiGestureEvent :: struct #ordered {
+Multi_Gesture_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
-	touchId: i64;
-	dTheta: f32;
-	dDist: f32;
+	touch_id: i64;
+	d_theta: f32;
+	d_dist: f32;
 	x: f32;
 	y: f32;
-	numFingers: u16;
+	num_fingers: u16;
 	padding: u16;
 }
 
-DollarGestureEvent :: struct #ordered {
+Dollar_Gesture_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
-	touchId: i64;
-	gestureId: i64;
-	numFingers: u32;
+	touch_id: i64;
+	gesture_id: i64;
+	num_fingers: u32;
 	error: f32;
 	x: f32;
 	y: f32;
 }
 
-DropEvent :: struct #ordered {
+Drop_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	file: ^u8;
 	window_id: u32;
 }
 
-QuitEvent :: struct #ordered {
+Quit_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 }
 
-OSEvent :: struct #ordered {
+OS_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 }
 
-UserEvent :: struct #ordered {
+User_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
 	window_id: u32;
@@ -2339,8 +2337,8 @@ UserEvent :: struct #ordered {
 	data2: ^rawptr;
 }
 
-SysWmEvent :: struct #ordered {
+Sys_Wm_Event :: struct #ordered {
 	event_type: u32;
 	timestamp: u32;
-	msg: ^SysWmMsg;
+	msg: ^Sys_Wm_Msg;
 }

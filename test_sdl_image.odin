@@ -1,7 +1,6 @@
-import . "sdl_image.odin";
+using import "sdl_image.odin";
 
-main :: proc()
-{
+main :: proc() {
 	test_init := init;
 	test_linked_version := linked_version;
 	test_load := load;
