@@ -1,7 +1,8 @@
 import "sdl.odin";
+import "core:mem.odin";
 using import "core:strings.odin";
 
-foreign_system_library lib "SDL2_ttf.lib";
+foreign_system_library lib "src/SDL2_ttf.lib";
 
 foreign lib {
 	byte_swapped_unicode							:: proc(swapped: i32) 																					#link_name "TTF_ByteSwappedUNICODE" ---;
@@ -67,109 +68,133 @@ font_face_style_name							:: proc(font: ^Font) -> string {
 }
 
 open_font										:: proc(file: string, pt_size: i32) -> ^Font {
-	file_c := new_c_string(file);
-	defer free(file_c);
-	return open_font_c(file_c, pt_size);
+	chars: [1024]u8;
+	copy(chars[..], cast([]u8)file);
+	chars[len(file)] = '\x00';
+
+	return open_font_c(&chars[0], pt_size);
 }
 
 open_font_index									:: proc(file: string, pt_size: i32, index: i32) -> ^Font {
-	file_c := new_c_string(file);
-	defer free(file_c);
-	return open_font_index_c(file_c, pt_size, index);
+	chars: [1024]u8;
+	copy(chars[..], cast([]u8)file);
+	chars[len(file)] = '\x00';
+
+	return open_font_index_c(&chars[0], pt_size, index);
 }
 
 render_text_blended								:: proc(font: ^Font, text: string, fg: sdl.Color) -> ^sdl.Surface {
-	text_c := new_c_string(text);
-	defer free(text_c);
-	return render_text_blended_c(font, text_c, fg);
+	chars: [1024]u8;
+	copy(chars[..], cast([]u8)text);
+	chars[len(text)] = '\x00';
+
+	return render_text_blended_c(font, &chars[0], fg);
 }
 
 render_text_blended_wrapped						:: proc(font: ^Font, text: string, fg: sdl.Color, wrap_length: u32) -> ^sdl.Surface {
-	text_c := new_c_string(text);
-	defer free(text_c);
-	return render_text_blended_wrapped_c(font, text_c, fg, wrap_length);
+	chars: [1024]u8;
+	copy(chars[..], cast([]u8)text);
+	chars[len(text)] = '\x00';
+
+	return render_text_blended_wrapped_c(font, &chars[0], fg, wrap_length);
 }
 
 render_text_shaded								:: proc(font: ^Font, text: string, fg, bg: sdl.Color) -> ^sdl.Surface {
-	text_c := new_c_string(text);
-	defer free(text_c);
-	return render_text_shaded_c(font, text_c, fg, bg);
+	chars: [1024]u8;
+	copy(chars[..], cast([]u8)text);
+	chars[len(text)] = '\x00';
+
+	return render_text_shaded_c(font, &chars[0], fg, bg);
 }
 
 render_text_solid								:: proc(font: ^Font, text: string, fg: sdl.Color) -> ^sdl.Surface {
-	text_c := new_c_string(text);
-	defer free(text_c);
-	return render_text_solid_c(font, text_c, fg);
+	chars: [1024]u8;
+	copy(chars[..], cast([]u8)text);
+	chars[len(text)] = '\x00';
+
+	return render_text_solid_c(font, &chars[0], fg);
 }
 
 /*
 render_unicode_blended							:: proc(font: ^Font, text: ^u16, fg: sdl.Color) -> ^sdl.Surface {
 	text_c := new_c_unicode_string(text);
 	defer free(text_c);
-	return render_unicode_blended_c(font, text_c, fg);
+	return render_unicode_blended_c(font, &chars[0], fg);
 }
 
 render_unicode_blended_wrapped					:: proc(font: ^Font, text: ^u16, fg: sdl.Color, wrap_length: u32) -> ^sdl.Surface {
 	text_c := new_c_unicode_string(text);
 	defer free(text_c);
-	return render_unicode_blended_wrapped_c(font, text_c, fg, wrap_length);
+	return render_unicode_blended_wrapped_c(font, &chars[0], fg, wrap_length);
 }
 
 render_unicode_shaded							:: proc(font: ^Font, text: ^u16, fg, bg: sdl.Color) -> ^sdl.Surface {
 	text_c := new_c_unicode_string(text);
 	defer free(text_c);
-	return render_unicode_shaded_c(font, text_c, fg, bg);
+	return render_unicode_shaded_c(font, &chars[0], fg, bg);
 }
 
 render_unicode_solid							:: proc(font: ^Font, text: ^u16, fg: sdl.Color) -> ^sdl.Surface {
 	text_c := new_c_unicode_string(text);
 	defer free(text_c);
-	return render_unicode_solid_c(font, text_c, fg);
+	return render_unicode_solid_c(font, &chars[0], fg);
 }
 */
 
 render_utf8_blended								:: proc(font: ^Font, text: string, fg: sdl.Color) -> ^sdl.Surface {
-	text_c := new_c_string(text);
-	defer free(text_c);
-	return render_utf8_blended_c(font, text_c, fg);
+	chars: [1024]u8;
+	copy(chars[..], cast([]u8)text);
+	chars[len(text)] = '\x00';
+
+	return render_utf8_blended_c(font, &chars[0], fg);
 }
 
 render_utf8_blended_wrapped						:: proc(font: ^Font, text: string, fg: sdl.Color, wrap_length: u32) -> ^sdl.Surface {
-	text_c := new_c_string(text);
-	defer free(text_c);
-	return render_utf8_blended_wrapped_c(font, text_c, fg, wrap_length);
+	chars: [1024]u8;
+	copy(chars[..], cast([]u8)text);
+	chars[len(text)] = '\x00';
+
+	return render_utf8_blended_wrapped_c(font, &chars[0], fg, wrap_length);
 }
 
 render_utf8_shaded								:: proc(font: ^Font, text: string, fg, bg: sdl.Color) -> ^sdl.Surface {
-	text_c := new_c_string(text);
-	defer free(text_c);
-	return render_utf8_shaded_c(font, text_c, fg, bg);
+	chars: [1024]u8;
+	copy(chars[..], cast([]u8)text);
+	chars[len(text)] = '\x00';
+
+	return render_utf8_shaded_c(font, &chars[0], fg, bg);
 }
 
 render_utf8_solid								:: proc(font: ^Font, text: string, fg: sdl.Color) -> ^sdl.Surface {
-	text_c := new_c_string(text);
-	defer free(text_c);
-	return render_utf8_solid_c(font, text_c, fg);
+	chars: [1024]u8;
+	copy(chars[..], cast([]u8)text);
+	chars[len(text)] = '\x00';
+
+	return render_utf8_solid_c(font, &chars[0], fg);
 }
 
 size_text										:: proc(font: ^Font, text: string, w, h: ^i32) -> i32 {
-	text_c := new_c_string(text);
-	defer free(text_c);
-	return size_text_c(font, text_c, w, h);
+	chars: [1024]u8;
+	copy(chars[..], cast([]u8)text);
+	chars[len(text)] = '\x00';
+
+	return size_text_c(font, &chars[0], w, h);
 }
 
 /*
 size_unicode									:: proc(font: ^Font, text: ^u16, w, h: ^i32) -> i32 {
 	text_c := new_c_unicode_string(text);
 	defer free(text_c);
-	return size_unicode_c(font, text_c, w, h);
+	return size_unicode_c(font, &chars[0], w, h);
 }
 */
 
 size_utf8										:: proc(font: ^Font, text: string, w, h: ^i32) -> i32 {
-	text_c := new_c_string(text);
-	defer free(text_c);
-	return size_utf8_c(font, text_c, w, h);
+	chars: [1024]u8;
+	copy(chars[..], cast([]u8)text);
+	chars[len(text)] = '\x00';
+
+	return size_utf8_c(font, &chars[0], w, h);
 }
 
 

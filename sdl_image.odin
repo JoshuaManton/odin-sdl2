@@ -2,7 +2,7 @@ import "sdl.odin";
 
 using import "core:strings.odin";
 
-foreign_system_library lib "SDL2_image.lib";
+foreign_system_library lib "src/SDL2_image.lib";
 
 foreign lib {
 	init								:: proc(flags: i32) -> i32																					#link_name "IMG_Init" ---;
