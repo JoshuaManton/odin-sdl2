@@ -4,6 +4,7 @@ using import "core:strings.odin";
 
 foreign import lib "SDL2_ttf.lib";
 
+@(default_calling_convention="c")
 foreign lib {
 	@(link_name="TTF_ByteSwappedUNICODE") byte_swapped_unicode							:: proc(swapped: i32) 																					 ---;
 	@(link_name="TTF_CloseFont") close_font										:: proc(font: ^Font) 																					 ---;
