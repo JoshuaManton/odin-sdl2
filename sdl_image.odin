@@ -6,7 +6,7 @@ foreign import lib "SDL2_image.lib";
 
 @(default_calling_convention="c")
 foreign lib {
-	@(link_name="IMG_Init") init								:: proc(flags: i32) -> i32																				---;
+	@(link_name="IMG_Init") init								:: proc(flags: Init_Flags) -> i32																				---;
 	@(link_name="IMG_Linked_Version") linked_version						:: proc() -> ^sdl.Version																				---;
 	@(link_name="IMG_Load") load_c								:: proc(file: ^u8) -> ^sdl.Surface																		---;
 	@(link_name="IMG_LoadBMP_RW") load_bmp_rw							:: proc(src: ^sdl.Rw_Ops) -> ^sdl.Surface																---;

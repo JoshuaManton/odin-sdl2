@@ -52,16 +52,16 @@ foreign lib {
 	@(link_name="SDL_CreateRGBSurfaceFrom") create_rgb_surface_from 						:: proc(pixels: rawptr, width, height, depth, pitch: i32, Rmask, Gmask, Bmask, Amask: u32) -> ^Surface																				 ---;
 	@(link_name="SDL_CreateRGBSurfaceWithFormat") create_rgb_surface_with_format 					:: proc(flags: u32, width, height, depth: i32, format: u32) -> ^Surface																												 ---;
 	@(link_name="SDL_CreateRGBSurfaceWithFormatFrom") create_rgb_surface_with_format_from 			:: proc(pixels: rawptr, width, height, depth, pitch: i32, format: u32) -> ^Surface																									 ---;
-	@(link_name="SDL_CreateRenderer") create_renderer 								:: proc(window: ^Window, index: i32, flags: u32) -> ^Renderer																														 ---;
+	@(link_name="SDL_CreateRenderer") create_renderer 								:: proc(window: ^Window, index: i32, flags: Renderer_Flags) -> ^Renderer																														 ---;
 	@(link_name="SDL_CreateSemaphore") create_semaphore 								:: proc(initial_value: u32) -> ^Sem																																					 ---;
-	@(link_name="SDL_CreateShapedWindow") create_shaped_window_c 							:: proc(title: ^u8, x, y, w, h: u32, flags: u32) -> ^Window																															 ---;
+	@(link_name="SDL_CreateShapedWindow") create_shaped_window_c 							:: proc(title: ^u8, x, y, w, h: u32, flags: Window_Flags) -> ^Window																															 ---;
 	@(link_name="SDL_CreateSoftwareRenderer") create_software_renderer 						:: proc(surface: ^Surface) -> ^Renderer																																				 ---;
 	@(link_name="SDL_CreateSystemCursor") create_system_cursor 							:: proc(id: System_Cursor) -> ^Cursor																																				 ---;
 	@(link_name="SDL_CreateTexture") create_texture 									:: proc(renderer: ^Renderer, format: u32, access: i32, w, h: i32) -> ^Texture																										 ---;
 	@(link_name="SDL_CreateTextureFromSurface") create_texture_from_surface 					:: proc(renderer: ^Renderer, surface: ^Surface) -> ^Texture																															 ---;
 	@(link_name="SDL_CreateThread") create_thread_c 								:: proc(fn: Thread_Function, name: ^u8, data: rawptr) -> ^Thread 																													 ---;
-	@(link_name="SDL_CreateWindow") create_window_c 								:: proc(title: ^u8, x, y, w, h: i32, flags: u32) -> ^Window																															 ---;
-	@(link_name="SDL_CreateWindowAndRenderer") create_window_and_renderer 						:: proc(width, height: i32, window_flags: u32, window: ^^Window, renderer: ^^Renderer) -> i32																						 ---;
+	@(link_name="SDL_CreateWindow") create_window_c 								:: proc(title: ^u8, x, y, w, h: i32, flags: Window_Flags) -> ^Window																															 ---;
+	@(link_name="SDL_CreateWindowAndRenderer") create_window_and_renderer 						:: proc(width, height: i32, window_flags: Window_Flags, window: ^^Window, renderer: ^^Renderer) -> i32																						 ---;
 	@(link_name="SDL_CreateWindowFrom") create_window_from 								:: proc(data: rawptr) -> ^Window																																					 ---;
 	@(link_name="SDL_DXGIGetOutputInfo") dxgi_get_output_info 							:: proc(display_index: i32, adapter_index: ^i32, output_index: ^i32) -> Bool																										 ---;
 	@(link_name="SDL_DelEventWatch") del_event_watch 								:: proc(filter: Event_Filter, userdata: rawptr)																																		 ---;
@@ -279,7 +279,7 @@ foreign lib {
 	@(link_name="SDL_HasSSE42") has_sse42 										:: proc() -> Bool																																									 ---;
 	@(link_name="SDL_HasScreenKeyboardSupport") has_screen_keyboard_support 					:: proc() -> Bool																																									 ---;
 	@(link_name="SDL_HideWindow") hide_window 									:: proc(window: ^Window)																																							 ---;
-	@(link_name="SDL_Init") init 											:: proc(flags: u32) -> i32																																							 ---;
+	@(link_name="SDL_Init") init 											:: proc(flags: Init_Flags) -> i32																																							 ---;
 	@(link_name="SDL_InitSubSystem") init_sub_system 								:: proc(flags: u32) -> i32																																							 ---;
 	@(link_name="SDL_IntersectRect") intersect_rect 									:: proc(a, b, result: ^Rect) -> Bool																																				 ---;
 	@(link_name="SDL_IntersectRectAndLine") intersect_rect_and_line 						:: proc(rect: ^Rect, x1, y1, x2, y2: ^i32) -> Bool																																	 ---;
@@ -504,19 +504,19 @@ foreign lib {
 }
 
 // Wrappers
-add_hint_callback  								:: proc(name: string, callback: Hint_Callback, userdata: rawptr) {
+add_hint_callback :: proc(name: string, callback: Hint_Callback, userdata: rawptr) {
 	name_c := new_c_string(name);
 	defer free(name_c);
 	add_hint_callback_c(name_c, callback, userdata);
 }
 
-audio_init 										:: proc(driver_name: string) -> i32 {
+audio_init :: proc(driver_name: string) -> i32 {
 	driver_name_c := new_c_string(driver_name);
 	defer free(driver_name_c);
 	return audio_init_c(driver_name_c);
 }
 
-create_cursor 									:: proc(data: string, mask: string, w, h: i32, hot_x, hot_y: i32) -> ^Cursor {
+create_cursor :: proc(data: string, mask: string, w, h: i32, hot_x, hot_y: i32) -> ^Cursor {
 	data_c := new_c_string(data);
 	defer free(data_c);
 
@@ -525,164 +525,164 @@ create_cursor 									:: proc(data: string, mask: string, w, h: i32, hot_x, hot
 	return create_cursor_c(data_c, mask_c, w, h, hot_x, hot_y);
 }
 
-create_shaped_window 							:: proc(title: string, x, y, w, h: u32, flags: u32) -> ^Window {
+create_shaped_window :: proc(title: string, x, y, w, h: u32, flags: Window_Flags) -> ^Window {
 	title_c := new_c_string(title);
 	defer free(title_c);
 	return create_shaped_window_c(title_c, x, y, w, h, flags);
 }
 
-create_thread 									:: proc(fn: Thread_Function, name: string, data: rawptr) -> ^Thread {
+create_thread :: proc(fn: Thread_Function, name: string, data: rawptr) -> ^Thread {
 	name_c := new_c_string(name);
 	defer free(name_c);
 	return create_thread_c(fn, name_c, data);
 }
 
-create_window 									:: proc(title: string, x, y, w, h: i32, flags: u32) -> ^Window {
+create_window :: proc(title: string, x, y, w, h: i32, flags: Window_Flags) -> ^Window {
 	title_c := new_c_string(title);
 	defer free(title_c);
 	return create_window_c(title_c, x, y, w, h, flags);
 }
 
-del_hint_callback 								:: proc(name: string, callback: Hint_Callback, userdata: rawptr) {
+del_hint_callback :: proc(name: string, callback: Hint_Callback, userdata: rawptr) {
 	name_c := new_c_string(name);
 	defer free(name_c);
 	del_hint_callback_c(name_c, callback, userdata);
 }
 
-gl_extension_supported 							:: proc(extension: string) -> Bool {
+gl_extension_supported :: proc(extension: string) -> Bool {
 	extension_c := new_c_string(extension);
 	defer free(extension_c);
 	return gl_extension_supported_c(extension_c);
 }
 
-gl_get_proc_address 							:: proc(name: string) -> rawptr {
+gl_get_proc_address :: proc(name: string) -> rawptr {
 	name_c := new_c_string(name);
 	defer free(name_c);
 	return gl_get_proc_address_c(name_c);
 }
 
-gl_load_library 								:: proc(path: string) -> i32 {
+gl_load_library :: proc(path: string) -> i32 {
 	path_c := new_c_string(path);
 	defer free(path_c);
 	return gl_load_library_c(path_c);
 }
 
-game_controller_add_mapping 					:: proc(mapping_string: string) -> i32 {
+game_controller_add_mapping :: proc(mapping_string: string) -> i32 {
 	mapping_string_c := new_c_string(mapping_string);
 	defer free(mapping_string_c);
 	return game_controller_add_mapping_c(mapping_string_c);
 }
 
-game_controller_get_axis_from_string 			:: proc(pch_string: string) -> string {
+game_controller_get_axis_from_string :: proc(pch_string: string) -> string {
 	pch_string_c := new_c_string(pch_string);
 	defer free(pch_string_c);
 	return to_odin_string(game_controller_get_axis_from_string_c(pch_string_c));
 }
 
-game_controller_get_button_from_string 			:: proc(pch_string: string) -> Game_Controller_Button {
+game_controller_get_button_from_string :: proc(pch_string: string) -> Game_Controller_Button {
 	pch_string_c := new_c_string(pch_string);
 	defer free(pch_string_c);
 	return game_controller_get_button_from_string_c(pch_string_c);
 }
 
-game_controller_get_string_for_axis 			:: proc(axis: Game_Controller_Axis) -> string {
+game_controller_get_string_for_axis :: proc(axis: Game_Controller_Axis) -> string {
 	odin_str := to_odin_string(game_controller_get_string_for_axis_c(axis));
 	return odin_str;
 }
 
-game_controller_get_string_for_button 			:: proc(button: Game_Controller_Button) -> string {
+game_controller_get_string_for_button :: proc(button: Game_Controller_Button) -> string {
 	odin_str := to_odin_string(game_controller_get_string_for_button_c(button));
 	return odin_str;
 }
 
-game_controller_mapping 						:: proc(game_controller: ^Game_Controller) -> string {
+game_controller_mapping :: proc(game_controller: ^Game_Controller) -> string {
 	odin_str := to_odin_string(game_controller_mapping_c(game_controller));
 	return odin_str;
 }
 
-game_controller_mapping_for_guid 				:: proc(guid: Joystick_Guid) -> string {
+game_controller_mapping_for_guid :: proc(guid: Joystick_Guid) -> string {
 	odin_str := to_odin_string(game_controller_mapping_for_guid_c(guid));
 	return odin_str;
 }
 
-game_controller_name 							:: proc(game_controller: ^Game_Controller) -> string {
+game_controller_name :: proc(game_controller: ^Game_Controller) -> string {
 	odin_str := to_odin_string(game_controller_name_c(game_controller));
 	return odin_str;
 }
 
-game_controller_name_for_index 					:: proc(joystick_index: i32) -> string {
+game_controller_name_for_index :: proc(joystick_index: i32) -> string {
 	odin_str := to_odin_string(game_controller_name_for_index_c(joystick_index));
 	return odin_str;
 }
 
-get_audio_device_name 							:: proc(index: i32, iscapture: i32) -> string {
+get_audio_device_name :: proc(index: i32, iscapture: i32) -> string {
 	odin_str := to_odin_string(get_audio_device_name_c(index, iscapture));
 	return odin_str;
 }
 
-get_audio_driver 								:: proc(index: i32) -> string {
+get_audio_driver :: proc(index: i32) -> string {
 	odin_str := to_odin_string(get_audio_driver_c(index));
 	return odin_str;
 }
 
-get_base_path 									:: proc() -> string {
+get_base_path :: proc() -> string {
 	odin_str := to_odin_string(get_base_path_c());
 	return odin_str;
 }
 
-get_clipboard_text 								:: proc() -> string {
+get_clipboard_text :: proc() -> string {
 	odin_str := to_odin_string(get_clipboard_text_c());
 	return odin_str;
 }
 
-get_current_audio_driver 						:: proc() -> string {
+get_current_audio_driver :: proc() -> string {
 	odin_str := to_odin_string(get_current_audio_driver_c());
 	return odin_str;
 }
 
-get_current_video_driver 						:: proc() -> string {
+get_current_video_driver :: proc() -> string {
 	odin_str := to_odin_string(get_current_video_driver_c());
 	return odin_str;
 }
 
-get_display_name 								:: proc(display_index: i32) -> string {
+get_display_name :: proc(display_index: i32) -> string {
 	odin_str := to_odin_string(get_display_name_c(display_index));
 	return odin_str;
 }
 
-get_error 										:: proc() -> string {
+get_error :: proc() -> string {
 	odin_str := to_odin_string(get_error_c());
 	return odin_str;
 }
 
-get_hint 										:: proc(name: string) -> string {
+get_hint :: proc(name: string) -> string {
 	name_c := new_c_string(name);
 	defer free(name_c);
 	return to_odin_string(get_hint_c(name_c));
 }
 
-get_key_from_name 								:: proc(name: string) -> Keycode {
+get_key_from_name :: proc(name: string) -> Keycode {
 	name_c := new_c_string(name);
 	defer free(name_c);
 	return get_key_from_name_c(name_c);
 }
 
-get_key_name 									:: proc(key: Keycode) -> string {
+get_key_name :: proc(key: Keycode) -> string {
 	odin_str := to_odin_string(get_key_name_c(key));
 	return odin_str;
 }
 
-get_pixel_format_name 							:: proc(format: u32) -> string {
+get_pixel_format_name :: proc(format: u32) -> string {
 	odin_str := to_odin_string(get_pixel_format_name_c(format));
 	return odin_str;
 }
 
-get_platform 									:: proc() -> string {
+get_platform :: proc() -> string {
 	odin_str := to_odin_string(get_platform_c());
 	return odin_str;
 }
 
-get_pref_path 									:: proc(org, app: string) -> string {
+get_pref_path :: proc(org, app: string) -> string {
 	org_c := new_c_string(org);
 	defer free(org_c);
 
@@ -691,89 +691,89 @@ get_pref_path 									:: proc(org, app: string) -> string {
 	return to_odin_string(get_pref_path_c(org_c, app_c));
 }
 
-get_revision 									:: proc() -> string {
+get_revision :: proc() -> string {
 	odin_str := to_odin_string(get_revision_c());
 	return odin_str;
 }
 
-get_scancode_from_name 							:: proc(name: string) -> Scancode {
+get_scancode_from_name :: proc(name: string) -> Scancode {
 	name_c := new_c_string(name);
 	defer free(name_c);
 	return get_scancode_from_name_c(name_c);
 }
 
-get_scancode_name 								:: proc(scancode: Scancode) -> string {
+get_scancode_name :: proc(scancode: Scancode) -> string {
 	odin_str := to_odin_string(get_scancode_name_c(scancode));
 	return odin_str;
 }
 
-get_thread_name 								:: proc(thread: ^Thread) -> string {
+get_thread_name :: proc(thread: ^Thread) -> string {
 	odin_str := to_odin_string(get_thread_name_c(thread));
 	return odin_str;
 }
 
-get_video_driver 								:: proc(index: i32) -> string {
+get_video_driver :: proc(index: i32) -> string {
 	odin_str := to_odin_string(get_video_driver_c(index));
 	return odin_str;
 }
 
-get_window_data 								:: proc(window: ^Window, name: string) -> rawptr {
+get_window_data :: proc(window: ^Window, name: string) -> rawptr {
 	name_c := new_c_string(name);
 	defer free(name_c);
 	return get_window_data_c(window, name_c);
 }
 
-get_window_title 								:: proc(window: ^Window) -> string {
+get_window_title :: proc(window: ^Window) -> string {
 	odin_str := to_odin_string(get_window_title_c(window));
 	return odin_str;
 }
 
-haptic_name 									:: proc(device_index: i32) -> string {
+haptic_name :: proc(device_index: i32) -> string {
 	odin_str := to_odin_string(haptic_name_c(device_index));
 	return odin_str;
 }
 
-joystick_get_guid_from_string 					:: proc(pch_guid: string) -> Joystick_Guid {
+joystick_get_guid_from_string :: proc(pch_guid: string) -> Joystick_Guid {
 	pch_guid_c := new_c_string(pch_guid);
 	defer free(pch_guid_c);
 	return joystick_get_guid_from_string_c(pch_guid_c);
 }
 
-joystick_name 									:: proc(joystick: ^Joystick) -> string {
+joystick_name :: proc(joystick: ^Joystick) -> string {
 	odin_str := to_odin_string(joystick_name_c(joystick));
 	return odin_str;
 }
 
-joystick_name_for_index 						:: proc(device_index: i32) -> string {
+joystick_name_for_index :: proc(device_index: i32) -> string {
 	odin_str := to_odin_string(joystick_name_for_index_c(device_index));
 	return odin_str;
 }
 
-load_function 									:: proc(handle: rawptr, name: string) -> rawptr {
+load_function :: proc(handle: rawptr, name: string) -> rawptr {
 	name_c := new_c_string(name);
 	defer free(name_c);
 	return load_function_c(handle, name_c);
 }
 
-load_object 									:: proc(sofile: string) -> string {
+load_object :: proc(sofile: string) -> string {
 	sofile_c := new_c_string(sofile);
 	defer free(sofile_c);
 	return to_odin_string(load_object_c(sofile_c));
 }
 
-open_audio_device 								:: proc(device: string, iscapture: i32, desired, obtained: ^Audio_Spec, allowed_changed: i32) -> Audio_Device_Id {
+open_audio_device :: proc(device: string, iscapture: i32, desired, obtained: ^Audio_Spec, allowed_changed: i32) -> Audio_Device_Id {
 	device_c := new_c_string(device);
 	defer free(device_c);
 	return open_audio_device_c(device_c, iscapture, desired, obtained, allowed_changed);
 }
 
-register_app 									:: proc(name: string, style: u32, h_inst: rawptr) -> i32 {
+register_app :: proc(name: string, style: u32, h_inst: rawptr) -> i32 {
 	name_c := new_c_string(name);
 	defer free(name_c);
 	return register_app_c(name_c, style, h_inst);
 }
 
-rw_from_file 									:: proc(file: string, mode: string) -> ^Rw_Ops {
+rw_from_file :: proc(file: string, mode: string) -> ^Rw_Ops {
 	file_c := new_c_string(file);
 	defer free(file_c);
 
@@ -782,13 +782,13 @@ rw_from_file 									:: proc(file: string, mode: string) -> ^Rw_Ops {
 	return rw_from_file_c(file_c, mode_c);
 }
 
-set_clipboard_text 								:: proc(text: string) -> i32 {
+set_clipboard_text :: proc(text: string) -> i32 {
 	text_c := new_c_string(text);
 	defer free(text_c);
 	return set_clipboard_text_c(text_c);
 }
 
-set_hint 										:: proc(name, value: string) -> Bool {
+set_hint :: proc(name, value: string) -> Bool {
 	name_c := new_c_string(name);
 	defer free(name_c);
 
@@ -797,7 +797,7 @@ set_hint 										:: proc(name, value: string) -> Bool {
 	return set_hint_c(name_c, value_c);
 }
 
-set_hint_with_priority 							:: proc(name, value: string, priority: Hint_Priority) -> Bool {
+set_hint_with_priority :: proc(name, value: string, priority: Hint_Priority) -> Bool {
 	name_c := new_c_string(name);
 	defer free(name_c);
 
@@ -806,19 +806,19 @@ set_hint_with_priority 							:: proc(name, value: string, priority: Hint_Priori
 	return set_hint_with_priority_c(name_c, value_c, priority);
 }
 
-set_window_data 								:: proc(window: ^Window, name: string, userdata: rawptr) -> rawptr {
+set_window_data :: proc(window: ^Window, name: string, userdata: rawptr) -> rawptr {
 	name_c := new_c_string(name);
 	defer free(name_c);
 	return set_window_data_c(window, name_c, userdata);
 }
 
-set_window_title 								:: proc(window: ^Window, title: string) {
+set_window_title :: proc(window: ^Window, title: string) {
 	title_c := new_c_string(title);
 	defer free(title_c);
 	set_window_title_c(window, title_c);
 }
 
-show_simple_message_box 						:: proc(flags: u32, title, message: string, window: ^Window) -> i32 {
+show_simple_message_box :: proc(flags: u32, title, message: string, window: ^Window) -> i32 {
 	title_c := new_c_string(title);
 	defer free(title_c);
 
@@ -827,13 +827,13 @@ show_simple_message_box 						:: proc(flags: u32, title, message: string, window
 	return show_simple_message_box_c(flags, title_c, message_c, window);
 }
 
-video_init 										:: proc(driver_name: string) -> i32 {
+video_init :: proc(driver_name: string) -> i32 {
 	driver_name_c := new_c_string(driver_name);
 	defer free(driver_name_c);
 	return video_init_c(driver_name_c);
 }
 
-Init_Flags :: enum i32 {
+Init_Flags :: enum u32 {
 	Timer = 0x00000001,
 	Audio = 0x00000010,
 	Video = 0x00000020,
@@ -845,7 +845,7 @@ Init_Flags :: enum i32 {
 	Everything = Timer | Audio | Video | Events | Joystick | Haptic | GameController
 }
 
-Window_Flags :: enum i32 {
+Window_Flags :: enum u32 {
 	Fullscreen = 0x00000001,
 	Open_GL = 0x00000002,
 	Shown = 0x00000004,
@@ -874,7 +874,7 @@ Window_Pos :: enum i32 {
 	Centered = 0x2FFF0000
 }
 
-Renderer_Flags :: enum i32 {
+Renderer_Flags :: enum u32 {
 	Software = 0x00000001,
 	Accelerated = 0x00000002,
 	Present_VSync = 0x00000004,
