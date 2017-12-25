@@ -1720,24 +1720,24 @@ Event_Type :: enum i32  {
 
 GL_Context :: rawptr;
 
-Blit_Map :: struct #ordered {};
-Window :: struct #ordered {};
-Renderer :: struct #ordered {};
-Texture :: struct #ordered {};
-Cond :: struct #ordered {};
-Mutex :: struct #ordered {};
-Sem :: struct #ordered {};
-Thread :: struct #ordered {};
-Haptic :: struct #ordered {};
-Joystick :: struct #ordered {};
-Game_Controller :: struct #ordered {};
-Cursor :: struct #ordered {};
-IDirect3D_Device9 :: struct #ordered {};
-Rw_Ops :: struct #ordered {};
+Blit_Map :: struct {};
+Window :: struct {};
+Renderer :: struct {};
+Texture :: struct {};
+Cond :: struct {};
+Mutex :: struct {};
+Sem :: struct {};
+Thread :: struct {};
+Haptic :: struct {};
+Joystick :: struct {};
+Game_Controller :: struct {};
+Cursor :: struct {};
+IDirect3D_Device9 :: struct {};
+Rw_Ops :: struct {};
 
 // Unsure of these
-Sys_Wm_Info :: struct #ordered {};
-Sys_Wm_Msg :: struct #ordered {};
+Sys_Wm_Info :: struct {};
+Sys_Wm_Msg :: struct {};
 
 Joystick_Id :: i32;
 Timer_Id :: i32;
@@ -1764,18 +1764,18 @@ Windows_Message_Hook :: proc "c" (userdata: rawptr, hwnd: rawptr, message: u32, 
 Log_Output_Function :: proc "c" (userdata: rawptr, category: i32, priority: Log_Priority, message: ^u8);
 
 // Thanks gingerBill for this one!
-Game_Controller_Button_Bind :: struct #ordered {
+Game_Controller_Button_Bind :: struct {
 	bind_type: Game_Controller_Bind_Type,
 	value: struct #raw_union {
 		button: i32,
 		axis:   i32,
-		using hat_mask: struct #ordered {
+		using hat_mask: struct {
 			hat, mask: i32,
 		},
 	},
 }
 
-Message_Box_Data :: struct #ordered {
+Message_Box_Data :: struct {
 	flags: u32,
 	window: ^Window,
 	title: ^u8,
@@ -1787,21 +1787,21 @@ Message_Box_Data :: struct #ordered {
 	color_scheme: ^Message_Box_Color_Scheme,
 }
 
-Message_Box_Button_Data :: struct #ordered {
+Message_Box_Button_Data :: struct {
 	flags: u32,
 	button_id: i32,
 	text: ^u8,
 }
 
-Message_Box_Color_Scheme :: struct #ordered {
+Message_Box_Color_Scheme :: struct {
 	colors: [Message_Box_Color_Type.Max]Message_Box_Color,
 }
 
-Message_Box_Color :: struct #ordered {
+Message_Box_Color :: struct {
 	r, g, b: u8,
 }
 
-Assert_Data :: struct #ordered {
+Assert_Data :: struct {
 	always_ignore: i32,
 	trigger_count: u32,
 	condition: ^u8,
@@ -1816,17 +1816,17 @@ Window_Shape_Params :: struct #raw_union {
 	color_key: Color,
 }
 
-Window_Shape_Mode :: struct #ordered {
+Window_Shape_Mode :: struct {
 	mode: Window_Shape_Modes,
 	parameters: Window_Shape_Params,
 }
 
-Point :: struct #ordered {
+Point :: struct {
 	x: i32,
 	y: i32,
 }
 
-Renderer_Info :: struct #ordered {
+Renderer_Info :: struct {
 	name: ^u8,
 	flags: u32,
 	num_texture_formats: u32,
@@ -1835,13 +1835,13 @@ Renderer_Info :: struct #ordered {
 	max_texture_height: i32,
 }
 
-Version :: struct #ordered {
+Version :: struct {
 	major: u8,
 	minor: u8,
 	patch: u8,
 }
 
-Display_Mode :: struct #ordered {
+Display_Mode :: struct {
 	format: u32,
 	w: i32,
 	h: i32,
@@ -1849,14 +1849,14 @@ Display_Mode :: struct #ordered {
 	driver_data: rawptr,
 }
 
-Finger :: struct #ordered {
+Finger :: struct {
 	id: Finger_Id,
 	x: f32,
 	y: f32,
 	pressure: f32,
 }
 
-Audio_Spec :: struct #ordered {
+Audio_Spec :: struct {
 	freq: i32,
 	format: Audio_Format,
 	channels: u8,
@@ -1868,11 +1868,11 @@ Audio_Spec :: struct #ordered {
 	userdata: rawptr,
 }
 
-Joystick_Guid :: struct #ordered {
+Joystick_Guid :: struct {
 	data: [16]u8,
 }
 
-Audio_Cvt :: struct #ordered {
+Audio_Cvt :: struct {
 	needed: i32,
 	src_format: Audio_Format,
 	dst_format: Audio_Format,
@@ -1886,7 +1886,7 @@ Audio_Cvt :: struct #ordered {
 	filter_index: i32,
 }
 
-Surface :: struct #ordered {
+Surface :: struct {
 	flags: u32,
 	format: ^Pixel_Format,
 	w, h: i32,
@@ -1904,21 +1904,21 @@ Surface :: struct #ordered {
 	refcount: i32,
 }
 
-Color :: struct #ordered {
+Color :: struct {
 	r: u8,
 	g: u8,
 	b: u8,
 	a: u8,
 }
 
-Palette :: struct #ordered {
+Palette :: struct {
 	num_colors: i32,
 	colors: ^Color,
 	version: u32,
 	ref_count: i32,
 }
 
-Pixel_Format :: struct #ordered {
+Pixel_Format :: struct {
 	format: u32,
 	palette: ^Palette,
 	bits_per_pixel: u8,
@@ -1940,16 +1940,16 @@ Pixel_Format :: struct #ordered {
 	next: ^Pixel_Format,
 }
 
-Rect :: struct #ordered {
+Rect :: struct {
 	x, y: i32,
 	w, h: i32,
 }
 
-Atomic :: struct #ordered {
+Atomic :: struct {
 	value: i32,
 }
 
-Keysym :: struct #ordered {
+Keysym :: struct {
 	scancode: u32,
 	sym: i32,
 	mod: u16,
@@ -2107,12 +2107,12 @@ Event :: struct #raw_union {
 	padding: [56]u8,
 }
 
-Common_Event :: struct #ordered {
+Common_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 }
 
-Window_Event :: struct #ordered {
+Window_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	window_id: u32,
@@ -2124,7 +2124,7 @@ Window_Event :: struct #ordered {
 	data2: i32,
 }
 
-Keyboard_Event :: struct #ordered {
+Keyboard_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	window_id: u32,
@@ -2136,7 +2136,7 @@ Keyboard_Event :: struct #ordered {
 }
 
 TEXT_EDITING_EVENT_TEXT_SIZE :: 32;
-Text_Editing_Event :: struct #ordered {
+Text_Editing_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	window_id: u32,
@@ -2147,14 +2147,14 @@ Text_Editing_Event :: struct #ordered {
 
 
 TEXT_INPUT_EVENT_TEXT_SIZE :: 32;
-Text_Input_Event :: struct #ordered {
+Text_Input_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	window_id: u32,
 	text: [TEXT_INPUT_EVENT_TEXT_SIZE]u8,
 }
 
-Mouse_Motion_Event :: struct #ordered {
+Mouse_Motion_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	window_id: u32,
@@ -2166,7 +2166,7 @@ Mouse_Motion_Event :: struct #ordered {
 	yrel: i32,
 }
 
-Mouse_Button_Event :: struct #ordered {
+Mouse_Button_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	window_id: u32,
@@ -2179,7 +2179,7 @@ Mouse_Button_Event :: struct #ordered {
 	y: i32,
 }
 
-Mouse_Wheel_Event :: struct #ordered {
+Mouse_Wheel_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	window_id: u32,
@@ -2189,7 +2189,7 @@ Mouse_Wheel_Event :: struct #ordered {
 	direction: u32,
 }
 
-Joy_Axis_Event :: struct #ordered {
+Joy_Axis_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	which: i32,
@@ -2201,7 +2201,7 @@ Joy_Axis_Event :: struct #ordered {
 	padding4: u16,
 }
 
-Joy_Ball_Event :: struct #ordered {
+Joy_Ball_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	which: i32,
@@ -2213,7 +2213,7 @@ Joy_Ball_Event :: struct #ordered {
 	yrel: i16,
 }
 
-Joy_Hat_Event :: struct #ordered {
+Joy_Hat_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	which: i32,
@@ -2223,7 +2223,7 @@ Joy_Hat_Event :: struct #ordered {
 	padding2: u8,
 }
 
-Joy_Button_Event :: struct #ordered {
+Joy_Button_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	which: i32,
@@ -2233,13 +2233,13 @@ Joy_Button_Event :: struct #ordered {
 	padding2: u8,
 }
 
-Joy_Device_Event :: struct #ordered {
+Joy_Device_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	which: i32,
 }
 
-Controller_Axis_Event :: struct #ordered {
+Controller_Axis_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	which: i32,
@@ -2251,7 +2251,7 @@ Controller_Axis_Event :: struct #ordered {
 	padding4: u16,
 }
 
-Controller_Button_Event :: struct #ordered {
+Controller_Button_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	which: i32,
@@ -2261,13 +2261,13 @@ Controller_Button_Event :: struct #ordered {
 	padding2: u8,
 }
 
-Controller_Device_Event :: struct #ordered {
+Controller_Device_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	which: i32,
 }
 
-Audio_Device_Event :: struct #ordered {
+Audio_Device_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	which: u32,
@@ -2277,7 +2277,7 @@ Audio_Device_Event :: struct #ordered {
 	padding3: u8,
 }
 
-Touch_Finger_Event :: struct #ordered {
+Touch_Finger_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	touch_id: i64,
@@ -2289,7 +2289,7 @@ Touch_Finger_Event :: struct #ordered {
 	pressure: f32,
 }
 
-Multi_Gesture_Event :: struct #ordered {
+Multi_Gesture_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	touch_id: i64,
@@ -2301,7 +2301,7 @@ Multi_Gesture_Event :: struct #ordered {
 	padding: u16,
 }
 
-Dollar_Gesture_Event :: struct #ordered {
+Dollar_Gesture_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	touch_id: i64,
@@ -2312,24 +2312,24 @@ Dollar_Gesture_Event :: struct #ordered {
 	y: f32,
 }
 
-Drop_Event :: struct #ordered {
+Drop_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	file: ^u8,
 	window_id: u32,
 }
 
-Quit_Event :: struct #ordered {
+Quit_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 }
 
-OS_Event :: struct #ordered {
+OS_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 }
 
-User_Event :: struct #ordered {
+User_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	window_id: u32,
@@ -2338,7 +2338,7 @@ User_Event :: struct #ordered {
 	data2: ^rawptr,
 }
 
-Sys_Wm_Event :: struct #ordered {
+Sys_Wm_Event :: struct {
 	event_type: u32,
 	timestamp: u32,
 	msg: ^Sys_Wm_Msg,

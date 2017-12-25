@@ -213,4 +213,4 @@ STYLE_STRIKETHROUGH :: 0x08;
 UNICODE_BOM_NATIVE  :: 0xFEFF;
 UNICODE_BOM_SWAPPED :: 0xFFFE;
 
-Font :: struct #ordered {};
+Font :: struct {};
