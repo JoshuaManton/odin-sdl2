@@ -1719,6 +1719,26 @@ Event_Type :: enum u32 {
 	Last_Event = 0xFFFF
 }
 
+Window_Event_ID :: enum u8 {
+    None = 0,
+    Shown,
+    Hidden,
+    Exposed,
+	Moved,
+    Resized,
+    Size_Changed,
+    Minimized,
+    Maximized,
+    Restored,
+    Enter,
+    Leave,
+    Focus_Gained,
+    Focus_Lost,
+    Close,
+    Take_Focus,
+    Hit_Test 
+}
+
 GL_Context :: rawptr;
 
 Blit_Map :: struct {};
@@ -2117,7 +2137,7 @@ Window_Event :: struct {
 	event_type: Event_Type,
 	timestamp: u32,
 	window_id: u32,
-	event: u8,
+	event: Window_Event_ID,
 	padding1: u8,
 	padding2: u8,
 	padding3: u8,
