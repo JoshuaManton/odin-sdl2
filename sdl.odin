@@ -1,6 +1,7 @@
 using import "core:strings.odin";
 
-foreign import lib "SDL2.lib";
+when ODIN_OS == "windows" do foreign import lib "SDL2.lib";
+when ODIN_OS == "linux" do foreign import lib "system:SDL2";
 
 @(default_calling_convention="c")
 foreign lib {
