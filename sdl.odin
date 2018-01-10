@@ -882,6 +882,11 @@ Renderer_Flags :: enum u32 {
 	Target_Texture = 0x00000008
 }
 
+Texture_Access :: enum i32 {
+    Static = 0,
+    Streaming,
+    Target
+}
 
 Blend_Mode :: enum i32 {
 	None = 0x00000000,
