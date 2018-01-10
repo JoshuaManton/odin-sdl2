@@ -1652,7 +1652,7 @@ Hat :: enum i32 {
 	Left_Down = Left | Down
 }
 
-Event_Type :: enum i32  {
+Event_Type :: enum u32 {
 	First_Event = 0,
 
 	Quit = 0x100,
@@ -1951,7 +1951,7 @@ Atomic :: struct {
 }
 
 Keysym :: struct {
-	scancode: u32,
+	scancode: Scancode,
 	sym: i32,
 	mod: u16,
 	unused: u32,
@@ -2079,7 +2079,7 @@ Haptic_Custom :: struct {
 }
 
 Event :: struct #raw_union {
-	event_type: u32,
+	event_type: Event_Type,
 	common: Common_Event,
 	window: Window_Event,
 	key: Keyboard_Event,
@@ -2109,12 +2109,12 @@ Event :: struct #raw_union {
 }
 
 Common_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 }
 
 Window_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	window_id: u32,
 	event: u8,
@@ -2126,7 +2126,7 @@ Window_Event :: struct {
 }
 
 Keyboard_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	window_id: u32,
 	state: u8,
@@ -2138,7 +2138,7 @@ Keyboard_Event :: struct {
 
 TEXT_EDITING_EVENT_TEXT_SIZE :: 32;
 Text_Editing_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	window_id: u32,
 	text: [TEXT_EDITING_EVENT_TEXT_SIZE]u8,
@@ -2149,14 +2149,14 @@ Text_Editing_Event :: struct {
 
 TEXT_INPUT_EVENT_TEXT_SIZE :: 32;
 Text_Input_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	window_id: u32,
 	text: [TEXT_INPUT_EVENT_TEXT_SIZE]u8,
 }
 
 Mouse_Motion_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	window_id: u32,
 	which: u32,
@@ -2168,7 +2168,7 @@ Mouse_Motion_Event :: struct {
 }
 
 Mouse_Button_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	window_id: u32,
 	which: u32,
@@ -2181,7 +2181,7 @@ Mouse_Button_Event :: struct {
 }
 
 Mouse_Wheel_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	window_id: u32,
 	which: u32,
@@ -2191,7 +2191,7 @@ Mouse_Wheel_Event :: struct {
 }
 
 Joy_Axis_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	which: i32,
 	axis: u8,
@@ -2203,7 +2203,7 @@ Joy_Axis_Event :: struct {
 }
 
 Joy_Ball_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	which: i32,
 	ball: u8,
@@ -2215,7 +2215,7 @@ Joy_Ball_Event :: struct {
 }
 
 Joy_Hat_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	which: i32,
 	hat: u8,
@@ -2225,7 +2225,7 @@ Joy_Hat_Event :: struct {
 }
 
 Joy_Button_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	which: i32,
 	button: u8,
@@ -2235,13 +2235,13 @@ Joy_Button_Event :: struct {
 }
 
 Joy_Device_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	which: i32,
 }
 
 Controller_Axis_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	which: i32,
 	axis: u8,
@@ -2253,7 +2253,7 @@ Controller_Axis_Event :: struct {
 }
 
 Controller_Button_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	which: i32,
 	button: u8,
@@ -2263,13 +2263,13 @@ Controller_Button_Event :: struct {
 }
 
 Controller_Device_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	which: i32,
 }
 
 Audio_Device_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	which: u32,
 	iscapture: u8,
@@ -2279,7 +2279,7 @@ Audio_Device_Event :: struct {
 }
 
 Touch_Finger_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	touch_id: i64,
 	finger_id: i64,
@@ -2291,7 +2291,7 @@ Touch_Finger_Event :: struct {
 }
 
 Multi_Gesture_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	touch_id: i64,
 	d_theta: f32,
@@ -2303,7 +2303,7 @@ Multi_Gesture_Event :: struct {
 }
 
 Dollar_Gesture_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	touch_id: i64,
 	gesture_id: i64,
@@ -2314,24 +2314,24 @@ Dollar_Gesture_Event :: struct {
 }
 
 Drop_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	file: ^u8,
 	window_id: u32,
 }
 
 Quit_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 }
 
 OS_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 }
 
 User_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	window_id: u32,
 	code: i32,
@@ -2340,7 +2340,7 @@ User_Event :: struct {
 }
 
 Sys_Wm_Event :: struct {
-	event_type: u32,
+	event_type: Event_Type,
 	timestamp: u32,
 	msg: ^Sys_Wm_Msg,
 }
