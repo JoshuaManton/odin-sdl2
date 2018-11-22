@@ -404,7 +404,7 @@ foreign lib {
 	@(link_name="SDL_RestoreWindow") restore_window :: proc(window: ^Window)																																		---;
 	@(link_name="SDL_RWFromConstMem") rw_from_const_mem :: proc(mem: rawptr, size: i32) -> ^Rw_Ops																														---;
 	@(link_name="SDL_RWFromFP") rw_from_fp :: proc(fp: rawptr, auto_close: Bool) -> ^Rw_Ops																												---;
-	@(link_name="SDL_RWFromFile") rw_from_file :: proc(file: cstring, mode: ^u8) -> ^Rw_Ops																														---;
+	@(link_name="SDL_RWFromFile") rw_from_file :: proc(file: cstring, mode: cstring) -> ^Rw_Ops																														---;
 	@(link_name="SDL_RWFromMem") rw_from_mem :: proc(mem: rawptr, size:i32) -> ^Rw_Ops																														---;
 	@(link_name="SDL_SaveAllDollarTemplates") save_all_dollar_templates :: proc(dst: ^Rw_Ops) -> i32																																	---;
 	@(link_name="SDL_SaveBMP_RW") save_bmp_rw :: proc(surface: ^Surface, dst: ^Rw_Ops, free_dst: i32) -> i32																									---;
@@ -1457,7 +1457,7 @@ Audio_Filter :: proc "c" (cvt: ^Audio_Cvt, format: Audio_Format);
 Thread_Function :: proc "c" (data: rawptr) -> i32;
 Hit_Test :: proc "c" (window: ^Window, area: ^Point, data: rawptr) -> Hit_Test_Result;
 Windows_Message_Hook :: proc "c" (userdata: rawptr, hwnd: rawptr, message: u32, wparam: u64, lparam: i64);
-Log_Output_Function :: proc "c" (userdata: rawptr, category: i32, priority: Log_Priority, message: ^u8);
+Log_Output_Function :: proc "c" (userdata: rawptr, category: i32, priority: Log_Priority, message: cstring);
 
 // Thanks gingerBill for this one!
 Game_Controller_Button_Bind :: struct {
@@ -1474,8 +1474,8 @@ Game_Controller_Button_Bind :: struct {
 Message_Box_Data :: struct {
 	flags: u32,
 	window: ^Window,
-	title: ^u8,
-	message: ^u8,
+	title: cstring,
+	message: cstring,
 
 	num_buttons: i32,
 	buttons: ^Message_Box_Button_Data,
@@ -1486,7 +1486,7 @@ Message_Box_Data :: struct {
 Message_Box_Button_Data :: struct {
 	flags: u32,
 	button_id: i32,
-	text: ^u8,
+	text: cstring,
 }
 
 Message_Box_Color_Scheme :: struct {
@@ -1500,10 +1500,10 @@ Message_Box_Color :: struct {
 Assert_Data :: struct {
 	always_ignore: i32,
 	trigger_count: u32,
-	condition: ^u8,
-	filename: ^u8,
+	condition: cstring,
+	filename: cstring,
 	linenum: i32,
-	function: ^u8,
+	function: cstring,
 	next: ^Assert_Data,
 }
 
@@ -1523,7 +1523,7 @@ Point :: struct {
 }
 
 Renderer_Info :: struct {
-	name: ^u8,
+	name: cstring,
 	flags: u32,
 	num_texture_formats: u32,
 	texture_formats: [16]u32,
@@ -2011,7 +2011,7 @@ Dollar_Gesture_Event :: struct {
 Drop_Event :: struct {
 	event_type: Event_Type,
 	timestamp: u32,
-	file: ^u8,
+	file: cstring,
 	window_id: u32,
 }
 
