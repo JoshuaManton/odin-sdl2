@@ -1,8 +1,8 @@
 package test
 
-import "shared:odin-sdl2"
-import "shared:odin-sdl2/image"
-import "shared:odin-sdl2/ttf"
+import ".."
+import "../image"
+import "../ttf"
 
 main :: proc() {
 	sdl.init(sdl.Init_Flags.Everything);
