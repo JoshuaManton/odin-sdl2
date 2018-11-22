@@ -1,9 +1,10 @@
 package sdl_ttf
 
 import ".." // sdl package
+import "core:os"
 
-when ODIN_OS == "windows" do foreign import lib "SDL2_ttf.lib";
-when ODIN_OS == "linux" do foreign import lib "system:SDL2_ttf";
+when os.OS == "windows" do foreign import lib "SDL2_ttf.lib";
+when os.OS == "linux" do foreign import lib "system:SDL2_ttf";
 
 @(default_calling_convention="c")
 foreign lib {

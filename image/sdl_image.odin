@@ -1,9 +1,10 @@
 package sdl_image
 
 import ".." // sdl package
+import "core:os"
 
-when ODIN_OS == "windows" do foreign import lib "SDL2_image.lib";
-when ODIN_OS == "linux" do foreign import lib "system:SDL2_image";
+when os.OS == "windows" do foreign import lib "SDL2_image.lib";
+when os.OS == "linux" do foreign import lib "system:SDL2_image";
 
 @(default_calling_convention="c")
 foreign lib {
