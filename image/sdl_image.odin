@@ -49,6 +49,7 @@ foreign lib {
 	@(link_name="IMG_isXCF") is_xcf :: proc(src: ^sdl.Rw_Ops) -> i32																			---;
 	@(link_name="IMG_isXPM") is_xpm :: proc(src: ^sdl.Rw_Ops) -> i32																			---;
 	@(link_name="IMG_isXV") is_xv :: proc(src: ^sdl.Rw_Ops) -> i32																			---;
+    @(link_name="SDL_GetError") get_error :: proc() -> cstring ---;
 }
 
 Init_Flags :: enum i32
