@@ -8,7 +8,7 @@ when os.OS == "linux" do foreign import lib "system:SDL2_image";
 
 @(default_calling_convention="c")
 foreign lib {
-	@(link_name="IMG_Init") init :: proc(flags: Init_Flags) -> i32																				---;
+	@(link_name="IMG_Init") init :: proc(flags: Init_Flags) -> Init_Flags																				---;
 	@(link_name="IMG_Linked_Version") linked_version :: proc() -> ^sdl.Version																				---;
 	@(link_name="IMG_Load") load :: proc(file: cstring) -> ^sdl.Surface																		---;
 	@(link_name="IMG_LoadBMP_RW") load_bmp_rw :: proc(src: ^sdl.Rw_Ops) -> ^sdl.Surface																---;
@@ -49,6 +49,7 @@ foreign lib {
 	@(link_name="IMG_isXCF") is_xcf :: proc(src: ^sdl.Rw_Ops) -> i32																			---;
 	@(link_name="IMG_isXPM") is_xpm :: proc(src: ^sdl.Rw_Ops) -> i32																			---;
 	@(link_name="IMG_isXV") is_xv :: proc(src: ^sdl.Rw_Ops) -> i32																			---;
+    @(link_name="SDL_GetError") get_error :: proc() -> cstring ---;
 }
 
 Init_Flags :: enum i32

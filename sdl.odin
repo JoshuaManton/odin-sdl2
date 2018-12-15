@@ -325,20 +325,20 @@ foreign lib {
 	@(link_name="SDL_LockSurface") lock_surface :: proc(surface: ^Surface) -> i32																																---;
 	@(link_name="SDL_LockTexture") lock_texture :: proc(texture: ^Texture, rect: ^Rect, pixels: ^rawptr, pitch: ^i32) -> i32																					---;
 	@(link_name="SDL_Log") log :: proc(fmt: ..cstring)																																			---;
-	@(link_name="SDL_LogCritical") log_critical :: proc(category: i32, fmt: ..cstring)																																---;
-	@(link_name="SDL_LogDebug") log_debug :: proc(category: i32, fmt: ..cstring)																																---;
-	@(link_name="SDL_LogError") log_error :: proc(category: i32, fmt: ..cstring)																																---;
+	@(link_name="SDL_LogCritical") log_critical :: proc(category: Log_Category, fmt: ..cstring)																																---;
+	@(link_name="SDL_LogDebug") log_debug :: proc(category: Log_Category, fmt: ..cstring)																																---;
+	@(link_name="SDL_LogError") log_error :: proc(category: Log_Category, fmt: ..cstring)																																---;
 	@(link_name="SDL_LogGetOutputFunction") log_get_output_function :: proc(callback: ^Log_Output_Function, userdata: ^rawptr)																										---;
-	@(link_name="SDL_LogGetPriority") log_get_priority :: proc(category: i32) -> Log_Priority																															---;
-	@(link_name="SDL_LogInfo") log_info :: proc(category: i32, fmt: ..cstring)																																---;
-	@(link_name="SDL_LogMessage") log_message :: proc(category: i32, priority: Log_Priority, fmt: ..cstring)																										---;
-	@(link_name="SDL_LogMessageV") log_message_v :: proc(category: i32, priority: Log_Priority, fmt: cstring, va_list: cstring)																							---;
+	@(link_name="SDL_LogGetPriority") log_get_priority :: proc(category: Log_Category) -> Log_Priority																															---;
+	@(link_name="SDL_LogInfo") log_info :: proc(category: Log_Category, fmt: ..cstring)																																---;
+	@(link_name="SDL_LogMessage") log_message :: proc(category: Log_Category, priority: Log_Priority, fmt: ..cstring)																										---;
+	@(link_name="SDL_LogMessageV") log_message_v :: proc(category: Log_Category, priority: Log_Priority, fmt: cstring, va_list: cstring)																							---;
 	@(link_name="SDL_LogResetPriorities") log_reset_priorities :: proc()																																						---;
 	@(link_name="SDL_LogSetAllPriority") log_set_all_priority :: proc(priority: Log_Priority)																																	---;
 	@(link_name="SDL_LogSetOutputFunction") log_set_output_function :: proc(callback: Log_Output_Function, userdata: rawptr)																										---;
-	@(link_name="SDL_LogSetPriority") log_set_priority :: proc(category: i32, priority: Log_Priority)																													---;
-	@(link_name="SDL_LogVerbose") log_verbose :: proc(category: i32, fmt: ..cstring)																																---;
-	@(link_name="SDL_LogWarn") log_warn :: proc(category: i32, fmt: ..cstring)																																---;
+	@(link_name="SDL_LogSetPriority") log_set_priority :: proc(category: Log_Category, priority: Log_Priority)																													---;
+	@(link_name="SDL_LogVerbose") log_verbose :: proc(category: Log_Category, fmt: ..cstring)																																---;
+	@(link_name="SDL_LogWarn") log_warn :: proc(category: Log_Category, fmt: ..cstring)																																---;
 	@(link_name="SDL_LowerBlit") lower_blit :: proc(src: ^Surface, srcrect: ^Rect, dst: ^Surface, dstrect: ^Rect) -> i32																					---;
 	@(link_name="SDL_LowerBlitScaled") lower_blit_scaled :: proc(src: ^Surface, srcrect: ^Rect, dst: ^Surface, dstrect: ^Rect) -> i32																					---;
 	@(link_name="SDL_MapRGB") map_rgb :: proc(format: ^Pixel_Format, r, g, b: u8) -> u32																												---;
@@ -723,6 +723,20 @@ Power_State :: enum i32 {
 	Charged
 }
 
+Log_Category :: enum i32 {
+    Application,
+    Error,
+    Assert,
+    System,
+    Audio,
+    Video,
+    Render,
+    Input,
+    Test,
+
+    Custom = 19
+}
+
 Log_Priority :: enum i32 {
 	Verbose = 1,
 	Debug,
@@ -732,7 +746,6 @@ Log_Priority :: enum i32 {
 	Critical,
 	Num_Log_Priorities
 }
-
 
 // Input stuff
 
@@ -1459,7 +1472,7 @@ Audio_Filter :: proc "c" (cvt: ^Audio_Cvt, format: Audio_Format);
 Thread_Function :: proc "c" (data: rawptr) -> i32;
 Hit_Test :: proc "c" (window: ^Window, area: ^Point, data: rawptr) -> Hit_Test_Result;
 Windows_Message_Hook :: proc "c" (userdata: rawptr, hwnd: rawptr, message: u32, wparam: u64, lparam: i64);
-Log_Output_Function :: proc "c" (userdata: rawptr, category: i32, priority: Log_Priority, message: cstring);
+Log_Output_Function :: proc "c" (userdata: rawptr, category: Log_Category, priority: Log_Priority, message: cstring);
 
 // Thanks gingerBill for this one!
 Game_Controller_Button_Bind :: struct {
