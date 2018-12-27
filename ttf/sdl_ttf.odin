@@ -55,6 +55,7 @@ foreign lib {
 	@(link_name="TTF_SizeUNICODE") size_unicode :: proc(font: ^Font, text: ^u16, w, h: ^i32) -> i32														 ---;
 	@(link_name="TTF_SizeUTF8") size_utf8 :: proc(font: ^Font, text: cstring, w, h: ^i32) -> i32														 ---;
 	@(link_name="TTF_WasInit") was_init :: proc() -> i32 																						 ---;
+    @(link_name="SDL_GetError") get_error :: proc() -> cstring ---;
 }
 
 HINTING_NORMAL :: 0;
