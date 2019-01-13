@@ -23,7 +23,7 @@ main :: proc() {
 	for running {
 		e: sdl.Event;
 		for sdl.poll_event(&e) != 0 {
-			if e.event_type == sdl.Event_Type.Quit {
+			if e.type == sdl.Event_Type.Quit {
 				running = false;
 			}
 		}
