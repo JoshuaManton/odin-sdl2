@@ -1,6 +1,6 @@
 package sdl_ttf
 
-import ".." // sdl package
+import sdl "shared:odin-sdl2" // sdl package
 import "core:os"
 
 when os.OS == "windows" do foreign import lib "SDL2_ttf.lib";
