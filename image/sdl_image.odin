@@ -5,6 +5,7 @@ import "core:os"
 
 when os.OS == "windows" do foreign import lib "SDL2_image.lib";
 when os.OS == "linux" do foreign import lib "system:SDL2_image";
+when os.OS == "darwin" do foreign import lib "system:SDL2_image";
 
 @(default_calling_convention="c")
 foreign lib {
