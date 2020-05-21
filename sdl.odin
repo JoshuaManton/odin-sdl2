@@ -388,7 +388,7 @@ foreign lib {
 	@(link_name="SDL_RenderDrawRects") render_draw_rects :: proc(renderer: ^Renderer, rects: ^Rect, count: i32) -> i32																									---;
 	@(link_name="SDL_RenderFillRect") render_fill_rect :: proc(dst: ^Renderer, rect: ^Rect) -> i32																														---;
 	@(link_name="SDL_RenderFillRects") render_fill_rects :: proc(dst: ^Renderer, rect: ^Rect, count: i32) -> i32																											---;
-	@(link_name="SDL_RenderGetClipRect") render_get_clip_rect :: proc(surface: ^Surface, rect: ^Rect)																															---;
+	@(link_name="SDL_RenderGetClipRect") render_get_clip_rect :: proc(renderer: ^Renderer, rect: ^Rect)																															---;
 	@(link_name="SDL_RenderGetD3D9Device") render_get_d3d9_device :: proc(renderer: ^Renderer) ->	^IDirect3D_Device9																												---;
 	@(link_name="SDL_RenderGetIntegerScale") render_get_integer_scale :: proc(renderer: ^Renderer) -> Bool																															---;
 	@(link_name="SDL_RenderGetLogicalSize") render_get_logical_size :: proc(renderer: ^Renderer, w, h: ^i32)																														---;
@@ -397,7 +397,7 @@ foreign lib {
 	@(link_name="SDL_RenderIsClipEnabled") render_is_clip_enabled :: proc(renderer: ^Renderer) -> Bool																															---;
 	@(link_name="SDL_RenderPresent") render_present :: proc(renderer: ^Renderer)																																	---;
 	@(link_name="SDL_RenderReadPixels") render_read_pixels :: proc(renderer: ^Renderer, rect: ^Rect, format: u32, pixels: rawptr, pitch: i32) -> i32																		---;
-	@(link_name="SDL_RenderSetClipRect") render_set_clip_rect :: proc(surface: ^Surface, rect: ^Rect) -> Bool																													---;
+	@(link_name="SDL_RenderSetClipRect") render_set_clip_rect :: proc(renderer: ^Renderer, rect: ^Rect) -> Bool																													---;
 	@(link_name="SDL_RenderSetIntegerScale") render_set_integer_scale :: proc(renderer: ^Renderer, enable: Bool) -> i32																												---;
 	@(link_name="SDL_RenderSetLogicalSize") render_set_logical_size :: proc(renderer: ^Renderer, w, h: i32) -> i32																													---;
 	@(link_name="SDL_RenderSetScale") render_set_scale :: proc(renderer: ^Renderer, scale_x, scale_y: f32) -> i32																										---;
