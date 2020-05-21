@@ -388,7 +388,7 @@ foreign lib {
 	@(link_name="SDL_RenderDrawRects") render_draw_rects :: proc(renderer: ^Renderer, rects: ^Rect, count: i32) -> i32																									---;
 	@(link_name="SDL_RenderFillRect") render_fill_rect :: proc(dst: ^Renderer, rect: ^Rect) -> i32																														---;
 	@(link_name="SDL_RenderFillRects") render_fill_rects :: proc(dst: ^Renderer, rect: ^Rect, count: i32) -> i32																											---;
-	@(link_name="SDL_RenderGetClipRect") render_get_clip_rect :: proc(surface: ^Surface, rect: ^Rect)																															---;
+	@(link_name="SDL_RenderGetClipRect") render_get_clip_rect :: proc(renderer: ^Renderer, rect: ^Rect)																															---;
 	@(link_name="SDL_RenderGetD3D9Device") render_get_d3d9_device :: proc(renderer: ^Renderer) ->	^IDirect3D_Device9																												---;
 	@(link_name="SDL_RenderGetIntegerScale") render_get_integer_scale :: proc(renderer: ^Renderer) -> Bool																															---;
 	@(link_name="SDL_RenderGetLogicalSize") render_get_logical_size :: proc(renderer: ^Renderer, w, h: ^i32)																														---;
