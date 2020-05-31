@@ -505,6 +505,8 @@ foreign lib {
 	@(link_name="SDL_WriteLE32") write_le32 :: proc(dst: ^Rw_Ops, value: u32) -> u64																														---;
 	@(link_name="SDL_WriteLE64") write_le64 :: proc(dst: ^Rw_Ops, value: u64) -> u64																														---;
 	@(link_name="SDL_WriteU8") write_u8 :: proc(dst: ^Rw_Ops, value: u8) -> u64																															---;
+	
+	@(link_name="SDL_free") free :: proc(mem: rawptr)																																					---;
 }
 
 Init_Flags :: enum u32 {
