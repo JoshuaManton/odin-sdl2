@@ -6,6 +6,7 @@ import "core:os"
 when os.OS == "windows" do foreign import lib "SDL2_ttf.lib";
 when os.OS == "linux" do foreign import lib "system:SDL2_ttf";
 when os.OS == "darwin" do foreign import lib "system:SDL2_ttf";
+when os.OS == "freebsd" do foreign import lib "system:SDL2_ttf";
 
 @(default_calling_convention="c")
 foreign lib {
