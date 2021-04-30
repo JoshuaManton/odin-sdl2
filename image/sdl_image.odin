@@ -54,10 +54,9 @@ foreign lib {
     @(link_name="SDL_GetError") get_error :: proc() -> cstring ---;
 }
 
-Init_Flags :: enum i32
-{
+Init_Flags :: enum i32 {
 	JPG = 0x00000001,
 	PNG = 0x00000002,
 	TIF = 0x00000004,
-	WEBP = 0x00000008
+	WEBP = 0x00000008,
 }
